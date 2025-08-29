@@ -8,9 +8,11 @@ import model.Subscriber;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class AppBookRent extends JFrame {
 
@@ -53,12 +55,16 @@ public class AppBookRent extends JFrame {
     private JPanel mainBody;
     private JButton BORROWINGButton;
     private JPanel listsBooks;
+    private JTable tableBook;
+    private JScrollPane scrollTable;
     private String titleBorder;
     private DefaultListModel<Book> modelBook;
     private DefaultListModel<?> modelDefault;
     private int selectedIndex;
     private final String[] AttAuthor = new String[]{"FirstName", "LastName"};
     private JList<?> gotList;
+
+    private final String[] h1Book = new String[]{"FirstNameAuthor", "LastNameAuthor","Title","ISBN","Stock"};
 
     //Constructor
     public AppBookRent() {
@@ -147,6 +153,15 @@ public class AppBookRent extends JFrame {
      * Books
      * Subscribers
      */
+    /*public void DataListAuthors() {
+        DefaultListModel<String> modelAuthor = new DefaultListModel<>();
+        for (Author author : Author.getListAuthors()) {
+            modelAuthor.addElement(author.getFirstNameAuthor() + " " + author.getLastNameAuthor());
+        }
+        this.listAuthor.setModel(modelAuthor);
+        String titleBorder = "(" + modelAuthor.size() + ")";
+        this.scrollListAuthor.setBorder(setupBorderScroll(titleBorder));
+    }*/
     public void DataListAuthors() {
         DefaultListModel<String> modelAuthor = new DefaultListModel<>();
         for (Author author : Author.getListAuthors()) {
@@ -350,6 +365,36 @@ public class AppBookRent extends JFrame {
             DialogFrame.confirmButton("PLEASE SELECT ANY ITEM!", false, false,"Card1");
         }
         return modelDefault;
+    }
+
+  /*  private <T> void configureTable(List<T> dataList, String[] headers, Class<?>[] columnClasses) {
+        TableModel model = new TableModele(dataList, headers, columnClasses);
+        this.table.setModel(model);
+        this.table.revalidate();
+        this.table.repaint();
+    }*/
+
+    private void constructDataTable(List<?> dataList, String[] headers) {
+
+        // Création du tableau de données
+        String[][] data = new String[Book.getListBooks().size()][h1Book.length];
+
+        // Remplissage du tableau selon le type d'objet
+        for (int i = 0; i < Book.getListBooks().size(); i++) {
+            Book book = Book.getListBooks().get(i);
+            data[i][0] = book.getFirstNameAuthor();
+            data[i][1] = book.getLastNameAuthor();
+            data[i][2] = book.getTitle();
+            data[i][3] = String.valueOf(book.getIsbn());
+            data[i][4] = String.valueOf(book.getStock());
+            }
+
+        // ajout de la table dans le scrollpane
+        scrollTable.setViewportView(tableBook);
+        // on redefinie le panelTable avec les modifications
+        contentPane.revalidate();
+        contentPane.repaint();
+
     }
 
 }

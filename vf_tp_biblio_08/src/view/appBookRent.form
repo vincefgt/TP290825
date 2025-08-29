@@ -34,13 +34,15 @@
             </properties>
             <border type="empty"/>
             <children>
-              <grid id="60f19" binding="bookPane" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
+              <grid id="60f19" binding="bookPane" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <card name="Card1"/>
                 </constraints>
                 <properties>
                   <autoscrolls value="false"/>
+                  <background color="-13623881"/>
+                  <doubleBuffered value="false"/>
                   <focusable value="false"/>
                   <inheritsPopupMenu value="true"/>
                   <maximumSize width="2000" height="1200"/>
@@ -62,7 +64,7 @@
                   </vspacer>
                   <vspacer id="2d839">
                     <constraints>
-                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="2" fill="1" indent="0" use-parent-layout="false">
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="2" fill="1" indent="0" use-parent-layout="false">
                         <minimum-size width="-1" height="20"/>
                         <preferred-size width="-1" height="20"/>
                         <maximum-size width="-1" height="20"/>
@@ -77,6 +79,7 @@
                     </constraints>
                     <properties>
                       <opaque value="false"/>
+                      <visible value="false"/>
                     </properties>
                     <border type="none"/>
                     <children>
@@ -130,7 +133,7 @@
                   <grid id="8b4d4" binding="inputBook" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="true" same-size-vertically="false" hgap="5" vgap="0">
                     <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <alignmentX value="0.0"/>
@@ -321,6 +324,45 @@
                       </component>
                     </children>
                   </grid>
+                  <scrollpane id="ebfaf" binding="scrollTable">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-13623881"/>
+                      <doubleBuffered value="true"/>
+                      <focusCycleRoot value="true"/>
+                      <focusable value="false"/>
+                      <opaque value="false"/>
+                      <requestFocusEnabled value="false"/>
+                      <visible value="true"/>
+                    </properties>
+                    <border type="empty">
+                      <font/>
+                      <title-color color="-2104859"/>
+                    </border>
+                    <children>
+                      <component id="73068" class="javax.swing.JTable" binding="tableBook">
+                        <constraints/>
+                        <properties>
+                          <autoCreateColumnsFromModel value="true"/>
+                          <autoCreateRowSorter value="false"/>
+                          <background color="-13623881"/>
+                          <columnSelectionAllowed value="true"/>
+                          <doubleBuffered value="true"/>
+                          <focusCycleRoot value="true"/>
+                          <font size="12" style="1"/>
+                          <foreground color="-1719369"/>
+                          <gridColor color="-1719369"/>
+                          <inheritsPopupMenu value="false"/>
+                          <opaque value="true"/>
+                          <rowSelectionAllowed value="true"/>
+                          <showVerticalLines value="false"/>
+                          <visible value="true"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
                 </children>
               </grid>
               <scrollpane id="6a7d0" binding="scrollListBorrow">

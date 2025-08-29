@@ -11,7 +11,7 @@
       <maximumSize width="-1" height="-1"/>
       <minimumSize width="-1" height="-1"/>
       <opaque value="true"/>
-      <preferredSize width="300" height="220"/>
+      <preferredSize width="300" height="180"/>
       <visible value="true"/>
     </properties>
     <border type="empty"/>
@@ -19,8 +19,8 @@
       <grid id="e3588" binding="labelPan" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="74" height="41"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="1" fill="1" indent="0" use-parent-layout="true">
+            <preferred-size width="-1" height="30"/>
           </grid>
         </constraints>
         <properties>
@@ -48,7 +48,9 @@
       </grid>
       <grid id="d5a0" binding="ButtonsGrid" layout-manager="CardLayout" hgap="0" vgap="0">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="2" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="100"/>
+          </grid>
         </constraints>
         <properties>
           <background color="-1719369"/>
@@ -113,7 +115,7 @@
               </component>
             </children>
           </grid>
-          <grid id="78180" binding="searchButton" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="78180" binding="searchButton" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="true" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <card name="Card2"/>
@@ -132,7 +134,9 @@
             <children>
               <component id="79fd6" class="javax.swing.JButton" binding="searchButtonBox">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="1" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="-1" height="25"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <background color="-2104859"/>
@@ -145,7 +149,9 @@
               </component>
               <component id="9f757" class="javax.swing.JTextField" binding="textInputBox">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="10" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="-1" height="25"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <autoscrolls value="false"/>
@@ -159,7 +165,9 @@
               </component>
               <component id="2c29e" class="javax.swing.JLabel" binding="invalidNumber">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="2" fill="1" indent="0" use-parent-layout="false">
+                    <minimum-size width="-1" height="25"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <autoscrolls value="true"/>
@@ -170,7 +178,7 @@
                   <horizontalTextPosition value="2"/>
                   <opaque value="false"/>
                   <requestFocusEnabled value="false"/>
-                  <text value="*ISBN NUMBER INVALID [-&gt;14]"/>
+                  <text value="*ISBN NUMBER INVALID [-&gt;14Number only]"/>
                   <verticalAlignment value="3"/>
                   <verticalTextPosition value="3"/>
                   <visible value="false"/>
