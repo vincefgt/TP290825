@@ -1,4 +1,4 @@
-package view;
+package view.appV2;
 
 import model.Book;
 import model.Subscriber;

@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="106e0295-5623-4489-bd72-9b2c9955d5bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/vf_java/src/exo_poo/Voiture.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vf_java/src/exo_poo/Compte.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_java/src/exo_poo/Compte.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vf_java/src/exo_poo/TestCompte.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_java/src/exo_poo/TestCompte.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vf_java/src/training/afpa/cda24060/Exo_algo_java.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_java/src/training/afpa/cda24060/List_exo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vf_java/src/training/afpa/cda24060/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_java/src/training/afpa/cda24060/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/afpa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/afpa.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vf_java/src/mmorpg/utility/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_java/src/mmorpg/utility/Regex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vf_tp_biblio_08/src/controler/LibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_tp_biblio_08/src/controler/LibraryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/BookDetailsDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/appV2/BookDetailsDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/LibraryLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/appV2/LibraryLauncher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/MainLibraryFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/appV2/MainLibraryFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/ModernLibraryFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/appV2/ModernLibraryFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/SearchDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/appV2/SearchDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/StatsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/appV2/StatsPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +32,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/vincefgt/dev_perso.git&quot;,
-    &quot;accountId&quot;: &quot;5fdee429-2643-41b9-b86f-b18089e226b1&quot;
+    &quot;url&quot;: &quot;https://github.com/vincefgt/TP290825.git&quot;,
+    &quot;accountId&quot;: &quot;d00ee0f3-2295-43be-bb30-929cbb102546&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -36,22 +44,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Candidat-xx/Desktop/25_afpa_cda/afpa/java&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.LibraryLauncher.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.MainLibraryFrame.executor": "Run",
+    "Application.ModernLibraryFrame.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.AuthorTest.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Candidat-xx/Desktop/25_afpa_cda/afpa/java",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.27812.49" />
-        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-IU-251.27812.49" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
+        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
       </set>
     </attachedChunks>
   </component>
@@ -64,10 +92,24 @@
       <updated>1754398517492</updated>
       <workItem from="1754398518537" duration="95000" />
       <workItem from="1754469899164" duration="65000" />
+      <workItem from="1756490571005" duration="87000" />
+      <workItem from="1756490664589" duration="108000" />
+      <workItem from="1756490780198" duration="1856000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

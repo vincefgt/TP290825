@@ -1,12 +1,10 @@
-package view;
+package view.appV2;
 
 import model.Book;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class BookDetailsDialog extends JDialog {
     
@@ -60,7 +58,7 @@ public class BookDetailsDialog extends JDialog {
     private void layoutComponents() {
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-        mainPanel.setBackground(Color.WHITE);
+        mainPanel.setBackground(Color.black);
         
         // Create info panel
         JPanel infoPanel = new JPanel(new GridBagLayout());

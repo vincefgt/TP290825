@@ -1,4 +1,4 @@
-package view;
+package view.appV2;
 
 import controler.Main;
 import exception.SaisieException;
@@ -168,7 +168,7 @@ public class ModernLibraryFrame extends JFrame {
         titlePanel.add(subtitleLabel, BorderLayout.SOUTH);
         
         // Add search button in header
-        JButton globalSearchButton = createStyledButton("🔍 Advanced Search", new Color(46, 204, 113));
+        JButton globalSearchButton = createStyledButton("🔍 Advanced Search", Color.black);
         globalSearchButton.addActionListener(e -> openSearchDialog());
         
         headerPanel.add(titlePanel, BorderLayout.WEST);

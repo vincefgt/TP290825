@@ -3,7 +3,7 @@ package controler;
 import exception.SaisieException;
 import model.Book;
 import model.Subscriber;
-import view.ModernLibraryFrame;
+import view.appV2.ModernLibraryFrame;
 
 import javax.swing.*;
 import java.time.LocalDateTime;

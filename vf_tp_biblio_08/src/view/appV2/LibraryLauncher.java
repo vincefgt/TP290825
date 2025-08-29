@@ -1,17 +1,18 @@
-package view;
+package view.appV2;
 
 import controler.Main;
 import exception.SaisieException;
-
 import javax.swing.*;
 import java.awt.*;
+import static javax.swing.UIManager.setLookAndFeel;
+import static javax.swing.UIManager.getSystemLookAndFeelClassName;
 
 public class LibraryLauncher {
     
     public static void main(String[] args) {
         // Set system look and feel
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeel());
+            setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,7 +63,7 @@ public class LibraryLauncher {
         JProgressBar progressBar = new JProgressBar();
         progressBar.setIndeterminate(true);
         progressBar.setBackground(new Color(52, 73, 94));
-        progressBar.setForeground(new Color(46, 204, 113));
+        progressBar.setForeground(Color.BLACK);
         
         splashPanel.add(titleLabel, BorderLayout.NORTH);
         splashPanel.add(subtitleLabel, BorderLayout.CENTER);

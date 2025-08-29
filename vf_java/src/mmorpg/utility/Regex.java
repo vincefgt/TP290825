@@ -18,9 +18,9 @@ public class Regex {
         return input;
     }
     //^[[word]]+(?:\s\w+){1}$
-    private static final Pattern nbWord = Pattern.compile("^\w+(?:\s\w+){2}$"); // équivalent à [0-9]
-    public static String testNumber(String input) {
-        if (digit.matcher(input).find()) {
+    private static final Pattern nbWord = Pattern.compile("^\\w+(?:\\s\\w+){2}$"); // équivalent à [0-9]
+    public static String testNumber2(String input) {
+        if (nbWord.matcher(input).find()) {
             System.err.println("test failed");
         }
         return input;

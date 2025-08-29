@@ -1,8 +1,7 @@
-package view;
+package view.appV2;
 
 import controler.Main;
 import exception.SaisieException;
-import model.Author;
 import model.Book;
 import model.Subscriber;
 
@@ -10,11 +9,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class MainLibraryFrame extends JFrame {
     
@@ -60,11 +56,11 @@ public class MainLibraryFrame extends JFrame {
         setMinimumSize(new Dimension(1000, 600));
         
         // Set modern look and feel
-        try {
+       /*try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeel());
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
     
     private void createComponents() {
