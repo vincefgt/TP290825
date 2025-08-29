@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.AppBookRent">
+  <grid id="27dc6" binding="contentPane" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="5" y="5" width="1082" height="731"/>
+    </constraints>
+    <properties>
+      <background color="-13623881"/>
+      <focusCycleRoot value="true"/>
+      <inheritsPopupMenu value="true"/>
+      <maximumSize width="2000" height="1200"/>
+      <minimumSize width="800" height="400"/>
+      <opaque value="true"/>
+      <preferredSize width="1200" height="600"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="6b19e" binding="mainBody" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="Center"/>
+        <properties>
+          <opaque value="false"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="b0caa" binding="lists" layout-manager="CardLayout" hgap="10" vgap="5" show="60f19">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <focusCycleRoot value="true"/>
+              <focusable value="false"/>
+              <foreground color="-13623881"/>
+              <opaque value="false"/>
+              <requestFocusEnabled value="true"/>
+              <visible value="true"/>
+            </properties>
+            <border type="empty"/>
+            <children>
+              <grid id="60f19" binding="bookPane" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <card name="Card1"/>
+                </constraints>
+                <properties>
+                  <autoscrolls value="false"/>
+                  <focusable value="false"/>
+                  <inheritsPopupMenu value="true"/>
+                  <maximumSize width="2000" height="1200"/>
+                  <minimumSize width="800" height="400"/>
+                  <opaque value="false"/>
+                  <preferredSize width="800" height="500"/>
+                  <visible value="true"/>
+                </properties>
+                <border type="empty"/>
+                <children>
+                  <vspacer id="882fc">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="2" fill="1" indent="0" use-parent-layout="false">
+                        <minimum-size width="-1" height="10"/>
+                        <preferred-size width="-1" height="10"/>
+                        <maximum-size width="-1" height="10"/>
+                      </grid>
+                    </constraints>
+                  </vspacer>
+                  <vspacer id="2d839">
+                    <constraints>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="2" fill="1" indent="0" use-parent-layout="false">
+                        <minimum-size width="-1" height="20"/>
+                        <preferred-size width="-1" height="20"/>
+                        <maximum-size width="-1" height="20"/>
+                      </grid>
+                    </constraints>
+                  </vspacer>
+                  <grid id="c2c27" binding="listsBooks" layout-manager="CardLayout" hgap="0" vgap="0">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <preferred-size width="2" height="250"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <opaque value="false"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <scrollpane id="5e478" binding="scrollListBook">
+                        <constraints>
+                          <card name="Card1"/>
+                        </constraints>
+                        <properties>
+                          <alignmentX value="0.0"/>
+                          <alignmentY value="0.0"/>
+                          <background color="-13623881"/>
+                          <focusable value="false"/>
+                          <horizontalScrollBarPolicy value="30"/>
+                          <inheritsPopupMenu value="true"/>
+                          <opaque value="false"/>
+                          <verticalScrollBarPolicy value="20"/>
+                          <visible value="true"/>
+                        </properties>
+                        <border type="line" title-justification="1" title-position="2">
+                          <font size="16" style="1"/>
+                          <title-color color="-1719369"/>
+                          <color color="-1719369"/>
+                        </border>
+                        <children>
+                          <component id="862ec" class="javax.swing.JList" binding="listBook">
+                            <constraints/>
+                            <properties>
+                              <alignmentX value="1.0"/>
+                              <alignmentY value="1.0"/>
+                              <autoscrolls value="false"/>
+                              <background color="-13623881"/>
+                              <doubleBuffered value="true"/>
+                              <focusCycleRoot value="true"/>
+                              <focusTraversalPolicyProvider value="true"/>
+                              <focusable value="true"/>
+                              <font size="12"/>
+                              <foreground color="-1719369"/>
+                              <layoutOrientation value="1"/>
+                              <opaque value="true"/>
+                              <requestFocusEnabled value="true"/>
+                              <selectionMode value="0"/>
+                              <valueIsAdjusting value="true"/>
+                              <visible value="true"/>
+                              <visibleRowCount value="12"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </scrollpane>
+                    </children>
+                  </grid>
+                  <grid id="8b4d4" binding="inputBook" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="true" same-size-vertically="false" hgap="5" vgap="0">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <alignmentX value="0.0"/>
+                      <alignmentY value="0.0"/>
+                      <autoscrolls value="false"/>
+                      <focusCycleRoot value="true"/>
+                      <focusTraversalPolicyProvider value="false"/>
+                      <opaque value="false"/>
+                    </properties>
+                    <border type="empty" title="NEW BOOK">
+                      <font size="16" style="1"/>
+                      <title-color color="-7373825"/>
+                    </border>
+                    <children>
+                      <component id="3eda7" class="javax.swing.JTextPane" binding="textTitle">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <focusCycleRoot value="false"/>
+                          <focusable value="false"/>
+                          <font size="10" style="3"/>
+                          <foreground color="-7373825"/>
+                          <opaque value="false"/>
+                          <requestFocusEnabled value="false"/>
+                          <text value="TITLE"/>
+                          <verifyInputWhenFocusTarget value="false"/>
+                        </properties>
+                      </component>
+                      <component id="b02d2" class="javax.swing.JTextField" binding="inputTitle">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="2" hsize-policy="2" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <autoscrolls value="false"/>
+                          <background color="-7373825"/>
+                          <caretColor color="-13623881"/>
+                          <doubleBuffered value="true"/>
+                          <focusCycleRoot value="true"/>
+                          <focusTraversalPolicyProvider value="false"/>
+                          <font size="12" style="1"/>
+                          <foreground color="-15134881"/>
+                          <horizontalAlignment value="0"/>
+                          <name value=""/>
+                          <requestFocusEnabled value="true"/>
+                          <text value=""/>
+                          <verifyInputWhenFocusTarget value="true"/>
+                        </properties>
+                      </component>
+                      <component id="f1e03" class="javax.swing.JTextPane" binding="textStock">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <editable value="false"/>
+                          <focusCycleRoot value="true"/>
+                          <focusable value="false"/>
+                          <font size="10" style="3"/>
+                          <foreground color="-7373825"/>
+                          <opaque value="false"/>
+                          <requestFocusEnabled value="false"/>
+                          <text value="STOCK"/>
+                        </properties>
+                      </component>
+                      <component id="5fa6" class="javax.swing.JTextField" binding="inputStock">
+                        <constraints>
+                          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="10" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <autoscrolls value="false"/>
+                          <background color="-7373825"/>
+                          <doubleBuffered value="true"/>
+                          <focusCycleRoot value="true"/>
+                          <focusTraversalPolicyProvider value="false"/>
+                          <font size="12" style="1"/>
+                          <foreground color="-15134881"/>
+                          <horizontalAlignment value="0"/>
+                        </properties>
+                      </component>
+                      <component id="1f50a" class="javax.swing.JTextPane" binding="textIsbn">
+                        <constraints>
+                          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <autoscrolls value="false"/>
+                          <editable value="false"/>
+                          <focusCycleRoot value="true"/>
+                          <focusable value="false"/>
+                          <font size="10" style="3"/>
+                          <foreground color="-7373825"/>
+                          <opaque value="false"/>
+                          <requestFocusEnabled value="false"/>
+                          <text value="ISBN NUNBER (14)"/>
+                          <verifyInputWhenFocusTarget value="false"/>
+                        </properties>
+                      </component>
+                      <component id="62754" class="javax.swing.JTextField" binding="inputIsbn">
+                        <constraints>
+                          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="10" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <autoscrolls value="false"/>
+                          <background color="-7373825"/>
+                          <doubleBuffered value="true"/>
+                          <focusCycleRoot value="true"/>
+                          <focusTraversalPolicyProvider value="false"/>
+                          <font size="12" style="1"/>
+                          <foreground color="-15134881"/>
+                          <horizontalAlignment value="0"/>
+                        </properties>
+                      </component>
+                      <component id="4e6db" class="javax.swing.JTextPane" binding="textFirstName">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="10" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="10" style="3"/>
+                          <foreground color="-7373825"/>
+                          <opaque value="false"/>
+                          <text value="AUTHOR FIRSTNAME"/>
+                        </properties>
+                      </component>
+                      <component id="965ac" class="javax.swing.JTextPane" binding="textLastName">
+                        <constraints>
+                          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <autoscrolls value="false"/>
+                          <editable value="false"/>
+                          <enabled value="true"/>
+                          <focusCycleRoot value="true"/>
+                          <focusable value="false"/>
+                          <font size="10" style="3"/>
+                          <foreground color="-7373825"/>
+                          <opaque value="false"/>
+                          <requestFocusEnabled value="false"/>
+                          <text value="AUTHOR LASTNAME"/>
+                          <verifyInputWhenFocusTarget value="false"/>
+                        </properties>
+                      </component>
+                      <component id="94f91" class="javax.swing.JTextField" binding="inputLastName">
+                        <constraints>
+                          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="10" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <autoscrolls value="false"/>
+                          <background color="-7373825"/>
+                          <doubleBuffered value="true"/>
+                          <focusCycleRoot value="true"/>
+                          <focusTraversalPolicyProvider value="false"/>
+                          <font size="12" style="1"/>
+                          <foreground color="-15134881"/>
+                          <horizontalAlignment value="0"/>
+                        </properties>
+                      </component>
+                      <component id="e4593" class="javax.swing.JButton" binding="buttonNewBook">
+                        <constraints>
+                          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="6" fill="0" indent="0" use-parent-layout="false">
+                            <preferred-size width="200" height="30"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <background color="-1719369"/>
+                          <borderPainted value="false"/>
+                          <focusable value="false"/>
+                          <font size="16" style="1"/>
+                          <foreground color="-15134881"/>
+                          <inheritsPopupMenu value="true"/>
+                          <margin top="0" left="0" bottom="0" right="0"/>
+                          <selected value="false"/>
+                          <text value="ADD NEW BOOK"/>
+                        </properties>
+                      </component>
+                      <component id="9515" class="javax.swing.JTextField" binding="inputFirstName">
+                        <constraints>
+                          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="10" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <autoscrolls value="false"/>
+                          <background color="-7373825"/>
+                          <doubleBuffered value="true"/>
+                          <focusCycleRoot value="true"/>
+                          <focusTraversalPolicyProvider value="false"/>
+                          <font size="12" style="1"/>
+                          <foreground color="-15134881"/>
+                          <horizontalAlignment value="0"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                </children>
+              </grid>
+              <scrollpane id="6a7d0" binding="scrollListBorrow">
+                <constraints>
+                  <card name="Card2"/>
+                </constraints>
+                <properties>
+                  <opaque value="false"/>
+                  <visible value="false"/>
+                </properties>
+                <border type="empty" title="BOOKs Borrowed List" title-justification="1" title-position="2">
+                  <font size="16" style="1"/>
+                  <title-color color="-1719369"/>
+                </border>
+                <children>
+                  <component id="5ce88" class="javax.swing.JList" binding="listBorrow">
+                    <constraints/>
+                    <properties>
+                      <autoscrolls value="false"/>
+                      <background color="-13623881"/>
+                      <focusable value="true"/>
+                      <font size="12"/>
+                      <foreground color="-1719369"/>
+                      <opaque value="true"/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
+              <scrollpane id="4aa8" binding="scrollListSub">
+                <constraints>
+                  <card name="Card3"/>
+                </constraints>
+                <properties>
+                  <background color="-13623881"/>
+                  <focusTraversalPolicyProvider value="false"/>
+                  <focusable value="true"/>
+                  <font/>
+                  <foreground color="-1719369"/>
+                  <horizontalScrollBarPolicy value="30"/>
+                  <opaque value="false"/>
+                  <verticalScrollBarPolicy value="20"/>
+                  <visible value="false"/>
+                </properties>
+                <border type="empty" title="SUBSCRIBERs List" title-justification="1" title-position="2">
+                  <font size="16" style="1"/>
+                  <title-color color="-1719369"/>
+                </border>
+                <children>
+                  <component id="f9e0" class="javax.swing.JList" binding="listSub">
+                    <constraints/>
+                    <properties>
+                      <alignmentX value="1.0"/>
+                      <alignmentY value="1.0"/>
+                      <background color="-13623881"/>
+                      <enabled value="true"/>
+                      <focusable value="false"/>
+                      <font size="12"/>
+                      <foreground color="-1719369"/>
+                      <requestFocusEnabled value="true"/>
+                      <selectionForeground color="-15134881"/>
+                      <selectionMode value="0"/>
+                      <valueIsAdjusting value="false"/>
+                      <visible value="true"/>
+                    </properties>
+                    <clientProperties>
+                      <List.isFileList class="java.lang.Boolean" value="false"/>
+                    </clientProperties>
+                  </component>
+                </children>
+              </scrollpane>
+              <scrollpane id="73bb5" binding="scrollListAuthor">
+                <constraints>
+                  <card name="Card4"/>
+                </constraints>
+                <properties>
+                  <background color="-13623881"/>
+                  <focusable value="true"/>
+                  <horizontalScrollBarPolicy value="30"/>
+                  <opaque value="false"/>
+                  <verticalScrollBarPolicy value="20"/>
+                  <visible value="false"/>
+                </properties>
+                <border type="empty" title="AUTHORs List" title-justification="1" title-position="2">
+                  <font size="16" style="1"/>
+                  <title-color color="-1719369"/>
+                </border>
+                <children>
+                  <component id="caba5" class="javax.swing.JList" binding="listAuthor">
+                    <constraints/>
+                    <properties>
+                      <alignmentX value="1.0"/>
+                      <alignmentY value="1.0"/>
+                      <background color="-13623881"/>
+                      <enabled value="true"/>
+                      <focusable value="true"/>
+                      <font size="12"/>
+                      <foreground color="-1719369"/>
+                      <selectionForeground color="-15134881"/>
+                      <selectionMode value="0"/>
+                      <valueIsAdjusting value="true"/>
+                      <visible value="true"/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
+            </children>
+          </grid>
+          <grid id="76344" binding="menu" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="0">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints border-constraint="West"/>
+            <properties>
+              <background color="-14412406"/>
+              <focusable value="true"/>
+              <foreground color="-1719369"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="1da69" class="javax.swing.JButton" binding="BOOKButton" default-binding="true">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="-1" height="50"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <alignmentY value="0.0"/>
+                  <background color="-14412406"/>
+                  <borderPainted value="false"/>
+                  <contentAreaFilled value="true"/>
+                  <focusable value="false"/>
+                  <font size="28"/>
+                  <foreground color="-1719369"/>
+                  <selected value="false"/>
+                  <text value="BOOK"/>
+                </properties>
+              </component>
+              <component id="1492d" class="javax.swing.JButton" binding="SUBButton">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="-1" height="50"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <alignmentY value="0.0"/>
+                  <background color="-14412406"/>
+                  <borderPainted value="false"/>
+                  <contentAreaFilled value="true"/>
+                  <doubleBuffered value="false"/>
+                  <focusTraversalPolicyProvider value="false"/>
+                  <focusable value="false"/>
+                  <font size="28"/>
+                  <foreground color="-1719369"/>
+                  <hideActionText value="false"/>
+                  <label value="SUBSCRIBER"/>
+                  <text value="SUBSCRIBER"/>
+                </properties>
+              </component>
+              <component id="3d0f0" class="javax.swing.JButton" binding="AUTHORButton" default-binding="true">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="-1" height="50"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <alignmentY value="0.0"/>
+                  <background color="-14412406"/>
+                  <borderPainted value="false"/>
+                  <focusable value="false"/>
+                  <font size="28"/>
+                  <foreground color="-1719369"/>
+                  <text value="AUTHOR"/>
+                </properties>
+              </component>
+              <component id="68474" class="javax.swing.JButton" binding="BORROWButton" default-binding="true">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="-1" height="50"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <alignmentY value="0.0"/>
+                  <background color="-14412406"/>
+                  <borderPainted value="false"/>
+                  <focusable value="false"/>
+                  <font size="28"/>
+                  <foreground color="-1719369"/>
+                  <selected value="false"/>
+                  <text value="BORROW"/>
+                  <toolTipText value="access Borrow List"/>
+                </properties>
+              </component>
+              <vspacer id="2f619">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+            </children>
+          </grid>
+          <grid id="4d0f5" binding="titleFrame" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="50">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints border-constraint="First"/>
+            <properties>
+              <background color="-15134881"/>
+              <focusCycleRoot value="true"/>
+              <focusable value="false"/>
+              <minimumSize width="519" height="80"/>
+              <opaque value="true"/>
+              <preferredSize width="519" height="80"/>
+            </properties>
+            <border type="empty"/>
+            <children>
+              <component id="820f4" class="javax.swing.JLabel" binding="title">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <alignmentY value="0.0"/>
+                  <autoscrolls value="false"/>
+                  <background color="-1719369"/>
+                  <focusable value="false"/>
+                  <font size="36"/>
+                  <foreground color="-1719369"/>
+                  <text value="BOOKRENT"/>
+                </properties>
+              </component>
+              <component id="4f4cb" class="javax.swing.JTextArea" binding="byVinceFgtTextArea" default-binding="true">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="50"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <autoscrolls value="false"/>
+                  <background color="-15134881"/>
+                  <editable value="false"/>
+                  <focusable value="false"/>
+                  <foreground color="-1719369"/>
+                  <text value="By vince.fgt"/>
+                </properties>
+              </component>
+              <component id="dbc19" class="javax.swing.JTextArea" binding="v100TextArea" default-binding="true">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="2" hsize-policy="0" anchor="6" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="50"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <background color="-15134881"/>
+                  <editable value="false"/>
+                  <foreground color="-1719369"/>
+                  <text value="v1.00"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="bfd12" binding="crud" layout-manager="FlowLayout" hgap="5" vgap="10" flow-align="1">
+            <constraints border-constraint="East"/>
+            <properties>
+              <focusable value="false"/>
+              <inheritsPopupMenu value="false"/>
+              <maximumSize width="120" height="20"/>
+              <minimumSize width="120" height="20"/>
+              <opaque value="false"/>
+              <preferredSize width="120" height="20"/>
+              <requestFocusEnabled value="true"/>
+              <visible value="true"/>
+            </properties>
+            <border type="empty"/>
+            <children>
+              <component id="5dffa" class="javax.swing.JButton" binding="MODIFIEDButton">
+                <constraints/>
+                <properties>
+                  <alignmentY value="0.0"/>
+                  <background color="-1719369"/>
+                  <borderPainted value="false"/>
+                  <focusCycleRoot value="true"/>
+                  <focusable value="false"/>
+                  <font size="12" style="1"/>
+                  <foreground color="-15134881"/>
+                  <horizontalTextPosition value="2"/>
+                  <maximumSize width="100" height="50"/>
+                  <minimumSize width="100" height="50"/>
+                  <preferredSize width="100" height="50"/>
+                  <text value="MODIFIED"/>
+                  <verifyInputWhenFocusTarget value="false"/>
+                  <visible value="true"/>
+                </properties>
+              </component>
+              <component id="9d91b" class="javax.swing.JButton" binding="DELETEButton">
+                <constraints/>
+                <properties>
+                  <background color="-1719369"/>
+                  <borderPainted value="false"/>
+                  <enabled value="true"/>
+                  <focusCycleRoot value="true"/>
+                  <focusable value="false"/>
+                  <font size="12" style="1"/>
+                  <foreground color="-15134881"/>
+                  <horizontalTextPosition value="0"/>
+                  <maximumSize width="100" height="50"/>
+                  <minimumSize width="100" height="50"/>
+                  <preferredSize width="100" height="50"/>
+                  <text value="DELETE"/>
+                </properties>
+              </component>
+              <component id="4ade" class="javax.swing.JButton" binding="SEARCHButton">
+                <constraints/>
+                <properties>
+                  <background color="-1719369"/>
+                  <borderPainted value="false"/>
+                  <focusCycleRoot value="true"/>
+                  <focusable value="false"/>
+                  <font size="12" style="1"/>
+                  <foreground color="-15134881"/>
+                  <horizontalTextPosition value="4"/>
+                  <maximumSize width="100" height="50"/>
+                  <minimumSize width="100" height="50"/>
+                  <preferredSize width="100" height="50"/>
+                  <text value="SEARCH"/>
+                </properties>
+              </component>
+              <component id="990b4" class="javax.swing.JButton" binding="BORROWINGButton">
+                <constraints/>
+                <properties>
+                  <background color="-1719369"/>
+                  <borderPainted value="false"/>
+                  <enabled value="true"/>
+                  <focusCycleRoot value="true"/>
+                  <focusable value="false"/>
+                  <font size="12" style="1"/>
+                  <foreground color="-15134881"/>
+                  <horizontalTextPosition value="0"/>
+                  <maximumSize width="100" height="50"/>
+                  <minimumSize width="100" height="50"/>
+                  <preferredSize width="100" height="50"/>
+                  <text value="BORROW"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
