@@ -67,7 +67,10 @@ public class Regex {
      */
     private static final Pattern pChar = Pattern.compile(
             //"^(?:[\\w\\d.,()\\-_:@#&^]+)$" // w digit
-            "^(?:[a-zA-Z.,()\\-_:@#&^]+)$" // all letters +..
+            //"^(?:[a-zA-Z.,()\\-_:@#&^]+)$" // at least one letters +..
+            //"^\\p{L}+$"  only lettre
+            //"[a-zA-Z .-]+" // letters + "."," ","-"
+            "^[\\p{L}]+([.\\- ][\\p{L}]*)*$"
     );
     //  "^[^\\W\\d_]+(?:\\s+[^\\W\\d_]+){0}$");
     public static boolean testChar(String input) {
@@ -104,7 +107,14 @@ public class Regex {
         pDigit = Pattern.compile(paramRegex);
     }
 
-
+    /**
+    * anything undefined yet
+     */
+    private static Pattern patternD = Pattern.compile(paramRegex);
+    public static <T> boolean testObjet(T input) {
+        patternD = Pattern.compile(paramRegex);
+        return !patternD.matcher(String.valueOf(input).trim()).matches(); //return true if error found
+    }
 
 /*public static void setParamRegex(String paramRegex) {
     Regex.paramRegex = paramRegex;

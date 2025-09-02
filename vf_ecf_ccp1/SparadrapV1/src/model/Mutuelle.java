@@ -3,6 +3,8 @@ package model;
 import controler.PharmacieController;
 import controler.Regex;
 
+import java.util.ArrayList;
+
 public class Mutuelle extends Person{
     private Dep dep;
     private int depCode;
@@ -10,10 +12,10 @@ public class Mutuelle extends Person{
     private double tauxRemb; // Taux de remboursement en pourcentage (0-100)
 
     // Constructeur
-    public Mutuelle(String firstName,String lastName, String address, String email,int nbState,String city,long phone, double tauxRemb) {
+    public Mutuelle(String firstName,String lastName, String address, String email,int nbState,String city,String phone, double tauxRemb) {
         super("Mutuelle",lastName,address,email,nbState,city,phone);
         this.setTauxRemb(tauxRemb);
-        PharmacieController.getListMutuelles().add(this);
+        PharmacieController.listMutuelles.add(this);
     }
 
     public Mutuelle(String lastName, double tauxRemb) {

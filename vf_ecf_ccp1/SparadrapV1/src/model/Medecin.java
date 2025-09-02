@@ -14,7 +14,7 @@ public class Medecin extends Person {
     private String idMedecin;
 
     // Constructor
-    public Medecin(String firstName, String lastName, String address,String email, int nbState,String city, long phone, long nbAgreement,String idMedecin) {
+    public Medecin(String firstName, String lastName, String address,String email, int nbState,String city, String phone, long nbAgreement,String idMedecin) {
         super(firstName,lastName,address,email,nbState,city,phone);
         this.setNbAgreement(nbAgreement);
         this.idMedecin = generateId();

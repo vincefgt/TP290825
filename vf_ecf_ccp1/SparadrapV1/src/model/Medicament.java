@@ -4,7 +4,6 @@ import controler.PharmacieController;
 import controler.Regex;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Medicament {
     private String nameMed;
@@ -55,11 +54,11 @@ public class Medicament {
         this.price = price;
     }
 
-    public String getDatOnMarket() {
+    public LocalDate getDatOnMarket() {
         return datOnMarket;
     }
     public void setDatOnMarket(String datOnMarket) {
-        this.datOnMarket = datOnMarket != null ? datOnMarket.trim() : "";
+        this.datOnMarket = LocalDate.parse(datOnMarket);
     }
 
     public int getStock() {

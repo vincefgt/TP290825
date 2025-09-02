@@ -21,7 +21,7 @@ public class Client extends Person {
 
     // Constructeur avec validation (code défensif)
     public Client(String firstName, String lastName, String address, int nbState,
-                  String city, long phone, String email, long nbSS,
+                  String city, String phone, String email, long nbSS,
                   LocalDate dateBirth,Mutuelle mut, Medecin medecinTraitant) {
         super (firstName, lastName,address,email,nbState,city,phone);
         PharmacieController.getListClients().add(this);

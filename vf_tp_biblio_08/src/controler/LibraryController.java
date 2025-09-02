@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 
 public class LibraryController {
     
-    private ModernLibraryInterface view;
+    /*private ModernLibraryInterface view;
     
-    public LibraryController(ModernLibraryInterface view) {
+   // public LibraryController(ModernLibraryInterface view) {
         this.view = view;
-    }
+    }*/
     
     public void addBook(String title, String authorFirst, String authorLast, int stock, long isbn) throws SaisieException {
         // Validate input
@@ -148,9 +148,9 @@ public class LibraryController {
                email.indexOf("@") < email.lastIndexOf(".");
     }
     
-    public void showNotification(String message, String title, int messageType) {
+    /*public void showNotification(String message, String title, int messageType) {
         SwingUtilities.invokeLater(() -> {
             JOptionPane.showMessageDialog(view, message, title, messageType);
         });
-    }
+    }*/
 }

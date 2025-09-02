@@ -2,6 +2,9 @@ package controler;
 
 import model.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PharmacieController {
     // Lists
     public static java.util.List<Client> listClients;
@@ -13,12 +16,12 @@ public class PharmacieController {
 
     // Constructeur
     public PharmacieController() {
-        listClients = new java.util.ArrayList<>();
-        listMedecins = new java.util.ArrayList<>();
-        listMed = new java.util.ArrayList<>();
-        listMutuelles = new java.util.ArrayList<>();
-        listOrdonnances = new java.util.ArrayList<>();
-        listAchats = new java.util.ArrayList<>();
+        listClients = new ArrayList<>();
+        listMedecins = new ArrayList<>();
+        listMed = new ArrayList<>();
+        listMutuelles = new ArrayList<>();
+        listOrdonnances = new ArrayList<>();
+        listAchats = new ArrayList<>();
         /**
          * listMedOrdo > list of med in each ordo > class Ordonnance creaet at Ordo creation.
          */
@@ -97,7 +100,7 @@ public class PharmacieController {
         }
         return false;
     }
-    public static java.util.List<Mutuelle> getListMutuelles() {
+    public static List<Mutuelle> getListMutuelles() {
         return listMutuelles;
     }
 

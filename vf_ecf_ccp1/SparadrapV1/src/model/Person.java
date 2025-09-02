@@ -1,6 +1,7 @@
 package model;
 
 import controler.Regex;
+import Exception.*;
 
 public class Person {
 
@@ -10,10 +11,10 @@ public class Person {
     private String email;
     private int nbState;
     private String city;
-    private long phone;
+    private String phone;
 
     //constructor
-    public Person(String firstName, String lastName, String address, String email, int nbState, String city, long phone) {
+    public Person(String firstName, String lastName, String address, String email, int nbState, String city, String phone) {
         /*// check if dataPerson is empty
         String[]listData = {firstName, lastName, address, email,String.valueOf(nbState),String.valueOf(phone),city};
         for (int i = 0; i < listData.length; i++) {
@@ -49,7 +50,7 @@ public class Person {
         return firstName;
     }
     public void setFirstName(String firstName) {
-        if (Regex.testNotEmpty(firstName)||!Regex.testChar(firstName))
+        if (Regex.testNotEmpty(firstName) || Regex.testChar(firstName))
             throw new IllegalArgumentException("firstName required without number");
         this.firstName = capitalize(firstName);
     }
@@ -58,7 +59,7 @@ public class Person {
         return lastName;
     }
     public void setLastName(String lastName) {
-        if (Regex.testNotEmpty(lastName)||!Regex.testChar(lastName))
+        if (Regex.testNotEmpty(lastName)||Regex.testChar(lastName))
             throw new IllegalArgumentException("lastName required without number");
         this.lastName = capitalize(lastName);
     }
@@ -85,9 +86,9 @@ public class Person {
         return nbState;
     }
     public void setNbState(int nbState) {
-        Regex.setParamRegex("^\\d{4}$");
+        Regex.setParamRegex("^\\d{5}$");
         if (Regex.testNotEmpty(String.valueOf(nbState))||Regex.testDigit(nbState))
-            throw new IllegalArgumentException("4 numbers required");
+            throw new IllegalArgumentException("Nb State 5 numbers required");
         this.nbState = nbState;
     }
 
@@ -100,13 +101,13 @@ public class Person {
         this.city = capitalize(city);
     }
 
-    public long getPhone() {
+    public String getPhone() {
         return phone;
     }
-    public void setPhone(long phone) {
-        Regex.setParamRegex("^\\d{10}$");
-        if (Regex.testDigit(phone))
-            throw new IllegalArgumentException("10 numbers required");
+    public void setPhone(String phone) {
+        Regex.setParamRegex("^\\+?\\w{10}$");
+        if (Regex.testObjet(phone))
+            throw new InputException("10 numbers required");
         this.phone = phone;
     }
 

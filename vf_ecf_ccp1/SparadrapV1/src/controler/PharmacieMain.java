@@ -8,26 +8,12 @@ import java.time.LocalDate;
 class PharmacieMain {
     public static void main(String[] args) {
 
-        // Exécution des tests unitaires
-        System.out.println("\n1. EXÉCUTION DES TESTS UNITAIRES:");
-        //PharmacieTests.executerTousLesTests();
-
-        // Démonstration du système
-        System.out.println("\n2. DÉMONSTRATION DU SYSTÈME:");
-        demonstrationSysteme();
-
-        System.out.println("\n===== FIN DU PROGRAMME =====");
-    }
-
     // Méthode de démonstration du fonctionnement du système
     public static void demonstrationSysteme() {
         try {
             // Initialisation du contrôleur et de la vue
             PharmacieController controller = new PharmacieController();
             PharmacieView view = new PharmacieView(controller);
-
-            // Création de données d'exemple
-            System.out.println("Création de données d'exemple...");
 
             // Mutuelles
             Mutuelle mgen = new Mutuelle("MGEN", 70.0);
@@ -43,13 +29,13 @@ class PharmacieMain {
 
             // Clients
             Client client1 = new Client("Durand", "Jean", "123 Rue de la République",
-                    75001, "Paris", 0111223344L,
+                    75001, "Paris", "0111223344",
                     "jean.durand@email.com", 111222333444555L, LocalDate.parse("15/06/1980"),null,null);
             client1.setMutuelle(mgen);
             client1.setMedecinTraitant(drDupont);
 
             Client client2 = new Client("Moreau", "Marie", "456 Boulevard Voltaire",
-                    69000, "Lyon", 4455667788L,
+                    69000, "Lyon", "4455667788",
                     "marie.moreau@email.com", 666777888999000L, LocalDate.parse("22/03/1975"),null,null);
             client2.setMutuelle(harmonie);
             client2.setMedecinTraitant(drMartin);

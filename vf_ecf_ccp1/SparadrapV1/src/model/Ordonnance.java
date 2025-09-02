@@ -12,7 +12,7 @@ public class Ordonnance extends Medecin{
     //private List<Ordonnance> listClientOrdo;
 
     // Constructeur
-    public Ordonnance(String firstName,String lastName,String address,String email,int nbState,String city,long phone,long nbAgreement,String idMedecin, LocalDate dateOrdo, Client patient) {
+    public Ordonnance(String firstName,String lastName,String address,String email,int nbState,String city,String phone,long nbAgreement,String idMedecin, LocalDate dateOrdo, Client patient) {
         super(firstName,lastName,address,email,nbState,city,phone,nbAgreement,idMedecin);
         this.setDate(dateOrdo);
         this.setPatient(patient);
