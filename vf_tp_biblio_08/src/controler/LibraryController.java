@@ -3,7 +3,6 @@ package controler;
 import exception.SaisieException;
 import model.Book;
 import model.Subscriber;
-import view.appV2.ModernLibraryFrame;
 
 import javax.swing.*;
 import java.time.LocalDateTime;
@@ -12,9 +11,9 @@ import java.util.stream.Collectors;
 
 public class LibraryController {
     
-    private ModernLibraryFrame view;
+    private ModernLibraryInterface view;
     
-    public LibraryController(ModernLibraryFrame view) {
+    public LibraryController(ModernLibraryInterface view) {
         this.view = view;
     }
     
