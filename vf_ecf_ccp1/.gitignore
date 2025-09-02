@@ -5,6 +5,9 @@
 .project
 .classpath
 SparadrapV2/
+skeleton-starter-flow-spring-24/
+
+
 *.iml
 .DS_Store
 
