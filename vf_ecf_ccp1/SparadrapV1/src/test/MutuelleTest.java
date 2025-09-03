@@ -1,3 +1,4 @@
+import controler.PharmacieController;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.*;
@@ -12,8 +13,8 @@ class MutuelleTest {
     private List<Mutuelle> listMutuelles;
 
 @BeforeEach
-public void setUp() {
-    listMutuelles = new ArrayList<>();
+void setup(){
+    PharmacieController controller = new PharmacieController();
 }
 
 
@@ -23,8 +24,7 @@ public void setUp() {
         assertDoesNotThrow(() -> {
             Mutuelle mutuelle = new Mutuelle("Mutuelle", "MGEN", "123 Avenue Mutuelle",
                     "contact@mgen.fr", 75015, "Paris", "0145678901", 70.0);
-
-            assertEquals("MGEN", mutuelle.getLastName());
+            assertEquals("Mgen", mutuelle.getLastName());
             assertEquals(70.0, mutuelle.getTauxRemb());
         });
     }
@@ -34,7 +34,6 @@ public void setUp() {
     void testCreationMutuelleSimplifie() {
         assertDoesNotThrow(() -> {
             Mutuelle mutuelle = new Mutuelle("Harmonie Mutuelle", 60.0);
-
             assertEquals("Harmonie Mutuelle", mutuelle.getLastName());
             assertEquals(60.0, mutuelle.getTauxRemb());
         });
@@ -43,19 +42,19 @@ public void setUp() {
     @Test
     @DisplayName("Test de validation du taux de remboursement valide")
     void testValidationTauxRemboursementValide() {
-        // Test avec taux minimum (0%)
+        // Test taux 0
         assertDoesNotThrow(() -> {
             Mutuelle mutuelle = new Mutuelle("Test Mutuelle", 0.0);
             assertEquals(0.0, mutuelle.getTauxRemb());
         });
 
-        // Test avec taux maximum (100%)
+        // Test taux 100
         assertDoesNotThrow(() -> {
             Mutuelle mutuelle = new Mutuelle("Test Mutuelle", 100.0);
             assertEquals(100.0, mutuelle.getTauxRemb());
         });
 
-        // Test avec taux moyen
+        // Test taux moyen
         assertDoesNotThrow(() -> {
             Mutuelle mutuelle = new Mutuelle("Test Mutuelle", 65.5);
             assertEquals(65.5, mutuelle.getTauxRemb());
@@ -114,7 +113,7 @@ public void setUp() {
     }
 
     @Test
-    @DisplayName("Test de calcul de remboursement avec taux 0%")
+    @DisplayName("Test calc remb 0%")
     void testCalculRemboursementTauxZero() {
         Mutuelle mutuelle = new Mutuelle("Aucun Remboursement", 0.0);
 
@@ -123,7 +122,7 @@ public void setUp() {
     }
 
     @Test
-    @DisplayName("Test de calcul de remboursement avec taux 100%")
+    @DisplayName("Test calc remb 100%")
     void testCalculRemboursementTauxMax() {
         Mutuelle mutuelle = new Mutuelle("Remboursement Total", 100.0);
 
@@ -133,8 +132,8 @@ public void setUp() {
 
     @Test
     @DisplayName("Test de calcul de remboursement avec montant négatif")
-    void testCalculRemboursementMontantNegatif() {
-        Mutuelle mutuelle = new Mutuelle("Test3", 70.0);
+    void testCalcRembMontantNegatif() {
+        Mutuelle mutuelle = new Mutuelle("TestN", 70.0);
 
         assertThrows(IllegalArgumentException.class, () -> {
             mutuelle.calcRemb(-50.0);
@@ -147,13 +146,13 @@ public void setUp() {
         double montant = 200.0;
 
         // Test avec différents taux
-        Mutuelle mutuelle20 = new Mutuelle("Test 20%", 20.0);
+        Mutuelle mutuelle20 = new Mutuelle("TestA", 20.0);
         assertEquals(40.0, mutuelle20.calcRemb(montant), 0.01);
 
-        Mutuelle mutuelle50 = new Mutuelle("Test 50%", 50.0);
+        Mutuelle mutuelle50 = new Mutuelle("TestB", 50.0);
         assertEquals(100.0, mutuelle50.calcRemb(montant), 0.01);
 
-        Mutuelle mutuelle90 = new Mutuelle("Test 90%", 90.0);
+        Mutuelle mutuelle90 = new Mutuelle("TestC", 90.0);
         assertEquals(180.0, mutuelle90.calcRemb(montant), 0.01);
     }
 
@@ -177,20 +176,28 @@ public void setUp() {
     @DisplayName("Test de la méthode toString")
     void testToString() {
         Mutuelle mutuelle = new Mutuelle("Crédit Mutuel", 65.5);
-
         String result = mutuelle.toString();
         assertTrue(result.contains("Crédit Mutuel"));
-        assertTrue(result.contains("65.5"));
-        assertTrue(result.contains("Remboursement"));
+        assertTrue(result.contains("65.5%"));
     }
 
-    @Disabled
+    //@Disabled
     @Test
-    @DisplayName("Test de calcul de remboursement avec précision")
-    void testCalculRemboursementPrecision() {
-        Mutuelle mutuelle = new Mutuelle("Test Précision", 33.33);
-
+    @DisplayName("Test cal remb 2 dec")
+    void testCalRemb2Dec() {
+        Mutuelle mutuelle = new Mutuelle("TestDoubleDec", 33.33);
         double montant = 99.99;
-        //double remboursement = mutuelle.calcRemb;
+        double remb = mutuelle.calcRemb(montant);
+        double expected = 99.99 * 0.3333;
+        assertEquals(expected, remb, 0.01);
+    }
+    @Test
+    @DisplayName("Test valid dep null")
+    void testValidationDepNull() {
+        Mutuelle mutuelle = new Mutuelle("Test Null", 50.0);
+        System.out.println(mutuelle.getDep());
+        assertThrows(IllegalArgumentException.class, () -> {
+            mutuelle.setDep(null);
+        });
     }
 }

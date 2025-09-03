@@ -17,7 +17,7 @@ public class Medecin extends Person {
     public Medecin(String firstName, String lastName, String address,String email, int nbState,String city, String phone, long nbAgreement,String idMedecin) {
         super(firstName,lastName,address,email,nbState,city,phone);
         this.setNbAgreement(nbAgreement);
-        this.idMedecin = generateId();
+        this.idMedecin = generateId(idMedecin);
         addMedecin(this);
         this.patients = new java.util.ArrayList<>();
         PharmacieController.getListMedecins().add(this);
@@ -29,23 +29,20 @@ public class Medecin extends Person {
         this.setIdMedecin(idMedecin);
         addMedecin(this);
         this.patients = new java.util.ArrayList<>();
+        //TODO:control if medecin existe > true > error
         PharmacieController.getListMedecins().add(this);
     }
 
     public void setIdMedecin(String idMedecin) {
-        this.idMedecin = generateId();
+        this.idMedecin = generateId(idMedecin);
     }
 
     public long getNbAgreement() {
         return nbAgreement;
     }
     public void setNbAgreement(long nbAgreement) {
-/*        Regex.setParamRegex("^\\d{11}$"); // strictly 11 numbers
-        if (Regex.testNotEmpty(String.valueOf(nbAgreement))||Regex.testDigit(nbAgreement)) {
-            throw new IllegalArgumentException("11 numbers required");
-        }
-*/  Regex.setParamRegex("^\\d{11}$");
-        if (Regex.testDigit(nbAgreement)||Regex.testNotEmpty(String.valueOf(nbAgreement)))
+        Regex.setParamRegex("^\\d{11}$");
+        if (Regex.testDigitLong(nbAgreement)||Regex.testNotEmpty(String.valueOf(nbAgreement)))
             throw new IllegalArgumentException("nbAgreement format invalid 11numbers required");
         this.nbAgreement = nbAgreement;
     }
@@ -76,16 +73,15 @@ public class Medecin extends Person {
     }
 
     // Méthodes utilitaires
-    private String generateId() {
-        return idMedecin = "MED" + format("%04d",PharmacieController.getListMedecins().size()+1); //Date.now().toString() + '_' + Math.random().toString(36).substr(2, 9);
+    private String generateId(String idMedecin) {
+        if (Regex.testNotEmpty(idMedecin)) {
+            return "MED" + format("%04d", PharmacieController.getListMedecins().size() + 1); //Date.now().toString() + '_' + Math.random().toString(36).substr(2, 9);
+        } else { return idMedecin; }
     }
 
-    public String getLastNameMedecin (){
-        return super.getLastName();
-    }
 
     @Override
     public String toString() {
-        return "Dr "+getFirstName()+" "+getLastName()+" (Agrement: "+nbAgreement+")";
+        return "Dr "+getLastName()+" "+getFirstName()+" (Agrement: "+nbAgreement+")";
     }
 }

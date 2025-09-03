@@ -39,11 +39,12 @@ public class Person {
         this.setCity(city);
         this.setPhone(phone);
     }
-
     public Person(String lastName) {
+        this.setLastName(lastName);
     }
-
     public Person(String lastName, String city) {
+        this.setLastName(lastName);
+        this.setCity(city);
     }
 
     public String getFirstName() {
@@ -87,7 +88,7 @@ public class Person {
     }
     public void setNbState(int nbState) {
         Regex.setParamRegex("^\\d{5}$");
-        if (Regex.testNotEmpty(String.valueOf(nbState))||Regex.testDigit(nbState))
+        if (Regex.testNotEmpty(String.valueOf(nbState))||Regex.testDigitLong(nbState))
             throw new IllegalArgumentException("Nb State 5 numbers required");
         this.nbState = nbState;
     }
@@ -116,11 +117,24 @@ public class Person {
         if (input == null || input.isEmpty()) {
             return input;
         }
-        return input.trim().substring(0, 1).toUpperCase() + input.trim().substring(1).toLowerCase();
+
+        String[] words = input.trim().toLowerCase().split("\\s+");
+        StringBuilder result = new StringBuilder();
+
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                result.append(Character.toUpperCase(word.charAt(0)))
+                        .append(word.substring(1))
+                        .append(" ");
+            }
+        }
+
+        return result.toString().trim();
     }
+
 
     @Override
     public String toString() {
-        return "Personne ["+firstName+lastName+address+email+nbState+city+phone+"]";
+        return "Personne ["+getFirstName()+getLastName()+getAddress()+getEmail()+getNbState()+getCity()+getPhone()+"]";
     }
 }

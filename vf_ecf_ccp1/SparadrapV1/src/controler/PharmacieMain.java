@@ -7,15 +7,12 @@ import java.time.LocalDate;
 
 class PharmacieMain {
     public static void main(String[] args) {
-
-    // Méthode de démonstration du fonctionnement du système
-    public static void demonstrationSysteme() {
         try {
             // Initialisation du contrôleur et de la vue
             PharmacieController controller = new PharmacieController();
             PharmacieView view = new PharmacieView(controller);
 
-            // Mutuelles
+           /* // Mutuelles
             Mutuelle mgen = new Mutuelle("MGEN", 70.0);
             Mutuelle harmonie = new Mutuelle("Harmonie Mutuelle", 60.0);
             controller.addMutuelle(mgen);
@@ -90,8 +87,7 @@ class PharmacieMain {
                 System.out.println("  Prix total: " + ord.calculerPrixTotal() + "€");
             }
 
-            System.out.println("\nAchats enregistrés:");
-            view.afficherListeAchats(controller.getListAchats());
+
 
             // Affichage des statistiques
             System.out.println("");

@@ -1,14 +1,16 @@
 package model;
 
-import controler.PharmacieController;
 import controler.Regex;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import static model.Achat.IsAchatDirect;
 
 public class Ordonnance extends Medecin{
     private LocalDate dateOrdo;
     private Client patient;
-    public java.util.List<Medicament> listMedOrdo;
+    public  List<Medicament> listMedOrdo;
     //private List<Ordonnance> listClientOrdo;
 
     // Constructeur
@@ -16,18 +18,18 @@ public class Ordonnance extends Medecin{
         super(firstName,lastName,address,email,nbState,city,phone,nbAgreement,idMedecin);
         this.setDate(dateOrdo);
         this.setPatient(patient);
-        this.listMedOrdo = new java.util.ArrayList<>();
-        PharmacieController.getListOrdo().add(this);
+        this.listMedOrdo = new ArrayList<>();
+        //PharmacieController.getListOrdo().add(this);
     }
 
     // Getters et Setters
-    public LocalDate getDate() {
-        return dateOrdo;
+    public String getDate() {
+        return dateOrdo.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
     public void setDate(LocalDate dateOrdo) {
         if (Regex.testDate(dateOrdo)||Regex.testNotEmpty(String.valueOf(dateOrdo)))
             throw new IllegalArgumentException("dateBirth required DD/MM/YYYY format");
-        this.dateOrdo = LocalDate.parse(dateOrdo.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        this.dateOrdo = dateOrdo;
     }
 
     public Client getPatient() {
@@ -39,23 +41,29 @@ public class Ordonnance extends Medecin{
         }
         this.patient = patient;
     }
+    /*public void setListMedOrdo() {
+        if (!IsAchatDirect()) {
+            listMedOrdo = Achat.getListMedAchat();
+            return;
+        }
+        listMedOrdo = new ArrayList<>();
+    }*/
 
-    public java.util.List<Medicament> getListMedOrdo() {
-        return new java.util.ArrayList<>(listMedOrdo); // Retour d'une copie
+    public List<Medicament> getListMedOrdo() {
+        return listMedOrdo;
     }
 
     // Méthodes pour gérer la liste des médicaments
     public void addMedOrdo(Medicament medicament) {
-        if (medicament != null && !listMedOrdo.contains(medicament)) {
-            listMedOrdo.add(medicament);
+        if (medicament != null && !getListMedOrdo().contains(medicament)) {
+            getListMedOrdo().add(medicament);
         }
     }
 
-    public boolean suprMedOrdo(Medicament medicament) {
-        return listMedOrdo.remove(medicament);
+    public boolean suppMedOrdo(Medicament medicament) {
+        return getListMedOrdo().remove(medicament);
     }
 
-    // Méthode pour calculer le prix total de l'ordonnance
     public double calculerPrixTotal() {
         double total = 0;
         for (Medicament med : listMedOrdo) {

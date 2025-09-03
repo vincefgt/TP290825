@@ -24,7 +24,7 @@ public class Medicament {
 
     // Getters et Setters
     public String getNameMed() {
-        return nameMed;
+        return this.nameMed;
     }
     public void setNameMed(String nameMed) {
         if (nameMed == null || nameMed.trim().isEmpty()) {
@@ -34,7 +34,7 @@ public class Medicament {
     }
 
     public catMed getCat() {
-        return cat;
+        return this.cat;
     }
     public void setCat(catMed cat) {
         if (Regex.testNotEmpty(String.valueOf(cat))) {
@@ -44,7 +44,7 @@ public class Medicament {
     }
 
     public double getPrice() {
-        return price;
+        return this.price;
     }
     public void setPrice(double price) {
         Regex.setParamRegex("^\\d+(\\.\\d+)?$");
@@ -55,18 +55,18 @@ public class Medicament {
     }
 
     public LocalDate getDatOnMarket() {
-        return datOnMarket;
+        return this.datOnMarket;
     }
     public void setDatOnMarket(String datOnMarket) {
         this.datOnMarket = LocalDate.parse(datOnMarket);
     }
 
     public int getStock() {
-        return stock;
+        return this.stock;
     }
     public void setStock(int stock) {
         Regex.setParamRegex("^\\d+$");
-        if (stock < 0||Regex.testDigit(stock)) {
+        if (stock < 0||Regex.testDigitLong(stock)) {
             throw new IllegalArgumentException("quantity > 0 required");
         }
         this.stock = stock;
@@ -87,6 +87,6 @@ public class Medicament {
 
     @Override
     public String toString() {
-        return nameMed + " (" + cat + ") - Prix: " + price + "€ - Stock: " + stock;
+        return getNameMed()+" ("+getCat()+") - Prix: "+getPrice()+"€ - Stock: "+getStock();
     }
 }

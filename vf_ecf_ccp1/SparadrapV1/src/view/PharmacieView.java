@@ -5,6 +5,7 @@ import model.Achat;
 import model.Client;
 
 import javax.swing.*;
+import java.util.List;
 
 public class PharmacieView {
     private PharmacieController controller;
@@ -107,5 +108,15 @@ public class PharmacieView {
         }
     }
 
+    public static <T> void printList(List<T> list) {
+        if (list == null || list.isEmpty()) {
+            System.out.println("Liste vide ou nulle");
+            return;
+        }
 
+        for (T element : list) {
+            System.out.println(element);
+        }
     }
+
+}

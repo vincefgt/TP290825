@@ -1,7 +1,6 @@
 package controler;
 
 import model.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,12 +15,12 @@ public class PharmacieController {
 
     // Constructeur
     public PharmacieController() {
-        listClients = new ArrayList<>();
-        listMedecins = new ArrayList<>();
-        listMed = new ArrayList<>();
-        listMutuelles = new ArrayList<>();
-        listOrdonnances = new ArrayList<>();
-        listAchats = new ArrayList<>();
+        listClients = new ArrayList<>(); // historic clients
+        listMedecins = new ArrayList<>(); // historic medecins
+        listMed = new ArrayList<>(); // historic meds
+        listMutuelles = new ArrayList<>(); // historic mutuelles
+        listOrdonnances = new ArrayList<>(); // historic ordos
+        listAchats = new ArrayList<>(); // historic achats
         /**
          * listMedOrdo > list of med in each ordo > class Ordonnance creaet at Ordo creation.
          */
@@ -45,7 +44,7 @@ public class PharmacieController {
         }
         return null;
     }
-    public static java.util.List<Client> getListClients() {
+    public static List<Client> getListClients() {
         return listClients;
     }
 
@@ -57,7 +56,7 @@ public class PharmacieController {
         return false;
     }
     public Medecin searchAgreement(long nbAgreement) {
-        if (Regex.testDigit(nbAgreement)||Regex.testNotEmpty(String.valueOf(nbAgreement))) {
+        if (Regex.testDigitLong(nbAgreement)||Regex.testNotEmpty(String.valueOf(nbAgreement))) {
             return null;
         }
         for (Medecin medecin : listMedecins) {
@@ -67,19 +66,20 @@ public class PharmacieController {
         }
         return null;
     }
-    public static java.util.List<Medecin> getListMedecins() {
+    public static List<Medecin> getListMedecins() {
         return listMedecins;
     }
 
     // MED add in med list = ALL med
     public boolean addMed(Medicament medicament) {
-        if (medicament != null && !PharmacieController.getListMed().contains(medicament)) {
+        if (medicament != null && !getListMed().contains(medicament)) {
             return listMed.add(medicament);
         }
         return false;
     }
+    // Med List
     public Medicament searchLastName(String lastName) {
-        if (Regex.testNotEmpty(lastName)||!Regex.testChar(lastName)) {
+        if (Regex.testNotEmpty(lastName)||Regex.testChar(lastName)) {
             return null;
         }
         for (Medicament med : listMed) {
@@ -89,7 +89,7 @@ public class PharmacieController {
         }
         return null;
     }
-    public static java.util.List<Medicament> getListMed() {
+    public static List<Medicament> getListMed() {
         return listMed;
     }
 
@@ -109,9 +109,10 @@ public class PharmacieController {
         if (ordonnance != null && !listOrdonnances.contains(ordonnance)) {
             return listOrdonnances.add(ordonnance);
         }
+        //TODO: message already exist
         return false;
     }
-    public static java.util.List<Ordonnance> getListOrdo() {
+    public static List<Ordonnance> getListOrdo() {
         return listOrdonnances;
     }
 
@@ -120,33 +121,31 @@ public class PharmacieController {
         if (achat == null) {
             return false;
         }
-
-        // Vérifier la disponibilité des médicaments
-        for (Medicament med : achat.getListMedAchat()) {
+        // availability med
+        for (Medicament med : getListMed()) {
             if (med.getStock() <= 0) {
-                System.out.println("Stock insuffisant pour: " + med.getNameMed());
+                System.out.println("Out of Stock: "+med.getNameMed());
                 return false;
             }
         }
-
-        // Réduire les quantités en stock
-        for (Medicament med : achat.getListMedAchat()) {
+        // down stock
+        for (Medicament med : getListMed()) {
             med.reduireQuantite(1); // Réduction d'1 unité par défaut
         }
-
-        // Recalculer les montants
-        achat.calculerMontants();
-
-        // Ajouter l'achat à la liste
+        // Recal montants
+        achat.calMontants();
+        // Add to list ALL Achats
         return listAchats.add(achat);
     }
-    public static java.util.List<Achat> getListAchats() {
+
+    // Historic Achats
+    public static List<Achat> getListAchats() {
         return listAchats;
     }
 
     // List of Client's Achat
-    public java.util.List<Achat> getAchatsClient(Client client) {
-        java.util.List<Achat> achatsClient = new java.util.ArrayList<>();
+    public List<Achat> getAchatsClient(Client client) {
+        List<Achat> achatsClient = new ArrayList<>();
         if (client != null) {
             for (Achat achat : listAchats) {
                 if (achat.getClient().equals(client)) {

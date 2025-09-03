@@ -15,22 +15,22 @@ public class Mutuelle extends Person{
     public Mutuelle(String firstName,String lastName, String address, String email,int nbState,String city,String phone, double tauxRemb) {
         super("Mutuelle",lastName,address,email,nbState,city,phone);
         this.setTauxRemb(tauxRemb);
-        PharmacieController.listMutuelles.add(this);
+        //PharmacieController.getListMutuelles().add(this);
     }
 
     public Mutuelle(String lastName, double tauxRemb) {
         super(lastName);
+        this.setFirstName("Mutuelle");
         this.setTauxRemb(tauxRemb);
-        PharmacieController.getListMutuelles().add(this);
+        //PharmacieController.getListMutuelles().add(this);
     }
-
 
     public Dep getDep() {
         return dep;
     }
     public void setDep(Dep dep) {
-        if (Regex.testNotEmpty(String.valueOf(dep))){
-            throw new IllegalArgumentException("nbAgreement format invalid 4numbers required");}
+        if (Regex.testNullObj(dep)){
+            throw new IllegalArgumentException("dep required");}
         this.dep = dep;
     }
 
@@ -47,13 +47,13 @@ public class Mutuelle extends Person{
     // Calculi refund
     public double calcRemb(double montant) {
         if (montant < 0) {
-            throw new IllegalArgumentException("Le montant ne peut pas être négatif");
+            throw new IllegalArgumentException("montant invalid <0");
         }
         return montant * (tauxRemb / 100.0);
     }
 
     @Override
     public String toString() {
-        return getLastName() + " (Remboursement: " + tauxRemb + "%)";
+        return getLastName()+" (Remb: "+getTauxRemb()+"%)";
     }
 }
