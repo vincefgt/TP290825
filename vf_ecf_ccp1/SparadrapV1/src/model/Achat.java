@@ -1,6 +1,6 @@
 package model;
 
-import controler.Regex;
+import controller.Regex;
 import Exception.InputException;
 
 import java.math.BigDecimal;
@@ -15,6 +15,7 @@ public class Achat {
     private LocalDate dateAchat;
     private Client client;
     private List<Medicament> listMedAchat;
+    private List<Medicament> listMedOrdo;
     private List<Achat> listAchatClient;
     private static Ordonnance ordonnance; // null si achat direct
     private double Total = 0;
@@ -36,7 +37,7 @@ public class Achat {
         this(dateAchat, client);
         this.setOrdonnance(ordonnance);
         this.listMedAchat = new ArrayList<>();
-        setListMedAchat(this.listMedAchat); // recup listMedOrdo
+        setListMedAchat(ordonnance.getListMedOrdo()); // recup listMedOrdo
     }
 
     // Getters et Setters
@@ -61,8 +62,8 @@ public class Achat {
         return this.listMedAchat;
     }
 
-    public  void setListMedAchat(List<Medicament> listMedAchat) { // from Ordo
-        this.listMedAchat.addAll(ordonnance.listMedOrdo);
+    public void setListMedAchat(List<Medicament> listMedOrdo) { // from Ordo
+        this.listMedAchat.addAll(listMedOrdo);
     }
 
     public Ordonnance getOrdonnance() {

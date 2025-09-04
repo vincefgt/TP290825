@@ -1,4 +1,4 @@
-package controler;
+package controller;
 
 import model.*;
 import java.util.ArrayList;
@@ -44,14 +44,14 @@ public class PharmacieController {
         }
         return null;
     }
-    public static List<Client> getListClients() {
+    public List<Client> getListClients() {
         return listClients;
     }
 
     //MEDECIN
     public boolean addMedecin(Medecin medecin) {
-        if (medecin != null && !listMedecins.contains(medecin)) {
-            return listMedecins.add(medecin);
+        if (medecin != null && !getListMedecins().contains(medecin)) {
+            return getListMedecins().add(medecin);
         }
         return false;
     }

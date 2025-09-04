@@ -1,6 +1,6 @@
 package model;
 
-import controler.Regex;
+import controller.Regex;
 import Exception.*;
 
 public class Person {

@@ -1,10 +1,6 @@
 package model;
 
-import controler.PharmacieController;
-import controler.Regex;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
+import controller.Regex;
 
 public class Mutuelle extends Person{
     private Dep dep;

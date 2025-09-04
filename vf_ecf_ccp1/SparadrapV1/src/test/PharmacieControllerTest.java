@@ -1,10 +1,10 @@
-import controler.PharmacieController;
+import controller.PharmacieController;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import view.PharmacieView;
-import static controler.PharmacieController.*;
+import static controller.PharmacieController.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 
@@ -43,30 +43,30 @@ public class PharmacieControllerTest {
     @DisplayName("Test d'ajout de client valide")
     void testAjoutClientValide() {
         assertTrue(controller.addClient(client1));
-        assertEquals(1, getListClients().size());
-        assertTrue(getListClients().contains(client1));
+        assertEquals(1, controller.getListClients().size());
+        assertTrue(controller.getListClients().contains(client1));
 
         assertTrue(controller.addClient(client2));
-        assertEquals(2, getListClients().size());
-        assertTrue(getListClients().contains(client2));
+        assertEquals(2, controller.getListClients().size());
+        assertTrue(controller.getListClients().contains(client2));
     }
 
     @Test
     @DisplayName("Test d'ajout de client null")
     void testAjoutClientNull() {
         assertFalse(controller.addClient(null));
-        assertEquals(0, getListClients().size());
+        assertEquals(0, controller.getListClients().size());
     }
 
     @Test
     @DisplayName("Test d'ajout de client en double")
     void testAjoutClientDouble() {
         assertTrue(controller.addClient(client1));
-        assertEquals(1, getListClients().size());
+        assertEquals(1, controller.getListClients().size());
 
         // Tentative d'ajout du même client
         assertFalse(controller.addClient(client1));
-        assertEquals(1, getListClients().size());
+        assertEquals(1, controller.getListClients().size());
     }
 
     @Test
@@ -327,7 +327,7 @@ public class PharmacieControllerTest {
         controller = null; //clear app
         controller = new PharmacieController(); // init app
         // verified creation empty lists
-        assertTrue(getListClients().isEmpty());
+        assertTrue(controller.getListClients().isEmpty());
 
         assertNotNull(getListMedecins());
         assertTrue(getListMedecins().isEmpty());

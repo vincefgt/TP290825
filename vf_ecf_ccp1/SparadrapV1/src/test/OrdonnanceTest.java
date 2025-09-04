@@ -1,4 +1,4 @@
-import controler.PharmacieController;
+import controller.PharmacieController;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

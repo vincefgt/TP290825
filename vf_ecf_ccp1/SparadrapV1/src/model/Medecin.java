@@ -1,9 +1,8 @@
 package model;
 
-import controler.PharmacieController;
-import controler.Regex;
-import java.util.Date;
-import java.util.List;
+import controller.PharmacieController;
+import controller.Regex;
+
 import static java.lang.String.format;
 
 public class Medecin extends Person {
@@ -18,9 +17,9 @@ public class Medecin extends Person {
         super(firstName,lastName,address,email,nbState,city,phone);
         this.setNbAgreement(nbAgreement);
         this.idMedecin = generateId(idMedecin);
-        addMedecin(this);
+        //addMedecin(this);
         this.patients = new java.util.ArrayList<>();
-        PharmacieController.getListMedecins().add(this);
+        //PharmacieController.getListMedecins().add(this); // do in controller
     }
 
     public Medecin(String lastName, String city, long nbAgreement,String idMedecin) {
@@ -31,6 +30,12 @@ public class Medecin extends Person {
         this.patients = new java.util.ArrayList<>();
         //TODO:control if medecin existe > true > error
         PharmacieController.getListMedecins().add(this);
+    }
+
+    public Medecin(String lastName, long nbAgreement) {
+        super(lastName);
+        this.setNbAgreement(nbAgreement);
+        this.setIdMedecin(idMedecin);
     }
 
     public void setIdMedecin(String idMedecin) {

@@ -1,12 +1,10 @@
 package model;
 
-import controler.Regex;
+import controller.Regex;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
-import static model.Achat.*;
 
 public class Ordonnance extends Medecin{
     private LocalDate dateOrdo;
@@ -21,6 +19,13 @@ public class Ordonnance extends Medecin{
         this.setPatient(patient);
         this.listMedOrdo = new ArrayList<>();
         //PharmacieController.getListOrdo().add(this);
+    }
+
+    public Ordonnance(LocalDate dateOrdo,long nbAgreement, String lastName, Client patient) {
+        super(lastName, nbAgreement);
+        this.setDate(dateOrdo);
+        this.setPatient(patient);
+        this.listMedOrdo = new ArrayList<>();
     }
 
     // Getters et Setters
@@ -42,23 +47,11 @@ public class Ordonnance extends Medecin{
         }
         this.patient = patient;
     }
-    /*public void setListMedOrdo() {
-        if (!IsAchatDirect()) {
-            listMedOrdo = Achat.getListMedAchat();
-            return;
-        }
-        listMedOrdo = new ArrayList<>();
-    }*/
-
 
     public List<Medicament> getListMedOrdo() {
         return this.listMedOrdo;
     }
-    /*public static void setListMedOrdo(){
-        if (IsAchatDirect()) {
-            listMedOrdo.addAll(getListMedAchat());
-        }
-    }*/
+
     // add med in ordo
     public void addMedOrdo(Medicament medicament) {
         if (medicament != null && !getListMedOrdo().contains(medicament)) {
