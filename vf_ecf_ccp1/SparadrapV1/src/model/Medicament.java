@@ -19,7 +19,7 @@ public class Medicament {
         this.setPrice(price);
         this.setDatOnMarket(datOnMarket);
         this.setStock(stock);
-        PharmacieController.getListMed().add(this);
+        //PharmacieController.getListMed().add(this);
     }
 
     // Getters et Setters

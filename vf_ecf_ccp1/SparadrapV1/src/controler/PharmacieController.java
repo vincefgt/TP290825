@@ -130,7 +130,7 @@ public class PharmacieController {
         }
         // down stock
         for (Medicament med : getListMed()) {
-            med.reduireQuantite(1); // Réduction d'1 unité par défaut
+            med.reduireQuantite(1); // -1 by default
         }
         // Recal montants
         achat.calMontants();

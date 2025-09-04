@@ -32,8 +32,11 @@ public class PharmacieControllerTest {
                 69000, "Lyon", "0987654321", "marie@test.com",
                 666777888999000L, LocalDate.of(1975, 5, 15), mutuelle2, medecin2);
         medicament1 = new Medicament("Doliprane", catMed.ANTALGIQUE, 5.20, "2023-01-01", 50);
+        getListMed().add(medicament1);
         medicament2 = new Medicament("Aspirine", catMed.ANALGESIQUE, 3.80, "2023-01-01", 30);
+        getListMed().add(medicament2);
         medicament3 = new Medicament("Ibuprofène", catMed.ANTIINFLAMMATOIRE, 4.50, "2023-01-01", 25);
+        getListMed().add(medicament3);
     }
 
     @Test
@@ -343,8 +346,8 @@ public class PharmacieControllerTest {
     }
 
     @Test
-    @DisplayName("Test de gestion d'achat avec ordonnance")
-    void testGestionAchatAvecOrdonnance() {
+    @DisplayName("Test achat w ordo")
+    void testAchatWOrdo() {
         ordonnance = new Ordonnance("Dubois", "Pierre", "10 Rue Médical",
                 "dr.dubois@hopital.fr", 75008, "Paris", "0140506070",
                 12345678910L, null, LocalDate.of(2024, 1, 15), client1);
@@ -357,7 +360,7 @@ public class PharmacieControllerTest {
         assertTrue(controller.savingAchat(achat));
         assertEquals(1, getListAchats().size());
 
-        // Verified Achat containt med Ordonnance
+        // Verified Achat contain med Ordonnance
         assertTrue(ordonnance.getListMedOrdo().contains(medicament1));
         assertTrue(ordonnance.getListMedOrdo().contains(medicament2));
 
