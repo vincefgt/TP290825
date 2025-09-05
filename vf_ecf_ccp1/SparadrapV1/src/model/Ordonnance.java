@@ -5,12 +5,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import static model.Achat.IsAchatDirect;
+
+import static model.Achat.*;
 
 public class Ordonnance extends Medecin{
     private LocalDate dateOrdo;
     private Client patient;
-    public  List<Medicament> listMedOrdo;
+    public List<Medicament> listMedOrdo;
     //private List<Ordonnance> listClientOrdo;
 
     // Constructeur
@@ -27,7 +28,7 @@ public class Ordonnance extends Medecin{
         return dateOrdo.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
     public void setDate(LocalDate dateOrdo) {
-        if (Regex.testDate(dateOrdo)||Regex.testNotEmpty(String.valueOf(dateOrdo)))
+        if (Regex.testNotEmpty(String.valueOf(dateOrdo))||Regex.testDate(dateOrdo))
             throw new IllegalArgumentException("dateBirth required DD/MM/YYYY format");
         this.dateOrdo = dateOrdo;
     }
@@ -49,11 +50,16 @@ public class Ordonnance extends Medecin{
         listMedOrdo = new ArrayList<>();
     }*/
 
-    public List<Medicament> getListMedOrdo() {
-        return listMedOrdo;
-    }
 
-    // Méthodes pour gérer la liste des médicaments
+    public List<Medicament> getListMedOrdo() {
+        return this.listMedOrdo;
+    }
+    /*public static void setListMedOrdo(){
+        if (IsAchatDirect()) {
+            listMedOrdo.addAll(getListMedAchat());
+        }
+    }*/
+    // add med in ordo
     public void addMedOrdo(Medicament medicament) {
         if (medicament != null && !getListMedOrdo().contains(medicament)) {
             getListMedOrdo().add(medicament);
