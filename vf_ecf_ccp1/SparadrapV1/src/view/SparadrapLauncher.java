@@ -16,7 +16,7 @@ public class SparadrapLauncher {
     public static void main(String[] args) {
         // Configuration du Look and Feel
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeel());
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             
             // Configuration pour un meilleur rendu des polices
             System.setProperty("awt.useSystemAAFontSettings", "on");
@@ -28,13 +28,7 @@ public class SparadrapLauncher {
         
         SwingUtilities.invokeLater(() -> {
             try {
-                // Afficher l'écran de démarrage
-                showSplashScreen();
-                
-                // Initialiser les données de test
                 initializeTestData();
-                
-                // Lancer l'interface principale
                 SparadrapMainInterface mainInterface = new SparadrapMainInterface();
                 mainInterface.setVisible(true);
                 
@@ -48,7 +42,7 @@ public class SparadrapLauncher {
         });
     }
     
-    private static void showSplashScreen() {
+    /*private static void showSplashScreen() {
         JWindow splash = new JWindow();
         splash.setSize(450, 300);
         splash.setLocationRelativeTo(null);
@@ -105,7 +99,7 @@ public class SparadrapLauncher {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-    }
+    }*/
     
     private static void initializeTestData() {
         try {

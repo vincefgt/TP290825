@@ -2,7 +2,6 @@ package view;
 
 import controler.PharmacieController;
 import model.*;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -17,10 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Interface principale moderne pour le système Pharmacie SPARADRAP
- * Utilise le plugin UI Designer d'IntelliJ IDEA
- */
+
 public class SparadrapMainInterface extends JFrame {
     
     // Panneaux principaux (liés au .form)
@@ -681,7 +677,7 @@ public class SparadrapMainInterface extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             try {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeel());
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             } catch (Exception e) {
                 e.printStackTrace();
             }
