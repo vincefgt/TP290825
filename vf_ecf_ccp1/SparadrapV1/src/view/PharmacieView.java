@@ -1,8 +1,10 @@
 package view;
 
-import controller.PharmacieController;
+import controler.PharmacieController;
 import model.Achat;
+import model.Client;
 
+import javax.swing.*;
 import java.util.List;
 
 public class PharmacieView {

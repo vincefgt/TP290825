@@ -1,6 +1,7 @@
 package model;
 
-import controller.Regex;
+import controler.PharmacieController;
+import controler.Regex;
 
 import java.time.LocalDate;
 
@@ -18,7 +19,7 @@ public class Medicament {
         this.setPrice(price);
         this.setDatOnMarket(datOnMarket);
         this.setStock(stock);
-        //PharmacieController.getListMed().add(this);
+        PharmacieController.getListMed().add(this);
     }
 
     // Getters et Setters

@@ -1,12 +1,10 @@
-import controller.PharmacieController;
+import controler.PharmacieController;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
-
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @DisplayName("Tests de la classe Achat")
 public class AchatTest {
@@ -21,15 +19,16 @@ public class AchatTest {
     @BeforeEach
     void setUp() {
         PharmacieController controller = new PharmacieController();
+
         mutuelle = new Mutuelle("MGEN", 70.0);
         medecin = new Medecin("Dubois", "Paris", 12345678910L, null);
-        client = new Client("Jean", "Dupont", "123 Rue Test",
+        client = new Client("Dupont", "Jean", "123 Rue Test",
                 75001, "Paris", "0123456789", "jean@test.com",
                 111222333444555L, LocalDate.of(1980, 1, 1), mutuelle, medecin);
         medicament1 = new Medicament("Doliprane", catMed.ANTALGIQUE, 5.20, "2023-01-01", 50);
         medicament2 = new Medicament("Aspirine", catMed.ANALGESIQUE, 3.80, "2023-01-01", 30);
         medicament3 = new Medicament("Ibuprofène", catMed.ANTIINFLAMMATOIRE, 4.50, "2023-01-01", 25);
-        ordonnance = new Ordonnance("Pierre", "DUBOIS", "10 Rue Médical",
+        ordonnance = new Ordonnance("Dubois", "Pierre", "10 Rue Médical",
                 "dr.dubois@hopital.fr", 75008, "Paris", "0140506070",
                 12345678910L, null, LocalDate.of(2024, 1, 15), client);
         ordonnance.addMedOrdo(medicament1);
@@ -37,14 +36,14 @@ public class AchatTest {
     }
 
     @Test
-    @DisplayName("Test creat achat direct")
-    void testCreaAchatDirect() {
+    @DisplayName("Test de création d'un achat direct (sans ordonnance)")
+    void testCreationAchatDirect() {
         LocalDate dateAchat = LocalDate.of(2024, 1, 20);
         assertDoesNotThrow(() -> {
             achat = new Achat(dateAchat, client);
         });
 
-        assertEquals(dateAchat.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), achat.getDateAchat());
+        assertEquals(dateAchat, achat.getDateAchat());
         assertEquals(client, achat.getClient());
         assertNull(achat.getOrdonnance());
         assertTrue(achat.IsAchatDirect());
@@ -61,7 +60,7 @@ public class AchatTest {
             achat = new Achat(dateAchat, client, ordonnance);
         });
 
-        assertEquals(dateAchat.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), achat.getDateAchat());
+        assertEquals(dateAchat, achat.getDateAchat());
         assertEquals(client, achat.getClient());
         assertEquals(ordonnance, achat.getOrdonnance());
         assertFalse(achat.IsAchatDirect());
@@ -176,28 +175,26 @@ public class AchatTest {
     }
 
     @Test
-    @DisplayName("Test iden direct vs ordo")
+    @DisplayName("Test d'identification d'achat direct vs ordonnance")
     void testIdentificationTypeAchat() {
         // Achat direct
         Achat achatDirect = new Achat(LocalDate.of(2024, 1, 20), client);
         assertNull(achatDirect.getOrdonnance());
 
         // Achat Ordo
-        Achat achatOrdonnance = new Achat(LocalDate.of(2024, 1, 21), client, ordonnance);
+        Achat achatOrdonnance = new Achat(LocalDate.of(2024, 1, 20), client, ordonnance);
         System.out.println(ordonnance);
-        System.out.println(achatOrdonnance);
         System.out.println(achatOrdonnance.getOrdonnance());
         assertNotNull(achatOrdonnance.getOrdonnance());
     }
 
     @Test
-    @DisplayName("Test toString achat direct")
+    @DisplayName("Test de la méthode toString pour achat direct")
     void testToStringAchatDirect() {
         achat = new Achat(LocalDate.of(2024, 1, 20), client);
         achat.addMedAchat(medicament1);
 
         String result = achat.toString();
-        System.out.println(result);
         assertTrue(result.contains("Achat direct"));
         assertTrue(result.contains("2024-01-20"));
         assertTrue(result.contains("Dupont"));
@@ -215,6 +212,24 @@ public class AchatTest {
         assertTrue(result.contains("2024-01-20"));
         assertTrue(result.contains("Dupont"));
         assertFalse(result.contains("Achat direct"));
+    }
+
+    @Test
+    @DisplayName("Test de gestion de liste immutable")
+    void testListeMedicamentsImmutable() {
+        achat = new Achat(LocalDate.of(2024, 1, 20), client);
+        achat.addMedAchat(medicament1);
+
+        // La méthode getListMedAchat() doit retourner une copie
+        var medicaments = achat.getListMedAchat();
+        int tailleBefore = medicaments.size();
+
+        // Tentative de modification directe de la liste retournée
+        medicaments.add(medicament2);
+
+        // La liste interne de l'achat ne doit pas être modifiée
+        assertEquals(tailleBefore, achat.getListMedAchat().size());
+        assertFalse(achat.getListMedAchat().contains(medicament2));
     }
 
     @Test
@@ -255,7 +270,7 @@ public class AchatTest {
         assertDoesNotThrow(() -> {
             achat.setDateAchat(nouvelleDate);
         });
-        assertEquals(nouvelleDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), achat.getDateAchat());
+        assertEquals(nouvelleDate, achat.getDateAchat());
     }
 
     @Test

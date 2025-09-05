@@ -1,8 +1,9 @@
-import controller.PharmacieController;
+import controler.PharmacieController;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;

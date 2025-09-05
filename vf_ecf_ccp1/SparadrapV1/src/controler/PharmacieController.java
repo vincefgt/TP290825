@@ -1,4 +1,4 @@
-package controller;
+package controler;
 
 import model.*;
 import java.util.ArrayList;
@@ -44,14 +44,14 @@ public class PharmacieController {
         }
         return null;
     }
-    public List<Client> getListClients() {
+    public static List<Client> getListClients() {
         return listClients;
     }
 
     //MEDECIN
     public boolean addMedecin(Medecin medecin) {
-        if (medecin != null && !getListMedecins().contains(medecin)) {
-            return getListMedecins().add(medecin);
+        if (medecin != null && !listMedecins.contains(medecin)) {
+            return listMedecins.add(medecin);
         }
         return false;
     }
@@ -130,7 +130,7 @@ public class PharmacieController {
         }
         // down stock
         for (Medicament med : getListMed()) {
-            med.reduireQuantite(1); // -1 by default
+            med.reduireQuantite(1); // Réduction d'1 unité par défaut
         }
         // Recal montants
         achat.calMontants();

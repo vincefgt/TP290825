@@ -1,15 +1,16 @@
 package model;
 
-import controller.Regex;
+import controler.Regex;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import static model.Achat.IsAchatDirect;
 
 public class Ordonnance extends Medecin{
     private LocalDate dateOrdo;
     private Client patient;
-    public List<Medicament> listMedOrdo;
+    public  List<Medicament> listMedOrdo;
     //private List<Ordonnance> listClientOrdo;
 
     // Constructeur
@@ -21,19 +22,12 @@ public class Ordonnance extends Medecin{
         //PharmacieController.getListOrdo().add(this);
     }
 
-    public Ordonnance(LocalDate dateOrdo,long nbAgreement, String lastName, Client patient) {
-        super(lastName, nbAgreement);
-        this.setDate(dateOrdo);
-        this.setPatient(patient);
-        this.listMedOrdo = new ArrayList<>();
-    }
-
     // Getters et Setters
     public String getDate() {
         return dateOrdo.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
     public void setDate(LocalDate dateOrdo) {
-        if (Regex.testNotEmpty(String.valueOf(dateOrdo))||Regex.testDate(dateOrdo))
+        if (Regex.testDate(dateOrdo)||Regex.testNotEmpty(String.valueOf(dateOrdo)))
             throw new IllegalArgumentException("dateBirth required DD/MM/YYYY format");
         this.dateOrdo = dateOrdo;
     }
@@ -47,12 +41,19 @@ public class Ordonnance extends Medecin{
         }
         this.patient = patient;
     }
+    /*public void setListMedOrdo() {
+        if (!IsAchatDirect()) {
+            listMedOrdo = Achat.getListMedAchat();
+            return;
+        }
+        listMedOrdo = new ArrayList<>();
+    }*/
 
     public List<Medicament> getListMedOrdo() {
-        return this.listMedOrdo;
+        return listMedOrdo;
     }
 
-    // add med in ordo
+    // Méthodes pour gérer la liste des médicaments
     public void addMedOrdo(Medicament medicament) {
         if (medicament != null && !getListMedOrdo().contains(medicament)) {
             getListMedOrdo().add(medicament);

@@ -1,10 +1,7 @@
 package model;
 
-import controller.Regex;
+import controler.Regex;
 import Exception.InputException;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -15,7 +12,6 @@ public class Achat {
     private LocalDate dateAchat;
     private Client client;
     private List<Medicament> listMedAchat;
-    private List<Medicament> listMedOrdo;
     private List<Achat> listAchatClient;
     private static Ordonnance ordonnance; // null si achat direct
     private double Total = 0;
@@ -34,10 +30,9 @@ public class Achat {
 
     // Constructeur achat ordonnance
     public Achat(LocalDate dateAchat, Client client, Ordonnance ordonnance) {
-        this(dateAchat, client);
+        this(dateAchat, client); // Appel du constructeur principal
         this.setOrdonnance(ordonnance);
         this.listMedAchat = new ArrayList<>();
-        setListMedAchat(ordonnance.getListMedOrdo()); // recup listMedOrdo
     }
 
     // Getters et Setters
@@ -53,8 +48,8 @@ public class Achat {
         return this.client;
     }
     public void setClient(Client client) {
-        if (Regex.testNotEmpty(client))
-            throw new InputException("client required");
+        if (Regex.testNotEmpty(String.valueOf(client)))
+            throw new InputException("address required");
         this.client = client;
     }
 
@@ -62,20 +57,14 @@ public class Achat {
         return this.listMedAchat;
     }
 
-    public void setListMedAchat(List<Medicament> listMedOrdo) { // from Ordo
-        this.listMedAchat.addAll(listMedOrdo);
-    }
-
     public Ordonnance getOrdonnance() {
         return ordonnance;
     }
     public void setOrdonnance(Ordonnance ordonnance) {
-//        if (ordonnance != null) {
-        Achat.ordonnance = ordonnance;
-//            (Medicament med : getListMedAchat()){
-//                Ordonnance.addMedOrdo(med);
-//            }
-
+        // create doublons
+        //if (ordonnance != null) {
+        //    this.listMedAchat.addAll(ordonnance.getListMedOrdo());
+        // }
     }
 
     public double getTotal() {
@@ -96,29 +85,31 @@ public class Achat {
     public boolean addMedAchat(Medicament medicament) {
         if (medicament != null) {
             this.listMedAchat.add(medicament);
-        } else if (ordonnance != null) {
-            this.listMedAchat.addAll(ordonnance.getListMedOrdo());
+            calMontants();
         }
-        calMontants();
         return false;
     }
 
-    // cal montants
+    // Méthode pour calculer les montants
     public void calMontants() {
         Total = 0;
         for (Medicament med : listMedAchat) {
             Total += med.getPrice();
         }
 
-    // Cal remb if mutuelle
-    if (client.getMutuelle() != null) {
-        Remb = client.getMutuelle().calcRemb(Total);
-        BigDecimal bd = new BigDecimal(Remb).setScale(2, RoundingMode.HALF_UP);
-        Remb = bd.doubleValue();
-    } else {
-        Remb = 0;
+        // Calculer le remboursement si le client a une mutuelle
+        if (client.getMutuelle() != null) {
+            Remb = client.getMutuelle().calcRemb(Total);
+        } else {
+            Remb = 0;
+        }
     }
-}
+
+    public void setListMedOrdo(){
+        if (IsAchatDirect()) {
+            ordonnance.listMedOrdo = getListMedAchat();
+        }
+    }
 
     // Direct vs Ordo
     public static boolean IsAchatDirect() {
@@ -129,6 +120,6 @@ public class Achat {
     public String toString() {
         String type = IsAchatDirect() ? "Achat direct" : "Achat sur ordonnance";
         return type+" - "+dateAchat+" - "+client.getLastName()+
-                " - Total: "+Total+"€ (Remboursé: "+Remb+"€) ";//+ordonnance;
+                " - Total: "+Total+"€ (Remboursé: "+Remb+"€)";
     }
 }

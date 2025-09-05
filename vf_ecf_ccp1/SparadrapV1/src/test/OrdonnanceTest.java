@@ -1,22 +1,20 @@
-import controller.PharmacieController;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @DisplayName("Tests clas Ordonnance")
 public class OrdonnanceTest {
+
 private Ordonnance ordonnance;
 private Client patient;
 private Medicament medicament1, medicament2, medicament3;
 
 @BeforeEach
 void setUp() {
-    PharmacieController controller = new PharmacieController();
-    patient = new Client("Jean", "Dupont", "123 Rue Test",
+    patient = new Client("Dupont", "Jean", "123 Rue Test",
             75001, "Paris", "0123456789", "jean@test.com",
             111222333444555L, LocalDate.of(1980, 1, 1), null, null);
     medicament1 = new Medicament("Doliprane", catMed.ANTALGIQUE, 5.20, "2023-01-01", 50);
@@ -25,8 +23,8 @@ void setUp() {
 }
 
 @Test
-@DisplayName("Test crea ordo valid")
-void testCreaOrdoeValid() {
+@DisplayName("Test de création d'une ordonnance valide")
+void testCreationOrdonnanceValide() {
     LocalDate dateOrdonnance = LocalDate.of(2024, 1, 15);
 
     assertDoesNotThrow(() -> {
@@ -34,15 +32,15 @@ void testCreaOrdoeValid() {
                 "dr.dubois@hopital.fr", 75008, "Paris", "0140506070",
                 12345678910L, null, dateOrdonnance, patient);
     });
-    assertEquals(dateOrdonnance.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), ordonnance.getDate());
+    assertEquals(dateOrdonnance, ordonnance.getDate());
     assertEquals(patient, ordonnance.getPatient());
     assertNotNull(ordonnance.getListMedOrdo());
     assertTrue(ordonnance.getListMedOrdo().isEmpty());
 }
 
 @Test
-@DisplayName("Test valid date ordo")
-void testValidDateOrdo() {
+@DisplayName("Test de validation de la date d'ordonnance")
+void testValidationDateOrdonnance() {
     // Test date valide
     assertDoesNotThrow(() -> {
         ordonnance = new Ordonnance("Martin", "Paul", "5 Avenue Santé",
@@ -51,12 +49,11 @@ void testValidDateOrdo() {
     });
 
     // Test date null
-    assertThrows(NullPointerException.class, () -> {
+    assertThrows(IllegalArgumentException.class, () -> {
         new Ordonnance("Test", "Test", "Test", "test@test.com",
                 75001, "Paris", "0123456789", 11111111111L,
                 null, null, patient);
     });
-
 }
 
 @Test
@@ -170,8 +167,8 @@ void testCalculPrixTotalAvecMedicamentsGratuits() {
 }
 
 @Test
-@DisplayName("Test modif date")
-void testModifDate() {
+@DisplayName("Test de modification de la date")
+void testModificationDate() {
     ordonnance = new Ordonnance("Test", "Test", "Test", "test@test.com",
             75001, "Paris", "0123456789", 11111111111L,
             null, LocalDate.of(2024, 1, 15), patient);
@@ -181,12 +178,12 @@ void testModifDate() {
     assertDoesNotThrow(() -> {
         ordonnance.setDate(nouvelleDate);
     });
-    assertEquals(nouvelleDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), ordonnance.getDate());
+    assertEquals(nouvelleDate, ordonnance.getDate());
 }
 
 @Test
-@DisplayName("Test modif patient")
-void testModifPatient() {
+@DisplayName("Test de modification du patient")
+void testModificationPatient() {
     ordonnance = new Ordonnance("Test", "Test", "Test", "test@test.com",
             75001, "Paris", "0123456789", 11111111111L,
             null, LocalDate.of(2024, 1, 15), patient);
@@ -209,10 +206,7 @@ void testModifPatient() {
 @Test
 @DisplayName("Test de la méthode toString")
 void testToString() {
-    Medecin medecin = new Medecin("Pierre", "Rousseau", "10 Boulevard Médical",
-            "dr.dubois@hopital.fr", 75008, "Paris", "0140506070",
-            12345678910L, null);
-    ordonnance = new Ordonnance("Pierre", "Rousseau", "25 Rue Médical",
+    ordonnance = new Ordonnance("Rousseau", "Pierre", "25 Rue Médical",
             "dr.rousseau@clinique.fr", 44000, "Nantes", "0240123456",
             33333333333L, null, LocalDate.of(2024, 1, 30), patient);
 
@@ -224,6 +218,27 @@ void testToString() {
     assertTrue(result.contains("Rousseau"));
     assertTrue(result.contains("Dupont")); // nom du patient
     assertTrue(result.contains("2 médicaments"));
+}
+
+@Test
+@DisplayName("Test de gestion de liste immutable")
+void testListeMedicamentsImmutable() {
+    ordonnance = new Ordonnance("Test", "Test", "Test", "test@test.com",
+            75001, "Paris", "0123456789", 11111111111L,
+            null, LocalDate.of(2024, 1, 15), patient);
+
+    ordonnance.addMedOrdo(medicament1);
+
+    // La méthode getListMedOrdo() doit retourner une copie
+    var medicaments = ordonnance.getListMedOrdo();
+    int tailleBefore = medicaments.size();
+
+    // Tentative de modification directe de la liste retournée
+    medicaments.add(medicament2);
+
+    // La liste interne de l'ordonnance ne doit pas être modifiée
+    assertEquals(tailleBefore, ordonnance.getListMedOrdo().size());
+    assertFalse(ordonnance.getListMedOrdo().contains(medicament2));
 }
 
 @Test

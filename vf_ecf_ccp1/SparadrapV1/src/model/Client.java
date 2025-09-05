@@ -1,10 +1,14 @@
 package model;
 
-import controller.Regex;
+import controler.PharmacieController;
+import controler.Regex;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Client extends Person {

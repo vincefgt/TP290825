@@ -1,6 +1,9 @@
 package model;
 
-import controller.Regex;
+import controler.PharmacieController;
+import controler.Regex;
+
+import java.util.ArrayList;
 
 public class Mutuelle extends Person{
     private Dep dep;
