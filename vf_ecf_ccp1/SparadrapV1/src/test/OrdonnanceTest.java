@@ -34,7 +34,7 @@ void testCreaOrdoeValid() {
                 "dr.dubois@hopital.fr", 75008, "Paris", "0140506070",
                 12345678910L, null, dateOrdonnance, patient);
     });
-    assertEquals(dateOrdonnance.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), ordonnance.getDate());
+    assertEquals(dateOrdonnance.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), ordonnance.getDateOrdo());
     assertEquals(patient, ordonnance.getPatient());
     assertNotNull(ordonnance.getListMedOrdo());
     assertTrue(ordonnance.getListMedOrdo().isEmpty());
@@ -179,9 +179,9 @@ void testModifDate() {
     LocalDate nouvelleDate = LocalDate.of(2024, 2, 20);
 
     assertDoesNotThrow(() -> {
-        ordonnance.setDate(nouvelleDate);
+        ordonnance.setDateOrdo(nouvelleDate);
     });
-    assertEquals(nouvelleDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), ordonnance.getDate());
+    assertEquals(nouvelleDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), ordonnance.getDateOrdo());
 }
 
 @Test

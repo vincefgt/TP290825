@@ -6,8 +6,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
@@ -19,7 +17,7 @@ import java.util.TimerTask;
 
 public class SparadrapMainInterface extends JFrame {
     
-    // Panneaux principaux (liés au .form)
+    // Panneaux principaux
     private JPanel mainPanel;
     private JPanel headerPanel;
     private JPanel contentPanel;
@@ -27,11 +25,11 @@ public class SparadrapMainInterface extends JFrame {
     private JPanel statusPanel;
     private JTabbedPane mainTabbedPane;
     
-    // Labels du header
+    // header
     private JLabel titleLabel;
     private JLabel versionLabel;
     
-    // Boutons de navigation
+    // nav
     private JButton clientsButton;
     private JButton medecinsButton;
     private JButton medicamentsButton;
@@ -40,7 +38,7 @@ public class SparadrapMainInterface extends JFrame {
     private JButton achatsButton;
     private JButton statistiquesButton;
     
-    // Onglet Clients
+    // Clients
     private JPanel clientFormPanel;
     private JTextField clientPrenomField;
     private JTextField clientNomField;
@@ -53,7 +51,7 @@ public class SparadrapMainInterface extends JFrame {
     private JTable clientsTable;
     private DefaultTableModel clientsTableModel;
     
-    // Onglet Médicaments
+    // Med
     private JPanel medicamentFormPanel;
     private JTextField medicamentNomField;
     private JComboBox<catMed> medicamentCategorieCombo;
@@ -65,7 +63,7 @@ public class SparadrapMainInterface extends JFrame {
     private JTable medicamentsTable;
     private DefaultTableModel medicamentsTableModel;
     
-    // Onglet Achats
+    // Achats
     private JPanel achatActionsPanel;
     private JButton nouvelAchatButton;
     private JButton achatOrdonnanceButton;
@@ -74,7 +72,7 @@ public class SparadrapMainInterface extends JFrame {
     private JTable achatsTable;
     private DefaultTableModel achatsTableModel;
     
-    // Onglet Statistiques
+    // Stat
     private JPanel statsCard1, statsCard2, statsCard3, statsCard4;
     private JLabel totalClientsLabel;
     private JLabel totalMedicamentsLabel;
@@ -85,7 +83,21 @@ public class SparadrapMainInterface extends JFrame {
     // Status bar
     private JLabel statusLabel;
     private JLabel timeLabel;
-    
+
+    // Ordo
+    private JTable ordoTable;
+    private JScrollPane ordoScrollPane;
+    private DefaultTableModel ordoTableModel;
+
+    //Mutuelle
+    private JTable mutuelleTable;
+    private JScrollPane mutuelleScrollPane;
+    private DefaultTableModel mutTableModel;
+    // Medecin
+    private JTable medecinTable;
+    private JScrollPane medecinScrollPane;
+    private DefaultTableModel medecinTableModel;
+
     // Controller
     private PharmacieController controller;
     
@@ -137,6 +149,16 @@ public class SparadrapMainInterface extends JFrame {
             public boolean isCellEditable(int row, int column) { return false; }
         };
         achatsTable.setModel(achatsTableModel);
+
+        // Ordonnance table
+        String[] ordoColumns = {"Date", "Patient", "Dr", "numero Agreement", "id medecin"};
+        ordoTableModel = new DefaultTableModel(ordoColumns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        ordoTable.setModel(ordoTableModel);
     }
     
     private void setupComboBoxes() {
@@ -212,7 +234,10 @@ public class SparadrapMainInterface extends JFrame {
         medicamentsButton.addActionListener(e -> showTab(1));
         achatsButton.addActionListener(e -> showTab(2));
         statistiquesButton.addActionListener(e -> showTab(3));
-        
+        ordonnancesButton.addActionListener(e -> showTab(4));
+        mutuellesButton.addActionListener(e -> showTab(5));
+        medecinsButton.addActionListener(e -> showTab(6));
+
         // Client actions
         addClientButton.addActionListener(e -> addNewClient());
         clearClientButton.addActionListener(e -> clearClientForm());
@@ -403,6 +428,7 @@ public class SparadrapMainInterface extends JFrame {
         loadClientsData();
         loadMedicamentsData();
         loadAchatsData();
+        loadOrdoData();
         updateStatistics();
     }
     
@@ -447,6 +473,46 @@ public class SparadrapMainInterface extends JFrame {
                 achat.getOrdonnance() != null ? "Oui" : "Non"
             };
             achatsTableModel.addRow(row);
+        }
+    }
+
+    private void loadOrdoData() {
+        ordoTableModel.setRowCount(0);
+        for (Ordonnance ordonnance : PharmacieController.getListOrdo()) {
+            Object[] row = {
+                    ordonnance.getDateOrdo(),
+                    ordonnance.getPatient().getFirstName() + " " + ordonnance.getPatient().getLastName(),
+                    ordonnance.getLastName(),
+                    ordonnance.getNbAgreement(),
+                    ordonnance.getIdMedecin()
+            };
+            ordoTableModel.addRow(row);
+        }
+    }
+    private void loadMutData() {
+        mutTableModel.setRowCount(0);
+        for (Mutuelle mut : PharmacieController.getListMutuelles()) {
+            Object[] row = {
+                    mut.getLastName(),
+                    mut.getAddress()+" "+mut.getNbState()+" "+mut.getCity(),
+                    mut.getDep(),
+                    mut.getPhone()+" / "+mut.getEmail(),
+                    mut.getTauxRemb()
+            };
+            mutTableModel.addRow(row);
+        }
+    }
+    private void loadMedecinData() {
+        medecinTableModel.setRowCount(0);
+        for (Medecin medecin : PharmacieController.getListMedecins()) {
+            Object[] row = {
+                    medecin.getFirstName()+" "+medecin.getLastName(),
+                    medecin.getAddress()+" "+medecin.getNbState()+" "+medecin.getCity(),
+                    medecin.getEmail()+"/ "+medecin.getPhone(),
+                    medecin.getNbAgreement(),
+                    medecin.getIdMedecin()
+            };
+            medecinTableModel.addRow(row);
         }
     }
     

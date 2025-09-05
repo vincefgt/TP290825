@@ -155,9 +155,15 @@ public class SparadrapLauncher {
             initController.addMed(ibuprofene);
             initController.addMed(vitamine);
             initController.addMed(antibiotique);
-            
+
+            // Création d'une ordonnance
+            Ordonnance ordonnance1 = new Ordonnance(LocalDate.parse("2024-01-20"), drDupont, client1);
+            ordonnance1.addMedOrdo(doliprane);
+            ordonnance1.addMedOrdo(ibuprofene);
+            initController.addOrdonnance(ordonnance1);
+
             // Créer quelques achats de test
-            Achat achat1 = new Achat(LocalDate.now().minusDays(5), client1);
+            Achat achat1 = new Achat(LocalDate.now().minusDays(5), client1,ordonnance1);
             achat1.addMedAchat(doliprane);
             achat1.addMedAchat(vitamine);
             initController.savingAchat(achat1);
