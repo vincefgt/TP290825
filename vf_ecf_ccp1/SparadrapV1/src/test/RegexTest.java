@@ -1,5 +1,3 @@
-package test2;
-
 import controler.Regex;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

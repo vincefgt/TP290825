@@ -13,7 +13,7 @@ public class Regex {
     public static final String REGEX_NSS = "^[12]\\d{2}(0[1-9]|1[0-2]|2[0-9])\\d{8}\\d{2}$";
     public static final String REGEX_DATE_NAISSANCE = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$";
     public static final String REGEX_DATE_BIRTH = "^(0[1-9]|[12][0-9]|3[01])([ \\/])?(0[1-9]|1[0-2])([ \\/])?([0-9]{4})$"; //12012025, 12/05/2025, 12 05 2025
-    public static final String REGEX_EMAIL = "^((?!\\.)[\\w\\-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])$";
+    public static final String REGEX_EMAIL = "^((?!\\.)[\\w\\-_.]*[^.])@((?!.*--)[A-Za-z0-9-]+)(\\.\\w+)+$";
     public static final String REGEX_CODE_POSTAL = "\\d{5}";
     public static final String REGEX_TELEPHONE = "^\\+?\\d{10,15}$";
     public static final String REGEX_ADRESSE = "^\\d{1,4}\\s?(bis|ter)?\\s?(rue|avenue|boulevard|chemin|allée|impasse|route|place)\\s.+$";
@@ -35,8 +35,8 @@ public class Regex {
      * @param input
      * @return
      */
-    public static boolean testNotEmpty(String input) {
-        return input == null || input.trim().isEmpty(); // return true if found
+    public static <T> boolean testNotEmpty(T input) {
+        return input == null || String.valueOf(input).trim().isEmpty(); // return true if found
     }
     /**
      * null Objet
