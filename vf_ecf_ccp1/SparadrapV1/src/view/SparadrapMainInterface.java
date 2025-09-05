@@ -90,12 +90,12 @@ public class SparadrapMainInterface extends JFrame {
     private PharmacieController controller;
     
     public SparadrapMainInterface() {
-        this.controller = new PharmacieController();
+        //this.controller = new PharmacieController();
         initializeFrame();
         initializeComponents();
         setupEventHandlers();
         loadInitialData();
-        startTimeUpdater();
+        //startTimeUpdater();
     }
     
     private void initializeFrame() {
@@ -104,20 +104,13 @@ public class SparadrapMainInterface extends JFrame {
         setSize(1200, 800);
         setLocationRelativeTo(null);
         setMinimumSize(new Dimension(1000, 600));
-        
-        // Set content pane from form
         setContentPane(mainPanel);
     }
     
     private void initializeComponents() {
-        // Initialize table models
-        initializeTableModels();
-        
-        // Setup combo boxes
-        setupComboBoxes();
-        
-        // Apply modern styling
-        applyModernStyling();
+        initializeTableModels(); // Initialize table models
+        setupComboBoxes(); // Setup combo boxes
+        applyModernStyling(); // Apply style
     }
     
     private void initializeTableModels() {
@@ -166,10 +159,8 @@ public class SparadrapMainInterface extends JFrame {
     }
     
     private void styleTable(JTable table) {
-        table.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         table.setRowHeight(28);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         table.getTableHeader().setBackground(new Color(52, 73, 94));
         table.getTableHeader().setForeground(Color.WHITE);
         table.setGridColor(new Color(230, 230, 230));
@@ -674,7 +665,7 @@ public class SparadrapMainInterface extends JFrame {
         }
     }
     
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -684,5 +675,5 @@ public class SparadrapMainInterface extends JFrame {
             
             new SparadrapMainInterface().setVisible(true);
         });
-    }
+    }*/
 }

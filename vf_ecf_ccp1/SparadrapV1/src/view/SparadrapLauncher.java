@@ -17,17 +17,13 @@ public class SparadrapLauncher {
         // Configuration du Look and Feel
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            
-            // Configuration pour un meilleur rendu des polices
-            System.setProperty("awt.useSystemAAFontSettings", "on");
-            System.setProperty("swing.aatext", "true");
-            
         } catch (Exception e) {
             e.printStackTrace();
         }
         
         SwingUtilities.invokeLater(() -> {
             try {
+                //showSplashScreen();
                 initializeTestData();
                 SparadrapMainInterface mainInterface = new SparadrapMainInterface();
                 mainInterface.setVisible(true);
@@ -42,7 +38,7 @@ public class SparadrapLauncher {
         });
     }
     
-    /*private static void showSplashScreen() {
+    private static void showSplashScreen() {
         JWindow splash = new JWindow();
         splash.setSize(450, 300);
         splash.setLocationRelativeTo(null);
@@ -99,20 +95,20 @@ public class SparadrapLauncher {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-    }*/
+    }
     
-    private static void initializeTestData() {
+    public static void initializeTestData() {
         try {
-            PharmacieController controller = new PharmacieController();
+            PharmacieController initController = new PharmacieController();
             
             // Créer des mutuelles de test
             Mutuelle mgen = new Mutuelle("MGEN", 70.0);
             Mutuelle harmonie = new Mutuelle("Harmonie Mutuelle", 60.0);
             Mutuelle secu = new Mutuelle("Sécurité Sociale", 65.0);
             
-            controller.addMutuelle(mgen);
-            controller.addMutuelle(harmonie);
-            controller.addMutuelle(secu);
+            initController.addMutuelle(mgen);
+            initController.addMutuelle(harmonie);
+            initController.addMutuelle(secu);
             
             // Créer des médecins de test
             Medecin drDupont = new Medecin("Dupont", "Dr", "15 Rue Médicale", 
@@ -122,8 +118,8 @@ public class SparadrapLauncher {
                     "dr.martin@clinique.fr", 69000, "Lyon", "0472345678",
                     98765432110L, "MED002");
             
-            controller.addMedecin(drDupont);
-            controller.addMedecin(drMartin);
+            initController.addMedecin(drDupont);
+            initController.addMedecin(drMartin);
             
             // Créer des clients de test
             Client client1 = new Client("Durand", "Jean", "123 Rue de la République",
@@ -138,9 +134,9 @@ public class SparadrapLauncher {
                     13000, "Marseille", "0491234567", "pierre.bernard@email.com",
                     555666777888999L, LocalDate.of(1985, 11, 8), secu, drDupont);
             
-            controller.addClient(client1);
-            controller.addClient(client2);
-            controller.addClient(client3);
+            initController.addClient(client1);
+            initController.addClient(client2);
+            initController.addClient(client3);
             
             // Créer des médicaments de test
             Medicament doliprane = new Medicament("Doliprane 1000mg", catMed.ANTALGIQUE, 
@@ -154,22 +150,22 @@ public class SparadrapLauncher {
             Medicament antibiotique = new Medicament("Amoxicilline", catMed.ANTIBIOTIQUE, 
                     12.50, "2023-01-01", 20);
             
-            controller.addMed(doliprane);
-            controller.addMed(aspirine);
-            controller.addMed(ibuprofene);
-            controller.addMed(vitamine);
-            controller.addMed(antibiotique);
+            initController.addMed(doliprane);
+            initController.addMed(aspirine);
+            initController.addMed(ibuprofene);
+            initController.addMed(vitamine);
+            initController.addMed(antibiotique);
             
             // Créer quelques achats de test
             Achat achat1 = new Achat(LocalDate.now().minusDays(5), client1);
             achat1.addMedAchat(doliprane);
             achat1.addMedAchat(vitamine);
-            controller.savingAchat(achat1);
+            initController.savingAchat(achat1);
             
             Achat achat2 = new Achat(LocalDate.now().minusDays(2), client2);
             achat2.addMedAchat(aspirine);
             achat2.addMedAchat(ibuprofene);
-            controller.savingAchat(achat2);
+            initController.savingAchat(achat2);
             
             System.out.println("✅ Données de test initialisées avec succès!");
             System.out.println("📊 Statistiques:");
