@@ -20,7 +20,7 @@ public class Medecin extends Person {
         this.idMedecin = generateId(idMedecin);
         addMedecin(this);
         this.patients = new java.util.ArrayList<>();
-        PharmacieController.getListMedecins().add(this);
+        //PharmacieController.getListMedecins().add(this);
     }
     public Medecin(String lastName, String city, long nbAgreement,String idMedecin) {
         super(lastName,city);
@@ -29,7 +29,7 @@ public class Medecin extends Person {
         addMedecin(this);
         this.patients = new java.util.ArrayList<>();
         //TODO:control if medecin existe > true > error
-        PharmacieController.getListMedecins().add(this);
+        //PharmacieController.getListMedecins().add(this);
     }
     public Medecin(String lastName, long nbAgreement, String idMedecin) {
         super(lastName);

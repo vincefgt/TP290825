@@ -101,44 +101,39 @@ public class SparadrapLauncher {
         try {
             PharmacieController initController = new PharmacieController();
             
-            // Créer des mutuelles de test
+            // Create mut (3)
             Mutuelle mgen = new Mutuelle("MGEN", 70.0);
             Mutuelle harmonie = new Mutuelle("Harmonie Mutuelle", 60.0);
             Mutuelle secu = new Mutuelle("Sécurité Sociale", 65.0);
-            
             initController.addMutuelle(mgen);
             initController.addMutuelle(harmonie);
             initController.addMutuelle(secu);
             
-            // Créer des médecins de test
-            Medecin drDupont = new Medecin("Dupont", "Dr", "15 Rue Médicale", 
+            // Create medecin (2)
+            Medecin drDupont = new Medecin("Charles", "Dupont", "15 Rue Médicale",
                     "dr.dupont@hopital.fr", 75008, "Paris", "0140506070",
                     12345678910L, "MED001");
-            Medecin drMartin = new Medecin("Martin", "Dr", "25 Avenue Santé",
+            Medecin drMartin = new Medecin("Pierre", "Martin", "25 Avenue Santé",
                     "dr.martin@clinique.fr", 69000, "Lyon", "0472345678",
                     98765432110L, "MED002");
-            
             initController.addMedecin(drDupont);
             initController.addMedecin(drMartin);
             
-            // Créer des clients de test
+            // Create client (3)
             Client client1 = new Client("Durand", "Jean", "123 Rue de la République",
                     75001, "Paris", "0123456789", "jean.durand@email.com",
                     111222333444555L, LocalDate.of(1980, 6, 15), mgen, drDupont);
-            
             Client client2 = new Client("Moreau", "Marie", "456 Boulevard Voltaire",
                     69000, "Lyon", "0987654321", "marie.moreau@email.com",
                     666777888999000L, LocalDate.of(1975, 3, 22), harmonie, drMartin);
-            
             Client client3 = new Client("Bernard", "Pierre", "789 Avenue de la Liberté",
                     13000, "Marseille", "0491234567", "pierre.bernard@email.com",
                     555666777888999L, LocalDate.of(1985, 11, 8), secu, drDupont);
-            
             initController.addClient(client1);
             initController.addClient(client2);
             initController.addClient(client3);
             
-            // Créer des médicaments de test
+            // Create med (5)
             Medicament doliprane = new Medicament("Doliprane 1000mg", catMed.ANTALGIQUE, 
                     5.20, "2023-01-01", 50);
             Medicament aspirine = new Medicament("Aspirine 500mg", catMed.ANALGESIQUE, 
@@ -149,30 +144,30 @@ public class SparadrapLauncher {
                     8.90, "2023-01-01", 40);
             Medicament antibiotique = new Medicament("Amoxicilline", catMed.ANTIBIOTIQUE, 
                     12.50, "2023-01-01", 20);
-            
             initController.addMed(doliprane);
             initController.addMed(aspirine);
             initController.addMed(ibuprofene);
             initController.addMed(vitamine);
             initController.addMed(antibiotique);
 
-            // Création d'une ordonnance
+            // Create ordo (1)
             Ordonnance ordonnance1 = new Ordonnance(LocalDate.parse("2024-01-20"), drDupont, client1);
             ordonnance1.addMedOrdo(doliprane);
             ordonnance1.addMedOrdo(ibuprofene);
             initController.addOrdonnance(ordonnance1);
 
-            // Créer quelques achats de test
+            // Create achat (2)
             Achat achat1 = new Achat(LocalDate.now().minusDays(5), client1,ordonnance1);
             achat1.addMedAchat(doliprane);
             achat1.addMedAchat(vitamine);
             initController.savingAchat(achat1);
-            
             Achat achat2 = new Achat(LocalDate.now().minusDays(2), client2);
             achat2.addMedAchat(aspirine);
             achat2.addMedAchat(ibuprofene);
             initController.savingAchat(achat2);
-            
+
+            PharmacieView.printList(initController.getListMedecins());
+
             System.out.println("✅ Données de test initialisées avec succès!");
             System.out.println("📊 Statistiques:");
             System.out.println("   - Clients: " + PharmacieController.getListClients().size());

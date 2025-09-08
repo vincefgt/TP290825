@@ -50,8 +50,8 @@ public class PharmacieController {
 
     //MEDECIN
     public boolean addMedecin(Medecin medecin) {
-        if (medecin != null && !listMedecins.contains(medecin)) {
-            return listMedecins.add(medecin);
+        if (medecin != null && !getListMedecins().contains(medecin)) {
+            return getListMedecins().add(medecin);
         }
         return false;
     }
@@ -73,7 +73,7 @@ public class PharmacieController {
     // MED add in med list = ALL med
     public boolean addMed(Medicament medicament) {
         if (medicament != null && !getListMed().contains(medicament)) {
-            return listMed.add(medicament);
+            return getListMed().add(medicament);
         }
         return false;
     }
@@ -96,7 +96,7 @@ public class PharmacieController {
     // MUTUELLES
     public boolean addMutuelle(Mutuelle mutuelle) {
         if (mutuelle != null && !listMutuelles.contains(mutuelle)) {
-            return listMutuelles.add(mutuelle);
+            return getListMutuelles().add(mutuelle);
         }
         return false;
     }
@@ -107,7 +107,7 @@ public class PharmacieController {
     // ORDO
     public boolean addOrdonnance(Ordonnance ordonnance) {
         if (ordonnance != null && !listOrdonnances.contains(ordonnance)) {
-            return listOrdonnances.add(ordonnance);
+            return getListOrdo().add(ordonnance);
         }
         //TODO: message already exist
         return false;

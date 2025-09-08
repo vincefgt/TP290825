@@ -3,7 +3,9 @@ package view;
 import controler.PharmacieController;
 import model.*;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -11,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -93,6 +96,7 @@ public class SparadrapMainInterface extends JFrame {
     private JTable mutuelleTable;
     private JScrollPane mutuelleScrollPane;
     private DefaultTableModel mutTableModel;
+
     // Medecin
     private JTable medecinTable;
     private JScrollPane medecinScrollPane;
@@ -100,7 +104,9 @@ public class SparadrapMainInterface extends JFrame {
 
     // Controller
     private PharmacieController controller;
-    
+
+    private String titleBorder;
+
     public SparadrapMainInterface() {
         //this.controller = new PharmacieController();
         initializeFrame();
@@ -149,7 +155,6 @@ public class SparadrapMainInterface extends JFrame {
             public boolean isCellEditable(int row, int column) { return false; }
         };
         achatsTable.setModel(achatsTableModel);
-
         // Ordonnance table
         String[] ordoColumns = {"Date", "Patient", "Dr", "numero Agreement", "id medecin"};
         ordoTableModel = new DefaultTableModel(ordoColumns, 0) {
@@ -159,10 +164,29 @@ public class SparadrapMainInterface extends JFrame {
             }
         };
         ordoTable.setModel(ordoTableModel);
+        // mut table
+        String[] mutColumns = {"Nom","Taux Remb"};
+        mutTableModel = new DefaultTableModel(mutColumns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        mutuelleTable.setModel(mutTableModel);
+
+        // medecin table
+        String[] medecincColumns = {"Nom", "Adresse", "email / phone","numero Agreement", "idMedecin"};
+        medecinTableModel = new DefaultTableModel(medecincColumns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        medecinTable.setModel(medecinTableModel);
     }
     
     private void setupComboBoxes() {
-        // Populate medicament categories
+        // med cat
         medicamentCategorieCombo.removeAllItems();
         for (catMed category : catMed.values()) {
             medicamentCategorieCombo.addItem(category);
@@ -172,24 +196,52 @@ public class SparadrapMainInterface extends JFrame {
     private void applyModernStyling() {
         // Style tables
         styleTable(clientsTable);
+        setupBorderScroll(clientScrollPane,titleCountItem(PharmacieController.getListClients()));
         styleTable(medicamentsTable);
+        setupBorderScroll(medicamentScrollPane,titleCountItem(PharmacieController.getListMed()));
         styleTable(achatsTable);
-        
+        setupBorderScroll(achatsScrollPane,titleCountItem(PharmacieController.getListAchats()));
+        styleTable(medecinTable);
+        setupBorderScroll(medecinScrollPane,titleCountItem(PharmacieController.getListMedecins()));
+        styleTable(mutuelleTable);
+        setupBorderScroll(mutuelleScrollPane,titleCountItem(PharmacieController.getListMutuelles()));
+        styleTable(ordoTable);
+        setupBorderScroll(ordoScrollPane,titleCountItem(PharmacieController.getListOrdo()));
         // Style buttons with hover effects
         styleNavigationButtons();
         styleActionButtons();
     }
     
     private void styleTable(JTable table) {
-        table.setRowHeight(28);
+        table.setRowHeight(20);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getTableHeader().setBackground(new Color(52, 73, 94));
         table.getTableHeader().setForeground(Color.WHITE);
         table.setGridColor(new Color(230, 230, 230));
         table.setSelectionBackground(new Color(52, 152, 219, 50));
         table.setSelectionForeground(new Color(52, 73, 94));
+        table.setShowVerticalLines(false);
+        table.setShowHorizontalLines(false);
+
     }
-    
+    public void setupBorderScroll(JScrollPane scroll,String title) {
+        TitledBorder border = BorderFactory.createTitledBorder(titleBorder);
+        //border.setBorder(BorderFactory.createEmptyBorder());
+        border.setTitleJustification(TitledBorder.LEFT);
+        border.setTitlePosition(TitledBorder.TOP);
+        border.setTitleFont(new Font("", Font.BOLD, 10));
+        border.setTitleColor(new Color(229, 195, 183));
+        scroll.setBorder(BorderFactory.createLineBorder(new Color(229, 195, 183)));
+        scroll.setBorder(border);
+    }
+    public String titleCountItem(List<?> modelDefault){
+        if (modelDefault.isEmpty()){
+             return titleBorder = "(empty)";
+        } else {
+            return titleBorder = "(" + modelDefault.size() + ")"; }
+    }
+
+
     private void styleNavigationButtons() {
         JButton[] navButtons = {clientsButton, medecinsButton, medicamentsButton, 
                                mutuellesButton, ordonnancesButton, achatsButton, statistiquesButton};
@@ -423,15 +475,17 @@ public class SparadrapMainInterface extends JFrame {
             showInfoMessage(message);
         }
     }
-    
+
+    // loading data
     private void loadInitialData() {
         loadClientsData();
         loadMedicamentsData();
         loadAchatsData();
         loadOrdoData();
+        loadMedecinData();
+        loadMutData();
         updateStatistics();
     }
-    
     private void loadClientsData() {
         clientsTableModel.setRowCount(0);
         for (Client client : PharmacieController.getListClients()) {
@@ -446,7 +500,6 @@ public class SparadrapMainInterface extends JFrame {
             clientsTableModel.addRow(row);
         }
     }
-    
     private void loadMedicamentsData() {
         medicamentsTableModel.setRowCount(0);
         for (Medicament med : PharmacieController.getListMed()) {
@@ -460,7 +513,6 @@ public class SparadrapMainInterface extends JFrame {
             medicamentsTableModel.addRow(row);
         }
     }
-    
     private void loadAchatsData() {
         achatsTableModel.setRowCount(0);
         for (Achat achat : PharmacieController.getListAchats()) {
@@ -475,7 +527,6 @@ public class SparadrapMainInterface extends JFrame {
             achatsTableModel.addRow(row);
         }
     }
-
     private void loadOrdoData() {
         ordoTableModel.setRowCount(0);
         for (Ordonnance ordonnance : PharmacieController.getListOrdo()) {
@@ -494,9 +545,6 @@ public class SparadrapMainInterface extends JFrame {
         for (Mutuelle mut : PharmacieController.getListMutuelles()) {
             Object[] row = {
                     mut.getLastName(),
-                    mut.getAddress()+" "+mut.getNbState()+" "+mut.getCity(),
-                    mut.getDep(),
-                    mut.getPhone()+" / "+mut.getEmail(),
                     mut.getTauxRemb()
             };
             mutTableModel.addRow(row);
@@ -506,7 +554,7 @@ public class SparadrapMainInterface extends JFrame {
         medecinTableModel.setRowCount(0);
         for (Medecin medecin : PharmacieController.getListMedecins()) {
             Object[] row = {
-                    medecin.getFirstName()+" "+medecin.getLastName(),
+                    "Dr "+medecin.getFirstName()+" "+medecin.getLastName(),
                     medecin.getAddress()+" "+medecin.getNbState()+" "+medecin.getCity(),
                     medecin.getEmail()+"/ "+medecin.getPhone(),
                     medecin.getNbAgreement(),
@@ -515,7 +563,8 @@ public class SparadrapMainInterface extends JFrame {
             medecinTableModel.addRow(row);
         }
     }
-    
+
+    // update
     private void updateStatistics() {
         totalClientsLabel.setText(String.valueOf(PharmacieController.getListClients().size()));
         totalMedicamentsLabel.setText(String.valueOf(PharmacieController.getListMed().size()));
@@ -527,7 +576,11 @@ public class SparadrapMainInterface extends JFrame {
                 .sum();
         chiffreAffairesLabel.setText(String.format("%.2f €", chiffreAffaires));
     }
-    
+    private void updateStatusLabel(String message) {
+        statusLabel.setText(message);
+    }
+
+    // clear data
     private void clearClientForm() {
         clientPrenomField.setText("");
         clientNomField.setText("");
@@ -535,7 +588,6 @@ public class SparadrapMainInterface extends JFrame {
         clientPhoneField.setText("");
         clientAddressField.setText("");
     }
-    
     private void clearMedicamentForm() {
         medicamentNomField.setText("");
         medicamentPrixField.setText("");
@@ -555,11 +607,7 @@ public class SparadrapMainInterface extends JFrame {
             }
         }, 0, 1000);
     }
-    
-    private void updateStatusLabel(String message) {
-        statusLabel.setText(message);
-    }
-    
+
     private void showSuccessMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Succès", JOptionPane.INFORMATION_MESSAGE);
     }

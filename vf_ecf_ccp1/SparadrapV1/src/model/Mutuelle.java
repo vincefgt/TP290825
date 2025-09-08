@@ -18,7 +18,6 @@ public class Mutuelle extends Person{
         this.setTauxRemb(tauxRemb);
         //PharmacieController.getListMutuelles().add(this);
     }
-
     public Mutuelle(String lastName, double tauxRemb) {
         super(lastName);
         this.setFirstName("Mutuelle");
