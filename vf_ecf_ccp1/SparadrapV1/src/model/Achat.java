@@ -17,9 +17,11 @@ public class Achat {
     private Client client;
     private List<Medicament> listMedAchat;
     private List<Achat> listAchatClient;
-    private static Ordonnance ordonnance; // null si achat direct
+    private Ordonnance ordonnance; // null si achat direct
     private double Total = 0;
     private double Remb = 0;
+
+    //TODO add quantity by achat
 
     // Constructeur achat direct
     public Achat(LocalDate dateAchat, Client client) {
@@ -31,7 +33,6 @@ public class Achat {
         this.setRemb(Remb);
         // adding when saving > PharmacieController
     }
-
     // Constructeur achat ordonnance
     public Achat(LocalDate dateAchat, Client client, Ordonnance ordonnance) {
         this(dateAchat, client);
@@ -67,11 +68,11 @@ public class Achat {
     }
 
     public Ordonnance getOrdonnance() {
-        return ordonnance;
+        return this.ordonnance;
     }
     public void setOrdonnance(Ordonnance ordonnance) {
 //        if (ordonnance != null) {
-        Achat.ordonnance = ordonnance;
+        this.ordonnance = ordonnance;
 //            (Medicament med : getListMedAchat()){
 //                Ordonnance.addMedOrdo(med);
 //            }
@@ -119,14 +120,14 @@ public class Achat {
 }
 
     // Direct vs Ordo
-    public static boolean IsAchatDirect() {
+    public static boolean IsAchatDirect(Ordonnance ordonnance) {
         return ordonnance == null;
     }
 
     @Override
     public String toString() {
-        String type = IsAchatDirect() ? "Achat direct" : "Achat sur ordonnance";
+        String type = IsAchatDirect(ordonnance) ? "Achat direct" : "Achat sur ordonnance";
         return type+" - "+dateAchat+" - "+client.getLastName()+
-                " - Total: "+Total+"€ (Remboursé: "+Remb+"€) ";//+ordonnance;
+                " - Total: "+Total+"€ (Remboursé: "+Remb+"€) "+ordonnance;
     }
 }

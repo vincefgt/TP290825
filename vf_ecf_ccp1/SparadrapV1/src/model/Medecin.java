@@ -9,29 +9,26 @@ public class Medecin extends Person {
 
     private long nbAgreement;
     private java.util.List<Client> patients; // List of patients
-    //private java.util.List<Medecin> listMedecin; //List of madecins
     private String idMedecin;
 
     // Constructor
-    public Medecin(String firstName, String lastName, String address,String email, int nbState,String city, String phone, long nbAgreement,String idMedecin) {
+    public Medecin(String firstName, String lastName, String address,String email, int nbState,String city,
+                   String phone, long nbAgreement,String idMedecin) {
         super(firstName,lastName,address,email,nbState,city,phone);
         this.setNbAgreement(nbAgreement);
         this.idMedecin = generateId(idMedecin);
         addMedecin(this);
         this.patients = new java.util.ArrayList<>();
-        //PharmacieController.getListMedecins().add(this);
     }
-    public Medecin(String lastName, String city, long nbAgreement,String idMedecin) {
-        super(lastName,city);
+    public Medecin(String lastName, String firstName, String city, long nbAgreement,String idMedecin) {
+        super(firstName,lastName,city);
         this.setNbAgreement(nbAgreement);
         this.setIdMedecin(idMedecin);
         addMedecin(this);
         this.patients = new java.util.ArrayList<>();
-        //TODO:control if medecin existe > true > error
-        //PharmacieController.getListMedecins().add(this);
     }
-    public Medecin(String lastName, long nbAgreement, String idMedecin) {
-        super(lastName);
+    public Medecin(String lastName,String firstName, long nbAgreement, String idMedecin) {
+        super(firstName,lastName);
         this.setNbAgreement(nbAgreement);
         this.setIdMedecin(idMedecin);
         addMedecin(this);
@@ -90,6 +87,6 @@ public class Medecin extends Person {
 
     @Override
     public String toString() {
-        return "Dr "+getLastName()+" "+getFirstName()+" (Agrement: "+nbAgreement+")";
+        return "Dr "+super.getLastName()+" "+super.getFirstName()+" (Agrement: "+nbAgreement+")";
     }
 }

@@ -20,7 +20,7 @@ import java.util.TimerTask;
 
 
 public class SparadrapMainInterface extends JFrame {
-    
+
     // Panneaux principaux
     private JPanel mainPanel;
     private JPanel headerPanel;
@@ -28,11 +28,11 @@ public class SparadrapMainInterface extends JFrame {
     private JPanel navigationPanel;
     private JPanel statusPanel;
     private JTabbedPane mainTabbedPane;
-    
+
     // header
     private JLabel titleLabel;
     private JLabel versionLabel;
-    
+
     // nav
     private JButton clientsButton;
     private JButton medecinsButton;
@@ -41,7 +41,7 @@ public class SparadrapMainInterface extends JFrame {
     private JButton ordonnancesButton;
     private JButton achatsButton;
     private JButton statistiquesButton;
-    
+
     // Clients
     private JPanel clientFormPanel;
     private JTextField clientPrenomField;
@@ -54,7 +54,14 @@ public class SparadrapMainInterface extends JFrame {
     private JScrollPane clientScrollPane;
     private JTable clientsTable;
     private DefaultTableModel clientsTableModel;
-    
+    private JButton updateClientButton;
+    private JButton cancelButton;
+    private JButton validationButton;
+    private JTextField clientNbStateField;
+    private JTextField clientCityField;
+    private JFormattedTextField clientDateBirthField;
+    private JFormattedTextField clientNbSSField;
+
     // Med
     private JPanel medicamentFormPanel;
     private JTextField medicamentNomField;
@@ -66,7 +73,7 @@ public class SparadrapMainInterface extends JFrame {
     private JScrollPane medicamentScrollPane;
     private JTable medicamentsTable;
     private DefaultTableModel medicamentsTableModel;
-    
+
     // Achats
     private JPanel achatActionsPanel;
     private JButton nouvelAchatButton;
@@ -75,7 +82,7 @@ public class SparadrapMainInterface extends JFrame {
     private JScrollPane achatsScrollPane;
     private JTable achatsTable;
     private DefaultTableModel achatsTableModel;
-    
+
     // Stat
     private JPanel statsCard1, statsCard2, statsCard3, statsCard4;
     private JLabel totalClientsLabel;
@@ -83,7 +90,7 @@ public class SparadrapMainInterface extends JFrame {
     private JLabel totalAchatsLabel;
     private JLabel chiffreAffairesLabel;
     private JButton refreshStatsButton;
-    
+
     // Status bar
     private JLabel statusLabel;
     private JLabel timeLabel;
@@ -97,17 +104,23 @@ public class SparadrapMainInterface extends JFrame {
     private JTable mutuelleTable;
     private JScrollPane mutuelleScrollPane;
     private DefaultTableModel mutTableModel;
+    private JTextField mutNameField;
+    private JTextField mutAddressField;
+    private JTextField mutNbStateField;
+    private JTextField mutCityField;
+    private JTextField mutDepField;
 
     // Medecin
     private JTable medecinTable;
     private JScrollPane medecinScrollPane;
+    private JTextField textField6;
     private DefaultTableModel medecinTableModel;
 
     // Controller
     private PharmacieController controller;
-
     private String titleBorder;
 
+    // init components
     public SparadrapMainInterface() {
         initializeFrame();
         initializeComponents();
@@ -115,7 +128,6 @@ public class SparadrapMainInterface extends JFrame {
         loadInitialData();
         //startTimeUpdater();
     }
-    
     private void initializeFrame() {
         setTitle("🏥 Pharmacie SPARADRAP - Système de Gestion");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -124,13 +136,13 @@ public class SparadrapMainInterface extends JFrame {
         setMinimumSize(new Dimension(1000, 600));
         setContentPane(mainPanel);
     }
-    
     private void initializeComponents() {
         initializeTableModels(); // Initialize table models
         setupComboBoxes(); // Setup combo boxes
         applyModernStyling(); // Apply style
+        cancelButton.setVisible(false); // hide button at start
+        validationButton.setVisible(false); // hide button at start
     }
-    
     private void initializeTableModels() {
         // Clients table
         String[] clientColumns = {"Prénom", "Nom", "Email", "Téléphone", "N° SS", "Mutuelle"};
@@ -139,7 +151,7 @@ public class SparadrapMainInterface extends JFrame {
             public boolean isCellEditable(int row, int column) { return false; }
         };
         clientsTable.setModel(clientsTableModel);
-        
+
         // Médicaments table
         String[] medicamentColumns = {"Nom", "Catégorie", "Prix (€)", "Stock", "Date Marché"};
         medicamentsTableModel = new DefaultTableModel(medicamentColumns, 0) {
@@ -147,7 +159,7 @@ public class SparadrapMainInterface extends JFrame {
             public boolean isCellEditable(int row, int column) { return false; }
         };
         medicamentsTable.setModel(medicamentsTableModel);
-        
+
         // Achats table
         String[] achatColumns = {"Date", "Client", "Type", "Montant Total", "Remboursement", "Ordonnance"};
         achatsTableModel = new DefaultTableModel(achatColumns, 0) {
@@ -184,7 +196,6 @@ public class SparadrapMainInterface extends JFrame {
         };
         medecinTable.setModel(medecinTableModel);
     }
-    
     private void setupComboBoxes() {
         // med cat
         medicamentCategorieCombo.removeAllItems();
@@ -192,7 +203,8 @@ public class SparadrapMainInterface extends JFrame {
             medicamentCategorieCombo.addItem(category);
         }
     }
-    
+
+    //UI
     private void applyModernStyling() {
         // Style tables
         styleTable(clientsTable);
@@ -211,7 +223,6 @@ public class SparadrapMainInterface extends JFrame {
         styleNavigationButtons();
         styleActionButtons();
     }
-    
     private void styleTable(JTable table) {
         table.setRowHeight(20);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -240,17 +251,14 @@ public class SparadrapMainInterface extends JFrame {
         } else {
             return titleBorder = "(" + modelDefault.size() + ")"; }
     }
-
-
     private void styleNavigationButtons() {
-        JButton[] navButtons = {clientsButton, medecinsButton, medicamentsButton, 
+        JButton[] navButtons = {clientsButton, medecinsButton, medicamentsButton,
                                mutuellesButton, ordonnancesButton, achatsButton, statistiquesButton};
-        
+
         for (JButton button : navButtons) {
             addHoverEffect(button, new Color(52, 152, 219), new Color(41, 128, 185));
         }
     }
-    
     private void styleActionButtons() {
         // Add hover effects to action buttons
         addHoverEffect(addClientButton, new Color(46, 204, 113), new Color(39, 174, 96));
@@ -262,24 +270,24 @@ public class SparadrapMainInterface extends JFrame {
         addHoverEffect(calculerRemboursementButton, new Color(155, 89, 182), new Color(142, 68, 173));
         addHoverEffect(refreshStatsButton, new Color(52, 73, 94), new Color(44, 62, 80));
     }
-    
     private void addHoverEffect(JButton button, Color normalColor, Color hoverColor) {
         button.setBackground(normalColor);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
+
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 button.setBackground(hoverColor);
             }
-            
+
             @Override
             public void mouseExited(MouseEvent e) {
                 button.setBackground(normalColor);
             }
         });
     }
-    
+
+    //Action buttons
     private void setupEventHandlers() {
         // Navigation buttons
         clientsButton.addActionListener(e -> showTab(0));
@@ -292,20 +300,22 @@ public class SparadrapMainInterface extends JFrame {
 
         // Client actions
         addClientButton.addActionListener(e -> addNewClient());
-        clearClientButton.addActionListener(e -> clearClientForm());
-        
+        clearClientButton.addActionListener(e -> delClientFrame());
+        updateClientButton.addActionListener(e -> updateClient());
+
+
         // Médicament actions
         addMedicamentButton.addActionListener(e -> addNewMedicament());
         clearMedicamentButton.addActionListener(e -> clearMedicamentForm());
-        
+
         // Achat actions
         nouvelAchatButton.addActionListener(e -> createNewAchat());
         achatOrdonnanceButton.addActionListener(e -> createAchatWithOrdonnance());
         calculerRemboursementButton.addActionListener(e -> calculateRemboursement());
-        
+
         // Stats
         refreshStatsButton.addActionListener(e -> updateStatistics());
-        
+
         // Table double-click events
         clientsTable.addMouseListener(new MouseAdapter() {
             @Override
@@ -315,17 +325,22 @@ public class SparadrapMainInterface extends JFrame {
                 }
             }
         });
-        /**
-         * TODO double click on table
-         */
-       /* medicamentsTable.addMouseListener(new MouseAdapter() {
+        achatsTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    showMedicamentDetails();
+                    showAchatDetails();
                 }
             }
-        });*/
+        });
+        medicamentsTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    //showMedicamentDetails();
+                }
+            }
+        });
         medecinTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -335,12 +350,28 @@ public class SparadrapMainInterface extends JFrame {
             }
         });
     }
-    
+
     private void showTab(int index) {
         mainTabbedPane.setSelectedIndex(index);
         updateStatusLabel("Onglet sélectionné: " + mainTabbedPane.getTitleAt(index));
     }
-    
+
+    private void delClientFrame() {
+        try {
+            int selectedClient = clientsTable.getSelectedRow();
+            if (selectedClient >= 0) {
+                PharmacieController.getListClients().remove(selectedClient);
+                clientsTableModel.removeRow(selectedClient);
+                showSuccessMessage("Client(e) supprimé(e) avec succès!");
+                updateStatusLabel("Client(e) supprimé(e)");
+            } else {
+                showErrorMessage("Selected Client required");
+            }
+            PharmacieView.printList(PharmacieController.getListClients());
+        } catch (Exception e) {
+            showErrorMessage("Erreur lors de la suppression: " + e.getMessage());
+        }
+    }
     private void addNewClient() {
         try {
             String prenom = clientPrenomField.getText().trim();
@@ -348,18 +379,21 @@ public class SparadrapMainInterface extends JFrame {
             String email = clientEmailField.getText().trim();
             String phone = clientPhoneField.getText().trim();
             String address = clientAddressField.getText().trim();
-            
+            int nbState = Integer.parseInt(clientNbStateField.getText());
+            String city = clientCityField.getText().trim();
+            LocalDate dateBirth = LocalDate.parse(clientDateBirthField.getText());
+            Long nbSS = Long.parseLong(clientNbSSField.getText().trim());
+
             if (prenom.isEmpty() || nom.isEmpty() || email.isEmpty()) {
                 showErrorMessage("Veuillez remplir au moins le prénom, nom et email!");
                 return;
             }
             
             // Create client with default values for required fields
-            Client newClient = new Client(prenom, nom, address.isEmpty() ? "Non renseigné" : address,
-                    75000, "Paris", phone.isEmpty() ? "0000000000" : phone,
-                    email, generateRandomSS(), LocalDate.now(), null, null);
+            Client newClient = new Client(prenom, nom, address.isEmpty() ? "Non renseigné" : address, nbState, city, phone.isEmpty() ? "0000000000" : phone,
+                    email,String.valueOf(nbSS).isEmpty() ? 0L : nbSS , dateBirth, null, null);
             
-            controller.addClient(newClient);
+            PharmacieController.addClient(newClient);
             loadClientsData();
             clearClientForm();
             showSuccessMessage("Client ajouté avec succès!");
@@ -369,7 +403,55 @@ public class SparadrapMainInterface extends JFrame {
             showErrorMessage("Erreur lors de l'ajout du client: " + e.getMessage());
         }
     }
-    
+    private void updateClient() {
+        try {
+            int selectedClient = clientsTable.getSelectedRow();
+            if (selectedClient >= 0 || selectedClient > clientsTable.getRowCount()) {
+                cancelButton.setVisible(true);
+                validationButton.setVisible(true);
+                addClientButton.setVisible(false);
+                clearClientButton.setVisible(false);
+                updateClientButton.setVisible(false);
+                setClientForm(PharmacieController.getListClients().get(selectedClient));
+                validationButton.addActionListener(actionEvent -> {
+                    Client client = PharmacieController.getListClients().get(selectedClient);
+                    PharmacieController.updateClient(client,
+                            clientPrenomField.getText(),
+                            clientNomField.getText(),
+                            clientAddressField.getText(),
+                            Integer.parseInt(clientNbStateField.getText()),
+                            clientCityField.getText(),
+                            clientPhoneField.getText(),
+                            clientEmailField.getText(),
+                            Long.parseLong(clientNbSSField.getText()),
+                            LocalDate.parse(clientDateBirthField.getText(),DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                            null,null
+                            );
+                    loadClientsData();
+                    clearClientForm();
+                    cancelButton.setVisible(false);
+                    validationButton.setVisible(false);
+                    addClientButton.setVisible(true);
+                    clearClientButton.setVisible(true);
+                    updateClientButton.setVisible(true);
+                    showSuccessMessage("Client(e) modifié(e) avec succès!");
+                    updateStatusLabel("Client(e) modifié(e) "); //TODO add lastName + FirstName
+                });
+                cancelButton.addActionListener(e -> {
+                    clearClientForm();
+                    cancelButton.setVisible(false);
+                    validationButton.setVisible(false);
+                    addClientButton.setVisible(true);
+                    clearClientButton.setVisible(true);
+                    updateClientButton.setVisible(true);
+                });
+            } else {
+                showErrorMessage("Selected Client required");
+            }
+        } catch (Exception e) {
+            showErrorMessage("Erreur lors de la modification: " + e.getMessage());
+        }
+    }
     private void addNewMedicament() {
         try {
             String nom = medicamentNomField.getText().trim();
@@ -388,7 +470,7 @@ public class SparadrapMainInterface extends JFrame {
             Medicament newMedicament = new Medicament(nom, categorie, prix, 
                     LocalDate.now().toString(), stock);
             
-            controller.addMed(newMedicament);
+            PharmacieController.addMed(newMedicament);
             loadMedicamentsData();
             clearMedicamentForm();
             showSuccessMessage("Médicament ajouté avec succès!");
@@ -449,7 +531,8 @@ public class SparadrapMainInterface extends JFrame {
         
         showInfoMessage(message);
     }
-    
+
+    // call popup
     private void showClientDetails() {
         int selectedRow = clientsTable.getSelectedRow();
         if (selectedRow != -1) {
@@ -475,6 +558,23 @@ public class SparadrapMainInterface extends JFrame {
             for (Medecin medecin : PharmacieController.getListMedecins()) {
                 if (medecin.getNbAgreement() == nbAgreement) {
                     MedecinDetailsDialog dialog = new MedecinDetailsDialog(this, medecin);
+                    dialog.setVisible(true);
+                    break;
+                }
+            }
+        }
+    }
+    private void showAchatDetails() {
+        int selectedRow = achatsTable.getSelectedRow();
+        if (selectedRow != -1) {
+            LocalDate dateAchat = LocalDate.parse((String)achatsTableModel.getValueAt(selectedRow, 0),DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            Client client =  PharmacieController.getListClients().get(selectedRow);
+
+            // Find client in controller
+            for (Achat achat : PharmacieController.getListAchats()) {
+                if (LocalDate.parse(achat.getDateAchat(),DateTimeFormatter.ofPattern("dd/MM/yyyy")).equals(dateAchat) &&
+                        achat.getClient().equals(client)) {
+                    AchatDetailsDialog dialog = new AchatDetailsDialog(this, achat);
                     dialog.setVisible(true);
                     break;
                 }
@@ -543,7 +643,7 @@ public class SparadrapMainInterface extends JFrame {
             Object[] row = {
                 achat.getDateAchat(),
                 achat.getClient().getFirstName() + " " + achat.getClient().getLastName(),
-                achat.IsAchatDirect() ? "Direct" : "Ordonnance",
+                achat.IsAchatDirect(achat.getOrdonnance()) ? "Direct" : "Ordonnance",
                 String.format("%.2f €", achat.getTotal()),
                 String.format("%.2f €", achat.getRemb()),
                 achat.getOrdonnance() != null ? "Oui" : "Non"
@@ -557,7 +657,7 @@ public class SparadrapMainInterface extends JFrame {
             Object[] row = {
                     ordonnance.getDateOrdo(),
                     ordonnance.getPatient().getFirstName() + " " + ordonnance.getPatient().getLastName(),
-                    "Dr "+ordonnance.getLastName(),
+                    "Dr "+ordonnance.getMedecin().getLastName()+" "+ordonnance.getMedecin().getFirstName(),
                     ordonnance.getNbAgreement(),
                     ordonnance.getIdMedecin()
             };
@@ -612,6 +712,19 @@ public class SparadrapMainInterface extends JFrame {
         statusLabel.setText(message);
     }
 
+    // set data
+    private void setClientForm(Client selectedClient) {
+        clientPrenomField.setText(selectedClient.getFirstName());
+        clientNomField.setText(selectedClient.getLastName());
+        clientEmailField.setText(selectedClient.getEmail());
+        clientPhoneField.setText(selectedClient.getPhone());
+        clientAddressField.setText(selectedClient.getAddress());
+        clientNbStateField.setText(String.valueOf(selectedClient.getNbState()));
+        clientCityField.setText(selectedClient.getCity());
+        clientDateBirthField.setText(selectedClient.getDateBirth());
+        clientNbSSField.setText(String.valueOf(selectedClient.getNbSS()));
+        //TODO add mututelle
+    }
     // clear data
     private void clearClientForm() {
         clientPrenomField.setText("");
@@ -619,6 +732,10 @@ public class SparadrapMainInterface extends JFrame {
         clientEmailField.setText("");
         clientPhoneField.setText("");
         clientAddressField.setText("");
+        clientNbStateField.setText("");
+        clientCityField.setText("");
+        clientDateBirthField.setText("");
+        clientNbSSField.setText("");
     }
     private void clearMedicamentForm() {
         medicamentNomField.setText("");
@@ -626,7 +743,18 @@ public class SparadrapMainInterface extends JFrame {
         medicamentStockField.setText("");
         medicamentCategorieCombo.setSelectedIndex(0);
     }
-    
+    //get data
+    private void getClientForm() {
+        clientPrenomField.getText();
+        clientNomField.getText();
+        clientEmailField.getText();
+        clientPhoneField.getText();
+        clientAddressField.getText();
+        clientNbStateField.getText();
+        clientCityField.getText();
+        clientDateBirthField.getText();
+        clientNbSSField.getText();
+    }
     private void startTimeUpdater() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -656,7 +784,11 @@ public class SparadrapMainInterface extends JFrame {
         // Generate a random 15-digit social security number
         return (long) (Math.random() * 900000000000000L) + 100000000000000L;
     }
-    
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
+
     // class for Achat Dialog
     private static class AchatDialog extends JDialog {
         private JComboBox<Client> clientCombo;
@@ -816,7 +948,7 @@ public class SparadrapMainInterface extends JFrame {
             // Close button
             JButton closeButton = new JButton("Fermer");
             closeButton.addActionListener(e -> dispose());
-            gbc.gridx = 0; gbc.gridy = 7; gbc.gridwidth = 2;
+            gbc.gridx = 0; gbc.gridy = 8; gbc.gridwidth = 2;
             gbc.anchor = GridBagConstraints.CENTER;
             panel.add(closeButton, gbc);
             
@@ -883,7 +1015,79 @@ public class SparadrapMainInterface extends JFrame {
             setContentPane(panel);
         }
     }
+    private static class AchatDetailsDialog extends JDialog {
+        public AchatDetailsDialog(Frame parent, Achat achat) {
+            super(parent, "Détails de l'achat", true);
+            setSize(400, 300);
+            setLocationRelativeTo(parent);
 
+            JPanel panel = new JPanel(new GridBagLayout());
+            panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.insets = new Insets(2, 5, 2, 5);
+            gbc.anchor = GridBagConstraints.WEST;
+
+            // Add client information
+            gbc.gridx = 0; gbc.gridy = 0;
+            panel.add(new JLabel("Date:"), gbc);
+            gbc.gridx = 1;
+            panel.add(new JLabel(achat.getDateAchat()), gbc);
+
+            gbc.gridx = 0; gbc.gridy = 1;
+            panel.add(new JLabel("Client:"), gbc);
+            gbc.gridx = 1;
+            panel.add(new JLabel(achat.getClient().getLastName()+" "+achat.getClient().getFirstName()), gbc);
+
+            gbc.gridx = 0; gbc.gridy = 2;
+            panel.add(new JLabel("Adresse:"), gbc);
+            gbc.gridx = 1;
+            panel.add(new JLabel("<html>"+achat.getClient().getAddress()+"<br>"
+                    +achat.getClient().getNbState()+" "+achat.getClient().getCity()), gbc);
+
+            gbc.gridx = 0; gbc.gridy = 3;
+            panel.add(new JLabel("Coord:"), gbc);
+            gbc.gridx = 1;
+            panel.add(new JLabel(achat.getClient().getEmail()+" / "+achat.getClient().getPhone()), gbc);
+
+            gbc.gridx = 0; gbc.gridy = 4;
+            panel.add(new JLabel("Montants:"), gbc);
+            gbc.gridx = 1;
+            panel.add(new JLabel("Total: "+achat.getTotal()+" Remb: "+achat.getRemb()), gbc);
+
+            gbc.gridx = 0; gbc.gridy = 5;
+            panel.add(new JLabel("Ordo:"), gbc);
+            gbc.gridx = 1;
+            String statusOrdo;
+            if(achat.getOrdonnance()==null){
+                statusOrdo = "non";
+            } else {
+                statusOrdo = "<html>"+achat.getOrdonnance().getDateOrdo()+"<br>"
+                                    +"Dr "+achat.getOrdonnance().getMedecin().getLastName()+" "+achat.getOrdonnance().getMedecin().getFirstName()+"<br>"
+                                    +"Numéro Agrement: "+achat.getOrdonnance().getNbAgreement(); }
+            panel.add(new JLabel(statusOrdo), gbc);
+
+            gbc.gridx = 0; gbc.gridy = 6;
+            JLabel medLabel = new JLabel("Med:");
+            medLabel.setVerticalAlignment(SwingConstants.TOP);
+            panel.add(medLabel, gbc);
+            gbc.gridx = 1;
+            StringBuilder sb = new StringBuilder("<html>");
+            for (Medicament med : achat.getListMedAchat()) {
+                sb.append(med.getNameMed()).append("<br>"); } //TODO add quantity
+            sb.append("</html>");
+            panel.add(new JLabel(sb.toString()), gbc);
+
+            // Close button
+            JButton closeButton = new JButton("Fermer");
+            closeButton.addActionListener(e -> dispose());
+            gbc.gridx = 0; gbc.gridy = 9; gbc.gridwidth = 2;
+            gbc.anchor = GridBagConstraints.CENTER;
+            panel.add(closeButton, gbc);
+
+            setContentPane(panel);
+        }
+    }
 
     /*public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

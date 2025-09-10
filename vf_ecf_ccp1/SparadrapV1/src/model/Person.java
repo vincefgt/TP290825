@@ -15,22 +15,6 @@ public class Person {
 
     //constructor
     public Person(String firstName, String lastName, String address, String email, int nbState, String city, String phone) {
-        /*// check if dataPerson is empty
-        String[]listData = {firstName, lastName, address, email,String.valueOf(nbState),String.valueOf(phone),city};
-        for (int i = 0; i < listData.length; i++) {
-        if (Regex.testNotEmpty(listData[i]))
-            throw new IllegalArgumentException(String.valueOf(listData[i]+"required"));
-        }
-        Regex.setParamRegex("^\\d{4}$");
-        if (Regex.testDigit(nbState))
-            throw new IllegalArgumentException(String.valueOf(nbState+"/ format invalid 4numbers required"));
-        Regex.setParamRegex("^\\d{10}$");
-        if (Regex.testDigit(phone))
-            throw new IllegalArgumentException(String.valueOf(phone+"/ format invalid 10numbers required"));
-        Regex.setParamRegex("^\\d{10}$");
-        if (Regex.testEmail(email))
-            throw new IllegalArgumentException(String.valueOf(email+"/ format invalid 10numbers required"));
-*/
         this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setAddress(address);
@@ -46,9 +30,14 @@ public class Person {
         this.setLastName(lastName);
         this.setCity(city);
     }
+    public Person(String lastName, String firstName, String city) {
+        this.setLastName(lastName);
+        this.setFirstName(firstName);
+        this.setCity(city);
+    }
 
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
     public void setFirstName(String firstName) {
         if (Regex.testNotEmpty(firstName) || Regex.testChar(firstName))
@@ -57,7 +46,7 @@ public class Person {
     }
 
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
     public void setLastName(String lastName) {
         if (Regex.testNotEmpty(lastName)||Regex.testChar(lastName))
@@ -66,7 +55,7 @@ public class Person {
     }
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
     public void setAddress(String address) {
         if (Regex.testNotEmpty(address))
@@ -75,7 +64,7 @@ public class Person {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
     public void setEmail(String email) {
         if (Regex.testNotEmpty(email)||Regex.testEmail(email))
@@ -84,7 +73,7 @@ public class Person {
     }
 
     public int getNbState() {
-        return nbState;
+        return this.nbState;
     }
     public void setNbState(int nbState) {
         Regex.setParamRegex("^\\d{5}$");
@@ -94,7 +83,7 @@ public class Person {
     }
 
     public String getCity() {
-        return city;
+        return this.city;
     }
     public void setCity(String city) {
         if (Regex.testNotEmpty(city))
@@ -103,7 +92,7 @@ public class Person {
     }
 
     public String getPhone() {
-        return phone;
+        return this.phone;
     }
     public void setPhone(String phone) {
         Regex.setParamRegex("^\\+?\\w{10}$");

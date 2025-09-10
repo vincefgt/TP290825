@@ -150,20 +150,20 @@ public class SparadrapLauncher {
             initController.addMed(antibiotique);
 
             // Create ordo (1)
-            Ordonnance ordonnance1 = new Ordonnance(LocalDate.parse("2024-01-20"), drDupont, client1);
+            Ordonnance ordonnance1 = new Ordonnance(LocalDate.parse("2024-01-20"), drDupont, client1); //client1 = durand
             ordonnance1.addMedOrdo(doliprane);
-            ordonnance1.addMedOrdo(ibuprofene);
+            ordonnance1.addMedOrdo(vitamine);
             initController.addOrdonnance(ordonnance1);
 
             // Create achat (2)
             Achat achat1 = new Achat(LocalDate.now().minusDays(5), client1,ordonnance1);
-            achat1.addMedAchat(doliprane);
-            achat1.addMedAchat(vitamine);
             initController.savingAchat(achat1);
             Achat achat2 = new Achat(LocalDate.now().minusDays(2), client2);
             achat2.addMedAchat(aspirine);
             achat2.addMedAchat(ibuprofene);
             initController.savingAchat(achat2);
+
+            PharmacieView.printList(PharmacieController.listAchats);
 
             System.out.println("✅ Données de test initialisées avec succès!");
             System.out.println("📊 Statistiques:");

@@ -61,6 +61,7 @@ public class Client extends Person {
         this.medecinTraitant = medecinTraitant;
     }
 
+
     @Override
     public String toString() {
         return "Client: "+getLastName()+" "+getFirstName()+" (N° SS: "+nbSS+")";

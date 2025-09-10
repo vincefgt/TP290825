@@ -47,7 +47,7 @@ public class AchatTest {
         assertEquals(dateAchat.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), achat.getDateAchat());
         assertEquals(client, achat.getClient());
         assertNull(achat.getOrdonnance());
-        assertTrue(achat.IsAchatDirect());
+        assertTrue(achat.IsAchatDirect(ordonnance));
         assertTrue(achat.getListMedAchat().isEmpty());
         assertEquals(0.0, achat.getTotal(), 0.01);
     }
@@ -64,7 +64,7 @@ public class AchatTest {
         assertEquals(dateAchat.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), achat.getDateAchat());
         assertEquals(client, achat.getClient());
         assertEquals(ordonnance, achat.getOrdonnance());
-        assertFalse(achat.IsAchatDirect());
+        assertFalse(achat.IsAchatDirect(ordonnance));
 
         // Vérifier que les médicaments de l'ordonnance sont dans l'achat
         assertEquals(2, achat.getListMedAchat().size());
@@ -262,10 +262,10 @@ public class AchatTest {
     @DisplayName("Test de définition d'ordonnance null")
     void testDefinitionOrdonnanceNull() {
         achat = new Achat(LocalDate.of(2024, 1, 20), client, ordonnance);
-        assertFalse(achat.IsAchatDirect());
+        assertFalse(achat.IsAchatDirect(ordonnance));
 
         // Définir ordonnance à null devrait transformer l'achat en achat direct
         achat.setOrdonnance(null);
-        assertTrue(achat.IsAchatDirect());
+        assertTrue(achat.IsAchatDirect(ordonnance));
     }
 }

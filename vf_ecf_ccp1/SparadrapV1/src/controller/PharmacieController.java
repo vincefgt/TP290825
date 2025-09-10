@@ -4,6 +4,7 @@ import model.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,9 +31,33 @@ public class PharmacieController {
     }
 
     // CLIENTS
-    public boolean addClient(Client client) {
+    public static boolean addClient(Client client) {
+        if (client != null && !getListClients().contains(client)) {
+            return getListClients().add(client);
+        }
+        return false;
+    }
+    public static boolean getClient(int row) {
+        return getListClients().get(row) != null;
+    }
+    public static void updateClient(Client client, String firstName, String lastName, String address, int nbState,
+                                       String city, String phone, String email, long nbSS,
+                                       LocalDate dateBirth, Mutuelle mut, Medecin medecinTraitant) {
+        client.setFirstName(firstName);
+        client.setLastName(lastName);
+        client.setNbState(nbState);
+        client.setMutuelle(mut);
+        client.setDateBirth(dateBirth);
+        client.setNbSS(nbSS);
+        //client.setMedecinTraitant(medecinTraitant);
+        client.setEmail(email);
+        client.setAddress(address);
+        client.setCity(city);
+        client.setPhone(phone);
+    }
+    public static boolean deleteClient(Client client){
         if (client != null && !listClients.contains(client)) {
-            return listClients.add(client);
+            return listClients.remove(client);
         }
         return false;
     }
@@ -74,7 +99,7 @@ public class PharmacieController {
     }
 
     // MED add in med list = ALL med
-    public boolean addMed(Medicament medicament) {
+    public static boolean addMed(Medicament medicament) {
         if (medicament != null && !getListMed().contains(medicament)) {
             return getListMed().add(medicament);
         }
@@ -112,7 +137,7 @@ public class PharmacieController {
         if (ordonnance != null && !listOrdonnances.contains(ordonnance)) {
             return getListOrdo().add(ordonnance);
         }
-        //TODO: message already exist
+        //TODO: popup message already exist
         return false;
     }
     public static List<Ordonnance> getListOrdo() {
@@ -135,6 +160,7 @@ public class PharmacieController {
         for (Medicament med : getListMed()) {
             med.reduireQuantite(1); // Réduction d'1 unité par défaut
         }
+
         // Recal montants
         achat.calMontants();
         // Add to list ALL Achats
