@@ -1,9 +1,8 @@
-package controler;
+package controller;
 
 import model.*;
 //import test.PharmacieTests;
 import view.PharmacieView;
-import java.time.LocalDate;
 
 class PharmacieMain {
     public static void main(String[] args) {
@@ -80,14 +79,6 @@ class PharmacieMain {
             for (Medicament med : controller.getListMed()) {
                 System.out.println("- " + med);
             }
-
-            System.out.println("\nOrdonnances créées:");
-            for (Ordonnance ord : controller.getListOrdo()) {
-                System.out.println("- " + ord);
-                System.out.println("  Prix total: " + ord.calculerPrixTotal() + "€");
-            }
-
-
 
             // Affichage des statistiques
             System.out.println("");

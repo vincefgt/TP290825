@@ -1,6 +1,7 @@
 package model;
 
-import controler.Regex;
+import controller.PharmacieController;
+import controller.Regex;
 import Exception.InputException;
 
 import java.math.BigDecimal;
@@ -78,17 +79,17 @@ public class Achat {
     }
 
     public double getTotal() {
-        return Total;
+        return PharmacieController.formatTwoDec(Total);
     }
     public void setTotal(double Total) {
-        this.Total = Total;
+        this.Total = PharmacieController.formatTwoDec(Total);
     }
 
     public double getRemb() {
-        return Remb;
+        return PharmacieController.formatTwoDec(Remb);
     }
     public void setRemb(double Remb) {
-        this.Remb = Remb;
+        this.Remb = PharmacieController.formatTwoDec(Remb);
     }
 
     // Add Med in Achat
@@ -104,16 +105,14 @@ public class Achat {
 
     // cal montants
     public void calMontants() {
-        Total = 0;
-        for (Medicament med : listMedAchat) {
-            Total += med.getPrice();
+        for (Medicament med : this.listMedAchat) {
+            PharmacieController.formatTwoDec(Total += med.getPrice());
         }
 
     // Cal remb if mutuelle
     if (client.getMutuelle() != null) {
         Remb = client.getMutuelle().calcRemb(Total);
-        BigDecimal bd = new BigDecimal(Remb).setScale(2, RoundingMode.HALF_UP);
-        Remb = bd.doubleValue();
+        PharmacieController.formatTwoDec(Remb);
     } else {
         Remb = 0;
     }

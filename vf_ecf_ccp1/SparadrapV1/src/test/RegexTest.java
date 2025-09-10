@@ -1,5 +1,4 @@
-import controler.Regex;
-import org.junit.jupiter.api.Disabled;
+import controller.Regex;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;

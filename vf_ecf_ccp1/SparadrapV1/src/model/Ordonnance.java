@@ -1,12 +1,11 @@
 package model;
 
-import controler.Regex;
+import controller.PharmacieController;
+import controller.Regex;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
-import static model.Achat.*;
 
 public class Ordonnance extends Medecin{
     private LocalDate dateOrdo;
@@ -84,14 +83,6 @@ public class Ordonnance extends Medecin{
 
     public boolean suppMedOrdo(Medicament medicament) {
         return getListMedOrdo().remove(medicament);
-    }
-
-    public double calculerPrixTotal() {
-        double total = 0;
-        for (Medicament med : listMedOrdo) {
-            total += med.getPrice();
-        }
-        return total;
     }
 
     @Override

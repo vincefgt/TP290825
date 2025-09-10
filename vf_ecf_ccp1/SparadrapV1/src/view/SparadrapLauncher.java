@@ -1,6 +1,6 @@
 package view;
 
-import controler.PharmacieController;
+import controller.PharmacieController;
 import model.*;
 
 import javax.swing.*;
@@ -97,10 +97,9 @@ public class SparadrapLauncher {
         }
     }
     
-    public static void initializeTestData() {
+    public static PharmacieController initializeTestData() {
         try {
             PharmacieController initController = new PharmacieController();
-            
             // Create mut (3)
             Mutuelle mgen = new Mutuelle("MGEN", 70.0);
             Mutuelle harmonie = new Mutuelle("Harmonie Mutuelle", 60.0);
@@ -166,8 +165,6 @@ public class SparadrapLauncher {
             achat2.addMedAchat(ibuprofene);
             initController.savingAchat(achat2);
 
-            PharmacieView.printList(initController.getListMedecins());
-
             System.out.println("✅ Données de test initialisées avec succès!");
             System.out.println("📊 Statistiques:");
             System.out.println("   - Clients: " + PharmacieController.getListClients().size());
@@ -175,10 +172,12 @@ public class SparadrapLauncher {
             System.out.println("   - Médicaments: " + PharmacieController.getListMed().size());
             System.out.println("   - Mutuelles: " + PharmacieController.getListMutuelles().size());
             System.out.println("   - Achats: " + PharmacieController.getListAchats().size());
-            
+            return initController;
+
         } catch (Exception e) {
             System.err.println("❌ Erreur lors de l'initialisation des données: " + e.getMessage());
             e.printStackTrace();
+            return null;
         }
     }
 }

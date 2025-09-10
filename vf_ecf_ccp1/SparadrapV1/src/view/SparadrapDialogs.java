@@ -5,8 +5,6 @@ import model.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
 /**
@@ -61,14 +59,14 @@ public class SparadrapDialogs {
             // ComboBox pour mutuelles
             mutuelleCombo = new JComboBox<>();
             mutuelleCombo.addItem(null); // Option "Aucune"
-            for (Mutuelle mutuelle : controler.PharmacieController.getListMutuelles()) {
+            for (Mutuelle mutuelle : controller.PharmacieController.getListMutuelles()) {
                 mutuelleCombo.addItem(mutuelle);
             }
             
             // ComboBox pour médecins
             medecinCombo = new JComboBox<>();
             medecinCombo.addItem(null); // Option "Aucun"
-            for (Medecin medecin : controler.PharmacieController.getListMedecins()) {
+            for (Medecin medecin : controller.PharmacieController.getListMedecins()) {
                 medecinCombo.addItem(medecin);
             }
             

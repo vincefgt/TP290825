@@ -1,4 +1,4 @@
-import controler.PharmacieController;
+import controller.PharmacieController;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -133,43 +133,6 @@ void testSuppressionMedicament() {
 }
 
 @Test
-@DisplayName("Test de calcul du prix total de l'ordonnance")
-void testCalculPrixTotal() {
-    ordonnance = new Ordonnance("Bernard", "Sophie", "20 Avenue Médecine",
-            "dr.bernard@hopital.fr", 33000, "Bordeaux", "0556789012",
-            44444444444L, null, LocalDate.of(2024, 2, 1), patient);
-
-    // Ordonnance vide
-    assertEquals(0.0, ordonnance.calculerPrixTotal(), 0.01);
-
-    // Ajout de médicaments
-    ordonnance.addMedOrdo(medicament1); // 5.20€
-    assertEquals(5.20, ordonnance.calculerPrixTotal(), 0.01);
-
-    ordonnance.addMedOrdo(medicament2); // 3.80€
-    assertEquals(9.00, ordonnance.calculerPrixTotal(), 0.01);
-
-    ordonnance.addMedOrdo(medicament3); // 4.50€
-    assertEquals(13.50, ordonnance.calculerPrixTotal(), 0.01);
-}
-
-@Test
-@DisplayName("Test de calcul du prix total avec médicaments gratuits")
-void testCalculPrixTotalAvecMedicamentsGratuits() {
-    // Création d'un médicament gratuit
-    Medicament medicamentGratuit = new Medicament("Échantillon", catMed.VITAMINE, 0.0, "2023-01-01", 10);
-
-    ordonnance = new Ordonnance("Test", "Test", "Test", "test@test.com",
-            75001, "Paris", "0123456789", 11111111111L,
-            null, LocalDate.of(2024, 1, 15), patient);
-
-    ordonnance.addMedOrdo(medicament1); // 5.20€
-    ordonnance.addMedOrdo(medicamentGratuit); // 0.00€
-
-    assertEquals(5.20, ordonnance.calculerPrixTotal(), 0.01);
-}
-
-@Test
 @DisplayName("Test modif date")
 void testModifDate() {
     ordonnance = new Ordonnance("Test", "Test", "Test", "test@test.com",
@@ -226,20 +189,4 @@ void testToString() {
     assertTrue(result.contains("2 médicaments"));
 }
 
-@Test
-@DisplayName("Test d'ordonnance avec plusieurs médicaments identiques en catégorie")
-void testOrdonnanceMemeCategorie() {
-    Medicament doliprane1 = new Medicament("Doliprane 500mg", catMed.ANTALGIQUE, 4.50, "2023-01-01", 40);
-    Medicament doliprane2 = new Medicament("Doliprane 1000mg", catMed.ANTALGIQUE, 5.20, "2023-01-01", 30);
-
-    ordonnance = new Ordonnance("Test", "Test", "Test", "test@test.com",
-            75001, "Paris", "0123456789", 11111111111L,
-            null, LocalDate.of(2024, 1, 15), patient);
-
-    ordonnance.addMedOrdo(doliprane1);
-    ordonnance.addMedOrdo(doliprane2);
-
-    assertEquals(2, ordonnance.getListMedOrdo().size());
-    assertEquals(9.70, ordonnance.calculerPrixTotal(), 0.01);
-}
 }

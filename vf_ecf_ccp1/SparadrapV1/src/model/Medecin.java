@@ -1,9 +1,8 @@
 package model;
 
-import controler.PharmacieController;
-import controler.Regex;
-import java.util.Date;
-import java.util.List;
+import controller.PharmacieController;
+import controller.Regex;
+
 import static java.lang.String.format;
 
 public class Medecin extends Person {

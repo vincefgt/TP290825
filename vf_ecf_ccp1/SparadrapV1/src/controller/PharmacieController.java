@@ -1,6 +1,9 @@
-package controler;
+package controller;
 
 import model.*;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,7 +120,7 @@ public class PharmacieController {
     }
 
     //ACHATS
-    public boolean savingAchat(Achat achat) {
+    public static boolean savingAchat(Achat achat) {
         if (achat == null) {
             return false;
         }
@@ -154,6 +157,11 @@ public class PharmacieController {
             }
         }
         return achatsClient;
+    }
+
+    public static double formatTwoDec(double nb){
+        BigDecimal bd = new BigDecimal(nb).setScale(2, RoundingMode.HALF_UP);
+        return nb = bd.doubleValue();
     }
 /*
     // === MÉTHODES UTILITAIRES ===

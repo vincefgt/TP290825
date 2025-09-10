@@ -1,7 +1,7 @@
 package model;
 
-import controler.PharmacieController;
-import controler.Regex;
+import controller.PharmacieController;
+import controller.Regex;
 
 import java.time.LocalDate;
 

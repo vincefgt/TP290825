@@ -1,9 +1,8 @@
-import controler.PharmacieController;
+import controller.PharmacieController;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
-import view.PharmacieView;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;

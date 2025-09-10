@@ -1,10 +1,7 @@
 package model;
 
-import controler.PharmacieController;
-import controler.Regex;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
+import controller.PharmacieController;
+import controller.Regex;
 
 public class Mutuelle extends Person{
     private Dep dep;
@@ -44,12 +41,12 @@ public class Mutuelle extends Person{
         this.tauxRemb = tauxRemb;
     }
 
-    // Calculi refund
+    // Calculi refund mutuelle
     public double calcRemb(double montant) {
         if (montant < 0) {
             throw new IllegalArgumentException("montant invalid <0");
         }
-        return montant * (tauxRemb / 100.0);
+        return PharmacieController.formatTwoDec(montant * (tauxRemb / 100.0));
     }
 
     @Override
