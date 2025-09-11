@@ -17,21 +17,18 @@ public class Medecin extends Person {
         super(firstName,lastName,address,email,nbState,city,phone);
         this.setNbAgreement(nbAgreement);
         this.idMedecin = generateId(idMedecin);
-        addMedecin(this);
         this.patients = new java.util.ArrayList<>();
     }
     public Medecin(String lastName, String firstName, String city, long nbAgreement,String idMedecin) {
         super(firstName,lastName,city);
         this.setNbAgreement(nbAgreement);
         this.setIdMedecin(idMedecin);
-        addMedecin(this);
         this.patients = new java.util.ArrayList<>();
     }
     public Medecin(String lastName,String firstName, long nbAgreement, String idMedecin) {
         super(firstName,lastName);
         this.setNbAgreement(nbAgreement);
         this.setIdMedecin(idMedecin);
-        addMedecin(this);
         this.patients = new java.util.ArrayList<>();
     }
 

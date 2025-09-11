@@ -737,18 +737,18 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <grid id="bf864" binding="sortingPane" layout-manager="GridLayoutManager" row-count="1" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="10" vgap="-1">
-                        <margin top="0" left="0" bottom="0" right="0"/>
+                      <grid id="bf864" binding="sortingPane" layout-manager="GridLayoutManager" row-count="1" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="10" vgap="-1">
+                        <margin top="2" left="2" bottom="2" right="2"/>
                         <constraints border-constraint="North"/>
                         <properties/>
                         <border type="none"/>
                         <children>
                           <component id="a5660" class="javax.swing.JComboBox" binding="dateFilterCombo">
                             <constraints>
-                              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false">
-                                <minimum-size width="400" height="-1"/>
-                                <preferred-size width="400" height="-1"/>
-                                <maximum-size width="800" height="-1"/>
+                              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                                <minimum-size width="100" height="-1"/>
+                                <preferred-size width="200" height="-1"/>
+                                <maximum-size width="400" height="-1"/>
                               </grid>
                             </constraints>
                             <properties>
@@ -765,10 +765,10 @@
                           </component>
                           <component id="8637" class="javax.swing.JRadioButton" binding="ordoRadioButton">
                             <constraints>
-                              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                              <grid row="0" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
-                              <actionCommand value="RadioButton"/>
+                              <actionCommand value="Ordonnances"/>
                               <focusable value="false"/>
                               <label value="Ordonnances"/>
                               <text value="Ordonnances"/>
@@ -776,21 +776,57 @@
                           </component>
                           <component id="7eb68" class="javax.swing.JRadioButton" binding="directRadioButton">
                             <constraints>
-                              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                              <grid row="0" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
-                              <actionCommand value="RadioButton"/>
+                              <actionCommand value="Direct"/>
                               <focusable value="false"/>
                               <label value="Direct"/>
                               <text value="Direct"/>
                             </properties>
                           </component>
-                          <component id="327ec" class="javax.swing.JRadioButton" binding="allRadioButton">
+                          <component id="50f85" class="javax.swing.JLabel">
                             <constraints>
-                              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
                             </constraints>
                             <properties>
-                              <actionCommand value="RadioButton"/>
+                              <text value="Du"/>
+                            </properties>
+                          </component>
+                          <component id="ac40e" class="javax.swing.JFormattedTextField" binding="startDayTextField">
+                            <constraints>
+                              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="9" fill="0" indent="0" use-parent-layout="false">
+                                <minimum-size width="60" height="-1"/>
+                                <preferred-size width="80" height="-1"/>
+                                <maximum-size width="200" height="-1"/>
+                              </grid>
+                            </constraints>
+                            <properties/>
+                          </component>
+                          <component id="4ef75" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <text value="au"/>
+                            </properties>
+                          </component>
+                          <component id="a04fa" class="javax.swing.JFormattedTextField" binding="endDayTextField">
+                            <constraints>
+                              <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                                <minimum-size width="60" height="-1"/>
+                                <preferred-size width="80" height="-1"/>
+                                <maximum-size width="200" height="-1"/>
+                              </grid>
+                            </constraints>
+                            <properties/>
+                          </component>
+                          <component id="327ec" class="javax.swing.JRadioButton" binding="allRadioButton">
+                            <constraints>
+                              <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="5" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <actionCommand value="Global"/>
                               <focusable value="false"/>
                               <label value="Global"/>
                               <text value="Global"/>

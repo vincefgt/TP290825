@@ -124,6 +124,8 @@ public class SparadrapMainInterface extends JFrame {
     private JPanel tableSortingPane;
     private JRadioButton directRadioButton;
     private JRadioButton allRadioButton;
+    private JFormattedTextField startDayTextField;
+    private JFormattedTextField endDayTextField;
     private DefaultTableModel medecinTableModel;
 
     // Controller
@@ -334,11 +336,21 @@ public class SparadrapMainInterface extends JFrame {
         nouvelAchatButton.addActionListener(e -> createNewAchat());
         achatOrdonnanceButton.addActionListener(e -> createAchatWithOrdonnance());
         calculerRemboursementButton.addActionListener(e -> calculateRemboursement());
-        dateFilterCombo.addActionListener(e -> filterAchatsByDate());
-        ActionListener groupListener = e -> filterAchatsByType(); //check group
+        dateFilterCombo.addActionListener(e -> filterAchats());
+        ActionListener groupListener = e -> filterAchats(); //check group
         ordoRadioButton.addActionListener(groupListener);
         directRadioButton.addActionListener(groupListener);
         allRadioButton.addActionListener(groupListener);
+        endDayTextField.addActionListener(e -> {
+            if(!startDayTextField.getText().isEmpty()){
+                dateFilterCombo.setSelectedItem("Date spe");
+                filterAchats();}
+        });
+        startDayTextField.addActionListener(e -> {
+            if(endDayTextField.getText().isEmpty()){
+                dateFilterCombo.setSelectedItem("Ce jour");
+                filterAchats();}
+        });
 
         // Stats
         refreshStatsButton.addActionListener(e -> updateStatistics());
@@ -666,25 +678,26 @@ public class SparadrapMainInterface extends JFrame {
         }
     }
     private void loadAchatsData() {
-            // If filter combo exists and is not set to ALL_TIME, use the filter
-            if (dateFilterCombo != null && !dateFilterCombo.getSelectedItem().equals(DateFilter.ALL_TIME.toString())) {
-                filterAchatsByDate();
-            } else {
-                achatsTableModel.setRowCount(0);
-                for (Achat achat : PharmacieController.getListAchats()) {
-                    Object[] row = {
-                            achat.getDateAchat(),
-                            achat.getClient().getFirstName() + " " + achat.getClient().getLastName(),
-                            achat.IsAchatDirect(achat.getOrdonnance()) ? "Direct" : "Ordonnance",
-                            String.format("%.2f €", achat.getTotal()),
-                            String.format("%.2f €", achat.getRemb()),
-                            achat.getOrdonnance() != null ? "Oui" : "Non"
-                    };
-                    achatsTableModel.addRow(row);
-                }
+        //if (dateFilterCombo != null) {
+            filterAchats();
+       /* } else {
+            achatsTableModel.setRowCount(0);
+            for (Achat achat : PharmacieController.getListAchats()) {
+                Object[] row = {
+                        achat.getDateAchat(),
+                        achat.getClient().getFirstName() + " " + achat.getClient().getLastName(),
+                        achat.IsAchatDirect(achat.getOrdonnance()) ? "Direct" : "Ordonnance",
+                        String.format("%.2f €", achat.getTotal()),
+                        String.format("%.2f €", achat.getRemb()),
+                        achat.getOrdonnance() != null ? "Oui" : "Non"
+                };
+                achatsTableModel.addRow(row);
+            }
+            if (achatsScrollPane != null) {
                 setupBorderScroll(achatsScrollPane, titleCountItem(PharmacieController.getListAchats()));
             }
-        }
+        }*/
+    }
     private void loadOrdoData() {
         ordoTableModel.setRowCount(0);
         for (Ordonnance ordonnance : PharmacieController.getListOrdo()) {
@@ -1125,40 +1138,18 @@ public class SparadrapMainInterface extends JFrame {
     }
 
     //Sort
-    private void filterAchatsByDate() {
-        String selectedFilter = (String) dateFilterCombo.getSelectedItem();
-        DateFilter filter = getDateFilterFromString(selectedFilter);
+    private void filterAchats() {
+        String selectedDateFilter = (String) dateFilterCombo.getSelectedItem();
+        assert selectedDateFilter != null; // not be null
+        DateFilter dateFilter = DateFilter.getDateFilterFromString(selectedDateFilter);
+        ButtonModel selectedRadioButton = buttonGroup.getSelection();
+        String typeFilter = selectedRadioButton.getActionCommand();
         achatsTableModel.setRowCount(0);
 
         for (Achat achat : PharmacieController.getListAchats()) {
-            LocalDate achatDate = LocalDate.parse(achat.getDateAchat(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-
-            boolean shouldInclude = false;
-
-            switch (filter) {
-                case TODAY:
-                    shouldInclude = achatDate.equals(now);
-                    break;
-                case THIS_WEEK:
-                    LocalDate weekStart = now.minusDays(now.getDayOfWeek().getValue() - 1);
-                    LocalDate weekEnd = weekStart.plusDays(6);
-                    shouldInclude = (achatDate.isEqual(weekStart) || achatDate.isAfter(weekStart)) &&
-                            (achatDate.isEqual(weekEnd) || achatDate.isBefore(weekEnd));
-                    break;
-                case THIS_MONTH:
-                    shouldInclude = achatDate.getMonth() == now.getMonth() &&
-                            achatDate.getYear() == now.getYear();
-                    break;
-                case THIS_YEAR:
-                    shouldInclude = achatDate.getYear() == now.getYear();
-                    break;
-                case ALL_TIME:
-                default:
-                    shouldInclude = true;
-                    break;
-            }
-
-            if (shouldInclude) {
+            boolean includeByDate = includeByDate(achat, dateFilter);
+            boolean includeByType = includeByType(achat, typeFilter);
+            if (includeByDate && includeByType) {
                 Object[] row = {
                         achat.getDateAchat(),
                         achat.getClient().getFirstName() + " " + achat.getClient().getLastName(),
@@ -1172,53 +1163,84 @@ public class SparadrapMainInterface extends JFrame {
         }
 
         // Update the border title with filtered count
-        setupBorderScroll(achatsScrollPane, "(" + achatsTableModel.getRowCount() + " / " +
-                PharmacieController.getListAchats().size() + ")");
+        setupBorderScroll(achatsScrollPane, "("+achatsTableModel.getRowCount()+" / "+
+                PharmacieController.getListAchats().size()+")");
 
-        updateStatusLabel("Achats filtrés: " + selectedFilter + " - " + achatsTableModel.getRowCount() + " résultats");
+System.out.println(achatsTableModel.getRowCount());
+        // Create status message showing both active filters
+        String statusMessage = "Achats filtrés: ";
+        if (!dateFilter.equals(DateFilter.ALL_TIME)) {
+            statusMessage += selectedDateFilter;}
+        if (!typeFilter.equals("Global")) {
+            if (!dateFilter.equals(DateFilter.ALL_TIME)) {
+                statusMessage += " + ";}
+            statusMessage += typeFilter;}
+        if (dateFilter.equals(DateFilter.ALL_TIME) && typeFilter.equals("Global")) {
+            statusMessage += "Aucun filtre";}
+        statusMessage += " - " + achatsTableModel.getRowCount() + " résultats";
+        updateStatusLabel(statusMessage);
     }
-    private DateFilter getDateFilterFromString(String filterString) {
-        for (DateFilter filter : DateFilter.values()) {
-            if (filter.toString().equals(filterString)) {
-                return filter;
-            }
-        }
-        return DateFilter.ALL_TIME;
-    }
-    private void filterAchatsByType() {
-        achatsTableModel.setRowCount(0);
-        ButtonModel selectedRadioButton = buttonGroup.getSelection();
-        String cmd = selectedRadioButton != null ? selectedRadioButton.getActionCommand() : "Global";
-        for (Achat achat : PharmacieController.getListAchats()) {
-            boolean shouldInclude;
-            System.out.println(cmd);
-            switch (cmd) {
-                    case "Ordonnances":
-                        shouldInclude = achat.getOrdonnance() != null;
-                        break;
-                    case "Direct":
-                        shouldInclude = achat.getOrdonnance() == null;
-                        break;
-                    default:
-                        shouldInclude = true;
-                        break;
-                }
 
-            if (shouldInclude) {
-                Object[] row = {
-                        achat.getDateAchat(),
-                        achat.getClient().getFirstName() + " " + achat.getClient().getLastName(),
-                        achat.IsAchatDirect(achat.getOrdonnance()) ? "Direct" : "Ordonnance",
-                        String.format("%.2f €", achat.getTotal()),
-                        String.format("%.2f €", achat.getRemb()),
-                        achat.getOrdonnance() != null ? "Oui" : "Non"
-                };
-                achatsTableModel.addRow(row);
-            }
+    public boolean includeByDate(Achat achat, DateFilter dateFilter) {
+    if (dateFilter == DateFilter.ALL_TIME) {
+        return true; }
+    LocalDate achatDate = LocalDate.parse(achat.getDateAchat(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+    switch (dateFilter) {
+        case TODAY:
+            startDayTextField.setText(LocalDate.now().toString());
+            endDayTextField.setText("");
+            return achatDate.equals(LocalDate.now());
+        case THIS_DAY:
+            endDayTextField.setText("");
+            startDayTextField.setText("");
+            return achatDate.equals(startDayTextField.getText()); //TODO
+        case THIS_WEEK:
+            endDayTextField.setText(LocalDate.now().toString());
+            startDayTextField.setText(LocalDate.now().minusDays(7).toString());
+            LocalDate weekStart = now.minusDays(now.getDayOfWeek().getValue() - 1);
+            LocalDate weekEnd = weekStart.plusDays(6);
+            return (achatDate.isEqual(weekStart) || achatDate.isAfter(weekStart)) &&
+                    (achatDate.isEqual(weekEnd) || achatDate.isBefore(weekEnd));
+        /*case LAST_MONTH:
+            LocalDate monthStart = now.minusDays(now.getDayOfMonth() - 1);
+            LocalDate monthEnd = monthStart.plusDays(30);
+            return (achatDate.isEqual(monthStart) || achatDate.isAfter(monthStart)) &&
+                    (achatDate.isEqual(monthEnd) || achatDate.isBefore(monthEnd));*/
+        case THIS_MONTH:
+            endDayTextField.setText(LocalDate.now().toString());
+            startDayTextField.setText(LocalDate.of(now.getYear(),now.getMonth(),1).toString());
+            return achatDate.getMonth() == now.getMonth() &&
+                    achatDate.getYear() == now.getYear();
+       /* case LAST_YEAR:
+            LocalDate yearStart = now.minusDays(now.getDayOfWeek().getValue() - 1);
+            LocalDate yearEnd = yearStart.plusDays(364);
+            return (achatDate.isEqual(yearStart) || achatDate.isAfter(yearStart)) &&
+                    (achatDate.isEqual(yearEnd) || achatDate.isBefore(yearEnd));*/
+        case THIS_YEAR:
+            endDayTextField.setText(LocalDate.now().toString());
+            startDayTextField.setText(LocalDate.of(now.getYear(),1,1).toString());
+            return achatDate.getYear() == now.getYear();
+        case MY_DATE:
+            LocalDate dateEnd = LocalDate.parse(startDayTextField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            LocalDate dateStart = LocalDate.parse(endDayTextField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            //TODO regex for input date
+        return (achatDate.isEqual(dateStart) || achatDate.isAfter(dateStart)) &&
+                (achatDate.isEqual(dateEnd) || achatDate.isBefore(dateEnd));
+        default:
+            return true;
         }
-        setupBorderScroll(achatsScrollPane, "(" + achatsTableModel.getRowCount() + " / " +
-                PharmacieController.getListAchats().size() + ")");
-        updateStatusLabel("Achats filtrés: "+cmd+" - "+achatsTableModel.getRowCount()+" résultats");
+    }
+
+    private boolean includeByType(Achat achat, String typeFilter) {
+    switch (typeFilter) {
+        case "Ordonnances":
+            return achat.getOrdonnance() != null;
+        case "Direct":
+            return achat.getOrdonnance() == null;
+        default: // "Global" or any other case
+            return true;
+        }
     }
 
     /*// Add method to get filtered achats for statistics (optional enhancement)
