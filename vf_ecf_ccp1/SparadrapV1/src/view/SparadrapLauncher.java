@@ -156,7 +156,7 @@ public class SparadrapLauncher {
             initController.addOrdonnance(ordonnance1);
 
             // Create achat (2)
-            Achat achat1 = new Achat(LocalDate.now().minusDays(5), client1,ordonnance1);
+            Achat achat1 = new Achat(LocalDate.now().minusDays(40), client1,ordonnance1);
             initController.savingAchat(achat1);
             Achat achat2 = new Achat(LocalDate.now().minusDays(2), client2);
             achat2.addMedAchat(aspirine);

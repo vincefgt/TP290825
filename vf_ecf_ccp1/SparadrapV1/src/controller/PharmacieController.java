@@ -205,4 +205,6 @@ public class PharmacieController {
         }
         System.out.println("Chiffre d'affaires total: " + chiffreAffaires + "€");
     }*/
+
+
 }
