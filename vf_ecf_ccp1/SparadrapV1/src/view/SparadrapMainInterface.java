@@ -542,6 +542,14 @@ public class SparadrapMainInterface extends JFrame {
         dialog.setVisible(true);
         
         if (dialog.isConfirmed()) {
+    private void ouvrirDialogueAchatOrdonnance() {
+        AchatOrdonnanceDialog dialog = new AchatOrdonnanceDialog(this);
+        dialog.setVisible(true);
+        if (dialog.isConfirmed()) {
+            actualiserDonnees();
+        }
+    }
+
             filterAchats();
             updateStatistics();
             updateStatusLabel("Nouvel achat enregistré");
