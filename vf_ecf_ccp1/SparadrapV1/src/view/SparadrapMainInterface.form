@@ -1226,6 +1226,43 @@
                   </grid>
                 </children>
               </grid>
+              <grid id="2980f" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <tabbedpane title="Untitled"/>
+                </constraints>
+                <properties/>
+                <border type="none" title="👨‍⚕️Medecins"/>
+                <children>
+                  <scrollpane id="e42ad" binding="medecinScrollPane">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="empty"/>
+                    <children>
+                      <component id="2ec53" class="javax.swing.JTable" binding="medecinTable">
+                        <constraints/>
+                        <properties>
+                          <fillsViewportHeight value="true"/>
+                          <intercellSpacing width="1" height="1"/>
+                          <showHorizontalLines value="false"/>
+                          <showVerticalLines value="false"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                  <grid id="cf817" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
+                </children>
+              </grid>
             </children>
           </tabbedpane>
         </children>
@@ -1264,41 +1301,6 @@
               <text value=""/>
             </properties>
           </component>
-          <grid id="2980f" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
-            <constraints border-constraint="Center"/>
-            <properties/>
-            <border type="none" title="👨‍⚕️Medecins"/>
-            <children>
-              <scrollpane id="e42ad" binding="medecinScrollPane">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-                <border type="empty"/>
-                <children>
-                  <component id="2ec53" class="javax.swing.JTable" binding="medecinTable">
-                    <constraints/>
-                    <properties>
-                      <fillsViewportHeight value="true"/>
-                      <intercellSpacing width="1" height="1"/>
-                      <showHorizontalLines value="false"/>
-                      <showVerticalLines value="false"/>
-                    </properties>
-                  </component>
-                </children>
-              </scrollpane>
-              <grid id="cf817" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-                <border type="none"/>
-                <children/>
-              </grid>
-            </children>
-          </grid>
         </children>
       </grid>
     </children>

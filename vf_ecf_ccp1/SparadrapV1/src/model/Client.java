@@ -64,6 +64,6 @@ public class Client extends Person {
 
     @Override
     public String toString() {
-        return "Client: "+getLastName()+" "+getFirstName()+" (N° SS: "+getNbSS()+")";
+        return getLastName()+" "+getFirstName()+" (N° SS: "+getNbSS()+")";
     }
 }

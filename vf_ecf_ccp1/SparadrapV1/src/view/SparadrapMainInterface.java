@@ -90,7 +90,7 @@ public class SparadrapMainInterface extends JFrame {
     private JComboBox<String> dateFilterCombo;
     private JPanel sortingPane;
     private JComboBox<Medecin> medecinsCombo;
-    static boolean typeAchat = false ;
+    public boolean typeAchat;
 
     // Stat
     private JPanel statsCard1, statsCard2, statsCard3, statsCard4;
@@ -540,8 +540,7 @@ public class SparadrapMainInterface extends JFrame {
             showErrorMessage("Aucun client enregistré. Veuillez d'abord ajouter des clients.");
             return;
         }
-        typeAchat=false;
-        AchatDialog dialog = new AchatDialog(this,"Nouvel Achat Direct");
+        AchatDialog dialog = new AchatDialog(this,"Nouvel Achat Direct",false);
         dialog.setVisible(true);
         
         if (dialog.isConfirmed()) {
@@ -557,8 +556,7 @@ public class SparadrapMainInterface extends JFrame {
             showErrorMessage("Aucun client enregistré. Veuillez d'abord ajouter des clients.");
             return;
         }
-        typeAchat=true;
-        AchatDialog dialog = new AchatDialog(this,"Nouvel Achat Ordonnance");
+        AchatDialog dialog = new AchatDialog(this,"Nouvel Achat Ordonnance",true);
         dialog.setVisible(true);
 
         if (dialog.isConfirmed()) {
@@ -598,7 +596,7 @@ public class SparadrapMainInterface extends JFrame {
         showInfoMessage(message);
     }
 
-    // call popup
+    // call popup details
     private void showClientDetails() {
         int selectedRow = clientsTable.getSelectedRow();
         if (selectedRow != -1) {
@@ -847,15 +845,18 @@ public class SparadrapMainInterface extends JFrame {
         private JLabel remboursementLabel;
         private boolean confirmed = false;
         private JComboBox<Client> clientCombo;
-        //private JComboBox<Medecin> medecinsCombo;
+        private JComboBox<Medecin> medecinsCombo;
+        private boolean typeAchat;
+        private JComboBox<Achat> achatsCombo;
 
-        public AchatDialog(Frame parent, String titleFrame) {
+        public AchatDialog(Frame parent, String titleFrame,boolean typeAchat) {
             super(parent, titleFrame ,true);
+            this.typeAchat = typeAchat;
             initializeDialog();
         }
         
         private void initializeDialog() {
-            setSize(500, 400);
+            setSize(600, 600);
             setLocationRelativeTo(getParent());
             
             JPanel mainPanel = new JPanel(new BorderLayout());
@@ -864,8 +865,32 @@ public class SparadrapMainInterface extends JFrame {
             // Client selection
             JPanel clientPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             clientPanel.add(new JLabel("Client:"));
+            clientCombo = new JComboBox<>();
             clientPanel.add(clientCombo);
-            
+            for (Client client : PharmacieController.getListClients()) {
+                clientCombo.addItem(client);
+            }
+            clientPanel.add(clientCombo);
+
+            //Medecin selection
+            JPanel medecinPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            medecinPanel.setVisible(false);
+            medecinPanel.add(new JLabel("Medecin:"));
+            medecinsCombo = new JComboBox<>();
+            for (Medecin medecin : PharmacieController.getListMedecins()) {
+                medecinsCombo.addItem(medecin);
+            }
+            medecinPanel.add(medecinsCombo);
+
+
+            //date Ordo
+            JPanel dateOrdoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            dateOrdoPanel.setVisible(false);
+            dateOrdoPanel.add(new JLabel("Date Ordonnance:"));
+            JFormattedTextField dateOrdo = new JFormattedTextField();
+            dateOrdo.setColumns(10);  // largeur du champ
+            dateOrdoPanel.add(dateOrdo);
+
             // Med selection
             medicamentsListModel = new DefaultListModel<>();
             for (Medicament med : PharmacieController.getListMed()) {
@@ -875,24 +900,8 @@ public class SparadrapMainInterface extends JFrame {
             }
             medicamentsList = new JList<>(medicamentsListModel);
             medicamentsList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION); // selection multiple
-            
             JScrollPane scrollPane = new JScrollPane(medicamentsList);
             scrollPane.setBorder(BorderFactory.createTitledBorder("Sélectionner les médicaments"));
-
-            //Medecin selection
-            // medecin > achat
-            JComboBox<Medecin> medecinsCombo = new JComboBox<>();
-
-            for (Medecin medecin : PharmacieController.getListMedecins()) {
-                medecinsCombo.addItem(medecin);
-            }
-            JPanel medecinPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-            medecinPanel.add(new JLabel(" "));
-            medecinPanel.add(medecinsCombo);
-            medecinsCombo.setVisible(false);
-            if (typeAchat){
-            medecinsCombo.setVisible(true);
-            }
 
             // Total panel
             JPanel totalPanel = new JPanel(new GridLayout(2, 1));
@@ -921,7 +930,16 @@ public class SparadrapMainInterface extends JFrame {
             buttonPanel.add(cancelButton);
             
             // Layout
-            mainPanel.add(clientPanel, BorderLayout.NORTH);
+
+            JPanel topPanel = new JPanel(new GridLayout(3, 1)); // 3 lines : client + medecin
+            topPanel.add(clientPanel);
+            topPanel.add(medecinPanel);
+            topPanel.add(dateOrdoPanel);
+            if (this.typeAchat){
+                medecinPanel.setVisible(true);
+                dateOrdoPanel.setVisible(true);
+            }
+            mainPanel.add(topPanel, BorderLayout.NORTH);
             mainPanel.add(scrollPane, BorderLayout.CENTER);
             mainPanel.add(totalPanel, BorderLayout.EAST);
             mainPanel.add(buttonPanel, BorderLayout.SOUTH);
@@ -956,183 +974,6 @@ public class SparadrapMainInterface extends JFrame {
             return confirmed;
         }
     }
-/*
-    // Dialogue pour créer un achat avec ordonnance
-    private class AchatOrdonnanceDialog extends JDialog {
-        private JComboBox<Client> clientCombo;
-        private JComboBox<Medecin> medecinCombo;
-        private JButton ajouterButton;
-        private JButton retirerButton;
-        private JButton creerButton;
-        private JButton annulerButton;
-        private boolean confirmed = false;
-        
-        public AchatOrdonnanceDialog(Frame parent) {
-            super(parent, "Nouvel Achat avec Ordonnance", true);
-            initializeDialog();
-            createComponents();
-            layoutComponents();
-            setupEventHandlers();
-            loadData();
-        }
-
-
-        private void createComponents() {
-            // ComboBoxes
-            clientCombo = new JComboBox<>();
-            medecinCombo = new JComboBox<>();
-
-        }
-
-        private void layoutComponents() {
-            JPanel mainPanel = new JPanel(new BorderLayout());
-            mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-            mainPanel.setBackground(Color.WHITE);
-
-            // Panel de sélection client/médecin
-            JPanel selectionPanel = new JPanel(new GridBagLayout());
-            selectionPanel.setBackground(Color.WHITE);
-            selectionPanel.setBorder(BorderFactory.createTitledBorder("Informations de l'Ordonnance"));
-
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.insets = new Insets(5, 5, 5, 5);
-            gbc.anchor = GridBagConstraints.WEST;
-
-            // Client
-            gbc.gridx = 0; gbc.gridy = 0;
-            selectionPanel.add(new JLabel("Client:"), gbc);
-            gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.weightx = 1.0;
-            selectionPanel.add(clientCombo, gbc);
-
-            // Médecin
-            gbc.gridx = 0; gbc.gridy = 1; gbc.fill = GridBagConstraints.NONE; gbc.weightx = 0;
-            selectionPanel.add(new JLabel("Médecin:"), gbc);
-            gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.weightx = 1.0;
-            selectionPanel.add(medecinCombo, gbc);
-
-            // Panel des médicaments
-            JPanel medicamentsPanel = new JPanel(new BorderLayout());
-            medicamentsPanel.setBorder(BorderFactory.createTitledBorder("Sélection des Médicaments"));
-            medicamentsPanel.setBackground(Color.WHITE);
-
-            // Panel gauche - médicaments disponibles
-            JPanel disponiblesPanel = new JPanel(new BorderLayout());
-            disponiblesPanel.setBorder(BorderFactory.createTitledBorder("Médicaments Disponibles"));
-            disponiblesPanel.add(new JScrollPane(medicamentsList), BorderLayout.CENTER);
-
-            // Panel droite - médicaments dans l'ordonnance
-            JPanel ordonnancePanel = new JPanel(new BorderLayout());
-            ordonnancePanel.setBorder(BorderFactory.createTitledBorder("Médicaments dans l'Ordonnance"));
-            ordonnancePanel.add(new JScrollPane(ordonnanceList), BorderLayout.CENTER);
-
-            // Panel central - boutons d'ajout/retrait
-            JPanel boutonsPanel = new JPanel(new GridLayout(2, 1, 5, 5));
-            boutonsPanel.setOpaque(false);
-            boutonsPanel.add(ajouterButton);
-            boutonsPanel.add(retirerButton);
-
-            JPanel boutonsContainer = new JPanel(new FlowLayout());
-            boutonsContainer.setOpaque(false);
-            boutonsContainer.add(boutonsPanel);
-
-            medicamentsPanel.add(disponiblesPanel, BorderLayout.WEST);
-            medicamentsPanel.add(boutonsContainer, BorderLayout.CENTER);
-            medicamentsPanel.add(ordonnancePanel, BorderLayout.EAST);
-
-            // Panel des boutons principaux
-            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-            buttonPanel.setBackground(Color.WHITE);
-            buttonPanel.add(annulerButton);
-            buttonPanel.add(creerButton);
-
-            mainPanel.add(selectionPanel, BorderLayout.NORTH);
-            mainPanel.add(medicamentsPanel, BorderLayout.CENTER);
-            mainPanel.add(buttonPanel, BorderLayout.SOUTH);
-
-            setContentPane(mainPanel);
-        }
-
-        private void setupEventHandlers() {
-            ajouterButton.addActionListener(e -> ajouterMedicament());
-            retirerButton.addActionListener(e -> retirerMedicament());
-            creerButton.addActionListener(e -> creerAchatOrdonnance());
-            annulerButton.addActionListener(e -> dispose());
-        }
-        
-        private void loadData() {
-            // Charger les clients
-            for (Client client : PharmacieController.getListClients()) {
-                clientCombo.addItem(client);
-            }
-            
-            // Charger les médecins
-            for (Medecin medecin : PharmacieController.getListMedecins()) {
-                medecinCombo.addItem(medecin);
-            }
-            
-            // Charger les médicaments disponibles
-            for (Medicament medicament : PharmacieController.getListMed()) {
-                if (medicament.getStock() > 0) {
-                    medicamentsModel.addElement(medicament);
-                }
-            }
-        }
-
-        
-        private void creerAchatOrdonnance() {
-            Client client = (Client) clientCombo.getSelectedItem();
-            Medecin medecin = (Medecin) medecinCombo.getSelectedItem();
-            
-            if (client == null || medecin == null) {
-                JOptionPane.showMessageDialog(this, "Veuillez sélectionner un client et un médecin!", 
-                                             "Sélection manquante", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-            
-            if (ordonnanceModel.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Veuillez ajouter au moins un médicament à l'ordonnance!", 
-                                             "Ordonnance vide", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-            
-            try {
-                // Créer l'achat avec ordonnance
-                boolean succes = PharmacieController.createNewAchatWithOrdonnance(
-                    java.time.LocalDate.now(), client, java.time.LocalDate.now(), medecin);
-                
-                if (succes) {
-                    // Ajouter les médicaments à l'ordonnance
-                    Ordonnance ordonnance = PharmacieController.getListOrdo().get(
-                        PharmacieController.getListOrdo().size() - 1);
-                    
-                    for (int i = 0; i < ordonnanceModel.size(); i++) {
-                        Medicament med = ordonnanceModel.getElementAt(i);
-                        PharmacieController.addMedicamentToOrdonnance(ordonnance, med);
-                    }
-                    
-                    confirmed = true;
-                    JOptionPane.showMessageDialog(this, 
-                        "Achat avec ordonnance créé avec succès!\n" +
-                        "Ordonnance: " + ordonnanceModel.size() + " médicament(s)\n" +
-                        "Client: " + client.getFirstName() + " " + client.getLastName() + "\n" +
-                        "Médecin: Dr " + medecin.getFirstName() + " " + medecin.getLastName(),
-                        "Succès", JOptionPane.INFORMATION_MESSAGE);
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Erreur lors de la création de l'achat!", 
-                                                 "Erreur", JOptionPane.ERROR_MESSAGE);
-                }
-                
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Erreur: " + e.getMessage(), 
-                                             "Erreur", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        
-        public boolean isConfirmed() {
-            return confirmed;
-        }
-    }*/
 
     private static class ClientDetailsDialog extends JDialog {
         public ClientDetailsDialog(Frame parent, Client client) {
