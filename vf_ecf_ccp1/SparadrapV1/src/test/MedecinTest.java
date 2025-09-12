@@ -194,7 +194,7 @@ void testListePatientsImmutable() {
     medecin.addPatient(patient1);
 
     // La méthode getPatients() doit retourner une copie
-    var patients = medecin.getPatients();
+    java.util.List<Client> patients = medecin.getPatients();
     int tailleBefore = patients.size();
 
     // Tentative de modification directe de la liste retournée

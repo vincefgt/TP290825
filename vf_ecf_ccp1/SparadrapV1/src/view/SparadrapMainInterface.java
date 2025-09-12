@@ -1258,12 +1258,12 @@ public class SparadrapMainInterface extends JFrame {
         }
     }
     private boolean includeByType(Achat achat, String typeFilter) {
-        return switch (typeFilter) {
-            case "Ordonnances" -> achat.getOrdonnance() != null;
-            case "Direct" -> achat.getOrdonnance() == null;
-            default -> // "Global" or any other case
-                    true;
-        };
+        switch (typeFilter) {
+            case "Ordonnances": return achat.getOrdonnance() != null;
+            case "Direct": return achat.getOrdonnance() == null;
+            default: // "Global" or any other case
+                   return true;
+        }
     }
     private void filterClients() {
         String selectedClientFilter = (String) clientCombo.getSelectedItem();

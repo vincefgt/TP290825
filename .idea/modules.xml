@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/afpa.iml" filepath="$PROJECT_DIR$/afpa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swing-ui-designer.iml" filepath="$PROJECT_DIR$/swing-ui-designer.iml" />
     </modules>
   </component>
 </project>
