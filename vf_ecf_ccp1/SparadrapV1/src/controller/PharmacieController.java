@@ -132,6 +132,41 @@ public class PharmacieController {
         return listMutuelles;
     }
 
+    // ACHAT WITH ORDONNANCE
+    public static boolean createNewAchatWithOrdonnance(LocalDate dateAchat, Client client, 
+                                                       LocalDate dateOrdo, Medecin medecin) {
+        if (client == null || medecin == null) {
+            return false;
+        }
+        
+        try {
+            // Create new ordonnance
+            Ordonnance ordonnance = new Ordonnance(dateOrdo, medecin, client);
+            
+            // Add ordonnance to list
+            if (addOrdonnance(ordonnance)) {
+                // Create achat with ordonnance
+                Achat achat = new Achat(dateAchat, client, ordonnance);
+                
+                // Save achat
+                return savingAchat(achat);
+            }
+        } catch (Exception e) {
+            System.err.println("Erreur lors de la création de l'achat avec ordonnance: " + e.getMessage());
+        }
+        
+        return false;
+    }
+    
+    // Add medication to existing ordonnance
+    public static boolean addMedicamentToOrdonnance(Ordonnance ordonnance, Medicament medicament) {
+        if (ordonnance != null && medicament != null) {
+            ordonnance.addMedOrdo(medicament);
+            return true;
+        }
+        return false;
+    }
+
     // ORDO
     public boolean addOrdonnance(Ordonnance ordonnance) {
         if (ordonnance != null && !listOrdonnances.contains(ordonnance)) {
