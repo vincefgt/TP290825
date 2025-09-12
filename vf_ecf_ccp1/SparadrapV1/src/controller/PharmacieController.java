@@ -168,7 +168,7 @@ public class PharmacieController {
     }
 
     // ORDO
-    public boolean addOrdonnance(Ordonnance ordonnance) {
+    public static boolean addOrdonnance(Ordonnance ordonnance) {
         if (ordonnance != null && !listOrdonnances.contains(ordonnance)) {
             return getListOrdo().add(ordonnance);
         }

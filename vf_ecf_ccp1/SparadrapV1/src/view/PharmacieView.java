@@ -1,7 +1,7 @@
 package view;
 
 import controller.PharmacieController;
-import model.Achat;
+import model.*;
 
 import java.util.List;
 

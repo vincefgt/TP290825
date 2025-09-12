@@ -89,6 +89,8 @@ public class SparadrapMainInterface extends JFrame {
     private JRadioButton ordoRadioButton;
     private JComboBox<String> dateFilterCombo;
     private JPanel sortingPane;
+    private JComboBox<Medecin> medecinsCombo;
+    static boolean typeAchat = false ;
 
     // Stat
     private JPanel statsCard1, statsCard2, statsCard3, statsCard4;
@@ -233,7 +235,7 @@ public class SparadrapMainInterface extends JFrame {
         clientCombo.setSelectedItem(0);
         for (Client client : PharmacieController.getListClients()) {
             String clientStringCombo = client.getLastName()+" "+client.getFirstName();
-            clientCombo.addItem(clientStringCombo);
+            clientCombo.addItem(client.toString());
         }
     }
 
@@ -361,6 +363,7 @@ public class SparadrapMainInterface extends JFrame {
                 dateFilterCombo.setSelectedItem("Ce jour");
                 filterAchats();}
         });
+
 
         // Stats
         refreshStatsButton.addActionListener(e -> updateStatistics());
@@ -537,8 +540,8 @@ public class SparadrapMainInterface extends JFrame {
             showErrorMessage("Aucun client enregistré. Veuillez d'abord ajouter des clients.");
             return;
         }
-        // Open achat dialog
-        AchatDialog dialog = new AchatDialog(this);
+        typeAchat=false;
+        AchatDialog dialog = new AchatDialog(this,"Nouvel Achat Direct");
         dialog.setVisible(true);
         
         if (dialog.isConfirmed()) {
@@ -548,9 +551,22 @@ public class SparadrapMainInterface extends JFrame {
             dateFilterCombo.setSelectedItem(DateFilter.ALL_TIME.toString());
         }
     }
-    
+    //TODO showInfoMessage("Fonctionnalité en développement: Achat avec ordonnance");
     private void createAchatWithOrdonnance() {
-        showInfoMessage("Fonctionnalité en développement: Achat avec ordonnance");
+        if (PharmacieController.getListClients().isEmpty()) {
+            showErrorMessage("Aucun client enregistré. Veuillez d'abord ajouter des clients.");
+            return;
+        }
+        typeAchat=true;
+        AchatDialog dialog = new AchatDialog(this,"Nouvel Achat Ordonnance");
+        dialog.setVisible(true);
+
+        if (dialog.isConfirmed()) {
+            filterAchats();
+            updateStatistics();
+            updateStatusLabel("Nouvel achat enregistré");
+            dateFilterCombo.setSelectedItem(DateFilter.ALL_TIME.toString());
+        }
     }
 
     /**
@@ -825,16 +841,16 @@ public class SparadrapMainInterface extends JFrame {
      * Class DialogBox
      */
     private static class AchatDialog extends JDialog {
-        private JComboBox<Client> clientCombo;
         private JList<Medicament> medicamentsList;
         private DefaultListModel<Medicament> medicamentsListModel;
         private JLabel totalLabel;
         private JLabel remboursementLabel;
         private boolean confirmed = false;
+        private JComboBox<Client> clientCombo;
+        //private JComboBox<Medecin> medecinsCombo;
 
-        
-        public AchatDialog(Frame parent) {
-            super(parent, "Nouvel Achat", true);
+        public AchatDialog(Frame parent, String titleFrame) {
+            super(parent, titleFrame ,true);
             initializeDialog();
         }
         
@@ -844,13 +860,13 @@ public class SparadrapMainInterface extends JFrame {
             
             JPanel mainPanel = new JPanel(new BorderLayout());
             mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-            
+
             // Client selection
             JPanel clientPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             clientPanel.add(new JLabel("Client:"));
             clientPanel.add(clientCombo);
             
-            // Medicaments selection
+            // Med selection
             medicamentsListModel = new DefaultListModel<>();
             for (Medicament med : PharmacieController.getListMed()) {
                 if (med.getStock() > 0) {
@@ -862,7 +878,22 @@ public class SparadrapMainInterface extends JFrame {
             
             JScrollPane scrollPane = new JScrollPane(medicamentsList);
             scrollPane.setBorder(BorderFactory.createTitledBorder("Sélectionner les médicaments"));
-            
+
+            //Medecin selection
+            // medecin > achat
+            JComboBox<Medecin> medecinsCombo = new JComboBox<>();
+
+            for (Medecin medecin : PharmacieController.getListMedecins()) {
+                medecinsCombo.addItem(medecin);
+            }
+            JPanel medecinPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            medecinPanel.add(new JLabel(" "));
+            medecinPanel.add(medecinsCombo);
+            medecinsCombo.setVisible(false);
+            if (typeAchat){
+            medecinsCombo.setVisible(true);
+            }
+
             // Total panel
             JPanel totalPanel = new JPanel(new GridLayout(2, 1));
             totalLabel = new JLabel("Total: 0.00 €");
@@ -897,7 +928,7 @@ public class SparadrapMainInterface extends JFrame {
             
             setContentPane(mainPanel);
         }
-        
+
         private void confirmAchat() {
             Client selectedClient = (Client) clientCombo.getSelectedItem();
             int[] selectedIndices = medicamentsList.getSelectedIndices();
@@ -912,6 +943,7 @@ public class SparadrapMainInterface extends JFrame {
                     newAchat.addMedAchat(med);
                 }
                 PharmacieController.savingAchat(newAchat);
+                //TODO permit input attribut of Ordo > create new ordo if not in the list
                 confirmed = true;
                 dispose();
 
@@ -924,15 +956,11 @@ public class SparadrapMainInterface extends JFrame {
             return confirmed;
         }
     }
-
+/*
     // Dialogue pour créer un achat avec ordonnance
     private class AchatOrdonnanceDialog extends JDialog {
         private JComboBox<Client> clientCombo;
         private JComboBox<Medecin> medecinCombo;
-        private JList<Medicament> medicamentsList;
-        private DefaultListModel<Medicament> medicamentsModel;
-        private JList<Medicament> ordonnanceList;
-        private DefaultListModel<Medicament> ordonnanceModel;
         private JButton ajouterButton;
         private JButton retirerButton;
         private JButton creerButton;
@@ -947,102 +975,83 @@ public class SparadrapMainInterface extends JFrame {
             setupEventHandlers();
             loadData();
         }
-        
-        private void initializeDialog() {
-            setSize(800, 600);
-            setLocationRelativeTo(getParent());
-            setResizable(false);
-        }
-        
+
+
         private void createComponents() {
             // ComboBoxes
             clientCombo = new JComboBox<>();
             medecinCombo = new JComboBox<>();
-            
-            // Lists
-            medicamentsModel = new DefaultListModel<>();
-            medicamentsList = new JList<>(medicamentsModel);
-            medicamentsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            
-            ordonnanceModel = new DefaultListModel<>();
-            ordonnanceList = new JList<>(ordonnanceModel);
-            ordonnanceList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            
-            // Buttons
-            ajouterButton = createStyledButton("Ajouter →", new Color(46, 204, 113));
-            retirerButton = createStyledButton("← Retirer", new Color(231, 76, 60));
-            creerButton = createStyledButton("Créer Achat", new Color(52, 152, 219));
-            annulerButton = createStyledButton("Annuler", new Color(149, 165, 166));
+
         }
-        
+
         private void layoutComponents() {
             JPanel mainPanel = new JPanel(new BorderLayout());
             mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
             mainPanel.setBackground(Color.WHITE);
-            
+
             // Panel de sélection client/médecin
             JPanel selectionPanel = new JPanel(new GridBagLayout());
             selectionPanel.setBackground(Color.WHITE);
             selectionPanel.setBorder(BorderFactory.createTitledBorder("Informations de l'Ordonnance"));
-            
+
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.insets = new Insets(5, 5, 5, 5);
             gbc.anchor = GridBagConstraints.WEST;
-            
+
             // Client
             gbc.gridx = 0; gbc.gridy = 0;
             selectionPanel.add(new JLabel("Client:"), gbc);
             gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.weightx = 1.0;
             selectionPanel.add(clientCombo, gbc);
-            
+
             // Médecin
             gbc.gridx = 0; gbc.gridy = 1; gbc.fill = GridBagConstraints.NONE; gbc.weightx = 0;
             selectionPanel.add(new JLabel("Médecin:"), gbc);
             gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.weightx = 1.0;
             selectionPanel.add(medecinCombo, gbc);
-            
+
             // Panel des médicaments
             JPanel medicamentsPanel = new JPanel(new BorderLayout());
             medicamentsPanel.setBorder(BorderFactory.createTitledBorder("Sélection des Médicaments"));
             medicamentsPanel.setBackground(Color.WHITE);
-            
+
             // Panel gauche - médicaments disponibles
             JPanel disponiblesPanel = new JPanel(new BorderLayout());
             disponiblesPanel.setBorder(BorderFactory.createTitledBorder("Médicaments Disponibles"));
             disponiblesPanel.add(new JScrollPane(medicamentsList), BorderLayout.CENTER);
-            
+
             // Panel droite - médicaments dans l'ordonnance
             JPanel ordonnancePanel = new JPanel(new BorderLayout());
             ordonnancePanel.setBorder(BorderFactory.createTitledBorder("Médicaments dans l'Ordonnance"));
             ordonnancePanel.add(new JScrollPane(ordonnanceList), BorderLayout.CENTER);
-            
+
             // Panel central - boutons d'ajout/retrait
             JPanel boutonsPanel = new JPanel(new GridLayout(2, 1, 5, 5));
             boutonsPanel.setOpaque(false);
             boutonsPanel.add(ajouterButton);
             boutonsPanel.add(retirerButton);
-            
+
             JPanel boutonsContainer = new JPanel(new FlowLayout());
             boutonsContainer.setOpaque(false);
             boutonsContainer.add(boutonsPanel);
-            
+
             medicamentsPanel.add(disponiblesPanel, BorderLayout.WEST);
             medicamentsPanel.add(boutonsContainer, BorderLayout.CENTER);
             medicamentsPanel.add(ordonnancePanel, BorderLayout.EAST);
-            
+
             // Panel des boutons principaux
             JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
             buttonPanel.setBackground(Color.WHITE);
             buttonPanel.add(annulerButton);
             buttonPanel.add(creerButton);
-            
+
             mainPanel.add(selectionPanel, BorderLayout.NORTH);
             mainPanel.add(medicamentsPanel, BorderLayout.CENTER);
             mainPanel.add(buttonPanel, BorderLayout.SOUTH);
-            
+
             setContentPane(mainPanel);
         }
-        
+
         private void setupEventHandlers() {
             ajouterButton.addActionListener(e -> ajouterMedicament());
             retirerButton.addActionListener(e -> retirerMedicament());
@@ -1068,22 +1077,7 @@ public class SparadrapMainInterface extends JFrame {
                 }
             }
         }
-        
-        private void ajouterMedicament() {
-            Medicament selected = medicamentsList.getSelectedValue();
-            if (selected != null && !ordonnanceModel.contains(selected)) {
-                ordonnanceModel.addElement(selected);
-                medicamentsList.clearSelection();
-            }
-        }
-        
-        private void retirerMedicament() {
-            Medicament selected = ordonnanceList.getSelectedValue();
-            if (selected != null) {
-                ordonnanceModel.removeElement(selected);
-                ordonnanceList.clearSelection();
-            }
-        }
+
         
         private void creerAchatOrdonnance() {
             Client client = (Client) clientCombo.getSelectedItem();
@@ -1138,7 +1132,7 @@ public class SparadrapMainInterface extends JFrame {
         public boolean isConfirmed() {
             return confirmed;
         }
-    }
+    }*/
 
     private static class ClientDetailsDialog extends JDialog {
         public ClientDetailsDialog(Frame parent, Client client) {

@@ -5,16 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="106e0295-5623-4489-bd72-9b2c9955d5bb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/afpa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/afpa.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vf_java/src/mmorpg/utility/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_java/src/mmorpg/utility/Regex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vf_tp_biblio_08/src/controler/LibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_tp_biblio_08/src/controler/LibraryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/BookDetailsDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/appV2/BookDetailsDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/LibraryLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/appV2/LibraryLauncher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/MainLibraryFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/appV2/MainLibraryFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/ModernLibraryFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/appV2/ModernLibraryFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/SearchDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/appV2/SearchDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/StatsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_tp_biblio_08/src/view/appV2/StatsPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vf_ecf_ccp1/SparadrapV1/src/controller/PharmacieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_ecf_ccp1/SparadrapV1/src/controller/PharmacieController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vf_ecf_ccp1/SparadrapV1/src/view/PharmacieView.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_ecf_ccp1/SparadrapV1/src/view/PharmacieView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vf_ecf_ccp1/SparadrapV1/src/view/SparadrapMainInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/vf_ecf_ccp1/SparadrapV1/src/view/SparadrapMainInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +46,7 @@
     "Application.Main.executor": "Run",
     "Application.MainLibraryFrame.executor": "Run",
     "Application.ModernLibraryFrame.executor": "Run",
+    "Application.SparadrapLauncher.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "JUnit.AuthorTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
@@ -57,7 +54,9 @@
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
@@ -68,13 +67,26 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="junit-jupiter" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="junit-jupiter" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -95,6 +107,7 @@
       <workItem from="1756490571005" duration="87000" />
       <workItem from="1756490664589" duration="108000" />
       <workItem from="1756490780198" duration="1856000" />
+      <workItem from="1757688009023" duration="8178000" />
     </task>
     <servers />
   </component>
