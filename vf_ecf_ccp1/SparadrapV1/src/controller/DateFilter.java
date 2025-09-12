@@ -2,7 +2,7 @@ package controller;
 
 public enum DateFilter {
     TODAY("Aujourd'hui"),
-    THIS_DAY("Ce jour"),
+    THIS_DAY("Le"),
     THIS_WEEK("Cette semaine"),
     //LAST_MONTH("31 jours"),
     THIS_MONTH("Ce mois"),
@@ -21,8 +21,8 @@ public enum DateFilter {
         switch (selected) {
             case "Aujourd'hui":
                 return DateFilter.TODAY;
-            case "Ce jour":
-                return DateFilter.THIS.DAY;
+            case "Le":
+                return DateFilter.THIS_DAY;
             case "Cette semaine":
                 return DateFilter.THIS_WEEK;
             case "Ce mois":

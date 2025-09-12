@@ -63,6 +63,8 @@ public class SparadrapMainInterface extends JFrame {
     private JTextField clientCityField;
     private JFormattedTextField clientDateBirthField;
     private JFormattedTextField clientNbSSField;
+    private JComboBox<String> clientCombo;
+
 
     // Med
     private JPanel medicamentFormPanel;
@@ -85,7 +87,7 @@ public class SparadrapMainInterface extends JFrame {
     private JTable achatsTable;
     private DefaultTableModel achatsTableModel;
     private JRadioButton ordoRadioButton;
-    private JComboBox dateFilterCombo;
+    private JComboBox<String> dateFilterCombo;
     private JPanel sortingPane;
 
     // Stat
@@ -119,13 +121,12 @@ public class SparadrapMainInterface extends JFrame {
     private JTable medecinTable;
     private JScrollPane medecinScrollPane;
     private JTextField textField6;
-
-
     private JPanel tableSortingPane;
     private JRadioButton directRadioButton;
     private JRadioButton allRadioButton;
     private JFormattedTextField startDayTextField;
     private JFormattedTextField endDayTextField;
+    private JFormattedTextField ssTextField;
     private DefaultTableModel medecinTableModel;
 
     // Controller
@@ -220,12 +221,20 @@ public class SparadrapMainInterface extends JFrame {
         for (catMed category : catMed.values()) {
             medicamentCategorieCombo.addItem(category);
         }
-        // sort
+        // achat > sort achat
         dateFilterCombo.removeAllItems();// = new JComboBox<>();
         for (DateFilter filter : DateFilter.values()) {
             dateFilterCombo.addItem(filter.toString());
         }
         dateFilterCombo.setSelectedItem(DateFilter.ALL_TIME.toString());
+        //  client > search client
+        clientCombo.removeAllItems();
+        clientCombo.addItem("Sélectionner le client");
+        clientCombo.setSelectedItem(0);
+        for (Client client : PharmacieController.getListClients()) {
+            String clientStringCombo = client.getLastName()+" "+client.getFirstName();
+            clientCombo.addItem(clientStringCombo);
+        }
     }
 
     //UI
@@ -251,7 +260,8 @@ public class SparadrapMainInterface extends JFrame {
         table.setRowHeight(20);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getTableHeader().setBackground(new Color(52, 73, 94));
-        table.getTableHeader().setForeground(Color.WHITE);
+        table.getTableHeader().setForeground(Color.DARK_GRAY);
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 12));
         table.setGridColor(new Color(230, 230, 230));
         table.setSelectionBackground(new Color(52, 152, 219, 50));
         table.setSelectionForeground(new Color(52, 73, 94));
@@ -265,7 +275,7 @@ public class SparadrapMainInterface extends JFrame {
         border.setTitleJustification(TitledBorder.LEFT);
         border.setTitlePosition(TitledBorder.TOP);
         border.setTitleFont(new Font("", Font.BOLD, 10));
-        border.setTitleColor(new Color(229, 195, 183));
+        border.setTitleColor(new Color(64, 64, 64));
         scroll.setBorder(BorderFactory.createLineBorder(new Color(229, 195, 183)));
         scroll.setBorder(border);
     }
@@ -326,7 +336,7 @@ public class SparadrapMainInterface extends JFrame {
         addClientButton.addActionListener(e -> addNewClient());
         clearClientButton.addActionListener(e -> delClientFrame());
         updateClientButton.addActionListener(e -> updateClient());
-
+        clientCombo.addActionListener(e -> filterClients());
 
         // Médicament actions
         addMedicamentButton.addActionListener(e -> addNewMedicament());
@@ -376,7 +386,7 @@ public class SparadrapMainInterface extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    //showMedicamentDetails();
+                    showMedicamentDetails();
                 }
             }
         });
@@ -532,7 +542,7 @@ public class SparadrapMainInterface extends JFrame {
         dialog.setVisible(true);
         
         if (dialog.isConfirmed()) {
-            loadAchatsData();
+            filterAchats();
             updateStatistics();
             updateStatusLabel("Nouvel achat enregistré");
             dateFilterCombo.setSelectedItem(DateFilter.ALL_TIME.toString());
@@ -609,7 +619,6 @@ public class SparadrapMainInterface extends JFrame {
         if (selectedRow != -1) {
             LocalDate dateAchat = LocalDate.parse((String)achatsTableModel.getValueAt(selectedRow, 0),DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             Client client =  PharmacieController.getListClients().get(selectedRow);
-
             // Find client in controller
             for (Achat achat : PharmacieController.getListAchats()) {
                 if (LocalDate.parse(achat.getDateAchat(),DateTimeFormatter.ofPattern("dd/MM/yyyy")).equals(dateAchat) &&
@@ -621,37 +630,32 @@ public class SparadrapMainInterface extends JFrame {
             }
         }
     }
-
-    /*private void showMedicamentDetails() {
+    private void showMedicamentDetails() {
         int selectedRow = medicamentsTable.getSelectedRow();
         if (selectedRow != -1) {
-            String nom = (String) medicamentsTableModel.getValueAt(selectedRow, 0);
-
-            String message = String.format(
-                "Détails du médicament:\n\n" +
-                "Nom: %s\n" +
-                "Catégorie: %s\n" +
-                "Prix: %s\n" +
-                "Stock: %s unités",
-                nom, categorie, prix, stock
-            );
-
-            showInfoMessage(message);
+            Medicament med = PharmacieController.getListMed().get(selectedRow);
+            for (Medicament medList : PharmacieController.getListMed()){
+                if (med.equals(medList)) {
+                    MedDetailsDialog dialog = new MedDetailsDialog(this, medList);
+                    dialog.setVisible(true);
+                    break;
+                }
+            }
         }
-    }*/
+    }
 
     // loading data
     private void loadInitialData() {
         loadClientsData();
         loadMedicamentsData();
-        loadAchatsData();
-        loadOrdoData();
-        loadMedecinData();
-        loadMutData();
+        filterAchats(); //TODO sort by date in JTable
+        loadOrdoData(); //TODO sort by date in JTable
+        loadMedecinData(); //TODO sort by Name(a-z) / by cat
+        loadMutData(); //TODO sort by Name(a-z)
         updateStatistics();
     }
     private void loadClientsData() {
-        clientsTableModel.setRowCount(0);
+        /*clientsTableModel.setRowCount(0);
         for (Client client : PharmacieController.getListClients()) {
             Object[] row = {
                 client.getFirstName(),
@@ -662,7 +666,8 @@ public class SparadrapMainInterface extends JFrame {
                 client.getMutuelle() != null ? client.getMutuelle().getLastName() : "Aucune"
             };
             clientsTableModel.addRow(row);
-        }
+        }*/
+        filterClients();
     }
     private void loadMedicamentsData() {
         medicamentsTableModel.setRowCount(0);
@@ -676,27 +681,6 @@ public class SparadrapMainInterface extends JFrame {
             };
             medicamentsTableModel.addRow(row);
         }
-    }
-    private void loadAchatsData() {
-        //if (dateFilterCombo != null) {
-            filterAchats();
-       /* } else {
-            achatsTableModel.setRowCount(0);
-            for (Achat achat : PharmacieController.getListAchats()) {
-                Object[] row = {
-                        achat.getDateAchat(),
-                        achat.getClient().getFirstName() + " " + achat.getClient().getLastName(),
-                        achat.IsAchatDirect(achat.getOrdonnance()) ? "Direct" : "Ordonnance",
-                        String.format("%.2f €", achat.getTotal()),
-                        String.format("%.2f €", achat.getRemb()),
-                        achat.getOrdonnance() != null ? "Oui" : "Non"
-                };
-                achatsTableModel.addRow(row);
-            }
-            if (achatsScrollPane != null) {
-                setupBorderScroll(achatsScrollPane, titleCountItem(PharmacieController.getListAchats()));
-            }
-        }*/
     }
     private void loadOrdoData() {
         ordoTableModel.setRowCount(0);
@@ -815,14 +799,16 @@ public class SparadrapMainInterface extends JFrame {
         }, 0, 1000);
     }
 
+    /**
+     * DialogBox
+     * @param message
+     */
     private void showSuccessMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Succès", JOptionPane.INFORMATION_MESSAGE);
     }
-    
     private void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Erreur", JOptionPane.ERROR_MESSAGE);
     }
-    
     private void showInfoMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Information", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -831,12 +817,13 @@ public class SparadrapMainInterface extends JFrame {
         // Generate a random 15-digit social security number
         return (long) (Math.random() * 900000000000000L) + 100000000000000L;
     }
-
     private void createUIComponents() {
         // TODO: place custom component creation code here
     }
 
-    // class for Achat Dialog
+    /**
+     * Class DialogBox
+     */
     private static class AchatDialog extends JDialog {
         private JComboBox<Client> clientCombo;
         private JList<Medicament> medicamentsList;
@@ -861,10 +848,6 @@ public class SparadrapMainInterface extends JFrame {
             // Client selection
             JPanel clientPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
             clientPanel.add(new JLabel("Client:"));
-            clientCombo = new JComboBox<>();
-            for (Client client : PharmacieController.getListClients()) {
-                clientCombo.addItem(client);
-            }
             clientPanel.add(clientCombo);
             
             // Medicaments selection
@@ -874,7 +857,6 @@ public class SparadrapMainInterface extends JFrame {
                     medicamentsListModel.addElement(med);
                 }
             }
-
             medicamentsList = new JList<>(medicamentsListModel);
             medicamentsList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION); // selection multiple
             
@@ -942,7 +924,6 @@ public class SparadrapMainInterface extends JFrame {
             return confirmed;
         }
     }
-    // class for Client Details Dialog
     private static class ClientDetailsDialog extends JDialog {
         public ClientDetailsDialog(Frame parent, Client client) {
             super(parent, "Détails du Client", true);
@@ -1002,7 +983,6 @@ public class SparadrapMainInterface extends JFrame {
             setContentPane(panel);
         }
     }
-    // class for Medecin Details Dialog
     private static class MedecinDetailsDialog extends JDialog {
         public MedecinDetailsDialog(Frame parent, Medecin medecin) {
             super(parent, "Détails du Medecin", true);
@@ -1062,7 +1042,6 @@ public class SparadrapMainInterface extends JFrame {
             setContentPane(panel);
         }
     }
-    // class for Achat Details Dialog
     private static class AchatDetailsDialog extends JDialog {
         public AchatDetailsDialog(Frame parent, Achat achat) {
             super(parent, "Détails de l'achat", true);
@@ -1101,7 +1080,7 @@ public class SparadrapMainInterface extends JFrame {
             gbc.gridx = 0; gbc.gridy = 4;
             panel.add(new JLabel("Montants:"), gbc);
             gbc.gridx = 1;
-            panel.add(new JLabel("Total: "+achat.getTotal()+" Remb: "+achat.getRemb()), gbc);
+            panel.add(new JLabel("Total: "+achat.getTotal()+" € Remb: "+achat.getRemb()+" €"), gbc);
 
             gbc.gridx = 0; gbc.gridy = 5;
             panel.add(new JLabel("Ordo:"), gbc);
@@ -1136,8 +1115,59 @@ public class SparadrapMainInterface extends JFrame {
             setContentPane(panel);
         }
     }
+    private static class MedDetailsDialog extends JDialog {
+        public MedDetailsDialog(Frame parent, Medicament med) {
+            super(parent, "Détails du Médicament", true);
+            setSize(400, 300);
+            setLocationRelativeTo(parent);
 
-    //Sort
+            JPanel panel = new JPanel(new GridBagLayout());
+            panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.insets = new Insets(2, 5, 2, 5);
+            gbc.anchor = GridBagConstraints.WEST;
+
+            // Add client information
+            gbc.gridx = 0; gbc.gridy = 0;
+            panel.add(new JLabel("Nom:"), gbc);
+            gbc.gridx = 1;
+            panel.add(new JLabel(med.getNameMed()), gbc);
+
+            gbc.gridx = 0; gbc.gridy = 1;
+            panel.add(new JLabel("Catégorie:"), gbc);
+            gbc.gridx = 1;
+            panel.add(new JLabel(String.valueOf(med.getCat())), gbc);
+
+            gbc.gridx = 0; gbc.gridy = 2;
+            panel.add(new JLabel("Prix:"), gbc);
+            gbc.gridx = 1;
+            panel.add(new JLabel(String.valueOf(med.getPrice()+" €")), gbc);
+
+            gbc.gridx = 0; gbc.gridy = 3;
+            panel.add(new JLabel("Stock:"), gbc);
+            gbc.gridx = 1;
+            panel.add(new JLabel(String.valueOf(med.getStock())), gbc);
+
+            gbc.gridx = 0; gbc.gridy = 4;
+            panel.add(new JLabel("Mise en circulation:"), gbc);
+            gbc.gridx = 1;
+            panel.add(new JLabel(med.getDatOnMarket().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))), gbc);
+//DateTimeFormatter.ofPattern("dd/MM/yyyy")
+            // Close button
+            JButton closeButton = new JButton("Fermer");
+            closeButton.addActionListener(e -> dispose());
+            gbc.gridx = 0; gbc.gridy = 6; gbc.gridwidth = 2;
+            gbc.anchor = GridBagConstraints.CENTER;
+            panel.add(closeButton, gbc);
+
+            setContentPane(panel);
+        }
+    }
+
+    /**
+     * Sorting Achats / clients
+     */
     private void filterAchats() {
         String selectedDateFilter = (String) dateFilterCombo.getSelectedItem();
         assert selectedDateFilter != null; // not be null
@@ -1149,7 +1179,7 @@ public class SparadrapMainInterface extends JFrame {
         for (Achat achat : PharmacieController.getListAchats()) {
             boolean includeByDate = includeByDate(achat, dateFilter);
             boolean includeByType = includeByType(achat, typeFilter);
-            if (includeByDate && includeByType) {
+            if (includeByDate && includeByType || dateFilter==null&&startDayTextField.getText().isEmpty()&&endDayTextField.getText().isEmpty()) {
                 Object[] row = {
                         achat.getDateAchat(),
                         achat.getClient().getFirstName() + " " + achat.getClient().getLastName(),
@@ -1165,8 +1195,6 @@ public class SparadrapMainInterface extends JFrame {
         // Update the border title with filtered count
         setupBorderScroll(achatsScrollPane, "("+achatsTableModel.getRowCount()+" / "+
                 PharmacieController.getListAchats().size()+")");
-
-System.out.println(achatsTableModel.getRowCount());
         // Create status message showing both active filters
         String statusMessage = "Achats filtrés: ";
         if (!dateFilter.equals(DateFilter.ALL_TIME)) {
@@ -1180,7 +1208,6 @@ System.out.println(achatsTableModel.getRowCount());
         statusMessage += " - " + achatsTableModel.getRowCount() + " résultats";
         updateStatusLabel(statusMessage);
     }
-
     public boolean includeByDate(Achat achat, DateFilter dateFilter) {
     if (dateFilter == DateFilter.ALL_TIME) {
         return true; }
@@ -1193,8 +1220,7 @@ System.out.println(achatsTableModel.getRowCount());
             return achatDate.equals(LocalDate.now());
         case THIS_DAY:
             endDayTextField.setText("");
-            startDayTextField.setText("");
-            return achatDate.equals(startDayTextField.getText()); //TODO
+            return achatDate.equals(LocalDate.parse(startDayTextField.getText(),DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         case THIS_WEEK:
             endDayTextField.setText(LocalDate.now().toString());
             startDayTextField.setText(LocalDate.now().minusDays(7).toString());
@@ -1231,19 +1257,50 @@ System.out.println(achatsTableModel.getRowCount());
             return true;
         }
     }
-
     private boolean includeByType(Achat achat, String typeFilter) {
-    switch (typeFilter) {
-        case "Ordonnances":
-            return achat.getOrdonnance() != null;
-        case "Direct":
-            return achat.getOrdonnance() == null;
-        default: // "Global" or any other case
-            return true;
-        }
+        return switch (typeFilter) {
+            case "Ordonnances" -> achat.getOrdonnance() != null;
+            case "Direct" -> achat.getOrdonnance() == null;
+            default -> // "Global" or any other case
+                    true;
+        };
     }
+    private void filterClients() {
+        String selectedClientFilter = (String) clientCombo.getSelectedItem();
+        assert selectedClientFilter != null; // not be null
+        clientsTableModel.setRowCount(0);
+        for (Client client : PharmacieController.getListClients()) {
+           boolean clientSelected = selectedClientFilter.equals(client.getLastName()+" "+client.getFirstName());
+           if  (clientCombo.getSelectedIndex() == 0) {
+               clientSelected = true;
+           }
+            if (clientSelected|| clientCombo==null) {
+            Object[] row = {
+                    client.getFirstName(),
+                    client.getLastName(),
+                    client.getEmail(),
+                    client.getPhone(),
+                    client.getNbSS(),
+                    client.getMutuelle() != null ? client.getMutuelle().getLastName() : "Aucune"
+            };
+            clientsTableModel.addRow(row);
+            }
+        }
 
-    /*// Add method to get filtered achats for statistics (optional enhancement)
+        // Update the border title with filtered count
+        setupBorderScroll(clientScrollPane, "("+clientsTableModel.getRowCount()+" / "+
+                PharmacieController.getListClients().size()+")");
+        // Create status message showing both active filters
+        String statusMessage = "Clients filtrés: "+selectedClientFilter;
+        updateStatusLabel(statusMessage);
+
+
+    }
+    // TODO filterMed(){}
+    // TODO filterMedecins(){}
+    // TODO filterMut(){}
+
+    /*// Add method to get filtered achats for statistics
     private java.awt.List<Achat> getFilteredAchats() {
         if (dateFilterCombo == null) {
             return PharmacieController.getListAchats();
@@ -1323,7 +1380,6 @@ System.out.println(achatsTableModel.getRowCount());
         setupBorderScroll(mutuelleScrollPane, titleCountItem(PharmacieController.getListMutuelles()));
         setupBorderScroll(ordoScrollPane, titleCountItem(PharmacieController.getListOrdo()));
     }*/
-
     /*public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             try {
