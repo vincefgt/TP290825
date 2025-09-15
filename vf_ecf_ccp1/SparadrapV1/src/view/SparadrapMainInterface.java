@@ -448,7 +448,6 @@ public class SparadrapMainInterface extends JFrame {
             } else {
                 showErrorMessage("Selected Client required");
             }
-            PharmacieView.printList(PharmacieController.getListClients());
         } catch (Exception e) {
             showErrorMessage("Erreur lors de la suppression: " + e.getMessage());
         }
@@ -533,43 +532,86 @@ public class SparadrapMainInterface extends JFrame {
             showErrorMessage("Erreur lors de la modification: " + e.getMessage());
         }
     }
-/*
-    private void update(JTable currentTable) {
+
+    private void delMedecin() {
         try {
-            int selection = currentTable.getSelectedRow();
-            if (selection >= 0 || selection > currentTable.getRowCount()) {
+            int selectedMedecin = medecinTable.getSelectedRow();
+            if (selectedMedecin >= 0) {
+                PharmacieController.getListMedecins().remove(selectedMedecin);
+                clientsTableModel.removeRow(selectedMedecin);
+                showSuccessMessage("Medecin supprimé avec succès!");
+                updateStatusLabel("Medecin supprimé");
+            } else {
+                showErrorMessage("Selected Medecin required");
+            }
+        } catch (Exception e) {
+            showErrorMessage("Erreur lors de la suppression: " + e.getMessage());
+        }
+    }
+    private void addNewMedecin() {
+        try {
+            String prenom = medecinPrenomField.getText().trim();
+            String nom = medecinNomField.getText().trim();
+            String email = medecinEmailField.getText().trim();
+            String phone = medecinPhoneField.getText().trim();
+            String address = medecinAddressField.getText().trim();
+            int nbState = Integer.parseInt(medecinNbStateField.getText());
+            String city = medecinCityField.getText().trim();
+            Long nbAgreement = Long.parseLong(medecinNbAgreementField.getText().trim());
+
+            if (prenom.isEmpty() || nom.isEmpty() || email.isEmpty()) {
+                showErrorMessage("Veuillez remplir au moins le prénom, nom et email!");
+                return;
+            }
+
+            // Create client with default values for required fields
+            Medecin newMedecin = new Medecin, nom, address.isEmpty() ? "Non renseigné" : address, nbState, city, phone.isEmpty() ? "0000000000" : phone,
+                    email,String.valueOf(nbAgreement).isEmpty() ? 0L : nbAgreement);
+
+            PharmacieController.addClient(newMedecin);
+            filterMedecins();//loadClientsData();
+            clearMedecinForm();
+            showSuccessMessage("Medecin ajouté avec succès!");
+            updateStatusLabel("Nouveau Medecin ajouté: Dr " + prenom + " " + nom);
+
+        } catch (Exception e) {
+            showErrorMessage("Erreur lors de l'ajout du client: " + e.getMessage());
+        }
+    }
+    private void updateMedecin() {
+        try {
+            int selectedMedecin = medecinTable.getSelectedRow();
+            if (selectedMedecin >= 0 || selectedMedecin > medecinTable.getRowCount()) {
                 cancelButton.setVisible(true);
                 validationButton.setVisible(true);
                 addClientButton.setVisible(false);
                 clearClientButton.setVisible(false);
                 updateClientButton.setVisible(false);
-                setForm(PharmacieController.getList(currentTable).get(selection));
+                setMedecinForm(PharmacieController.getListMedecins().get(selectedMedecin));
                 validationButton.addActionListener(actionEvent -> {
-                    Objet obj = PharmacieController.getList(currentTable).get(selection);
-                    PharmacieController.updateClient(client,
-                            clientPrenomField.getText(),
-                            clientNomField.getText(),
-                            clientAddressField.getText(),
-                            Integer.parseInt(clientNbStateField.getText()),
-                            clientCityField.getText(),
-                            clientPhoneField.getText(),
-                            clientEmailField.getText(),
-                            Long.parseLong(clientNbSSField.getText()),
-                            LocalDate.parse(clientDateBirthField.getText(),DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                            null,null
+                    Medecin medecin = PharmacieController.getListMedecin().get(selectedMedecin);
+                    PharmacieController.updateMedecin(Medecin,
+                            medecinPrenomField.getText(),
+                            medecinNomField.getText(),
+                            medecinAddressField.getText(),
+                            Integer.parseInt(medecinNbAgreementField.getText()),
+                            medecinCityField.getText(),
+                            medecinPhoneField.getText(),
+                            medecinEmailField.getText(),
+                            Long.parseLong(medecinNbAgreementField.getText()),
                     );
-                    filterClients();//loadClientsData();
-                    clearClientForm();
+                    filterMedecin();//loadClientsData();
+                    clearMedecinForm();
                     cancelButton.setVisible(false);
                     validationButton.setVisible(false);
                     addClientButton.setVisible(true);
                     clearClientButton.setVisible(true);
                     updateClientButton.setVisible(true);
-                    showSuccessMessage("Client(e) modifié(e) avec succès!");
-                    updateStatusLabel("Client(e) modifié(e) "); //TODO add lastName + FirstName
+                    showSuccessMessage("Medecin modifié avec succès!");
+                    updateStatusLabel("Medecin modifié "); //TODO add lastName + FirstName
                 });
                 cancelButton.addActionListener(e -> {
-                    clearClientForm();
+                    clearMedecintForm();
                     cancelButton.setVisible(false);
                     validationButton.setVisible(false);
                     addClientButton.setVisible(true);
@@ -577,34 +619,13 @@ public class SparadrapMainInterface extends JFrame {
                     updateClientButton.setVisible(true);
                 });
             } else {
-                showErrorMessage("Selected Client required");
+                showErrorMessage("Selected Medecin required");
             }
         } catch (Exception e) {
             showErrorMessage("Erreur lors de la modification: " + e.getMessage());
         }
-    }*/
-
-
-
-    private void actionModifiedButton(){
-        // tableau qui contient toutes tes JList
-        List<?> allLists = new ArrayList<>();
-        for (List<?> l : Lists.values()) {
-            JTable tabLists = allLists.addAll(l);
-        }
-
-
-        for (JTable currentTable : tabLists) {
-            int selectedIndex = currentTable.getSelectedRow();
-            if (selectedIndex != -1) {  // if at least one item selected
-                DefaultTableModel model = (DefaultTableModel) currentTable.getModel();
-            } else {
-              //  DialogFrame.confirmButton("PLEASE SELECT ANY ITEM!",false,false);
-            }
-            break;
-        }
-        contentPane.revalidate();
     }
+
     private void addNewMedicament() {
         try {
             String nom = medicamentNomField.getText().trim();
