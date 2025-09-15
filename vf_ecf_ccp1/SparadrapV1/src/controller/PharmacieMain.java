@@ -64,8 +64,8 @@ class PharmacieMain {
             if (achatCree) {
                 // Ajouter des médicaments à la dernière ordonnance créée
                 Ordonnance derniereOrdonnance = controller.getListOrdo().get(controller.getListOrdo().size() - 1);
-                controller.addMedicamentToOrdonnance(derniereOrdonnance, doliprane);
-                controller.addMedicamentToOrdonnance(derniereOrdonnance, ibuprofene);
+                controller.addMedToOrdo(derniereOrdonnance, doliprane);
+                controller.addMedToOrdo(derniereOrdonnance, ibuprofene);
                 
                 System.out.println("✓ Achat avec ordonnance créé avec succès!");
                 System.out.println("✓ Médicaments ajoutés à l'ordonnance: Doliprane, Ibuprofène");

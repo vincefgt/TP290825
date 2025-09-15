@@ -84,6 +84,6 @@ public class Medecin extends Person {
 
     @Override
     public String toString() {
-        return "Dr "+super.getLastName()+" "+super.getFirstName()+" (Agrement: "+nbAgreement+")";
+        return "Dr "+super.getLastName()+" "+super.getFirstName();//+" (Agrement: "+nbAgreement+")";
     }
 }

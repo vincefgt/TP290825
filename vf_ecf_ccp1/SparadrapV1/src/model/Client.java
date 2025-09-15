@@ -14,18 +14,18 @@ public class Client extends Person {
     private Medecin medecinTraitant;
     //private List<Client> listClient;
 
-    public static Map<String, Client> MapPatientClient = new HashMap<>();
+    public static Map<String, Client> MapClient = new HashMap<>();
 
     // Constructeur avec validation (code défensif)
     public Client(String firstName, String lastName, String address, int nbState,
                   String city, String phone, String email, long nbSS,
                   LocalDate dateBirth,Mutuelle mut, Medecin medecinTraitant) {
         super (firstName, lastName,address,email,nbState,city,phone);
-        //PharmacieController.getListClients().add(this);
         this.setNbSS(nbSS);
         this.setDateBirth(dateBirth);
         this.setMutuelle(mut);
         this.setMedecinTraitant(medecinTraitant);
+        MapClient.put(lastName+" "+firstName, this);
     }
 
     public long getNbSS() {

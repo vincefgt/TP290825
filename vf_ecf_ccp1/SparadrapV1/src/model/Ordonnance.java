@@ -58,9 +58,11 @@ public class Ordonnance extends Medecin{
         this.medecin = medecin;
     }
 
-
     public List<Medicament> getListMedOrdo() {
         return this.listMedOrdo;
+    }
+    public void setListMedOrdo(List<Medicament> listMedOrdo) {
+        this.listMedOrdo = listMedOrdo;
     }
 
     // add med in ordo

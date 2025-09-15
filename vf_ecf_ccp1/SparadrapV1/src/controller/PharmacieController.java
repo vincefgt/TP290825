@@ -25,9 +25,6 @@ public class PharmacieController {
         listMutuelles = new ArrayList<>(); // historic mutuelles
         listOrdonnances = new ArrayList<>(); // historic ordos
         listAchats = new ArrayList<>(); // historic achats
-        /**
-         * listMedOrdo > list of med in each ordo > class Ordonnance creaet at Ordo creation.
-         */
     }
 
     // CLIENTS
@@ -159,7 +156,7 @@ public class PharmacieController {
     }
     
     // Add medication to existing ordonnance
-    public static boolean addMedicamentToOrdonnance(Ordonnance ordonnance, Medicament medicament) {
+    public static boolean addMedToOrdo(Ordonnance ordonnance, Medicament medicament) {
         if (ordonnance != null && medicament != null) {
             ordonnance.addMedOrdo(medicament);
             return true;

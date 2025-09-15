@@ -194,7 +194,7 @@ public class PharmacieView {
             } else if (medIndex > 0 && medIndex <= controller.getListMed().size()) {
                 Medicament medicamentSelectionne = controller.getListMed().get(medIndex - 1);
                 
-                if (controller.addMedicamentToOrdonnance(derniereOrdonnance, medicamentSelectionne)) {
+                if (controller.addMedToOrdo(derniereOrdonnance, medicamentSelectionne)) {
                     afficherSucces("Médicament ajouté à l'ordonnance: " + medicamentSelectionne.getNameMed());
                 } else {
                     afficherErreur("Erreur lors de l'ajout du médicament.");

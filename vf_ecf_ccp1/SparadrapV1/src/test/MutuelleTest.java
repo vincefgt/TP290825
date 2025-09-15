@@ -22,7 +22,7 @@ void setup(){
     void testCreationMutuelleComplete() {
         assertDoesNotThrow(() -> {
             Mutuelle mutuelle = new Mutuelle("Mutuelle", "MGEN", "123 Avenue Mutuelle",
-                    "contact@mgen.fr", 75015, "Paris", "0145678901", 70.0);
+                    "contact@mgen.fr", 75015, "Paris", "0145678901", 70.0,null);
             assertEquals("Mgen", mutuelle.getLastName());
             assertEquals(70.0, mutuelle.getTauxRemb());
         });
