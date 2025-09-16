@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class Regex {
 
     static String paramRegex = "^(\\d)$";
-    public static final String REGEX_MOTS2 = "^[\\p{L}]+([.\\- ][\\p{L}]*)*$";
+    public static final String REGEX_MOTS2 = "^[\\p{L}]*([.\\- ][\\p{L}]*)?$";
     public static final String REGEX_MOTS = "^[\\p{L}][\\p{L} \\-']*[\\p{L}]$";
     public static final String REGEX_NSS = "^[12]\\d{2}(0[1-9]|1[0-2]|2[0-9])\\d{8}\\d{2}$";
     public static final String REGEX_DATE_NAISSANCE = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$";
@@ -35,6 +35,7 @@ public class Regex {
      * @return
      */
     public static <T> boolean testNotEmpty(T input) {
+       // return String.valueOf(input).trim().isEmpty(); // return true if found
         return input == null || String.valueOf(input).trim().isEmpty(); // return true if found
     }
     /**

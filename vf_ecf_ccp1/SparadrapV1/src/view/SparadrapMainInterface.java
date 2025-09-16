@@ -9,7 +9,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -114,16 +113,10 @@ public class SparadrapMainInterface extends JFrame {
     private JTable mutuelleTable;
     private JScrollPane mutuelleScrollPane;
     private DefaultTableModel mutTableModel;
-    private JTextField mutNameField;
-    private JTextField mutAddressField;
-    private JTextField mutNbStateField;
-    private JTextField mutCityField;
-    private JTextField mutDepField;
 
     // Medecin
     private JTable medecinTable;
     private JScrollPane medecinScrollPane;
-    private JTextField textField6;
     private JPanel tableSortingPane;
     private JRadioButton directRadioButton;
     private JRadioButton allRadioButton;
@@ -132,6 +125,35 @@ public class SparadrapMainInterface extends JFrame {
     private JFormattedTextField ssTextField;
     private JPanel SortOrdoPane;
     private JComboBox patientComboSort;
+    private JTextField medecinPrenomField;
+    private JTextField medecinEmailField;
+    private JTextField medecinAddressField;
+    private JTextField medecinNbStateField;
+    private JTextField medecinNomField;
+    private JTextField medecinPhoneField;
+    private JTextField medecinCityField;
+    private JFormattedTextField medecinNbAgreementField;
+    private JButton addMedecinButton;
+    private JButton clearMedecinButton;
+    private JButton updateMedecinButton;
+    private JButton cancelMedecinButton;
+    private JButton validationMedecinButton;
+    private JPanel searchPane;
+    private JComboBox<Mutuelle> mutCombo;
+    private JTextField mutAddressField;
+    private JTextField mutNomField;
+    private JLabel mutRembField;
+    private JTextField mutTauxRembField;
+    private JButton addMutButton;
+    private JButton clearMutButton;
+    private JButton updateMutButton;
+    private JButton cancelMutButton;
+    private JButton validationMutButton;
+    private JTextField mutPhoneField;
+    private JTextField mutEmailField;
+    private JTextField mutNbStateField;
+    private JTextField mutCityField;
+    private JComboBox clientComboµAchat;
     private DefaultTableModel medecinTableModel;
 
     // Controller
@@ -160,8 +182,12 @@ public class SparadrapMainInterface extends JFrame {
         initializeTableModels(); // Initialize table models
         setupComboBoxes(); // Setup combo boxes
         applyModernStyling(); // Apply style
-        cancelButton.setVisible(false); // hide button at start
-        validationButton.setVisible(false); // hide button at start
+        cancelButton.setVisible(false); // hide button at start Client
+        validationButton.setVisible(false); // hide button at start Client
+        cancelMedecinButton.setVisible(false); // hide button at start Medecin
+        validationMedecinButton.setVisible(false); // hide button at start Medecin
+        cancelMutButton.setVisible(false); // hide button at start Mut
+        validationMutButton.setVisible(false); // hide button at start Mut
         buttonGroup.add(ordoRadioButton);
         buttonGroup.add(directRadioButton);
         buttonGroup.add(allRadioButton);
@@ -234,11 +260,12 @@ public class SparadrapMainInterface extends JFrame {
         dateFilterCombo.setSelectedItem(DateFilter.ALL_TIME.toString());
         //  client > search client
         clientCombo.removeAllItems();
-        clientCombo.addItem("Sélectionner le client");
+        clientCombo.addItem("Sélectionner client");
         clientCombo.setSelectedItem(0);
         for (Client client : PharmacieController.getListClients()) {
             String clientStringCombo = client.getLastName()+" "+client.getFirstName();
             clientCombo.addItem(client.toString());
+            clientComboAchat.addItem(client.toString());
         }
         // medecin > ordo frame
         medecinsCombo.removeAllItems();
@@ -246,6 +273,12 @@ public class SparadrapMainInterface extends JFrame {
         for (Medecin medecin : PharmacieController.getListMedecins()) {
             //String medecinStringCombo = "Dr "+medecin.getLastName()+" "+medecin.getFirstName();
             medecinsCombo.addItem(medecin);
+        }
+        // mut > client Frame
+        mutCombo.removeAllItems();
+        mutCombo.setSelectedItem(0);
+        for (Mutuelle mut : PharmacieController.getListMutuelles()) {
+            mutCombo.addItem(mut);
         }
     }
 
@@ -356,7 +389,7 @@ public class SparadrapMainInterface extends JFrame {
         // Achat actions
         nouvelAchatButton.addActionListener(e -> createNewAchat());
         achatOrdonnanceButton.addActionListener(e -> createAchatWithOrdonnance());
-        calculerRemboursementButton.addActionListener(e -> calculateRemboursement());
+       // calculerRemboursementButton.addActionListener(e -> calculateRemboursement());
         dateFilterCombo.addActionListener(e -> filterAchats());
         ActionListener groupListener = e -> filterAchats(); //check group
         ordoRadioButton.addActionListener(groupListener);
@@ -372,6 +405,16 @@ public class SparadrapMainInterface extends JFrame {
                 dateFilterCombo.setSelectedItem("Ce jour");
                 filterAchats();}
         });
+
+        //Medecin actions
+        addMedecinButton.addActionListener(e -> addNewMedecin());
+        clearMedecinButton.addActionListener(e -> delMedecin());
+        updateMedecinButton.addActionListener(e -> updateMedecin());
+
+        //Mutuelle actions
+        addMutButton.addActionListener(e -> addNewMut());
+        clearMutButton.addActionListener(e -> delMut());
+        updateMutButton.addActionListener(e -> updateMut());
 
         //ordo actions
         medecinsCombo.addActionListener(e -> {
@@ -437,6 +480,7 @@ public class SparadrapMainInterface extends JFrame {
         updateStatusLabel("Onglet sélectionné: " + mainTabbedPane.getTitleAt(index));
     }
 
+    //CRUD Client
     private void delClientFrame() {
         try {
             int selectedClient = clientsTable.getSelectedRow();
@@ -495,6 +539,7 @@ public class SparadrapMainInterface extends JFrame {
                 setClientForm(PharmacieController.getListClients().get(selectedClient));
                 validationButton.addActionListener(actionEvent -> {
                     Client client = PharmacieController.getListClients().get(selectedClient);
+                    Mutuelle selectedMut = (Mutuelle) mutCombo.getSelectedItem();
                     PharmacieController.updateClient(client,
                             clientPrenomField.getText(),
                             clientNomField.getText(),
@@ -504,9 +549,9 @@ public class SparadrapMainInterface extends JFrame {
                             clientPhoneField.getText(),
                             clientEmailField.getText(),
                             Long.parseLong(clientNbSSField.getText()),
-                            LocalDate.parse(clientDateBirthField.getText(),DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                            null,null
-                            );
+                            LocalDate.parse(clientDateBirthField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                            selectedMut, null
+                    );
                     filterClients();//loadClientsData();
                     clearClientForm();
                     cancelButton.setVisible(false);
@@ -532,13 +577,13 @@ public class SparadrapMainInterface extends JFrame {
             showErrorMessage("Erreur lors de la modification: " + e.getMessage());
         }
     }
-
+    // CRUD medecin
     private void delMedecin() {
         try {
             int selectedMedecin = medecinTable.getSelectedRow();
             if (selectedMedecin >= 0) {
                 PharmacieController.getListMedecins().remove(selectedMedecin);
-                clientsTableModel.removeRow(selectedMedecin);
+                medecinTableModel.removeRow(selectedMedecin);
                 showSuccessMessage("Medecin supprimé avec succès!");
                 updateStatusLabel("Medecin supprimé");
             } else {
@@ -564,12 +609,12 @@ public class SparadrapMainInterface extends JFrame {
                 return;
             }
 
-            // Create client with default values for required fields
-            Medecin newMedecin = new Medecin, nom, address.isEmpty() ? "Non renseigné" : address, nbState, city, phone.isEmpty() ? "0000000000" : phone,
-                    email,String.valueOf(nbAgreement).isEmpty() ? 0L : nbAgreement);
+            // Create medecin with default values for required fields
+            Medecin newMedecin = new Medecin(prenom,nom, address.isEmpty() ? "Non renseigné" : address, email, nbState, city, phone.isEmpty() ? "0000000000" : phone
+                    ,String.valueOf(nbAgreement).isEmpty() ? 000000000000000L : nbAgreement,null);
 
-            PharmacieController.addClient(newMedecin);
-            filterMedecins();//loadClientsData();
+            PharmacieController.addMedecin(newMedecin);
+            loadMedecinData();
             clearMedecinForm();
             showSuccessMessage("Medecin ajouté avec succès!");
             updateStatusLabel("Nouveau Medecin ajouté: Dr " + prenom + " " + nom);
@@ -582,44 +627,137 @@ public class SparadrapMainInterface extends JFrame {
         try {
             int selectedMedecin = medecinTable.getSelectedRow();
             if (selectedMedecin >= 0 || selectedMedecin > medecinTable.getRowCount()) {
-                cancelButton.setVisible(true);
-                validationButton.setVisible(true);
-                addClientButton.setVisible(false);
-                clearClientButton.setVisible(false);
-                updateClientButton.setVisible(false);
+                cancelMedecinButton.setVisible(true);
+                validationMedecinButton.setVisible(true);
+                addMedecinButton.setVisible(false);
+                clearMedecinButton.setVisible(false);
+                updateMedecinButton.setVisible(false);
                 setMedecinForm(PharmacieController.getListMedecins().get(selectedMedecin));
-                validationButton.addActionListener(actionEvent -> {
-                    Medecin medecin = PharmacieController.getListMedecin().get(selectedMedecin);
-                    PharmacieController.updateMedecin(Medecin,
+                validationMedecinButton.addActionListener(actionEvent -> {
+                    Medecin medecin = PharmacieController.getListMedecins().get(selectedMedecin);
+                    PharmacieController.updateMedecin(medecin,
                             medecinPrenomField.getText(),
                             medecinNomField.getText(),
                             medecinAddressField.getText(),
-                            Integer.parseInt(medecinNbAgreementField.getText()),
+                            Integer.parseInt(medecinNbStateField.getText()),
                             medecinCityField.getText(),
                             medecinPhoneField.getText(),
                             medecinEmailField.getText(),
-                            Long.parseLong(medecinNbAgreementField.getText()),
+                            Long.parseLong(medecinNbAgreementField.getText())
                     );
-                    filterMedecin();//loadClientsData();
+                    loadMedecinData();
                     clearMedecinForm();
-                    cancelButton.setVisible(false);
-                    validationButton.setVisible(false);
-                    addClientButton.setVisible(true);
-                    clearClientButton.setVisible(true);
-                    updateClientButton.setVisible(true);
+                    cancelMedecinButton.setVisible(false);
+                    validationMedecinButton.setVisible(false);
+                    addMedecinButton.setVisible(true);
+                    clearMedecinButton.setVisible(true);
+                    updateMedecinButton.setVisible(true);
                     showSuccessMessage("Medecin modifié avec succès!");
                     updateStatusLabel("Medecin modifié "); //TODO add lastName + FirstName
                 });
-                cancelButton.addActionListener(e -> {
-                    clearMedecintForm();
-                    cancelButton.setVisible(false);
-                    validationButton.setVisible(false);
-                    addClientButton.setVisible(true);
-                    clearClientButton.setVisible(true);
-                    updateClientButton.setVisible(true);
+                cancelMedecinButton.addActionListener(e -> {
+                    clearMedecinForm();
+                    cancelMedecinButton.setVisible(false);
+                    validationMedecinButton.setVisible(false);
+                    addMedecinButton.setVisible(true);
+                    clearMedecinButton.setVisible(true);
+                    updateMedecinButton.setVisible(true);
                 });
             } else {
                 showErrorMessage("Selected Medecin required");
+            }
+        } catch (Exception e) {
+            showErrorMessage("Erreur lors de la modification: " + e.getMessage());
+        }
+    }
+    //CRUD Mutuelle
+    private void delMut() {
+        try {
+            int selectedMut = mutuelleTable.getSelectedRow();
+            if (selectedMut >= 0) {
+                PharmacieController.getListMutuelles().remove(selectedMut);
+                mutTableModel.removeRow(selectedMut);
+                showSuccessMessage("Mutuelle supprimée avec succès!");
+                updateStatusLabel("Mutuelle supprimée");
+            } else {
+                showErrorMessage("Selected Medecin required");
+            }
+        } catch (Exception e) {
+            showErrorMessage("Erreur lors de la suppression: " + e.getMessage());
+        }
+    }
+    private void addNewMut() {
+        try {
+            String nomMut = mutNomField.getText().trim();
+            String emailMut = mutEmailField.getText().isEmpty() ? null : mutEmailField.getText().trim();
+            //String emailMut = mutEmailField.getText().trim();
+            String phoneMut = mutPhoneField.getText().isEmpty() ? null : mutPhoneField.getText().trim();
+            String addressMut = mutAddressField.getText().isEmpty() ? null : mutAddressField.getText().trim();
+            int nbStateMut = String.valueOf(mutNbStateField.getText()).isEmpty() ? 0 : Integer.parseInt(mutNbStateField.getText());
+            String cityMut = mutCityField.getText().isEmpty() ? null : mutCityField.getText().trim();
+            Double tauxRemb = Double.parseDouble(mutTauxRembField.getText().trim());
+
+            if (nomMut.isEmpty() || String.valueOf(tauxRemb).isEmpty()) {
+                showErrorMessage("Veuillez remplir au moins le nom et un taux de remboursement!");
+                return;
+            }
+
+            // Create mutuelle with default values for required fields
+            Mutuelle newMut = new Mutuelle(nomMut,tauxRemb);
+            PharmacieController.addMutuelle(newMut);
+            loadMutData();
+            clearMutForm();
+            showSuccessMessage("Mutuelle ajoutée avec succès!");
+            updateStatusLabel("Nouvelle Mutuelle ajoutée: "+nomMut);
+
+        } catch (Exception e) {
+            showErrorMessage("Erreur lors de l'ajout du client: " + e.getMessage());
+        }
+    }
+    private void updateMut() {
+        try {
+            int selectedMut = mutuelleTable.getSelectedRow()+1;
+            if (selectedMut >= 0 || selectedMut > mutuelleTable.getRowCount()) {
+                cancelMutButton.setVisible(true);
+                validationMutButton.setVisible(true);
+                addMutButton.setVisible(false);
+                clearMutButton.setVisible(false);
+                updateMutButton.setVisible(false);
+                setMutForm(PharmacieController.getListMutuelles().get(selectedMut));
+                validationMutButton.addActionListener(actionEvent -> {
+                    Mutuelle mut = PharmacieController.getListMutuelles().get(selectedMut);
+                    PharmacieController.updateMutuelle(mut,
+                    mutNomField.getText().trim(),
+                    mutAddressField.getText().trim(),
+                    Integer.parseInt(mutNbStateField.getText().trim()),
+                    mutCityField.getText().trim(),
+                    mutPhoneField.getText().trim(),
+                    mutEmailField.getText().trim(),
+                    Double.parseDouble(mutTauxRembField.getText().trim())
+                    //mutDepField.getText()
+                    );
+
+                    loadMutData();
+                    clearMutForm();
+                    mutuelleTable.setRowSelectionInterval(selectedMut-1, selectedMut-1);
+                    cancelMutButton.setVisible(false);
+                    validationMutButton.setVisible(false);
+                    addMutButton.setVisible(true);
+                    clearMutButton.setVisible(true);
+                    updateMutButton.setVisible(true);
+                    showSuccessMessage("Mutuelle modifiée avec succès!");
+                    updateStatusLabel("Mutuelle modifiée ");
+                });
+                cancelMutButton.addActionListener(e -> {
+                    clearMutForm();
+                    cancelMutButton.setVisible(false);
+                    validationMutButton.setVisible(false);
+                    addMutButton.setVisible(true);
+                    clearMutButton.setVisible(true);
+                    updateMutButton.setVisible(true);
+                });
+            } else {
+                showErrorMessage("Selected Mutuelle required");
             }
         } catch (Exception e) {
             showErrorMessage("Erreur lors de la modification: " + e.getMessage());
@@ -656,6 +794,7 @@ public class SparadrapMainInterface extends JFrame {
             showErrorMessage("Erreur lors de l'ajout du médicament: " + e.getMessage());
         }
     }
+    //TODO private void clearMedicament() {}
     
     private void createNewAchat() {
         if (PharmacieController.getListClients().isEmpty()) {
@@ -667,12 +806,13 @@ public class SparadrapMainInterface extends JFrame {
         
         if (dialog.isConfirmed()) {
             filterAchats();
+            loadMedicamentsData();
             updateStatistics();
             updateStatusLabel("Nouvel achat enregistré");
             dateFilterCombo.setSelectedItem(DateFilter.ALL_TIME.toString());
         }
     }
-
+    //TODO private void updateAchat() {}
     private void createAchatWithOrdonnance() {
         if (PharmacieController.getListClients().isEmpty()) {
             showErrorMessage("Aucun client enregistré. Veuillez d'abord ajouter des clients.");
@@ -689,12 +829,10 @@ public class SparadrapMainInterface extends JFrame {
             dateFilterCombo.setSelectedItem(DateFilter.ALL_TIME.toString());
         }
     }
+    //TODO private void updateAchatOrdonnance() {}
 
-    /**
-     * TODO: A garder????
-     */
-    private void calculateRemboursement() {
-        int selectedRow = achatsTable.getSelectedRow();
+    // TODO: private void calculateRemboursement() {
+       /* int selectedRow = achatsTable.getSelectedRow();
         if (selectedRow == -1) {
             showErrorMessage("Veuillez sélectionner un achat dans la liste!");
             return;
@@ -717,7 +855,7 @@ public class SparadrapMainInterface extends JFrame {
         );
         
         showInfoMessage(message);
-    }
+    }*/
 
     // call popup details
     private void showClientDetails() {
@@ -830,7 +968,9 @@ public class SparadrapMainInterface extends JFrame {
     }
     private void loadMutData() {
         mutTableModel.setRowCount(0);
-        for (Mutuelle mut : PharmacieController.getListMutuelles()) {
+        List<Mutuelle> sListMutuelle = PharmacieController.getListMutuelles().subList(1, PharmacieController.getListMutuelles().size());
+        sListMutuelle.sort(Comparator.comparing(m -> m.getLastName().toLowerCase()));
+        for (Mutuelle mut : sListMutuelle) {
             Object[] row = {
                     mut.getLastName(),
                     mut.getTauxRemb()
@@ -887,7 +1027,27 @@ public class SparadrapMainInterface extends JFrame {
         clientCityField.setText(selectedClient.getCity());
         clientDateBirthField.setText(selectedClient.getDateBirth());
         clientNbSSField.setText(String.valueOf(selectedClient.getNbSS()));
-        //TODO add mututelle
+        mutCombo.setSelectedIndex(PharmacieController.getListMutuelles().indexOf(selectedClient.getMutuelle()));
+    }
+    private void setMedecinForm(Medecin selectedMedecin) {
+        medecinPrenomField.setText(selectedMedecin.getFirstName());
+        medecinNomField.setText(selectedMedecin.getLastName());
+        medecinEmailField.setText(selectedMedecin.getEmail());
+        medecinPhoneField.setText(selectedMedecin.getPhone());
+        medecinAddressField.setText(selectedMedecin.getAddress());
+        medecinNbStateField.setText(String.valueOf(selectedMedecin.getNbState()));
+        medecinCityField.setText(selectedMedecin.getCity());
+        medecinNbAgreementField.setText(String.valueOf(selectedMedecin.getNbAgreement()));
+    }
+    private void setMutForm(Mutuelle selectedMut) {
+        mutNomField.setText(selectedMut.getLastName());
+        mutEmailField.setText(selectedMut.getEmail());
+        mutPhoneField.setText(selectedMut.getPhone());
+        mutAddressField.setText(selectedMut.getAddress());
+        mutNbStateField.setText(String.valueOf(selectedMut.getNbState()));
+        mutNbStateField.setText(String.valueOf(selectedMut.getNbState()));
+        mutCityField.setText(selectedMut.getCity());
+        mutTauxRembField.setText(String.valueOf(selectedMut.getTauxRemb()));
     }
     // clear data
     private void clearClientForm() {
@@ -900,12 +1060,32 @@ public class SparadrapMainInterface extends JFrame {
         clientCityField.setText("");
         clientDateBirthField.setText("");
         clientNbSSField.setText("");
+        mutCombo.setSelectedIndex(0);
     }
     private void clearMedicamentForm() {
         medicamentNomField.setText("");
         medicamentPrixField.setText("");
         medicamentStockField.setText("");
         medicamentCategorieCombo.setSelectedIndex(0);
+    }
+    private void clearMedecinForm() {
+        medecinPrenomField.setText("");
+        medecinNomField.setText("");
+        medecinEmailField.setText("");
+        medecinPhoneField.setText("");
+        medecinAddressField.setText("");
+        medecinNbStateField.setText("");
+        medecinCityField.setText("");
+        medecinNbAgreementField.setText("");
+    }
+    private void clearMutForm() {
+        mutNomField.setText("");
+        mutEmailField.setText("");
+        mutPhoneField.setText("");
+        mutAddressField.setText("");
+        mutNbStateField.setText("");
+        mutCityField.setText("");
+        mutTauxRembField.setText("");
     }
     //get data
     private void getClientForm() {

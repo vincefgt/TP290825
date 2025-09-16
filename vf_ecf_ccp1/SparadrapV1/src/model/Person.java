@@ -67,7 +67,7 @@ public class Person {
         return this.email;
     }
     public void setEmail(String email) {
-        if (Regex.testNotEmpty(email)||Regex.testEmail(email))
+        if (Regex.testEmail(email) || Regex.testNotEmpty(email))
             throw new IllegalArgumentException("email required with @ & .");
         this.email = email;
     }
@@ -77,7 +77,7 @@ public class Person {
     }
     public void setNbState(int nbState) {
         Regex.setParamRegex("^\\d{5}$");
-        if (Regex.testNotEmpty(String.valueOf(nbState))||Regex.testDigitLong(nbState))
+        if (Regex.testNotEmpty(String.valueOf(nbState)) && Regex.testDigitLong(nbState)) // if not empty should be equal to 5 number
             throw new IllegalArgumentException("Nb State 5 numbers required");
         this.nbState = nbState;
     }

@@ -7,13 +7,13 @@ import static java.lang.String.format;
 
 public class Medecin extends Person {
 
-    private long nbAgreement;
+    private Long nbAgreement;
     private java.util.List<Client> patients; // List of patients
     private String idMedecin;
 
     // Constructor
     public Medecin(String firstName, String lastName, String address,String email, int nbState,String city,
-                   String phone, long nbAgreement,String idMedecin) {
+                   String phone, Long nbAgreement,String idMedecin) {
         super(firstName,lastName,address,email,nbState,city,phone);
         this.setNbAgreement(nbAgreement);
         this.idMedecin = generateId(idMedecin);

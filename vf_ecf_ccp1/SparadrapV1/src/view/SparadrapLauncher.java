@@ -100,10 +100,12 @@ public class SparadrapLauncher {
     public static PharmacieController initializeTestData() {
         try {
             PharmacieController initController = new PharmacieController();
-            // Create mut (3)
+            // Create mut (4)
+            Mutuelle defaultMut = new Mutuelle("Sélectionner mutuelle",0);
             Mutuelle mgen = new Mutuelle("MGEN", 70.0);
             Mutuelle harmonie = new Mutuelle("Harmonie Mutuelle", 60.0);
             Mutuelle secu = new Mutuelle("Sécurité Sociale", 65.0);
+            initController.addMutuelle(defaultMut);
             initController.addMutuelle(mgen);
             initController.addMutuelle(harmonie);
             initController.addMutuelle(secu);

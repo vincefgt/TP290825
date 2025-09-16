@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class PharmacieController {
@@ -74,7 +76,7 @@ public class PharmacieController {
     }
 
     //MEDECIN
-    public boolean addMedecin(Medecin medecin) {
+    public static boolean addMedecin(Medecin medecin) {
         if (medecin != null && !getListMedecins().contains(medecin)) {
             return getListMedecins().add(medecin);
         }
@@ -93,6 +95,17 @@ public class PharmacieController {
     }
     public static List<Medecin> getListMedecins() {
         return listMedecins;
+    }
+    public static void updateMedecin(Medecin medecin, String firstName, String lastName, String address, int nbState,
+                                    String city, String phone, String email, Long nbAgreement) {
+        medecin.setFirstName(firstName);
+        medecin.setLastName(lastName);
+        medecin.setNbState(nbState);
+        medecin.setNbAgreement(nbAgreement);
+        medecin.setEmail(email);
+        medecin.setAddress(address);
+        medecin.setCity(city);
+        medecin.setPhone(phone);
     }
 
     // MED add in med list = ALL med
@@ -119,14 +132,32 @@ public class PharmacieController {
     }
 
     // MUTUELLES
-    public boolean addMutuelle(Mutuelle mutuelle) {
-        if (mutuelle != null && !listMutuelles.contains(mutuelle)) {
+    public static boolean addMutuelle(Mutuelle mutuelle) {
+        if (mutuelle != null && !getListMutuelles().contains(mutuelle)) {
             return getListMutuelles().add(mutuelle);
         }
         return false;
     }
+
     public static List<Mutuelle> getListMutuelles() {
         return listMutuelles;
+    }
+    public static void updateMutuelle(Mutuelle mut, String lastName, String address, int nbState,
+                                     String city, String phone, String email, Double tauxRemb) {
+        mut.setLastName(lastName);
+        mut.setTauxRemb(tauxRemb);
+        if (address == null) {
+            mut.setNbState(nbState);
+            mut.setEmail(email);
+            mut.setAddress(address);
+            mut.setCity(city);
+            mut.setPhone(phone);
+            //mut.setDep(dep);
+        }
+
+
+
+
     }
 
     // ACHAT WITH ORDONNANCE
@@ -222,7 +253,7 @@ public class PharmacieController {
         return nb = bd.doubleValue();
     }
 /*
-    // === MÉTHODES UTILITAIRES ===
+    // === MÉTHODES ===
     public void afficherStatistiques() {
         System.out.println("=== STATISTIQUES PHARMACIE SPARADRAP ===");
         System.out.println("Nombre de clients: " + listClients.size());

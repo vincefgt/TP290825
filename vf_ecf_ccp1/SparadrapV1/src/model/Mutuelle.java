@@ -10,11 +10,10 @@ public class Mutuelle extends Person{
     private double tauxRemb =0; // Taux de remboursement en pourcentage (0-100)
 
     // Constructeur
-    public Mutuelle(String firstName,String lastName, String address, String email,int nbState,String city,String phone, double tauxRemb,Dep dep) {
+    public Mutuelle(String firstName,String lastName, String address, String email,int nbState,String city,String phone, double tauxRemb) { //,Dep dep) {
         super("Mutuelle",lastName,address,email,nbState,city,phone);
         this.setTauxRemb(tauxRemb);
-        this.setDep(dep);
-        //PharmacieController.getListMutuelles().add(this);
+       // this.setDep(dep);
     }
     public Mutuelle(String lastName, double tauxRemb) {
         super(lastName);
@@ -52,6 +51,6 @@ public class Mutuelle extends Person{
 
     @Override
     public String toString() {
-        return getLastName()+" (Remb: "+getTauxRemb()+"%)";
+        return getLastName();//+" (Remb: "+getTauxRemb()+"%)";
     }
 }
