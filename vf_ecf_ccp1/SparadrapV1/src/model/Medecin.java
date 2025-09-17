@@ -84,6 +84,10 @@ public class Medecin extends Person {
 
     @Override
     public String toString() {
-        return "Dr "+super.getLastName()+" "+super.getFirstName();//+" (Agrement: "+nbAgreement+")";
+        if (super.getLastName().equals(PharmacieController.getListMedecins().getFirst().getLastName())) {
+            return super.getLastName();
+        } else  {
+            return "Dr "+super.getLastName() + " " + super.getFirstName(); //+" (Agrement: "+nbAgreement+")";
+        }
     }
 }

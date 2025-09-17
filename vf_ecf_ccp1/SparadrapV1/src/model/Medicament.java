@@ -51,7 +51,7 @@ public class Medicament {
         if (price < 0|| Regex.testDigitDec(price)) {
             throw new IllegalArgumentException("price > 0 required");
         }
-        this.price = price;
+        this.price = PharmacieController.formatTwoDec(price);
     }
 
     public LocalDate getDatOnMarket() {

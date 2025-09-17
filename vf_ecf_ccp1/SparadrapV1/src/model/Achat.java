@@ -31,14 +31,13 @@ public class Achat {
         this.setOrdonnance(null); // Achat direct
         this.setTotal(Total);
         this.setRemb(Remb);
-        // adding when saving > PharmacieController
     }
     // Constructeur achat ordonnance
     public Achat(LocalDate dateAchat, Client client, Ordonnance ordonnance) {
         this(dateAchat, client);
         this.setOrdonnance(ordonnance);
         this.listMedAchat = new ArrayList<>();
-        setListMedAchat(this.listMedAchat); // recup listMedOrdo
+        this.setListMedAchat(ordonnance); // recup listMedOrdo to listMedAchat
     }
 
     // Getters et Setters
@@ -63,20 +62,15 @@ public class Achat {
         return this.listMedAchat;
     }
 
-    public  void setListMedAchat(List<Medicament> listMedAchat) { // from Ordo
-        this.listMedAchat.addAll(ordonnance.listMedOrdo);
+    public  void setListMedAchat(Ordonnance ordonnance) { // from Ordo
+        this.listMedAchat.addAll(ordonnance.getListMedOrdo());
     }
 
     public Ordonnance getOrdonnance() {
         return this.ordonnance;
     }
     public void setOrdonnance(Ordonnance ordonnance) {
-//        if (ordonnance != null) {
-        this.ordonnance = ordonnance;
-//            (Medicament med : getListMedAchat()){
-//                Ordonnance.addMedOrdo(med);
-//            }
-
+            this.ordonnance = ordonnance;
     }
 
     public double getTotal() {
@@ -100,7 +94,6 @@ public class Achat {
         } else if (ordonnance != null) {
             this.listMedAchat.addAll(ordonnance.getListMedOrdo());
         }
-        calMontants();
         return false;
     }
 

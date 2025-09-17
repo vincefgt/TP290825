@@ -40,8 +40,8 @@ public class Person {
         return this.firstName;
     }
     public void setFirstName(String firstName) {
-        if (Regex.testNotEmpty(firstName) || Regex.testChar(firstName))
-            throw new IllegalArgumentException("firstName required & without number");
+        //if (Regex.testNotEmpty(firstName) || Regex.testChar(firstName))
+        //    throw new IllegalArgumentException("firstName required & without number");
         this.firstName = capitalize(firstName);
     }
 
@@ -51,7 +51,7 @@ public class Person {
     public void setLastName(String lastName) {
         if (Regex.testNotEmpty(lastName)||Regex.testChar(lastName))
             throw new IllegalArgumentException("lastName required & without number");
-        this.lastName = capitalize(lastName);
+        this.lastName = capitalize(lastName).toUpperCase();
     }
 
     public String getAddress() {

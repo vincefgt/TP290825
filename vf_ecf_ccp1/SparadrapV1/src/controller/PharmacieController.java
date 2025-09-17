@@ -138,7 +138,6 @@ public class PharmacieController {
         }
         return false;
     }
-
     public static List<Mutuelle> getListMutuelles() {
         return listMutuelles;
     }
@@ -223,7 +222,6 @@ public class PharmacieController {
         for (Medicament med : getListMed()) {
             med.reduireQuantite(1); // Réduction d'1 unité par défaut
         }
-
         // Recal montants
         achat.calMontants();
         // Add to list ALL Achats

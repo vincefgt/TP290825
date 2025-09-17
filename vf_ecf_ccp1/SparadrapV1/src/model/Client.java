@@ -1,5 +1,6 @@
 package model;
 
+import controller.PharmacieController;
 import controller.Regex;
 
 import java.time.LocalDate;
@@ -64,6 +65,10 @@ public class Client extends Person {
 
     @Override
     public String toString() {
-        return getLastName()+" "+getFirstName()+" (N° SS: "+getNbSS()+")";
+        if (super.getLastName().equals(PharmacieController.getListClients().getFirst().getLastName())){
+            return super.getLastName();
+        } else {
+            return getLastName()+" "+getFirstName() +" (N° SS: "+getNbSS()+")";
+        }
     }
 }
