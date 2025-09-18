@@ -1175,15 +1175,17 @@ public class SparadrapMainInterface extends JFrame {
     /**
      * Class DialogBox
      */
-    private static class AchatDialog extends JDialog {
+    public static class AchatDialog extends JDialog {
         private JList<Medicament> medicamentsList;
         private DefaultListModel<Medicament> medicamentsListModel;
-        private boolean confirmed = false;
+        private JList<Medicament> cartList;
+        private DefaultListModel<Medicament> cartListModel;
         private JComboBox<Client> clientCombo;
         private JComboBox<Medecin> medecinsCombo;
         private boolean typeAchat;
         private JComboBox<Achat> achatsCombo;
         public JFormattedTextField dateOrdoField;
+        boolean confirmed;
 
         public AchatDialog(Frame parent, String titleFrame,boolean typeAchat) {
             super(parent, titleFrame ,true);
@@ -1238,13 +1240,22 @@ public class SparadrapMainInterface extends JFrame {
             medicamentsList = new JList<>(medicamentsListModel);
             medicamentsList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION); // selection multiple
             JScrollPane scrollPane = new JScrollPane(medicamentsList);
-            scrollPane.setBorder(BorderFactory.createTitledBorder("Sélectionner les médicaments"));
+            scrollPane.setBorder(BorderFactory.createTitledBorder("\uD83D\uDC8A Sélectionner les médicaments"));
+
+            // bracket
+            cartListModel = new DefaultListModel<>();
+            cartList = new JList<>(cartListModel);
+            JScrollPane scrollPaneB = new JScrollPane(cartList);
+            scrollPaneB.setBorder(BorderFactory.createTitledBorder("\uD83D\uDED2 Panier"));
+
 
             // Total panel
             double total = 0.0;
             double remb = 0.0;
+            double totalCart = 0.0;
+            double rembCart = 0.0;
             Mutuelle mut;
-            JPanel totalPanel = new JPanel(new GridLayout(5, 1));
+            JPanel totalPanel = new JPanel(new GridLayout(9, 1));
             totalPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
             totalPanel.setPreferredSize(new Dimension(200, 100));
             JLabel tLabel = new JLabel("Total: ");
@@ -1252,30 +1263,42 @@ public class SparadrapMainInterface extends JFrame {
             JLabel rLabel = new JLabel("Remb: ");
             JLabel rembLabel = new JLabel(remb+ " €");
             JLabel mutLabel = new JLabel("");
+            JLabel tCartLabel = new JLabel("Total panier: ");
+            JLabel totalCartLabel = new JLabel(totalCart +" €");
+            JLabel rCartLabel = new JLabel("Remb panier: ");
+            JLabel rembCartLabel = new JLabel(rembCart+ " €");
+            JLabel mutCartLabel = new JLabel("");
+
             totalPanel.add(tLabel);
             tLabel.setFont(new Font("Arial", Font.BOLD, 14));
             tLabel.setHorizontalAlignment(SwingConstants.CENTER);
             tLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-//
             totalPanel.add(totalLabel);
             totalLabel.setFont(new Font("Arial", Font.ITALIC, 18));
             totalLabel.setHorizontalAlignment(SwingConstants.CENTER);
             totalLabel.setVerticalAlignment(SwingConstants.TOP);
-
             totalPanel.add(rLabel);
             rLabel.setFont(new Font("Arial", Font.BOLD, 14));
             rLabel.setHorizontalAlignment(SwingConstants.CENTER);
             rLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-
             totalPanel.add(rembLabel);
             rembLabel.setHorizontalAlignment(SwingConstants.CENTER);
             rembLabel.setVerticalAlignment(SwingConstants.TOP);
             rembLabel.setFont(new Font("Arial", Font.ITALIC, 18));
 
+            JSeparator separator = new JSeparator(SwingConstants.HORIZONTAL);
+            totalPanel.add(separator);
+
+            totalPanel.add(tCartLabel);
+            totalPanel.add(totalCartLabel);
+            totalPanel.add(rCartLabel);
+            totalPanel.add(rembCartLabel);
+
             totalPanel.add(mutLabel);
             mutLabel.setHorizontalAlignment(SwingConstants.CENTER);
             mutLabel.setVerticalAlignment(SwingConstants.TOP);
             mutLabel.setForeground(Color.LIGHT_GRAY);
+
 
             // listening selection change Med/Client
             medicamentsList.addListSelectionListener(new ListSelectionListener() {
@@ -1324,7 +1347,56 @@ public class SparadrapMainInterface extends JFrame {
                     }
                 }
             });
-
+            // double clic action medicamentList
+            medicamentsList.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (e.getClickCount() == 2 && !e.isConsumed()) {
+                        e.consume(); // avoid multiple triggers
+                        int index = medicamentsList.locationToIndex(e.getPoint());
+                        if (index >= 0) {
+                            Medicament med = medicamentsListModel.getElementAt(index);
+                            cartListModel.addElement(med);
+                        }
+                    }
+                }
+            });
+            // double clic action cartList
+            cartList.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (e.getClickCount() == 2 && !e.isConsumed()) {
+                        e.consume(); // avoid multiple triggers
+                        int index = cartList.locationToIndex(e.getPoint());
+                        if (index >= 0) {
+                            Medicament med = cartListModel.getElementAt(index);
+                            cartListModel.removeElement(med);
+                        }
+                    }
+                }
+            });
+            cartList.addListSelectionListener(new ListSelectionListener() {
+                @Override
+                public void valueChanged(ListSelectionEvent e) {
+                    java.util.List<Medicament> selectedMedsCart = cartList.getSelectedValuesList();
+                    double total = 0.0;
+                    double remb = 0.0;
+                    for (Medicament med : selectedMedsCart) {
+                        total += med.getPrice();
+                    }
+                    totalCartLabel.setText(PharmacieController.formatTwoDec(total)+" €");
+                    Client selectedClient = (Client) clientCombo.getSelectedItem();
+                    if (selectedClient != null) {
+                        if (selectedClient.getMutuelle() != null) {
+                            remb = selectedClient.getMutuelle().calcRemb(total);
+                        } else {
+                            remb = 0.0;
+                        }
+                    }
+                    rembCartLabel.setText(remb+ " €");
+                    mutCartLabel.setText(selectedClient.getMutuelle().getLastName()+" "+selectedClient.getMutuelle().getTauxRemb()+"%");
+                };
+            });
             // Buttons
             JPanel buttonPanel = new JPanel(new FlowLayout());
             JButton confirmButton = new JButton("Confirmer");
@@ -1348,12 +1420,16 @@ public class SparadrapMainInterface extends JFrame {
             topPanel.add(clientPanel);
             topPanel.add(medecinPanel);
             topPanel.add(dateOrdoPanel);
+            JPanel centerPanel = new JPanel(new GridLayout(2, 1));
+            centerPanel.add(scrollPane);
+            centerPanel.add(scrollPaneB);
+
             if (this.typeAchat){
                 medecinPanel.setVisible(true);
                 dateOrdoPanel.setVisible(true);
             }
             mainPanel.add(topPanel, BorderLayout.NORTH);
-            mainPanel.add(scrollPane, BorderLayout.CENTER);
+            mainPanel.add(centerPanel, BorderLayout.CENTER);
             mainPanel.add(totalPanel, BorderLayout.EAST);
             mainPanel.add(buttonPanel, BorderLayout.SOUTH);
             
