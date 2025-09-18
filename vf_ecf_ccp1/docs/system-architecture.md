@@ -118,6 +118,8 @@ Prescription Creation → Purchase Processing
 - **IntelliJ IDEA**: Primary IDE with UI Designer
 - **Git**: Version control
 - **PowerDesigner**: UML modeling
+- **Plantuml**: UML Pluging EntiliJ
+- **Diagrams.net**: UML Pluging  EntiliJ
 
 ## 7. Testing Strategy
 
@@ -158,11 +160,13 @@ Prescription Creation → Purchase Processing
 ## 10. Future Enhancements
 
 ### 10.1 Planned Features
+- USECASE: Search by NbSS / Update Achat / Delete Achat
 - Database persistence layer
 - Multi-user support with authentication
 - Advanced reporting and analytics
 - Web-based interface
 - Mobile application support
+
 
 ### 10.2 Scalability Considerations
 - Database integration for large datasets

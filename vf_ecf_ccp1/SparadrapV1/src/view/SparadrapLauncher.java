@@ -144,7 +144,7 @@ public class SparadrapLauncher {
 
             // Create med (5)
             Medicament doliprane = new Medicament("Doliprane 1000mg", catMed.ANTALGIQUE, 
-                    5.20, "2023-01-01", 50);
+                    15.20, "2023-01-01", 50);
             Medicament aspirine = new Medicament("Aspirine 500mg", catMed.ANALGESIQUE, 
                     3.80, "2023-01-01", 30);
             Medicament ibuprofene = new Medicament("Ibuprofène 200mg", catMed.ANTIINFLAMMATOIRE, 

@@ -1,8 +1,9 @@
 # Sparadrap API Documentation
+### Generate with IA.
 
 ## PharmacieController API Reference
 
-### Client Management
+### Client Management 
 
 #### addClient(Client client)
 ```java
