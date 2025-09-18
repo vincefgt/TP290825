@@ -10,6 +10,69 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Main controller class for the Sparadrap Pharmacy Management System.
+ * 
+ * <p>This class serves as the central business logic controller, managing all
+ * pharmacy operations including client registration, medication inventory,
+ * prescription handling, and purchase processing. It implements a singleton-like
+ * pattern using static collections to ensure centralized data management.</p>
+ * 
+ * <h2>Key Responsibilities:</h2>
+ * <ul>
+ *   <li>Client lifecycle management (CRUD operations)</li>
+ *   <li>Doctor registration and patient assignment</li>
+ *   <li>Medication inventory management</li>
+ *   <li>Insurance company management</li>
+ *   <li>Prescription creation and medication assignment</li>
+ *   <li>Purchase processing (direct and prescription-based)</li>
+ *   <li>Stock management and validation</li>
+ *   <li>Financial calculations and reimbursements</li>
+ * </ul>
+ * 
+ * <h2>Data Collections:</h2>
+ * <p>The controller maintains static collections for all entities:</p>
+ * <ul>
+ *   <li>{@code listClients} - All registered clients</li>
+ *   <li>{@code listMedecins} - All registered doctors</li>
+ *   <li>{@code listMed} - All available medications</li>
+ *   <li>{@code listMutuelles} - All insurance companies</li>
+ *   <li>{@code listOrdonnances} - All prescriptions</li>
+ *   <li>{@code listAchats} - All purchase transactions</li>
+ * </ul>
+ * 
+ * <h2>Business Rules:</h2>
+ * <ul>
+ *   <li>Clients must have valid social security numbers (15 digits)</li>
+ *   <li>Doctors must have valid agreement numbers (11 digits)</li>
+ *   <li>Stock levels are automatically updated during purchases</li>
+ *   <li>Insurance reimbursements are calculated automatically</li>
+ *   <li>Prescriptions link doctors, clients, and medications</li>
+ * </ul>
+ * 
+ * <h2>Usage Example:</h2>
+ * <pre>{@code
+ * // Initialize controller
+ * PharmacieController controller = new PharmacieController();
+ * 
+ * // Add entities
+ * Client client = new Client("John", "Doe", ...);
+ * controller.addClient(client);
+ * 
+ * // Create prescription-based purchase
+ * boolean success = controller.createNewAchatWithOrdonnance(
+ *     LocalDate.now(), client, LocalDate.now(), doctor);
+ * }</pre>
+ * 
+ * @author Sparadrap Development Team
+ * @version 1.0
+ * @since 2025-01-15
+ * @see model.Client
+ * @see model.Medecin
+ * @see model.Medicament
+ * @see model.Achat
+ * @see model.Ordonnance
+ */
 public class PharmacieController {
     // Lists
     public static java.util.List<Client> listClients;

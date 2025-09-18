@@ -1,0 +1,275 @@
+@startuml Sparadrap_Class_Diagram
+
+!theme plain
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+skinparam packageStyle rectangle
+
+package "Model Layer" {
+    abstract class Person {
+        -firstName: String
+        -lastName: String
+        -address: String
+        -email: String
+        -nbState: int
+        -city: String
+        -phone: String
+        +getFirstName(): String
+        +setFirstName(String): void
+        +getLastName(): String
+        +setLastName(String): void
+        +getAddress(): String
+        +setAddress(String): void
+        +getEmail(): String
+        +setEmail(String): void
+        +getNbState(): int
+        +setNbState(int): void
+        +getCity(): String
+        +setCity(String): void
+        +getPhone(): String
+        +setPhone(String): void
+        +{static}capitalize(String): String
+    }
+
+    class Client {
+        -nbSS: long
+        -dateBirth: LocalDate
+        -mut: Mutuelle
+        -medecinTraitant: Medecin
+        +{static}MapClient: Map<String, Client>
+        +getNbSS(): long
+        +setNbSS(long): void
+        +getDateBirth(): String
+        +setDateBirth(LocalDate): void
+        +getMutuelle(): Mutuelle
+        +setMutuelle(Mutuelle): void
+        +getMedecinTraitant(): Medecin
+        +setMedecinTraitant(Medecin): void
+    }
+
+    class Medecin {
+        -nbAgreement: Long
+        -patients: List<Client>
+        -idMedecin: String
+        +getNbAgreement(): long
+        +setNbAgreement(long): void
+        +getPatients(): List<Client>
+        +addPatient(Client): void
+        +deletePatient(Client): boolean
+        +getIdMedecin(): String
+        +setIdMedecin(String): void
+    }
+
+    class Mutuelle {
+        -dep: Dep
+        -tauxRemb: double
+        +getDep(): Dep
+        +setDep(Dep): void
+        +getTauxRemb(): double
+        +setTauxRemb(double): void
+        +calcRemb(double): double
+    }
+
+    class Medicament {
+        -nameMed: String
+        -cat: catMed
+        -price: double
+        -datOnMarket: LocalDate
+        -stock: int
+        +getNameMed(): String
+        +setNameMed(String): void
+        +getCat(): catMed
+        +setCat(catMed): void
+        +getPrice(): double
+        +setPrice(double): void
+        +getDatOnMarket(): LocalDate
+        +setDatOnMarket(String): void
+        +getStock(): int
+        +setStock(int): void
+        +reduireQuantite(int): boolean
+    }
+
+    class Ordonnance {
+        -dateOrdo: LocalDate
+        -patient: Client
+        -medecin: Medecin
+        -listMedOrdo: List<Medicament>
+        +getDateOrdo(): String
+        +setDateOrdo(LocalDate): void
+        +getPatient(): Client
+        +setPatient(Client): void
+        +getMedecin(): Medecin
+        +setMedecin(Medecin): void
+        +getListMedOrdo(): List<Medicament>
+        +addMedOrdo(Medicament): void
+        +suppMedOrdo(Medicament): boolean
+    }
+
+    class Achat {
+        -dateAchat: LocalDate
+        -client: Client
+        -listMedAchat: List<Medicament>
+        -ordonnance: Ordonnance
+        -Total: double
+        -Remb: double
+        +getDateAchat(): String
+        +setDateAchat(LocalDate): void
+        +getClient(): Client
+        +setClient(Client): void
+        +getListMedAchat(): List<Medicament>
+        +getOrdonnance(): Ordonnance
+        +setOrdonnance(Ordonnance): void
+        +getTotal(): double
+        +getRemb(): double
+        +addMedAchat(Medicament): boolean
+        +calMontants(): void
+        +{static}IsAchatDirect(Ordonnance): boolean
+    }
+
+    enum catMed {
+        ANTALGIQUE
+        ANALGESIQUE
+        ANTIINFLAMMATOIRE
+        ANTIBIOTIQUE
+        ANTIVIRAL
+        VITAMINE
+        ANTIDEPRESSEUR
+        DIABETIQUE
+        +values(): catMed[]
+    }
+
+    enum Dep {
+        AIN(1, "Ain")
+        PARIS(75, "Paris")
+        RHONE(69, "Rhône")
+        -codeDep: int
+        -nameDep: String
+        +getCodeDep(): int
+        +getNameDep(): String
+    }
+
+    enum DateFilter {
+        TODAY
+        THIS_WEEK
+        THIS_MONTH
+        THIS_YEAR
+        ALL_TIME
+        +getDateFilterFromString(String): DateFilter
+    }
+}
+
+package "Controller Layer" {
+    class PharmacieController {
+        +{static}listClients: List<Client>
+        +{static}listMedecins: List<Medecin>
+        +{static}listMed: List<Medicament>
+        +{static}listMutuelles: List<Mutuelle>
+        +{static}listOrdonnances: List<Ordonnance>
+        +{static}listAchats: List<Achat>
+        +{static}addClient(Client): boolean
+        +{static}addMedecin(Medecin): boolean
+        +{static}addMed(Medicament): boolean
+        +{static}addMutuelle(Mutuelle): boolean
+        +{static}addOrdonnance(Ordonnance): boolean
+        +{static}createNewAchatWithOrdonnance(...): boolean
+        +{static}addMedToOrdo(Ordonnance, Medicament): boolean
+        +{static}savingAchat(Achat): boolean
+        +{static}formatTwoDec(double): double
+        +SearchSS(long): Client
+        +searchAgreement(long): Medecin
+        +searchLastName(String): Medicament
+        +getAchatsClient(Client): List<Achat>
+    }
+
+    class Regex {
+        +{static}paramRegex: String
+        +{static}testNotEmpty(T): boolean
+        +{static}testNullObj(Object): boolean
+        +{static}testDigitLong(long): boolean
+        +{static}testDigitDec(double): boolean
+        +{static}testEmail(String): boolean
+        +{static}testChar(String): boolean
+        +{static}testDate(LocalDate): boolean
+        +{static}setParamRegex(String): void
+    }
+}
+
+package "View Layer" {
+    class SparadrapMainInterface {
+        -controller: PharmacieController
+        +createClientDialog(): void
+        +createMedecinDialog(): void
+        +createAchatDialog(): void
+        +updateTables(): void
+        +showStatistics(): void
+    }
+
+    class PharmacieView {
+        -controller: PharmacieController
+        -scanner: Scanner
+        +afficherMenu(): void
+        +creerAchatAvecOrdonnance(): void
+        +afficherListeAchats(List<Achat>): void
+        +afficherErreur(String): void
+        +afficherSucces(String): void
+    }
+
+    class SparadrapLauncher {
+        +{static}main(String[]): void
+        +{static}initializeTestData(): PharmacieController
+    }
+}
+
+package "Exception Layer" {
+    class InputException {
+        +InputException(String)
+    }
+}
+
+' Inheritance relationships
+Person <|-- Client
+Person <|-- Medecin
+Person <|-- Mutuelle
+Medecin <|-- Ordonnance
+RuntimeException <|-- InputException
+
+' Association relationships
+Client "0..1" -- "1..*" Mutuelle : has insurance >
+Client "0..1" -- "1..*" Medecin : treated by >
+Client "1" -- "0..*" Achat : makes >
+Client "1" -- "0..*" Ordonnance : receives >
+
+Medecin "1" -- "0..*" Ordonnance : prescribes >
+Medecin "1" -- "0..*" Client : treats >
+
+Ordonnance "0..1" -- "1" Achat : basis for >
+Ordonnance "1" -- "1..*" Medicament : contains >
+
+Achat "1" -- "1..*" Medicament : includes >
+
+Medicament "1" -- "1" catMed : categorized as >
+Mutuelle "1" -- "1" Dep : located in >
+
+' Controller relationships
+PharmacieController ..> Client : manages
+PharmacieController ..> Medecin : manages
+PharmacieController ..> Medicament : manages
+PharmacieController ..> Mutuelle : manages
+PharmacieController ..> Ordonnance : manages
+PharmacieController ..> Achat : manages
+
+' View relationships
+SparadrapMainInterface ..> PharmacieController : uses
+PharmacieView ..> PharmacieController : uses
+
+' Utility relationships
+PharmacieController ..> Regex : validates with
+Person ..> InputException : throws
+
+note top of PharmacieController : "Singleton pattern\nCentralized business logic\nStatic data management"
+
+note top of Achat : "Supports both direct purchases\nand prescription-based purchases"
+
+note top of Regex : "Validation utility class\nConfigurable regex patterns\nInput sanitization"
+
+@enduml

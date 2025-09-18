@@ -8,6 +8,60 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Represents a pharmacy client (customer) in the Sparadrap system.
+ * 
+ * <p>This class extends {@link Person} and adds client-specific attributes
+ * such as social security number, birth date, insurance information, and
+ * treating doctor. Clients are the primary customers of the pharmacy and
+ * can make purchases either directly or through prescriptions.</p>
+ * 
+ * <h2>Key Features:</h2>
+ * <ul>
+ *   <li>Social Security Number validation (15 digits)</li>
+ *   <li>Insurance company association for reimbursements</li>
+ *   <li>Treating doctor assignment</li>
+ *   <li>Birth date tracking for age-related validations</li>
+ *   <li>Automatic registration in global client map</li>
+ * </ul>
+ * 
+ * <h2>Validation Rules:</h2>
+ * <ul>
+ *   <li>Social Security Number must be exactly 15 digits</li>
+ *   <li>Birth date must be a valid past date</li>
+ *   <li>All inherited Person validations apply</li>
+ * </ul>
+ * 
+ * <h2>Relationships:</h2>
+ * <ul>
+ *   <li><strong>Insurance</strong>: Optional association with {@link Mutuelle}</li>
+ *   <li><strong>Doctor</strong>: Optional association with treating {@link Medecin}</li>
+ *   <li><strong>Purchases</strong>: One-to-many relationship with {@link Achat}</li>
+ *   <li><strong>Prescriptions</strong>: One-to-many relationship with {@link Ordonnance}</li>
+ * </ul>
+ * 
+ * <h2>Usage Example:</h2>
+ * <pre>{@code
+ * // Create a new client
+ * Client client = new Client(
+ *     "John", "Doe", "123 Main St",
+ *     75001, "Paris", "0123456789",
+ *     "john.doe@email.com", 123456789012345L,
+ *     LocalDate.of(1980, 1, 1), insurance, doctor
+ * );
+ * 
+ * // The client is automatically added to the global map
+ * Client found = Client.MapClient.get("Doe John");
+ * }</pre>
+ * 
+ * @author Sparadrap Development Team
+ * @version 1.0
+ * @since 2025-01-15
+ * @see Person
+ * @see Mutuelle
+ * @see Medecin
+ * @see Achat
+ */
 public class Client extends Person {
     private long nbSS;
     private LocalDate dateBirth;

@@ -5,6 +5,64 @@ import controller.Regex;
 
 import static java.lang.String.format;
 
+/**
+ * Represents a medical doctor in the Sparadrap pharmacy system.
+ * 
+ * <p>This class extends {@link Person} and adds doctor-specific attributes
+ * such as medical agreement number, patient list, and unique identifier.
+ * Doctors can prescribe medications through {@link Ordonnance} objects and
+ * serve as treating doctors for {@link Client} objects.</p>
+ * 
+ * <h2>Key Features:</h2>
+ * <ul>
+ *   <li>Medical agreement number validation (11 digits)</li>
+ *   <li>Patient management (add/remove patients)</li>
+ *   <li>Automatic ID generation</li>
+ *   <li>Prescription creation capabilities</li>
+ * </ul>
+ * 
+ * <h2>Validation Rules:</h2>
+ * <ul>
+ *   <li>Agreement number must be exactly 11 digits</li>
+ *   <li>All inherited Person validations apply</li>
+ *   <li>Patient list maintains referential integrity</li>
+ * </ul>
+ * 
+ * <h2>Patient Management:</h2>
+ * <p>Doctors maintain a list of their patients with the following operations:</p>
+ * <ul>
+ *   <li>{@link #addPatient(Client)} - Add a new patient</li>
+ *   <li>{@link #deletePatient(Client)} - Remove a patient</li>
+ *   <li>{@link #getPatients()} - Get immutable copy of patient list</li>
+ * </ul>
+ * 
+ * <h2>ID Generation:</h2>
+ * <p>Doctor IDs are automatically generated using the format "MED####" where
+ * #### is a sequential number based on the total number of doctors in the system.</p>
+ * 
+ * <h2>Usage Example:</h2>
+ * <pre>{@code
+ * // Create a new doctor
+ * Medecin doctor = new Medecin(
+ *     "Pierre", "Dupont", "10 Medical St",
+ *     "dr.dupont@hospital.fr", 75008, "Paris",
+ *     "0140506070", 12345678910L, "MED001"
+ * );
+ * 
+ * // Add a patient
+ * doctor.addPatient(client);
+ * 
+ * // Get patient list (immutable copy)
+ * List<Client> patients = doctor.getPatients();
+ * }</pre>
+ * 
+ * @author Sparadrap Development Team
+ * @version 1.0
+ * @since 2025-01-15
+ * @see Person
+ * @see Client
+ * @see Ordonnance
+ */
 public class Medecin extends Person {
 
     private Long nbAgreement;

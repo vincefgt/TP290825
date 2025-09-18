@@ -11,6 +11,75 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a purchase transaction in the Sparadrap pharmacy system.
+ * 
+ * <p>This class handles both direct purchases (without prescription) and
+ * prescription-based purchases. It manages the financial calculations including
+ * total amounts and insurance reimbursements, while also handling stock
+ * management for purchased medications.</p>
+ * 
+ * <h2>Purchase Types:</h2>
+ * <ul>
+ *   <li><strong>Direct Purchase</strong>: Client buys medications without prescription</li>
+ *   <li><strong>Prescription Purchase</strong>: Client buys medications based on doctor's prescription</li>
+ * </ul>
+ * 
+ * <h2>Key Features:</h2>
+ * <ul>
+ *   <li>Automatic total calculation based on medication prices</li>
+ *   <li>Insurance reimbursement calculation</li>
+ *   <li>Stock level validation and updates</li>
+ *   <li>Date tracking for purchase history</li>
+ *   <li>Support for both purchase types</li>
+ * </ul>
+ * 
+ * <h2>Financial Calculations:</h2>
+ * <p>The system automatically calculates:</p>
+ * <ul>
+ *   <li><strong>Total Amount</strong>: Sum of all medication prices</li>
+ *   <li><strong>Reimbursement</strong>: Based on client's insurance rate</li>
+ *   <li><strong>Net Amount</strong>: Total minus reimbursement</li>
+ * </ul>
+ * 
+ * <h2>Stock Management:</h2>
+ * <p>During purchase processing:</p>
+ * <ol>
+ *   <li>System validates medication availability</li>
+ *   <li>Stock levels are reduced by purchase quantity</li>
+ *   <li>Out-of-stock items prevent purchase completion</li>
+ * </ol>
+ * 
+ * <h2>Usage Examples:</h2>
+ * 
+ * <h3>Direct Purchase:</h3>
+ * <pre>{@code
+ * // Create direct purchase
+ * Achat directPurchase = new Achat(LocalDate.now(), client);
+ * directPurchase.addMedAchat(medication1);
+ * directPurchase.addMedAchat(medication2);
+ * 
+ * // Process purchase
+ * PharmacieController.savingAchat(directPurchase);
+ * }</pre>
+ * 
+ * <h3>Prescription Purchase:</h3>
+ * <pre>{@code
+ * // Create prescription-based purchase
+ * Achat prescriptionPurchase = new Achat(LocalDate.now(), client, prescription);
+ * 
+ * // Medications are automatically added from prescription
+ * PharmacieController.savingAchat(prescriptionPurchase);
+ * }</pre>
+ * 
+ * @author Sparadrap Development Team
+ * @version 1.0
+ * @since 2025-01-15
+ * @see Client
+ * @see Medicament
+ * @see Ordonnance
+ * @see Mutuelle
+ */
 // Classe Achat représentant un achat (avec ou sans ordonnance)
 public class Achat {
     private LocalDate dateAchat;
