@@ -122,7 +122,7 @@ public class SparadrapMainInterface extends JFrame {
     private JButton updateMutButton;
     private JButton cancelMutButton;
     private JButton validationMutButton;
-    private JTextField mutPhoneField;
+    private JFormattedTextField mutPhoneField;
     private JTextField mutEmailField;
     private JTextField mutNbStateField;
     private JTextField mutCityField;
