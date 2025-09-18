@@ -77,7 +77,7 @@ public class Medecin extends Person {
         this.idMedecin = generateId(idMedecin);
         this.patients = new java.util.ArrayList<>();
     }
-    public Medecin(String lastName, String firstName, String city, long nbAgreement,String idMedecin) {
+    public Medecin(String firstName, String lastName, String city, long nbAgreement,String idMedecin) {
         super(firstName,lastName,city);
         this.setNbAgreement(nbAgreement);
         this.setIdMedecin(idMedecin);
@@ -142,7 +142,7 @@ public class Medecin extends Person {
 
     @Override
     public String toString() {
-        if (super.getLastName().equals(PharmacieController.getListMedecins().getFirst().getLastName())) {
+        if (super.getLastName().equals("Tous Medecins")){//PharmacieController.getListMedecins().getFirst().getLastName())) {
             return super.getLastName();
         } else  {
             return "Dr "+super.getLastName() + " " + super.getFirstName(); //+" (Agrement: "+nbAgreement+")";

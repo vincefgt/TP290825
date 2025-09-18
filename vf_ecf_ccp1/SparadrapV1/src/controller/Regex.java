@@ -94,7 +94,7 @@ public class Regex {
             //"[a-zA-Z .-]+" // letters + "."," ","-"
             REGEX_MOTS2);
     public static boolean testChar(String input) {
-        return !pChar.matcher(input).matches(); //= error
+        return   input.isEmpty() || !pChar.matcher(input).matches(); //= error
     }
 
     /**

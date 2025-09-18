@@ -111,7 +111,7 @@ public class SparadrapLauncher {
             initController.addMutuelle(secu);
             
             // Create medecin (3)
-            Medecin defaultMedecin = new Medecin("-----", "Tous Medecins", "Nc",
+            Medecin defaultMedecin = new Medecin("default", "Tous Medecins", "Nc",
                     "default@medecin.fr", 0, "Nc", "0000000000",
                     12345678910L, "MED000"); // do no delete
             Medecin drDupont = new Medecin("Charles", "Dupont", "15 Rue Médicale",
@@ -125,7 +125,7 @@ public class SparadrapLauncher {
             initController.addMedecin(drMartin);
             
             // Create client (4)
-            Client defaultClient = new Client("------", "Tous Clients", "Nc",
+            Client defaultClient = new Client("default", "Tous Clients", "Nc",
                     0, "Nc", "0000000000", "default@client.fr", 123456789101112L,
                      LocalDate.of(1900, 1, 1), null, null); // default do not delete
             Client client1 = new Client("Durand", "Jean", "123 Rue de la République",
@@ -144,15 +144,15 @@ public class SparadrapLauncher {
 
             // Create med (5)
             Medicament doliprane = new Medicament("Doliprane 1000mg", catMed.ANTALGIQUE, 
-                    15.20, "2023-01-01", 50);
+                    15.20, "1986-03-21", 50);
             Medicament aspirine = new Medicament("Aspirine 500mg", catMed.ANALGESIQUE, 
-                    3.80, "2023-01-01", 30);
+                    3.80, "2023-01-10", 30);
             Medicament ibuprofene = new Medicament("Ibuprofène 200mg", catMed.ANTIINFLAMMATOIRE, 
-                    4.50, "2023-01-01", 25);
+                    4.50, "2024-01-01", 25);
             Medicament vitamine = new Medicament("Vitamine C", catMed.VITAMINE, 
-                    8.90, "2023-01-01", 40);
+                    8.90, "2023-02-01", 40);
             Medicament antibiotique = new Medicament("Amoxicilline", catMed.ANTIBIOTIQUE, 
-                    12.50, "2023-01-01", 20);
+                    12.50, "2025-09-04", 20);
             initController.addMed(doliprane);
             initController.addMed(aspirine);
             initController.addMed(ibuprofene);

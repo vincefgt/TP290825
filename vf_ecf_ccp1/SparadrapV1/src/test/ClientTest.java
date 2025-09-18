@@ -30,7 +30,7 @@ void testCreationClientValide() {
                 111222333444555L, LocalDate.of(1980, 6, 15), mutuelle, medecin);
     });
 
-    assertEquals("Jean", client.getLastName());
+    assertEquals("JEAN", client.getLastName());
     assertEquals("Dupont", client.getFirstName());
     assertEquals(111222333444555L, client.getNbSS());
     assertEquals(mutuelle, client.getMutuelle());
@@ -117,7 +117,7 @@ void testToString() {
             75001, "Paris", "0123456789", "jean@test.com",
             111222333444555L, LocalDate.of(1980, 6, 15), null, null);
 
-    String expected = "Client: Jean Dupont (N° SS: 111222333444555)";
+    String expected = "JEAN Dupont (N° SS: 111222333444555)";
     assertEquals(expected, client.toString());
 }
 }

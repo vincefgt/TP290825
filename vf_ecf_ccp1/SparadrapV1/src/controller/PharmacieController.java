@@ -228,7 +228,6 @@ public class PharmacieController {
         if (client == null || medecin == null) {
             return false;
         }
-        
         try {
             // Create new ordonnance
             Ordonnance ordonnance = new Ordonnance(dateOrdo, medecin, client);

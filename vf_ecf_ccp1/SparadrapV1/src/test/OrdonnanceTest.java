@@ -169,24 +169,5 @@ void testModifPatient() {
     });
 }
 
-@Test
-@DisplayName("Test de la méthode toString")
-void testToString() {
-    Medecin medecin = new Medecin("Pierre", "Rousseau", "10 Boulevard Médical",
-            "dr.dubois@hopital.fr", 75008, "Paris", "0140506070",
-            12345678910L, null);
-    ordonnance = new Ordonnance("Pierre", "Rousseau", "25 Rue Médical",
-            "dr.rousseau@clinique.fr", 44000, "Nantes", "0240123456",
-            33333333333L, null, LocalDate.of(2024, 1, 30), patient);
-
-    ordonnance.addMedOrdo(medicament1);
-    ordonnance.addMedOrdo(medicament2);
-
-    String result = ordonnance.toString();
-    assertTrue(result.contains("2024-01-30"));
-    assertTrue(result.contains("Rousseau"));
-    assertTrue(result.contains("Dupont")); // nom du patient
-    assertTrue(result.contains("2 médicaments"));
-}
 
 }

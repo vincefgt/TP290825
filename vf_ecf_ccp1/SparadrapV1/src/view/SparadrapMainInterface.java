@@ -973,13 +973,16 @@ public class SparadrapMainInterface extends JFrame {
     }
     private void loadMedicamentsData() {
         medicamentsTableModel.setRowCount(0);
-        for (Medicament med : PharmacieController.getListMed()) {
+        List<Medicament> sListMed = PharmacieController.getListMed().subList(0, PharmacieController.getListMed().size());
+        sListMed.sort(Comparator.comparing(m -> m.getNameMed().toLowerCase()));
+
+        for (Medicament med : sListMed) {
             Object[] row = {
                 med.getNameMed(),
                 med.getCat().toString(),
                 String.format("%.2f €", med.getPrice()),
                 med.getStock(),
-                med.getDatOnMarket().toString()
+                med.getDatOnMarket().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
             };
             medicamentsTableModel.addRow(row);
         }
@@ -1878,7 +1881,7 @@ public class SparadrapMainInterface extends JFrame {
         assert selectedClientFilter != null; // not be null
         clientsTableModel.setRowCount(0);
         List<Client> sListClient = PharmacieController.getListClients().subList(1, PharmacieController.getListClients().size());
-        sListClient.sort(Comparator.comparing(Client::getNbSS));
+        sListClient.sort(Comparator.comparing(m -> m.getLastName().toLowerCase()+" "+m.getFirstName().toLowerCase()));
         for (Client client : sListClient) {
            boolean clientSelected = selectedClientFilter.equals(client); //client.getLastName()+" "+client.getFirstName());
            if  (clientCombo.getSelectedIndex() == 0) {

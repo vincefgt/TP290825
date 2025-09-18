@@ -119,7 +119,7 @@ public class Client extends Person {
 
     @Override
     public String toString() {
-        if (super.getLastName().equals(PharmacieController.getListClients().getFirst().getLastName())){
+        if (super.getLastName().equals("Tous Clients")){//PharmacieController.getListClients().getFirst().getLastName())){
             return super.getLastName();
         } else {
             return getLastName()+" "+getFirstName() +" (N° SS: "+getNbSS()+")";

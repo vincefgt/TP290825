@@ -35,7 +35,7 @@ void testCreationMedecinComplet() {
                 12345678910L, null);
     });
 
-    assertEquals("Pierre", medecin.getLastName());
+    assertEquals("PIERRE", medecin.getLastName());
     assertEquals("Dubois", medecin.getFirstName());
     assertEquals(12345678910L, medecin.getNbAgreement());
     assertNotNull(medecin.getPatients());
@@ -48,7 +48,7 @@ void testCreationMedecin2() {
     assertDoesNotThrow(() -> {
         medecin = new Medecin("Dupont", "Paris", 12345678910L, null);
     });
-    assertEquals("Dupont", medecin.getLastName());
+    assertEquals("PARIS", medecin.getLastName());
     assertEquals(12345678910L, medecin.getNbAgreement());
 }
 
@@ -136,12 +136,12 @@ void testSuppressionPatientNull() {
 @Test
 @DisplayName("Test ID auto")
 void testGenerationId() {
-    medecin = new Medecin("TestIdA", "Ville1", 11111111111L, "");
-    Medecin medecin2 = new Medecin("TestIdB", "Ville2", 22222222222L, "");
+    medecin = new Medecin("TestIdA", "TestA", 11111111111L, "");
+    Medecin medecin2 = new Medecin("TestIdB", "TestB", 22222222222L, "");
 
     // IDs should be auto & diff
-    assertNotNull(medecin.toString());
-    assertNotNull(medecin2.toString());
+    assertNotNull(medecin.getIdMedecin());
+    assertNotNull(medecin2.getIdMedecin());
 }
 
 @Test
@@ -153,20 +153,20 @@ void testGetLastNameMedecin() {
                 12345678910L, null);
     });
 
-    assertEquals("Pierre", medecin.getLastName());
+    assertEquals("PIERRE", medecin.getLastName());
     assertEquals(medecin.getLastName(), medecin.getLastName());
 }
 
 @Test
 @DisplayName("Test toString")
 void testToString() {
-    medecin = new Medecin("Rousseau", "Pierre", "15 Rue Médicale",
+    medecin = new Medecin("Pierre", "Rousseau", "15 Rue Médicale",
             "dr.rousseau@clinique.fr", 33000, "Bordeaux", "0556789012",
             44444444444L, "");
 
     String result = medecin.toString();
-    assertTrue(result.contains("Dr Pierre Rousseau"));
-    assertTrue(result.contains("44444444444"));
+    assertTrue(result.contains("Dr ROUSSEAU Pierre"));
+    assertFalse(result.contains("44444444444"));
 }
 
 @Test

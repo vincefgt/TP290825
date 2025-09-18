@@ -160,6 +160,7 @@ public class Achat {
     public boolean addMedAchat(Medicament medicament) {
         if (medicament != null) {
             this.listMedAchat.add(medicament);
+            calMontants();
         } else if (ordonnance != null) {
             this.listMedAchat.addAll(ordonnance.getListMedOrdo());
         }
@@ -168,6 +169,7 @@ public class Achat {
 
     // cal montants
     public void calMontants() {
+        Total = 0;
         for (Medicament med : this.listMedAchat) {
             PharmacieController.formatTwoDec(Total += med.getPrice());
         }
@@ -180,7 +182,12 @@ public class Achat {
         Remb = 0;
     }
 }
-
+    public class Total{
+        double Total;
+        public Total(double total) {
+        this.Total = total;
+        }
+    }
     // Direct vs Ordo
     public static boolean IsAchatDirect(Ordonnance ordonnance) {
         return ordonnance == null;

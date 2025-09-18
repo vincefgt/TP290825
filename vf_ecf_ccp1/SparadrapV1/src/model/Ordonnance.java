@@ -85,10 +85,12 @@ public class Ordonnance extends Medecin{
     public List<Medicament> listMedOrdo;
 
     // Constructeur
-    public Ordonnance(String firstName,String lastName,String address,String email,int nbState,String city,String phone,long nbAgreement,String idMedecin, LocalDate dateOrdo, Client patient) {
+    public Ordonnance(String firstName,String lastName,String address,String email,int nbState,String city,String phone,Long nbAgreement,String idMedecin, LocalDate dateOrdo, Client patient) {
         super(firstName,lastName,address,email,nbState,city,phone,nbAgreement,idMedecin);
         this.setDateOrdo(dateOrdo);
         this.setPatient(patient);
+        Medecin mededin = new Medecin(firstName,lastName,address,email,nbState,city,phone,nbAgreement,null); // because do not exist
+        this.setMedecin(mededin);
         this.listMedOrdo = new ArrayList<>();
     }
     public Ordonnance(LocalDate dateOrdo,Medecin medecin,Client patient) {
