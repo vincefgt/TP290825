@@ -1,0 +1,141 @@
+sequenceDiagram
+    participant User as User/Pharmacist
+    participant View as PharmacieView
+    participant Controller as PharmacieController
+    participant Client as Client
+    participant Medecin as Medecin
+    participant Ordonnance as Ordonnance
+    participant Medicament as Medicament
+    participant Achat as Achat
+    participant Mutuelle as Mutuelle
+
+    Note over User, Mutuelle: System Initialization
+    User->>View: Start Application
+    View->>Controller: new PharmacieController()
+    Controller->>Controller: Initialize static lists
+    
+    Note over User, Mutuelle: Client Registration Process
+    User->>View: Register New Client
+    View->>Controller: addClient(client)
+    Controller->>Client: new Client(params)
+    Client->>Client: Validate data (Regex)
+    Client-->>Client: Add to MapClient
+    Client-->>Controller: Client created
+    Controller->>Controller: Add to listClients
+    Controller-->>View: Success/Failure
+    View-->>User: Registration Result
+
+    Note over User, Mutuelle: Doctor Registration Process
+    User->>View: Register New Doctor
+    View->>Controller: addMedecin(medecin)
+    Controller->>Medecin: new Medecin(params)
+    Medecin->>Medecin: Validate agreement number
+    Medecin->>Medecin: Generate ID
+    Medecin-->>Controller: Doctor created
+    Controller->>Controller: Add to listMedecins
+    Controller-->>View: Success/Failure
+    View-->>User: Registration Result
+
+    Note over User, Mutuelle: Prescription-based Purchase Process
+    User->>View: Create Purchase with Prescription
+    View->>Controller: createNewAchatWithOrdonnance(date, client, dateOrdo, medecin)
+    
+    Controller->>Ordonnance: new Ordonnance(dateOrdo, medecin, client)
+    Ordonnance->>Ordonnance: Validate parameters
+    Ordonnance-->>Controller: Ordonnance created
+    
+    Controller->>Controller: addOrdonnance(ordonnance)
+    Controller->>Controller: Add to listOrdonnances
+    
+    Controller->>Achat: new Achat(dateAchat, client, ordonnance)
+    Achat->>Achat: setListMedAchat(ordonnance)
+    Achat->>Ordonnance: getListMedOrdo()
+    Ordonnance-->>Achat: List of medications
+    Achat-->>Controller: Achat created
+    
+    Controller->>Controller: savingAchat(achat)
+    
+    Note over Controller, Medicament: Stock Validation
+    loop For each medication
+        Controller->>Medicament: Check stock > 0
+        alt Stock insufficient
+            Medicament-->>Controller: Stock error
+            Controller-->>View: "Out of Stock" message
+            View-->>User: Error message
+        else Stock available
+            Controller->>Medicament: reduireQuantite(1)
+            Medicament->>Medicament: Update stock
+            Medicament-->>Controller: Stock updated
+        end
+    end
+    
+    Note over Controller, Mutuelle: Financial Calculations
+    Controller->>Achat: calMontants()
+    Achat->>Achat: Calculate total from medications
+    alt Client has insurance
+        Achat->>Client: getMutuelle()
+        Client-->>Achat: Mutuelle object
+        Achat->>Mutuelle: calcRemb(total)
+        Mutuelle->>Mutuelle: Calculate reimbursement
+        Mutuelle-->>Achat: Reimbursement amount
+    else No insurance
+        Achat->>Achat: Set reimbursement to 0
+    end
+    
+    Controller->>Controller: Add achat to listAchats
+    Controller-->>View: Purchase completed
+    View-->>User: Success message
+
+    Note over User, Mutuelle: Add Medication to Prescription
+    User->>View: Add Medication to Prescription
+    View->>Controller: addMedToOrdo(ordonnance, medicament)
+    Controller->>Ordonnance: addMedOrdo(medicament)
+    Ordonnance->>Ordonnance: Check if medication exists
+    alt Medication not in list
+        Ordonnance->>Ordonnance: Add to listMedOrdo
+        Ordonnance-->>Controller: Medication added
+    else Medication already exists
+        Ordonnance-->>Controller: No change
+    end
+    Controller-->>View: Result
+    View-->>User: Confirmation
+
+    Note over User, Mutuelle: Direct Purchase Process
+    User->>View: Create Direct Purchase
+    View->>Controller: Create new Achat(date, client)
+    Controller->>Achat: new Achat(dateAchat, client)
+    Achat->>Achat: Set ordonnance to null
+    Achat-->>Controller: Direct achat created
+    
+    User->>View: Add medications to purchase
+    View->>Controller: Add medications
+    Controller->>Achat: addMedAchat(medicament)
+    Achat->>Achat: Add to listMedAchat
+    Achat->>Achat: calMontants()
+    
+    Controller->>Controller: savingAchat(achat)
+    Note right of Controller: Same stock validation and<br/>financial calculation as above
+    Controller-->>View: Purchase completed
+    View-->>User: Success message
+
+    Note over User, Mutuelle: Search Operations
+    User->>View: Search Client by SS Number
+    View->>Controller: SearchSS(numeroSS)
+    Controller->>Controller: Iterate through listClients
+    loop For each client
+        Controller->>Client: getNbSS()
+        Client-->>Controller: SS Number
+        alt SS Number matches
+            Controller-->>View: Client found
+        end
+    end
+    View-->>User: Search result
+
+    Note over User, Mutuelle: Update Operations
+    User->>View: Update Client Information
+    View->>Controller: updateClient(client, params...)
+    Controller->>Client: Set various fields
+    Client->>Client: Validate each field
+    Client-->>Controller: Fields updated
+    Controller-->>View: Update completed
+    View-->>User: Confirmation
