@@ -215,7 +215,7 @@ public class SparadrapDialogs {
                 dispose();
                 
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Le numéro de sécurité sociale doit être un nombre valide!", 
+                JOptionPane.showMessageDialog(this, "Le numéro de sécurité sociale doit être un nombre valide[13 numeros]!",
                                              "Erreur de format", JOptionPane.ERROR_MESSAGE);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Erreur: " + e.getMessage(), 
