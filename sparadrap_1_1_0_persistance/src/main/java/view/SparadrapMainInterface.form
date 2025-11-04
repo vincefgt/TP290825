@@ -1,0 +1,2096 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.SparadrapMainInterface">
+  <grid id="27dc6" binding="mainPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="1729" height="868"/>
+    </constraints>
+    <properties>
+      <background color="-1"/>
+      <preferredSize width="1200" height="800"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="8b9c2" binding="headerPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="North"/>
+        <properties>
+          <background color="-14412406"/>
+          <preferredSize width="-1" height="80"/>
+        </properties>
+        <border type="empty">
+          <size top="15" left="20" bottom="15" right="20"/>
+        </border>
+        <children>
+          <component id="a1b2c" class="javax.swing.JLabel" binding="titleLabel">
+            <constraints border-constraint="West"/>
+            <properties>
+              <font size="28" style="1"/>
+              <foreground color="-1"/>
+              <text value="🏥 Pharmacie SPARADRAP"/>
+            </properties>
+          </component>
+          <component id="d3e4f" class="javax.swing.JLabel" binding="versionLabel">
+            <constraints border-constraint="East"/>
+            <properties>
+              <font size="12" style="0"/>
+              <foreground color="-4473925"/>
+              <text value="Version 1.0 - Système de Gestion"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="g5h6i" binding="contentPanel" layout-manager="BorderLayout" hgap="10" vgap="10">
+        <constraints border-constraint="Center"/>
+        <properties>
+          <background color="-986896"/>
+          <opaque value="true"/>
+        </properties>
+        <border type="empty">
+          <size top="20" left="20" bottom="20" right="20"/>
+        </border>
+        <children>
+          <grid id="j7k8l" binding="navigationPanel" layout-manager="GridLayoutManager" row-count="1" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints border-constraint="North"/>
+            <properties>
+              <background color="-1"/>
+              <minimumSize width="824" height="50"/>
+              <opaque value="false"/>
+              <preferredSize width="-1" height="60"/>
+            </properties>
+            <border type="empty" title-justification="1" title-position="2">
+              <font size="14" style="1"/>
+              <title-color color="-14412406"/>
+              <color color="-4473925"/>
+            </border>
+            <children>
+              <component id="m9n0o" class="javax.swing.JButton" binding="clientsButton">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="-1" height="40"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <background color="-2104859"/>
+                  <borderPainted value="false"/>
+                  <focusCycleRoot value="true"/>
+                  <focusable value="false"/>
+                  <font size="12" style="1"/>
+                  <foreground color="-1"/>
+                  <text value="👥 Clients"/>
+                </properties>
+              </component>
+              <component id="b9c0d" class="javax.swing.JButton" binding="achatsButton">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="-1" height="40"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <background color="-2104859"/>
+                  <borderPainted value="false"/>
+                  <focusCycleRoot value="true"/>
+                  <focusable value="false"/>
+                  <font size="12" style="1"/>
+                  <foreground color="-1"/>
+                  <text value="🛒 Achats"/>
+                </properties>
+              </component>
+              <component id="y7z8a" class="javax.swing.JButton" binding="ordonnancesButton">
+                <constraints>
+                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="-1" height="40"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <background color="-2104859"/>
+                  <borderPainted value="false"/>
+                  <focusCycleRoot value="true"/>
+                  <focusable value="false"/>
+                  <font size="12" style="1"/>
+                  <foreground color="-1"/>
+                  <text value="📋 Ordonnances"/>
+                </properties>
+              </component>
+              <component id="p1q2r" class="javax.swing.JButton" binding="medecinsButton">
+                <constraints>
+                  <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="-1" height="40"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <background color="-2104859"/>
+                  <borderPainted value="false"/>
+                  <focusCycleRoot value="true"/>
+                  <focusable value="false"/>
+                  <font size="12" style="1"/>
+                  <foreground color="-1"/>
+                  <text value="👨‍⚕️ Médecins"/>
+                </properties>
+              </component>
+              <component id="v5w6x" class="javax.swing.JButton" binding="mutuellesButton">
+                <constraints>
+                  <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="-1" height="40"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <background color="-2104859"/>
+                  <borderPainted value="false"/>
+                  <focusCycleRoot value="true"/>
+                  <focusable value="false"/>
+                  <font size="12" style="1"/>
+                  <foreground color="-1"/>
+                  <text value="🏛️ Mutuelles"/>
+                </properties>
+              </component>
+              <component id="s3t4u" class="javax.swing.JButton" binding="medicamentsButton">
+                <constraints>
+                  <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="-1" height="40"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <background color="-2104859"/>
+                  <borderPainted value="false"/>
+                  <focusCycleRoot value="true"/>
+                  <focusable value="false"/>
+                  <font size="12" style="1"/>
+                  <foreground color="-1"/>
+                  <text value="💊 Médicaments"/>
+                </properties>
+              </component>
+              <component id="e1f2g" class="javax.swing.JButton" binding="statistiquesButton">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="-1" height="40"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <background color="-2104859"/>
+                  <borderPainted value="false"/>
+                  <focusable value="false"/>
+                  <font size="12" style="1"/>
+                  <foreground color="-1"/>
+                  <selected value="true"/>
+                  <text value="📊 Statistiques"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <tabbedpane id="k5l6m" binding="mainTabbedPane">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <background color="-1"/>
+              <enabled value="false"/>
+              <focusCycleRoot value="false"/>
+              <focusable value="false"/>
+              <font size="12" style="1"/>
+              <foreground color="-14412406"/>
+              <opaque value="false"/>
+              <visible value="true"/>
+            </properties>
+            <border type="empty"/>
+            <children>
+              <grid id="n7o8p" layout-manager="BorderLayout" hgap="10" vgap="10">
+                <constraints>
+                  <tabbedpane title="👥 Gestion des Clients"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                </properties>
+                <border type="empty">
+                  <size top="15" left="15" bottom="15" right="15"/>
+                </border>
+                <children>
+                  <grid id="q9r0s" binding="clientFormPanel" layout-manager="GridLayoutManager" row-count="5" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints border-constraint="North"/>
+                    <properties>
+                      <background color="-1"/>
+                      <preferredSize width="-1" height="200"/>
+                    </properties>
+                    <border type="line" title="Nouveau Client" title-justification="1" title-position="2">
+                      <font size="14" style="1"/>
+                      <title-color color="-14412406"/>
+                      <color color="-4473925"/>
+                    </border>
+                    <children>
+                      <component id="t1u2v" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <text value="Prénom:"/>
+                        </properties>
+                      </component>
+                      <component id="f9g0h" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <text value="Email:"/>
+                        </properties>
+                      </component>
+                      <component id="r7s8t" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <text value="Adresse:"/>
+                        </properties>
+                      </component>
+                      <component id="d843b" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <text value="Cp:"/>
+                        </properties>
+                      </component>
+                      <component id="i1j2k" class="javax.swing.JTextField" binding="clientEmailField">
+                        <constraints>
+                          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="80" height="26"/>
+                            <preferred-size width="300" height="26"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                        </properties>
+                      </component>
+                      <component id="w3x4y" class="javax.swing.JTextField" binding="clientPrenomField">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="80" height="26"/>
+                            <preferred-size width="300" height="26"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                        </properties>
+                      </component>
+                      <component id="80d10" class="javax.swing.JTextField" binding="clientNbStateField">
+                        <constraints>
+                          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="50" height="26"/>
+                            <preferred-size width="100" height="26"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <minimumSize width="80" height="34"/>
+                          <opaque value="false"/>
+                          <preferredSize width="-1" height="34"/>
+                        </properties>
+                      </component>
+                      <grid id="x1y2z" layout-manager="GridLayoutManager" row-count="1" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="-1">
+                        <margin top="5" left="0" bottom="0" right="0"/>
+                        <constraints>
+                          <grid row="4" column="0" row-span="1" col-span="6" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="a3b4c" class="javax.swing.JButton" binding="addClientButton">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="-1" height="35"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <background color="-11751600"/>
+                              <borderPainted value="false"/>
+                              <font size="12" style="1"/>
+                              <foreground color="-1"/>
+                              <text value="➕ Ajouter Client"/>
+                              <visible value="true"/>
+                            </properties>
+                          </component>
+                          <component id="d5e6f" class="javax.swing.JButton" binding="clearClientButton">
+                            <constraints>
+                              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="-1" height="35"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <background color="-4473925"/>
+                              <borderPainted value="false"/>
+                              <font size="12" style="1"/>
+                              <foreground color="-1"/>
+                              <text value="🗑️ Effacer"/>
+                            </properties>
+                          </component>
+                          <component id="31a55" class="javax.swing.JButton" binding="updateClientButton">
+                            <constraints>
+                              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="-1" height="35"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <background color="-65424"/>
+                              <borderPainted value="false"/>
+                              <contentAreaFilled value="true"/>
+                              <focusable value="false"/>
+                              <hideActionText value="false"/>
+                              <text value="✔ Modifier"/>
+                            </properties>
+                          </component>
+                          <component id="ecbde" class="javax.swing.JButton" binding="cancelButton">
+                            <constraints>
+                              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="-1" height="35"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <background color="-65424"/>
+                              <borderPainted value="false"/>
+                              <focusable value="false"/>
+                              <foreground color="-2104859"/>
+                              <minimumSize width="40" height="34"/>
+                              <opaque value="true"/>
+                              <preferredSize width="100" height="34"/>
+                              <text value="✖ Annuler"/>
+                            </properties>
+                          </component>
+                          <component id="3393f" class="javax.swing.JButton" binding="validationButton">
+                            <constraints>
+                              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="-1" height="35"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <background color="-11751600"/>
+                              <borderPainted value="false"/>
+                              <contentAreaFilled value="true"/>
+                              <focusable value="false"/>
+                              <label value="✔ Valider"/>
+                              <minimumSize width="100" height="34"/>
+                              <preferredSize width="100" height="34"/>
+                              <selected value="false"/>
+                              <text value="✔ Valider"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <component id="l3m4n" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <horizontalTextPosition value="4"/>
+                          <text value="Téléphone:"/>
+                        </properties>
+                      </component>
+                      <component id="z5a6b" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <horizontalTextPosition value="4"/>
+                          <text value="Nom:"/>
+                        </properties>
+                      </component>
+                      <component id="2e116" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <horizontalTextPosition value="4"/>
+                          <text value="Ville:"/>
+                        </properties>
+                      </component>
+                      <component id="cf4df" class="javax.swing.JTextField" binding="clientCityField">
+                        <constraints>
+                          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="80" height="26"/>
+                            <preferred-size width="300" height="26"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <maximumSize width="400" height="500"/>
+                          <minimumSize width="400" height="34"/>
+                          <opaque value="false"/>
+                          <preferredSize width="-1" height="34"/>
+                        </properties>
+                      </component>
+                      <component id="o5p6q" class="javax.swing.JTextField" binding="clientPhoneField">
+                        <constraints>
+                          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="50" height="26"/>
+                            <preferred-size width="100" height="26"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                          <maximumSize width="400" height="500"/>
+                          <minimumSize width="400" height="34"/>
+                        </properties>
+                      </component>
+                      <component id="6d00c" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <opaque value="false"/>
+                          <text value="Date de &#10;naîssance:"/>
+                        </properties>
+                      </component>
+                      <component id="8b80f" class="javax.swing.JFormattedTextField" binding="clientDateBirthField">
+                        <constraints>
+                          <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <preferred-size width="150" height="26"/>
+                          </grid>
+                        </constraints>
+                        <properties/>
+                      </component>
+                      <component id="f07b6" class="javax.swing.JFormattedTextField" binding="clientNbSSField">
+                        <constraints>
+                          <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <preferred-size width="150" height="26"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <minimumSize width="200" height="34"/>
+                          <preferredSize width="200" height="34"/>
+                        </properties>
+                      </component>
+                      <component id="8cde3" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <requestFocusEnabled value="true"/>
+                          <text value="Numéro SS:"/>
+                        </properties>
+                      </component>
+                      <component id="43b2" class="javax.swing.JComboBox" binding="mutCombo">
+                        <constraints>
+                          <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <preferred-size width="150" height="26"/>
+                          </grid>
+                        </constraints>
+                        <properties/>
+                      </component>
+                      <component id="1b789" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <text value="Mutuelle:"/>
+                        </properties>
+                      </component>
+                      <component id="u9v0w" class="javax.swing.JTextField" binding="clientAddressField">
+                        <constraints>
+                          <grid row="2" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="7" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="100" height="26"/>
+                            <preferred-size width="600" height="26"/>
+                            <maximum-size width="1000" height="26"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                          <horizontalAlignment value="2"/>
+                        </properties>
+                      </component>
+                      <component id="c7d8e" class="javax.swing.JTextField" binding="clientNomField">
+                        <constraints>
+                          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="80" height="26"/>
+                            <preferred-size width="300" height="26"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                          <maximumSize width="400" height="800"/>
+                          <minimumSize width="400" height="34"/>
+                          <opaque value="false"/>
+                          <preferredSize width="49" height="500"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <scrollpane id="g7h8i" binding="clientScrollPane">
+                    <constraints border-constraint="Center"/>
+                    <properties>
+                      <background color="-1"/>
+                      <toolTipText value="double pour détails"/>
+                    </properties>
+                    <border type="line" title="Liste des Clients" title-justification="1" title-position="2">
+                      <font size="14" style="1"/>
+                      <title-color color="-14412406"/>
+                      <color color="-4473925"/>
+                    </border>
+                    <children>
+                      <component id="j9k0l" class="javax.swing.JTable" binding="clientsTable">
+                        <constraints/>
+                        <properties>
+                          <alignmentX value="0.5"/>
+                          <cellSelectionEnabled value="false"/>
+                          <columnSelectionAllowed value="false"/>
+                          <focusCycleRoot value="false"/>
+                          <focusable value="false"/>
+                          <font size="12"/>
+                          <gridColor color="-4473925"/>
+                          <inheritsPopupMenu value="true"/>
+                          <intercellSpacing width="1" height="1"/>
+                          <preferredScrollableViewportSize width="200" height="400"/>
+                          <requestFocusEnabled value="true"/>
+                          <rowHeight value="25"/>
+                          <rowSelectionAllowed value="true"/>
+                          <showHorizontalLines value="true"/>
+                          <showVerticalLines value="false"/>
+                          <toolTipText value="double click pour détails"/>
+                          <verifyInputWhenFocusTarget value="true"/>
+                          <visible value="true"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                  <grid id="43d86" binding="searchPane" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                    <constraints border-constraint="South"/>
+                    <properties>
+                      <focusable value="false"/>
+                      <maximumSize width="2000" height="1000"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="f8137" class="javax.swing.JLabel">
+                        <constraints/>
+                        <properties>
+                          <horizontalAlignment value="2"/>
+                          <text value="Recherche client:"/>
+                        </properties>
+                      </component>
+                      <component id="506fc" class="javax.swing.JComboBox" binding="clientCombo">
+                        <constraints/>
+                        <properties>
+                          <focusCycleRoot value="true"/>
+                          <focusable value="false"/>
+                          <inheritsPopupMenu value="false"/>
+                          <maximumRowCount value="10"/>
+                          <minimumSize width="250" height="30"/>
+                          <opaque value="false"/>
+                          <popupVisible value="false"/>
+                          <preferredSize width="250" height="25"/>
+                          <toolTipText value="Selectionner client"/>
+                        </properties>
+                      </component>
+                      <component id="34858" class="javax.swing.JLabel">
+                        <constraints/>
+                        <properties>
+                          <enabled value="false"/>
+                          <text value="Recherche Numéro SS"/>
+                        </properties>
+                      </component>
+                      <component id="dc399" class="javax.swing.JFormattedTextField" binding="ssTextField">
+                        <constraints/>
+                        <properties>
+                          <editable value="true"/>
+                          <enabled value="false"/>
+                          <minimumSize width="200" height="25"/>
+                          <opaque value="false"/>
+                          <preferredSize width="200" height="25"/>
+                          <requestFocusEnabled value="false"/>
+                          <scrollOffset value="0"/>
+                          <toolTipText value="Entrer n° Sécurité Sociale"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                </children>
+              </grid>
+              <grid id="m1n2o" layout-manager="BorderLayout" hgap="10" vgap="10">
+                <constraints>
+                  <tabbedpane title="💊 Gestion des Médicaments"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                </properties>
+                <border type="empty">
+                  <size top="15" left="15" bottom="15" right="15"/>
+                </border>
+                <children>
+                  <grid id="p3q4r" binding="medicamentFormPanel" layout-manager="GridLayoutManager" row-count="2" column-count="11" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints border-constraint="North"/>
+                    <properties>
+                      <background color="-1"/>
+                      <focusable value="false"/>
+                      <maximumSize width="-1" height="-1"/>
+                      <minimumSize width="-1" height="-1"/>
+                      <preferredSize width="-1" height="150"/>
+                    </properties>
+                    <border type="line" title="Nouveau Médicament" title-justification="1" title-position="2">
+                      <font size="14" style="1"/>
+                      <title-color color="-14412406"/>
+                      <color color="-4473925"/>
+                    </border>
+                    <children>
+                      <component id="s5t6u" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <text value="Nom:"/>
+                        </properties>
+                      </component>
+                      <component id="v7w8x" class="javax.swing.JTextField" binding="medicamentNomField">
+                        <constraints>
+                          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                            <preferred-size width="300" height="30"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                          <maximumSize width="100" height="35"/>
+                          <minimumSize width="60" height="35"/>
+                          <preferredSize width="40" height="35"/>
+                        </properties>
+                      </component>
+                      <component id="y9z0a" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <text value="Catégorie:"/>
+                        </properties>
+                      </component>
+                      <grid id="q1r2s" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="-1">
+                        <margin top="5" left="0" bottom="0" right="0"/>
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="10" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="t3u4v" class="javax.swing.JButton" binding="addMedicamentButton">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="-1" height="35"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <background color="-11751600"/>
+                              <borderPainted value="false"/>
+                              <font size="12" style="1"/>
+                              <foreground color="-1"/>
+                              <text value="➕ Ajouter Médicament"/>
+                            </properties>
+                          </component>
+                          <component id="w5x6y" class="javax.swing.JButton" binding="clearMedicamentButton">
+                            <constraints>
+                              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="-1" height="35"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <background color="-4473925"/>
+                              <borderPainted value="false"/>
+                              <font size="12" style="1"/>
+                              <foreground color="-1"/>
+                              <text value="🗑️ Effacer"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <component id="k7l8m" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="0" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <text value="Stock:"/>
+                        </properties>
+                      </component>
+                      <component id="b1c2d" class="javax.swing.JComboBox" binding="medicamentCategorieCombo">
+                        <constraints>
+                          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                            <preferred-size width="150" height="30"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                        </properties>
+                      </component>
+                      <component id="e3f4g" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <text value="Prix (€):"/>
+                        </properties>
+                      </component>
+                      <component id="h5i6j" class="javax.swing.JTextField" binding="medicamentPrixField">
+                        <constraints>
+                          <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                            <preferred-size width="100" height="30"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                        </properties>
+                      </component>
+                      <hspacer id="7e84">
+                        <constraints>
+                          <grid row="0" column="9" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                      </hspacer>
+                      <component id="n9o0p" class="javax.swing.JTextField" binding="medicamentStockField">
+                        <constraints>
+                          <grid row="0" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                            <preferred-size width="100" height="30"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                          <horizontalAlignment value="0"/>
+                        </properties>
+                      </component>
+                      <hspacer id="9e2e0">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                      </hspacer>
+                    </children>
+                  </grid>
+                  <scrollpane id="z7a8b" binding="medicamentScrollPane">
+                    <constraints border-constraint="Center"/>
+                    <properties>
+                      <background color="-1"/>
+                    </properties>
+                    <border type="none" title="Liste des Médicaments" title-justification="1" title-position="2">
+                      <font size="14" style="1"/>
+                      <title-color color="-14412406"/>
+                      <color color="-4473925"/>
+                    </border>
+                    <children>
+                      <component id="c9d0e" class="javax.swing.JTable" binding="medicamentsTable">
+                        <constraints/>
+                        <properties>
+                          <font size="12"/>
+                          <gridColor color="-4473925"/>
+                          <inheritsPopupMenu value="true"/>
+                          <intercellSpacing width="1" height="1"/>
+                          <rowHeight value="25"/>
+                          <showHorizontalLines value="true"/>
+                          <showVerticalLines value="false"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                </children>
+              </grid>
+              <grid id="f1g2h" layout-manager="BorderLayout" hgap="10" vgap="10">
+                <constraints>
+                  <tabbedpane title="🛒 Gestion des Achats"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                </properties>
+                <border type="empty">
+                  <size top="15" left="15" bottom="15" right="15"/>
+                </border>
+                <children>
+                  <grid id="i3j4k" binding="achatActionsPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints border-constraint="North"/>
+                    <properties>
+                      <background color="-1"/>
+                      <preferredSize width="-1" height="68"/>
+                    </properties>
+                    <border type="line" title="Actions" title-justification="1" title-position="2">
+                      <font size="14" style="1"/>
+                      <title-color color="-14412406"/>
+                      <color color="-4473925"/>
+                    </border>
+                    <children>
+                      <component id="l5m6n" class="javax.swing.JButton" binding="nouvelAchatButton">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                            <preferred-size width="-1" height="35"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <background color="-11751600"/>
+                          <borderPainted value="false"/>
+                          <focusable value="false"/>
+                          <font size="12" style="1"/>
+                          <foreground color="-1"/>
+                          <preferredSize width="150" height="35"/>
+                          <text value="🛒 Nouvel Achat"/>
+                        </properties>
+                      </component>
+                      <component id="o7p8q" class="javax.swing.JButton" binding="achatOrdonnanceButton">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                            <preferred-size width="-1" height="35"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <background color="-2104859"/>
+                          <borderPainted value="false"/>
+                          <focusable value="false"/>
+                          <font size="12" style="1"/>
+                          <foreground color="-1"/>
+                          <preferredSize width="150" height="35"/>
+                          <text value="📋 Achat Ordonnance"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <grid id="6ceca" binding="tableSortingPane" layout-manager="BorderLayout" hgap="0" vgap="0">
+                    <constraints border-constraint="Center"/>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <grid id="bf864" binding="sortingPane" layout-manager="GridLayoutManager" row-count="1" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="10" vgap="-1">
+                        <margin top="2" left="2" bottom="2" right="2"/>
+                        <constraints border-constraint="North"/>
+                        <properties/>
+                        <border type="none"/>
+                        <children>
+                          <component id="a5660" class="javax.swing.JComboBox" binding="dateFilterCombo">
+                            <constraints>
+                              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                                <minimum-size width="100" height="-1"/>
+                                <preferred-size width="200" height="-1"/>
+                                <maximum-size width="400" height="-1"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <autoscrolls value="true"/>
+                            </properties>
+                          </component>
+                          <component id="cbe1a" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <text value="Filtrer par période:"/>
+                            </properties>
+                          </component>
+                          <component id="8637" class="javax.swing.JRadioButton" binding="ordoRadioButton">
+                            <constraints>
+                              <grid row="0" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <actionCommand value="Ordonnances"/>
+                              <focusable value="false"/>
+                              <label value="Ordonnances"/>
+                              <text value="Ordonnances"/>
+                            </properties>
+                          </component>
+                          <component id="7eb68" class="javax.swing.JRadioButton" binding="directRadioButton">
+                            <constraints>
+                              <grid row="0" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <actionCommand value="Direct"/>
+                              <focusable value="false"/>
+                              <label value="Direct"/>
+                              <text value="Direct"/>
+                            </properties>
+                          </component>
+                          <component id="50f85" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="3" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <text value="Du \ Le"/>
+                            </properties>
+                          </component>
+                          <component id="ac40e" class="javax.swing.JFormattedTextField" binding="startDayTextField">
+                            <constraints>
+                              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="9" fill="0" indent="0" use-parent-layout="false">
+                                <minimum-size width="60" height="-1"/>
+                                <preferred-size width="80" height="-1"/>
+                                <maximum-size width="200" height="-1"/>
+                              </grid>
+                            </constraints>
+                            <properties/>
+                          </component>
+                          <component id="4ef75" class="javax.swing.JLabel">
+                            <constraints>
+                              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <text value="au"/>
+                            </properties>
+                          </component>
+                          <component id="a04fa" class="javax.swing.JFormattedTextField" binding="endDayTextField">
+                            <constraints>
+                              <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                                <minimum-size width="60" height="-1"/>
+                                <preferred-size width="80" height="-1"/>
+                                <maximum-size width="200" height="-1"/>
+                              </grid>
+                            </constraints>
+                            <properties/>
+                          </component>
+                          <component id="327ec" class="javax.swing.JRadioButton" binding="allRadioButton">
+                            <constraints>
+                              <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="5" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <actionCommand value="Global"/>
+                              <focusable value="false"/>
+                              <label value="Global"/>
+                              <text value="Global"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <scrollpane id="u1v2w" binding="achatsScrollPane">
+                        <constraints border-constraint="Center"/>
+                        <properties>
+                          <background color="-1"/>
+                        </properties>
+                        <border type="line" title="Historique des Achats" title-justification="1" title-position="2">
+                          <font size="14" style="1"/>
+                          <title-color color="-14412406"/>
+                          <color color="-4473925"/>
+                        </border>
+                        <children>
+                          <component id="x3y4z" class="javax.swing.JTable" binding="achatsTable">
+                            <constraints/>
+                            <properties>
+                              <autoCreateRowSorter value="false"/>
+                              <fillsViewportHeight value="false"/>
+                              <font size="12"/>
+                              <gridColor color="-4473925"/>
+                              <intercellSpacing width="1" height="1"/>
+                              <rowHeight value="25"/>
+                              <rowSelectionAllowed value="true"/>
+                              <showHorizontalLines value="true"/>
+                              <showVerticalLines value="false"/>
+                              <updateSelectionOnSort value="true"/>
+                              <verifyInputWhenFocusTarget value="true"/>
+                              <visible value="true"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </scrollpane>
+                      <grid id="b9439" binding="searchByClient" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                        <constraints border-constraint="South"/>
+                        <properties>
+                          <focusable value="false"/>
+                          <maximumSize width="2000" height="1000"/>
+                        </properties>
+                        <border type="empty"/>
+                        <children>
+                          <component id="d454b" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <enabled value="true"/>
+                              <horizontalAlignment value="2"/>
+                              <text value="Filtre par Client:"/>
+                            </properties>
+                          </component>
+                          <component id="4d873" class="javax.swing.JComboBox" binding="clientComboAchat">
+                            <constraints/>
+                            <properties>
+                              <enabled value="true"/>
+                              <focusCycleRoot value="true"/>
+                              <focusable value="false"/>
+                              <inheritsPopupMenu value="false"/>
+                              <maximumRowCount value="10"/>
+                              <minimumSize width="150" height="25"/>
+                              <opaque value="false"/>
+                              <popupVisible value="false"/>
+                              <preferredSize width="250" height="25"/>
+                              <toolTipText value="Selectionner client"/>
+                            </properties>
+                          </component>
+                          <component id="58d6e" class="javax.swing.JRadioButton" binding="allAchatsRadio">
+                            <constraints/>
+                            <properties>
+                              <text value="Tous"/>
+                            </properties>
+                          </component>
+                          <component id="5167c" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <enabled value="false"/>
+                              <text value="Recherche Numéro SS"/>
+                            </properties>
+                          </component>
+                          <component id="852ed" class="javax.swing.JFormattedTextField" binding="formattedTextField1" default-binding="true">
+                            <constraints/>
+                            <properties>
+                              <editable value="true"/>
+                              <enabled value="false"/>
+                              <minimumSize width="200" height="25"/>
+                              <preferredSize width="200" height="25"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                    </children>
+                  </grid>
+                </children>
+              </grid>
+              <grid id="a5b6c" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="true" same-size-vertically="false" hgap="20" vgap="20">
+                <margin top="20" left="20" bottom="20" right="20"/>
+                <constraints>
+                  <tabbedpane title="📊 Statistiques"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                </properties>
+                <border type="empty">
+                  <title-color color="-2104859"/>
+                </border>
+                <children>
+                  <grid id="d7e8f" binding="statsCard1" layout-manager="BorderLayout" hgap="0" vgap="5">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-2104859"/>
+                    </properties>
+                    <border type="line" title="Clients" title-justification="1" title-position="2">
+                      <font size="14" style="1"/>
+                      <title-color color="-1"/>
+                      <color color="-1"/>
+                    </border>
+                    <children>
+                      <component id="g9h0i" class="javax.swing.JLabel" binding="totalClientsLabel">
+                        <constraints border-constraint="Center"/>
+                        <properties>
+                          <font size="36" style="1"/>
+                          <foreground color="-1"/>
+                          <horizontalAlignment value="0"/>
+                          <text value="0"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <grid id="j1k2l" binding="statsCard2" layout-manager="BorderLayout" hgap="0" vgap="5">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-11751600"/>
+                    </properties>
+                    <border type="line" title="Médicaments" title-justification="1" title-position="2">
+                      <font size="14" style="1"/>
+                      <title-color color="-1"/>
+                      <color color="-1"/>
+                    </border>
+                    <children>
+                      <component id="m3n4o" class="javax.swing.JLabel" binding="totalMedicamentsLabel">
+                        <constraints border-constraint="Center"/>
+                        <properties>
+                          <font size="36" style="1"/>
+                          <foreground color="-1"/>
+                          <horizontalAlignment value="0"/>
+                          <text value="0"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <grid id="p5q6r" binding="statsCard3" layout-manager="BorderLayout" hgap="0" vgap="5">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-723724"/>
+                    </properties>
+                    <border type="line" title="Achats" title-justification="1" title-position="2">
+                      <font size="14" style="1"/>
+                      <title-color color="-1"/>
+                      <color color="-1"/>
+                    </border>
+                    <children>
+                      <component id="s7t8u" class="javax.swing.JLabel" binding="totalAchatsLabel">
+                        <constraints border-constraint="Center"/>
+                        <properties>
+                          <font size="36" style="1"/>
+                          <foreground color="-1"/>
+                          <horizontalAlignment value="0"/>
+                          <text value="0"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <grid id="v9w0x" binding="statsCard4" layout-manager="BorderLayout" hgap="0" vgap="5">
+                    <constraints>
+                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-4473925"/>
+                    </properties>
+                    <border type="line" title="Chiffre d'Affaires" title-justification="1" title-position="2">
+                      <font size="14" style="1"/>
+                      <title-color color="-1"/>
+                      <color color="-1"/>
+                    </border>
+                    <children>
+                      <component id="y1z2a" class="javax.swing.JLabel" binding="chiffreAffairesLabel">
+                        <constraints border-constraint="Center"/>
+                        <properties>
+                          <font size="24" style="1"/>
+                          <foreground color="-1"/>
+                          <horizontalAlignment value="0"/>
+                          <text value="0.00 €"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <component id="b3c4d" class="javax.swing.JButton" binding="refreshStatsButton">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                        <preferred-size width="200" height="40"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <background color="-14412406"/>
+                      <borderPainted value="false"/>
+                      <font size="14" style="1"/>
+                      <foreground color="-1"/>
+                      <text value="🔄 Actualiser les Statistiques"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="b94cd" layout-manager="BorderLayout" hgap="0" vgap="5">
+                <constraints>
+                  <tabbedpane title="📋 Ordonnance"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                  <doubleBuffered value="false"/>
+                  <focusable value="false"/>
+                  <foreground color="-2104859"/>
+                  <inheritsPopupMenu value="true"/>
+                  <opaque value="true"/>
+                </properties>
+                <border type="none" title="📋 Ordonnances"/>
+                <children>
+                  <grid id="d64d7" binding="SortOrdoPane" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                    <constraints border-constraint="North"/>
+                    <properties>
+                      <background color="-2104859"/>
+                      <enabled value="false"/>
+                      <focusable value="false"/>
+                      <minimumSize width="915" height="45"/>
+                      <opaque value="true"/>
+                      <preferredSize width="915" height="45"/>
+                      <requestFocusEnabled value="false"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="461d" class="javax.swing.JLabel">
+                        <constraints/>
+                        <properties>
+                          <enabled value="false"/>
+                          <focusable value="false"/>
+                          <text value="Filtrer par période:"/>
+                        </properties>
+                      </component>
+                      <component id="112f4" class="javax.swing.JComboBox">
+                        <constraints/>
+                        <properties>
+                          <autoscrolls value="true"/>
+                          <enabled value="false"/>
+                          <preferredSize width="200" height="28"/>
+                        </properties>
+                      </component>
+                      <component id="6f8bf" class="javax.swing.JLabel">
+                        <constraints/>
+                        <properties>
+                          <enabled value="false"/>
+                          <focusable value="false"/>
+                          <text value="Du \ Le"/>
+                        </properties>
+                      </component>
+                      <component id="55219" class="javax.swing.JFormattedTextField">
+                        <constraints/>
+                        <properties>
+                          <editable value="true"/>
+                          <enabled value="false"/>
+                          <preferredSize width="100" height="32"/>
+                        </properties>
+                      </component>
+                      <component id="20080" class="javax.swing.JLabel">
+                        <constraints/>
+                        <properties>
+                          <enabled value="false"/>
+                          <focusable value="false"/>
+                          <text value="au"/>
+                        </properties>
+                      </component>
+                      <component id="d1f21" class="javax.swing.JFormattedTextField">
+                        <constraints/>
+                        <properties>
+                          <enabled value="false"/>
+                          <preferredSize width="100" height="32"/>
+                        </properties>
+                      </component>
+                      <component id="e469" class="javax.swing.JLabel">
+                        <constraints/>
+                        <properties>
+                          <enabled value="true"/>
+                          <focusable value="false"/>
+                          <opaque value="false"/>
+                          <text value="Par medecin"/>
+                        </properties>
+                      </component>
+                      <component id="dd763" class="javax.swing.JComboBox" binding="medecinsCombo">
+                        <constraints/>
+                        <properties>
+                          <enabled value="true"/>
+                          <focusable value="false"/>
+                          <preferredSize width="200" height="28"/>
+                        </properties>
+                      </component>
+                      <component id="3aac9" class="javax.swing.JLabel">
+                        <constraints/>
+                        <properties>
+                          <enabled value="false"/>
+                          <focusable value="false"/>
+                          <text value="Par patient"/>
+                        </properties>
+                      </component>
+                      <component id="cad39" class="javax.swing.JComboBox" binding="patientComboSort">
+                        <constraints/>
+                        <properties>
+                          <enabled value="false"/>
+                          <focusable value="true"/>
+                          <preferredSize width="200" height="28"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <scrollpane id="8918d" binding="ordoScrollPane">
+                    <constraints border-constraint="Center"/>
+                    <properties>
+                      <autoscrolls value="true"/>
+                      <background color="-1"/>
+                      <inheritsPopupMenu value="true"/>
+                      <opaque value="true"/>
+                      <preferredSize width="452" height="800"/>
+                      <toolTipText value="double click pour détails"/>
+                      <visible value="true"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="2f2ac" class="javax.swing.JTable" binding="ordoTable">
+                        <constraints/>
+                        <properties>
+                          <autoCreateRowSorter value="true"/>
+                          <autoscrolls value="true"/>
+                          <background color="-1"/>
+                          <intercellSpacing width="1" height="1"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                </children>
+              </grid>
+              <grid id="df75d" layout-manager="BorderLayout" hgap="0" vgap="0">
+                <constraints>
+                  <tabbedpane title="🏛️ Mutelles"/>
+                </constraints>
+                <properties/>
+                <border type="none" title="🏛️Mutelles"/>
+                <children>
+                  <grid id="68144" layout-manager="GridLayoutManager" row-count="4" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints border-constraint="North"/>
+                    <properties>
+                      <background color="-1"/>
+                      <focusable value="false"/>
+                      <preferredSize width="-1" height="200"/>
+                    </properties>
+                    <border type="line" title="Nouvelle Mutuelle" title-justification="1" title-position="2">
+                      <font size="14" style="1"/>
+                      <title-color color="-14412406"/>
+                      <color color="-4473925"/>
+                    </border>
+                    <children>
+                      <component id="8dbca" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <focusable value="false"/>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <horizontalTextPosition value="4"/>
+                          <requestFocusEnabled value="false"/>
+                          <text value="Nom:"/>
+                        </properties>
+                      </component>
+                      <component id="8e7b9" class="javax.swing.JTextField" binding="mutNomField">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="100" height="26"/>
+                            <preferred-size width="250" height="26"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                          <inheritsPopupMenu value="true"/>
+                          <margin top="4" left="12" bottom="4" right="12"/>
+                          <minimumSize width="350" height="26"/>
+                          <opaque value="true"/>
+                          <preferredSize width="350" height="36"/>
+                        </properties>
+                      </component>
+                      <grid id="a3823" layout-manager="GridLayoutManager" row-count="1" column-count="5" same-size-horizontally="false" same-size-vertically="true" hgap="0" vgap="-1">
+                        <margin top="5" left="0" bottom="0" right="0"/>
+                        <constraints>
+                          <grid row="3" column="0" row-span="1" col-span="6" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                            <minimum-size width="-1" height="35"/>
+                            <preferred-size width="-1" height="40"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                          <focusable value="false"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="b6f5" class="javax.swing.JButton" binding="addMutButton">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="-1" height="35"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <actionCommand value="➕ Ajouter Mutuelle"/>
+                              <background color="-11751600"/>
+                              <borderPainted value="false"/>
+                              <font size="12" style="1"/>
+                              <foreground color="-1"/>
+                              <horizontalTextPosition value="0"/>
+                              <label value="➕ Ajouter Mutuelle"/>
+                              <text value="➕ Ajouter Mutuelle"/>
+                              <visible value="true"/>
+                            </properties>
+                          </component>
+                          <component id="e79b9" class="javax.swing.JButton" binding="clearMutButton">
+                            <constraints>
+                              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="-1" height="35"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <background color="-4473925"/>
+                              <borderPainted value="false"/>
+                              <font size="12" style="1"/>
+                              <foreground color="-1"/>
+                              <horizontalTextPosition value="0"/>
+                              <text value="🗑️ Effacer"/>
+                            </properties>
+                          </component>
+                          <component id="a7d42" class="javax.swing.JButton" binding="updateMutButton">
+                            <constraints>
+                              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="-1" height="35"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <background color="-65424"/>
+                              <borderPainted value="false"/>
+                              <contentAreaFilled value="true"/>
+                              <focusable value="false"/>
+                              <hideActionText value="false"/>
+                              <horizontalTextPosition value="0"/>
+                              <text value="✔ Modifier"/>
+                            </properties>
+                          </component>
+                          <component id="24d20" class="javax.swing.JButton" binding="cancelMutButton">
+                            <constraints>
+                              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="-1" height="35"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <background color="-65424"/>
+                              <borderPainted value="false"/>
+                              <focusable value="false"/>
+                              <foreground color="-2104859"/>
+                              <horizontalTextPosition value="0"/>
+                              <minimumSize width="40" height="34"/>
+                              <opaque value="true"/>
+                              <preferredSize width="100" height="34"/>
+                              <text value="✖ Annuler"/>
+                            </properties>
+                          </component>
+                          <component id="88d2d" class="javax.swing.JButton" binding="validationMutButton">
+                            <constraints>
+                              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="-1" height="35"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <background color="-11751600"/>
+                              <borderPainted value="false"/>
+                              <contentAreaFilled value="true"/>
+                              <focusable value="false"/>
+                              <horizontalTextPosition value="0"/>
+                              <label value="✔ Valider"/>
+                              <minimumSize width="100" height="34"/>
+                              <preferredSize width="100" height="34"/>
+                              <selected value="false"/>
+                              <text value="✔ Valider"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <component id="22fdf" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <focusable value="false"/>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <horizontalTextPosition value="4"/>
+                          <text value="Email:"/>
+                        </properties>
+                      </component>
+                      <component id="36d65" class="javax.swing.JTextField" binding="mutEmailField">
+                        <constraints>
+                          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="100" height="26"/>
+                            <preferred-size width="250" height="26"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                          <margin top="4" left="12" bottom="4" right="12"/>
+                          <maximumSize width="400" height="800"/>
+                          <minimumSize width="350" height="26"/>
+                          <opaque value="false"/>
+                          <preferredSize width="49" height="500"/>
+                        </properties>
+                      </component>
+                      <component id="27dc5" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <focusable value="false"/>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <horizontalTextPosition value="4"/>
+                          <text value="Téléphone:"/>
+                        </properties>
+                      </component>
+                      <component id="451ea" class="javax.swing.JFormattedTextField" binding="mutPhoneField">
+                        <constraints>
+                          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="100" height="26"/>
+                            <preferred-size width="100" height="26"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                          <margin top="2" left="6" bottom="2" right="6"/>
+                          <maximumSize width="400" height="500"/>
+                          <minimumSize width="350" height="26"/>
+                          <selectionEnd value="0"/>
+                          <selectionStart value="0"/>
+                        </properties>
+                      </component>
+                      <component id="75b46" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <focusable value="false"/>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <horizontalTextPosition value="4"/>
+                          <text value="Ville:"/>
+                        </properties>
+                      </component>
+                      <component id="b560c" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <focusable value="false"/>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <horizontalTextPosition value="4"/>
+                          <text value="Adresse:"/>
+                        </properties>
+                      </component>
+                      <component id="47a90" class="javax.swing.JTextField" binding="mutAddressField">
+                        <constraints>
+                          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="100" height="26"/>
+                            <preferred-size width="250" height="26"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                          <inheritsPopupMenu value="true"/>
+                          <margin top="4" left="12" bottom="4" right="12"/>
+                          <minimumSize width="350" height="26"/>
+                          <preferredSize width="350" height="36"/>
+                        </properties>
+                      </component>
+                      <component id="eea6c" class="javax.swing.JTextField" binding="mutCityField">
+                        <constraints>
+                          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="100" height="26"/>
+                            <preferred-size width="250" height="26"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                          <inheritsPopupMenu value="true"/>
+                          <margin top="4" left="12" bottom="4" right="12"/>
+                          <minimumSize width="350" height="26"/>
+                        </properties>
+                      </component>
+                      <component id="741c3" class="javax.swing.JTextField" binding="mutNbStateField">
+                        <constraints>
+                          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="50" height="26"/>
+                            <preferred-size width="100" height="26"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <inheritsPopupMenu value="true"/>
+                          <margin top="4" left="12" bottom="4" right="12"/>
+                          <minimumSize width="350" height="26"/>
+                          <opaque value="true"/>
+                          <preferredSize width="-1" height="34"/>
+                        </properties>
+                      </component>
+                      <component id="dd350" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <alignmentX value="0.5"/>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="0"/>
+                          <horizontalTextPosition value="0"/>
+                          <text value="Remboursement (%):"/>
+                        </properties>
+                      </component>
+                      <component id="91dda" class="javax.swing.JTextField" binding="mutTauxRembField">
+                        <constraints>
+                          <grid row="1" column="4" row-span="2" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="2" indent="2" use-parent-layout="false">
+                            <preferred-size width="150" height="-1"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <autoscrolls value="true"/>
+                          <focusable value="false"/>
+                          <font size="16" style="1"/>
+                          <foreground color="-14803166"/>
+                          <horizontalAlignment value="0"/>
+                          <margin top="4" left="12" bottom="4" right="12"/>
+                          <minimumSize width="80" height="26"/>
+                          <preferredSize width="80" height="26"/>
+                          <selectionEnd value="0"/>
+                        </properties>
+                      </component>
+                      <hspacer id="1bbe7">
+                        <constraints>
+                          <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                      </hspacer>
+                      <component id="a7f1b" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <focusable value="false"/>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <horizontalTextPosition value="4"/>
+                          <text value="Cp:"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <scrollpane id="6fc08" binding="mutuelleScrollPane">
+                    <constraints border-constraint="Center"/>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="6735f" class="javax.swing.JTable" binding="mutuelleTable">
+                        <constraints/>
+                        <properties>
+                          <autoscrolls value="true"/>
+                          <background color="-2104859"/>
+                          <cellSelectionEnabled value="true"/>
+                          <columnSelectionAllowed value="true"/>
+                          <gridColor color="-2104859"/>
+                          <inheritsPopupMenu value="false"/>
+                          <opaque value="true"/>
+                          <showHorizontalLines value="true"/>
+                          <showVerticalLines value="false"/>
+                          <toolTipText value="double clic pour détails"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                </children>
+              </grid>
+              <grid id="2980f" layout-manager="BorderLayout" hgap="0" vgap="0">
+                <constraints>
+                  <tabbedpane title="👨‍⚕️Medecins"/>
+                </constraints>
+                <properties/>
+                <border type="none" title="👨‍⚕️Medecins"/>
+                <children>
+                  <grid id="261d2" layout-manager="GridLayoutManager" row-count="4" column-count="8" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints border-constraint="North"/>
+                    <properties>
+                      <background color="-1"/>
+                      <focusable value="false"/>
+                      <preferredSize width="-1" height="200"/>
+                    </properties>
+                    <border type="line" title="Nouveau Medecin" title-justification="1" title-position="2">
+                      <font size="14" style="1"/>
+                      <title-color color="-14412406"/>
+                      <color color="-4473925"/>
+                    </border>
+                    <children>
+                      <component id="30dfd" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <horizontalTextPosition value="4"/>
+                          <text value="Prénom:"/>
+                        </properties>
+                      </component>
+                      <component id="63603" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <horizontalTextPosition value="4"/>
+                          <text value="Email:"/>
+                        </properties>
+                      </component>
+                      <component id="d2cdc" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <horizontalTextPosition value="4"/>
+                          <text value="Adresse:"/>
+                        </properties>
+                      </component>
+                      <component id="db785" class="javax.swing.JTextField" binding="medecinEmailField">
+                        <constraints>
+                          <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="200" height="25"/>
+                            <preferred-size width="300" height="25"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                          <inheritsPopupMenu value="true"/>
+                          <maximumSize width="-1" height="-1"/>
+                          <minimumSize width="350" height="35"/>
+                          <preferredSize width="350" height="35"/>
+                        </properties>
+                      </component>
+                      <component id="fefce" class="javax.swing.JTextField" binding="medecinPrenomField">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="200" height="25"/>
+                            <preferred-size width="300" height="25"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                          <inheritsPopupMenu value="true"/>
+                          <maximumSize width="-1" height="-1"/>
+                          <minimumSize width="350" height="35"/>
+                          <opaque value="true"/>
+                          <preferredSize width="350" height="35"/>
+                        </properties>
+                      </component>
+                      <grid id="fc483" layout-manager="GridLayoutManager" row-count="1" column-count="5" same-size-horizontally="false" same-size-vertically="true" hgap="0" vgap="-1">
+                        <margin top="5" left="0" bottom="0" right="0"/>
+                        <constraints>
+                          <grid row="3" column="0" row-span="1" col-span="8" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                          <focusable value="false"/>
+                          <maximumSize width="-1" height="-1"/>
+                          <minimumSize width="500" height="35"/>
+                          <preferredSize width="1000" height="40"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="10a90" class="javax.swing.JButton" binding="addMedecinButton">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                <minimum-size width="-1" height="35"/>
+                                <preferred-size width="-1" height="35"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <actionCommand value="➕ Ajouter Medecin"/>
+                              <alignmentX value="0.5"/>
+                              <background color="-11751600"/>
+                              <borderPainted value="false"/>
+                              <contentAreaFilled value="true"/>
+                              <font size="12" style="1"/>
+                              <foreground color="-1"/>
+                              <horizontalAlignment value="0"/>
+                              <horizontalTextPosition value="0"/>
+                              <minimumSize width="100" height="30"/>
+                              <preferredSize width="200" height="30"/>
+                              <requestFocusEnabled value="false"/>
+                              <text value="➕ Ajouter Medecin"/>
+                              <verticalAlignment value="0"/>
+                              <verticalTextPosition value="0"/>
+                              <visible value="true"/>
+                            </properties>
+                          </component>
+                          <component id="fd649" class="javax.swing.JButton" binding="clearMedecinButton">
+                            <constraints>
+                              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="-1" height="35"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <alignmentX value="0.5"/>
+                              <background color="-4473925"/>
+                              <borderPainted value="false"/>
+                              <contentAreaFilled value="true"/>
+                              <font size="12" style="1"/>
+                              <foreground color="-1"/>
+                              <horizontalAlignment value="0"/>
+                              <horizontalTextPosition value="0"/>
+                              <minimumSize width="100" height="30"/>
+                              <preferredSize width="200" height="30"/>
+                              <requestFocusEnabled value="false"/>
+                              <text value="🗑️ Effacer"/>
+                              <verticalAlignment value="0"/>
+                              <verticalTextPosition value="0"/>
+                            </properties>
+                          </component>
+                          <component id="9e1a4" class="javax.swing.JButton" binding="updateMedecinButton">
+                            <constraints>
+                              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="-1" height="35"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <alignmentX value="0.5"/>
+                              <background color="-65424"/>
+                              <borderPainted value="false"/>
+                              <contentAreaFilled value="true"/>
+                              <focusable value="false"/>
+                              <hideActionText value="false"/>
+                              <horizontalAlignment value="0"/>
+                              <horizontalTextPosition value="0"/>
+                              <minimumSize width="100" height="30"/>
+                              <preferredSize width="200" height="30"/>
+                              <requestFocusEnabled value="false"/>
+                              <text value="✔ Modifier"/>
+                              <verticalAlignment value="0"/>
+                              <verticalTextPosition value="0"/>
+                            </properties>
+                          </component>
+                          <component id="58da5" class="javax.swing.JButton" binding="cancelMedecinButton">
+                            <constraints>
+                              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="-1" height="35"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <alignmentX value="0.5"/>
+                              <background color="-65424"/>
+                              <borderPainted value="false"/>
+                              <contentAreaFilled value="true"/>
+                              <focusable value="false"/>
+                              <foreground color="-2104859"/>
+                              <horizontalAlignment value="0"/>
+                              <horizontalTextPosition value="0"/>
+                              <minimumSize width="100" height="30"/>
+                              <opaque value="true"/>
+                              <preferredSize width="200" height="30"/>
+                              <requestFocusEnabled value="false"/>
+                              <text value="✖ Annuler"/>
+                              <verticalAlignment value="0"/>
+                              <verticalTextPosition value="0"/>
+                            </properties>
+                          </component>
+                          <component id="63294" class="javax.swing.JButton" binding="validationMedecinButton">
+                            <constraints>
+                              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                <preferred-size width="-1" height="35"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <alignmentX value="0.5"/>
+                              <background color="-11751600"/>
+                              <borderPainted value="false"/>
+                              <contentAreaFilled value="true"/>
+                              <focusable value="false"/>
+                              <horizontalAlignment value="0"/>
+                              <horizontalTextPosition value="0"/>
+                              <label value="✔ Valider"/>
+                              <minimumSize width="100" height="30"/>
+                              <preferredSize width="200" height="30"/>
+                              <requestFocusEnabled value="false"/>
+                              <selected value="false"/>
+                              <text value="✔ Valider"/>
+                              <verticalAlignment value="0"/>
+                              <verticalTextPosition value="0"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <component id="38057" class="javax.swing.JTextField" binding="medecinAddressField">
+                        <constraints>
+                          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="100" height="25"/>
+                            <preferred-size width="200" height="25"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                          <inheritsPopupMenu value="true"/>
+                          <maximumSize width="-1" height="-1"/>
+                          <minimumSize width="350" height="35"/>
+                          <preferredSize width="350" height="35"/>
+                        </properties>
+                      </component>
+                      <component id="431b3" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <focusable value="false"/>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <horizontalTextPosition value="4"/>
+                          <requestFocusEnabled value="true"/>
+                          <text value="Numéro Agrement:"/>
+                        </properties>
+                      </component>
+                      <component id="a0a9d" class="javax.swing.JFormattedTextField" binding="medecinNbAgreementField">
+                        <constraints>
+                          <grid row="0" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="80" height="25"/>
+                            <preferred-size width="100" height="25"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <minimumSize width="200" height="35"/>
+                          <preferredSize width="150" height="35"/>
+                        </properties>
+                      </component>
+                      <component id="f0d6c" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <horizontalTextPosition value="4"/>
+                          <text value="Cp:"/>
+                        </properties>
+                      </component>
+                      <component id="ffaf7" class="javax.swing.JTextField" binding="medecinNbStateField">
+                        <constraints>
+                          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="50" height="25"/>
+                            <preferred-size width="150" height="25"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <inheritsPopupMenu value="true"/>
+                          <maximumSize width="-1" height="-1"/>
+                          <minimumSize width="80" height="35"/>
+                          <opaque value="true"/>
+                          <preferredSize width="80" height="35"/>
+                        </properties>
+                      </component>
+                      <component id="36fb3" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <horizontalTextPosition value="4"/>
+                          <text value="Ville:"/>
+                        </properties>
+                      </component>
+                      <component id="b2b4f" class="javax.swing.JTextField" binding="medecinCityField">
+                        <constraints>
+                          <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="50" height="25"/>
+                            <preferred-size width="200" height="25"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <maximumSize width="-1" height="-1"/>
+                          <minimumSize width="200" height="35"/>
+                          <opaque value="false"/>
+                          <preferredSize width="235" height="35"/>
+                        </properties>
+                      </component>
+                      <component id="96870" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <horizontalTextPosition value="4"/>
+                          <text value="Téléphone:"/>
+                        </properties>
+                      </component>
+                      <component id="dfc28" class="javax.swing.JTextField" binding="medecinPhoneField">
+                        <constraints>
+                          <grid row="1" column="4" row-span="1" col-span="2" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="200" height="25"/>
+                            <preferred-size width="300" height="25"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                          <maximumSize width="-1" height="-1"/>
+                          <minimumSize width="350" height="35"/>
+                          <preferredSize width="350" height="35"/>
+                        </properties>
+                      </component>
+                      <component id="70526" class="javax.swing.JTextField" binding="medecinNomField">
+                        <constraints>
+                          <grid row="0" column="4" row-span="1" col-span="2" vsize-policy="0" hsize-policy="1" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="200" height="25"/>
+                            <preferred-size width="300" height="25"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <font size="12"/>
+                          <maximumSize width="-1" height="-1"/>
+                          <minimumSize width="350" height="35"/>
+                          <opaque value="false"/>
+                          <preferredSize width="350" height="35"/>
+                        </properties>
+                      </component>
+                      <component id="c7425" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <font size="12" style="1"/>
+                          <horizontalAlignment value="4"/>
+                          <horizontalTextPosition value="4"/>
+                          <text value="Nom:"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <scrollpane id="e42ad" binding="medecinScrollPane">
+                    <constraints border-constraint="Center"/>
+                    <properties/>
+                    <border type="empty"/>
+                    <children>
+                      <component id="2ec53" class="javax.swing.JTable" binding="medecinTable">
+                        <constraints/>
+                        <properties>
+                          <cellSelectionEnabled value="false"/>
+                          <fillsViewportHeight value="false"/>
+                          <focusable value="false"/>
+                          <inheritsPopupMenu value="false"/>
+                          <intercellSpacing width="1" height="1"/>
+                          <opaque value="false"/>
+                          <rowSelectionAllowed value="true"/>
+                          <showHorizontalLines value="true"/>
+                          <showVerticalLines value="false"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                </children>
+              </grid>
+            </children>
+          </tabbedpane>
+        </children>
+      </grid>
+      <grid id="e5f6g" binding="statusPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="South"/>
+        <properties>
+          <background color="-4473925"/>
+          <preferredSize width="-1" height="30"/>
+          <visible value="true"/>
+        </properties>
+        <border type="empty">
+          <size top="5" left="20" bottom="5" right="20"/>
+        </border>
+        <children>
+          <component id="h7i8j" class="javax.swing.JLabel" binding="statusLabel">
+            <constraints border-constraint="West"/>
+            <properties>
+              <font size="12"/>
+              <foreground color="-1"/>
+              <maximumSize width="600" height="18"/>
+              <minimumSize width="100" height="18"/>
+              <preferredSize width="300" height="18"/>
+              <text value="Prêt - Système initialisé"/>
+            </properties>
+          </component>
+          <component id="k9l0m" class="javax.swing.JLabel" binding="timeLabel">
+            <constraints border-constraint="East"/>
+            <properties>
+              <font size="12"/>
+              <foreground color="-1"/>
+              <horizontalAlignment value="4"/>
+              <maximumSize width="200" height="-1"/>
+              <minimumSize width="-1" height="-1"/>
+              <preferredSize width="200" height="-1"/>
+              <text value=""/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
