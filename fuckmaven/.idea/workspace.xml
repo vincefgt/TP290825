@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1d1271bf-ddb8-4281-befa-b97dc075eb57" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../maven_start/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../maven_start/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../maven_start/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../maven_start/.mvn/jvm.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../maven_start/.mvn/maven.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../maven_start/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../maven_start/src/main/java/vf_afpa_cda24060/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../maven_start/src/test/java/vf_afpa_cda24060/AppTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sparadrap_1_1_0_persistance/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sparadrap_1_1_0_persistance/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sparadrap_1_1_0_persistance/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sparadrap_1_1_0_persistance/src/main/java/vf_afpa_cda24060/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sparadrap_1_1_0_persistance/src/test/java/vf_afpa_cda24060/AchatTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sparadrap_1_1_0_persistance/src/test/java/vf_afpa_cda24060/AppTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/Exception/AchatException.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/Exception/AchatException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/Exception/ClientException.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/Exception/ClientException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/Exception/InputException.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/Exception/InputException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/Exception/OrdonnanceException.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/Exception/OrdonnanceException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/Exception/StockException.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/Exception/StockException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/controller/DateFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/controller/DateFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/controller/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/controller/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/controller/PharmacieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/controller/PharmacieController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/controller/PharmacieMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/controller/PharmacieMain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/controller/Regex.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/controller/Regex.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Achat$Total.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Achat$Total.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Achat.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Achat.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Dep.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Dep.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Lists.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Lists.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Medecin.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Medecin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Medicament.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Medicament.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Mutuelle.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Mutuelle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Ordonnance.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Ordonnance.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Person.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/Person.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/catMed.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/model/catMed.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/Interface$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/Interface$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/Interface.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/Interface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/PharmacieView.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/PharmacieView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapDialogs$ClientDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapDialogs$ClientDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapDialogs$ConfirmDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapDialogs$ConfirmDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapDialogs.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapDialogs.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapLauncher.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapLauncher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$14.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$15.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$AchatDetailsDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$AchatDetailsDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$AchatDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$AchatDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$AchatDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$AchatDialog$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$AchatDialog$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$AchatDialog$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$AchatDialog$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$AchatDialog$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$AchatDialog$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$AchatDialog$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$AchatDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$AchatDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$ClientDetailsDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$ClientDetailsDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$MedDetailsDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$MedDetailsDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$MedecinDetailsDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$MedecinDetailsDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$MutDetailsDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$MutDetailsDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$OrdoDetailsDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface$OrdoDetailsDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/../vf_ecf_ccp1/out/production/SparadrapV1/view/SparadrapMainInterface.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "vincefgt"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/vincefgt/TP290825.git",
+    "accountId": "969e022d-7f6c-4889-b3e0-45a35c72bf05"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="3518lN2eIfsEjd7kp0eADM4jqGT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "Maven.fuckmaven [test].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Sparadrap__1__1__0__persistance",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.23892.409" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1d1271bf-ddb8-4281-befa-b97dc075eb57" name="Changes" comment="" />
+      <created>1762266367939</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1762266367939</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="com.vaadin.designer2.intellij.settings.SizePresetsSettingsComponent">
+    <option name="sizePresets">
+      <list>
+        <SizePreset>
+          <option name="caption" value="Phone" />
+          <option name="height" value="568" />
+          <option name="width" value="320" />
+        </SizePreset>
+        <SizePreset>
+          <option name="caption" value="Tablet" />
+          <option name="height" value="1024" />
+          <option name="width" value="768" />
+        </SizePreset>
+        <SizePreset>
+          <option name="caption" value="Desktop" />
+          <option name="height" value="900" />
+          <option name="width" value="1440" />
+        </SizePreset>
+      </list>
+    </option>
+  </component>
+</project>
