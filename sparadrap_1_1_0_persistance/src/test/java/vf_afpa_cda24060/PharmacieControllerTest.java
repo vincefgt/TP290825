@@ -1,3 +1,5 @@
+package vf_afpa_cda24060;
+
 import controller.PharmacieController;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -177,7 +179,6 @@ public class PharmacieControllerTest {
         listMed.clear();
         controller.addMed(medicament1);
         controller.addMed(medicament2);
-        PharmacieView.printList(listMed);
         Medicament medTrouve = controller.searchLastName("Doliprane");
         assertNotNull(medTrouve);
         assertEquals(medicament1, medTrouve);

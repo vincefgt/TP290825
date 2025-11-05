@@ -1,4 +1,4 @@
-package vf_afpa_cda24060;
+package vf_afpa_cda24060_2;
 
 /**
  * Hello world!

@@ -3,11 +3,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>vf_afpa_cda24060</groupId>
-  <artifactId>maven_start</artifactId>
+  <groupId>vf_afpa_cda24060_2</groupId>
+  <artifactId>sparadrap_1_1_1</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>maven_start</name>
+  <name>sparadrap_1_1_1</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -15,8 +15,15 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>21</maven.compiler.release>
   </properties>
-
-
+    <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>6.0.0</version>
+        <scope>test</scope>
+    </dependency>
+    </dependencies>
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>

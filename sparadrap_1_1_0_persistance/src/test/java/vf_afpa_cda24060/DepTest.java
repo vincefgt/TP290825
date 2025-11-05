@@ -1,3 +1,5 @@
+package vf_afpa_cda24060;
+
 import org.junit.jupiter.api.*;
 
 

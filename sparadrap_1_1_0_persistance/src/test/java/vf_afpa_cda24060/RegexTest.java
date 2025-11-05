@@ -1,3 +1,5 @@
+package vf_afpa_cda24060;
+
 import controller.Regex;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
