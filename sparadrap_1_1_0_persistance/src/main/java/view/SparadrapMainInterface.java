@@ -126,7 +126,7 @@ public class SparadrapMainInterface extends JFrame {
     private JTextField mutEmailField;
     private JTextField mutNbStateField;
     private JTextField mutCityField;
-    List<Mutuelle> sListMutuelle = PharmacieController.getListMutuelles().subList(1, PharmacieController.getListMutuelles().size());
+
 
     // Medecin
     private JTable medecinTable;
@@ -156,7 +156,7 @@ public class SparadrapMainInterface extends JFrame {
     private JRadioButton allAchatsRadio;
     private JFormattedTextField formattedTextField1;
     private DefaultTableModel medecinTableModel;
-    List<Medecin> sListMedecins = PharmacieController.getListMedecins().subList(1, PharmacieController.getListMedecins().size());
+
 
     // Controller
     private PharmacieController controller;
@@ -249,6 +249,7 @@ public class SparadrapMainInterface extends JFrame {
         };
         medecinTable.setModel(medecinTableModel);
     }
+
     private void setupComboBoxes() {
         // med cat
         medicamentCategorieCombo.removeAllItems();
@@ -267,12 +268,12 @@ public class SparadrapMainInterface extends JFrame {
         clientCombo.setSelectedItem(-1);
         clientComboAchat.removeAllItems();
         clientComboAchat.setSelectedIndex(-1);
-
-        for (Client client : PharmacieController.getListClients()) {
+/*
+       for (Client client : PharmacieController.getListClients()) {
             //String clientStringCombo = client.getLastName()+" "+client.getFirstName();
             clientCombo.addItem(client);
             clientComboAchat.addItem(client);
-        }
+        }*/
         // medecin > ordo frame
         medecinsCombo.removeAllItems();
         medecinsCombo.setSelectedItem(-1);
@@ -1003,6 +1004,7 @@ public class SparadrapMainInterface extends JFrame {
     }
     private void loadMutData() {
         mutTableModel.setRowCount(0);
+        List<Mutuelle> sListMutuelle = PharmacieController.getListMutuelles().subList(1, PharmacieController.getListMutuelles().size());
         // creation sublist to sort and hide first line
         sListMutuelle.sort(Comparator.comparing(m -> m.getLastName().toLowerCase())); // sort By alpha
         for (Mutuelle mut : sListMutuelle) {
@@ -1017,6 +1019,7 @@ public class SparadrapMainInterface extends JFrame {
     }
     private void loadMedecinData() {
         medecinTableModel.setRowCount(0);
+        List<Medecin> sListMedecins = PharmacieController.getListMedecins().subList(1, PharmacieController.getListMedecins().size());
         sListMedecins.sort(Comparator.comparing(m -> m.getLastName().toLowerCase()+" "+m.getFirstName().toLowerCase()));
         for (Medecin medecin : sListMedecins) {
             Object[] row = {

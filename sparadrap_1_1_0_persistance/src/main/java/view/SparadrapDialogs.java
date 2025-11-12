@@ -59,7 +59,7 @@ public class SparadrapDialogs {
             // ComboBox pour mutuelles
             mutuelleCombo = new JComboBox<>();
             mutuelleCombo.addItem(null); // Option "Aucune"
-            for (Mutuelle mutuelle : controller.PharmacieController.getListMutuelles()) {
+           for (Mutuelle mutuelle : controller.PharmacieController.getListMutuelles()) {
                 mutuelleCombo.addItem(mutuelle);
             }
             

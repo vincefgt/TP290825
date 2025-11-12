@@ -6,9 +6,11 @@ import view.PharmacieView;
 
 import java.time.LocalDate;
 
+import static controller.PharmacieController.listAchats;
+
 class SparadrapMainInit {
     public static void main(String[] args) {
-        initializeTestData();
+      //  initializeTestData(); loading data
     }
 
     public static PharmacieController initializeTestData() {
@@ -96,13 +98,20 @@ class SparadrapMainInit {
             Achat achat4 = new Achat(LocalDate.now().minusDays(2), client2,ordonnance2);
             initController.savingAchat(achat4);
 
-            System.out.println("✅ Données de test initialisées avec succès!");
+           /* System.out.println("✅ Données de test initialisées avec succès!");
             System.out.println("📊 Statistiques:");
             System.out.println("   - Clients: " + PharmacieController.getListClients().size());
             System.out.println("   - Médecins: " + PharmacieController.getListMedecins().size());
             System.out.println("   - Médicaments: " + PharmacieController.getListMed().size());
             System.out.println("   - Mutuelles: " + PharmacieController.getListMutuelles().size());
             System.out.println("   - Achats: " + PharmacieController.getListAchats().size());
+
+            /**
+             * double chiffreAffaires = 0;
+            for (Achat achat : listAchats) {
+                chiffreAffaires += achat.getMontantTotal(); }
+            System.out.println("Chiffre d'affaires total: " + chiffreAffaires + "€");
+             **/
             return initController;
 
         } catch (Exception e) {

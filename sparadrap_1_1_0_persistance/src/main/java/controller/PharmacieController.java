@@ -225,16 +225,12 @@ public class PharmacieController {
             return false;
         }
         try {
-            // Create new ordonnance
-            Ordonnance ordonnance = new Ordonnance(dateOrdo, medecin, client);
+            Ordonnance ordonnance = new Ordonnance(dateOrdo, medecin, client); // Create new ordonnance
             
             // Add ordonnance to list
             if (addOrdonnance(ordonnance)) {
-                // Create achat with ordonnance
-                Achat achat = new Achat(dateAchat, client, ordonnance);
-                
-                // Save achat
-                return savingAchat(achat);
+                Achat achat = new Achat(dateAchat, client, ordonnance); // Create achat with ordonnance
+                return savingAchat(achat); // Save achat
             }
         } catch (Exception e) {
             System.err.println("Erreur lors de la création de l'achat avec ordonnance: " + e.getMessage());
@@ -308,22 +304,4 @@ public class PharmacieController {
         BigDecimal bd = new BigDecimal(nb).setScale(2, RoundingMode.HALF_UP);
         return nb = bd.doubleValue();
     }
-/*
-    // === MÉTHODES ===
-    public void afficherStatistiques() {
-        System.out.println("=== STATISTIQUES PHARMACIE SPARADRAP ===");
-        System.out.println("Nombre de clients: " + listClients.size());
-        System.out.println("Nombre de médecins: " + listMedecins.size());
-        System.out.println("Nombre de médicaments: " + listMed.size());
-        System.out.println("Nombre d'ordonnances: " + listOrdonnances.size());
-        System.out.println("Nombre d'achats: " + listAchats.size());
-
-        double chiffreAffaires = 0;
-        for (Achat achat : listAchats) {
-            chiffreAffaires += achat.getMontantTotal();
-        }
-        System.out.println("Chiffre d'affaires total: " + chiffreAffaires + "€");
-    }*/
-
-
 }

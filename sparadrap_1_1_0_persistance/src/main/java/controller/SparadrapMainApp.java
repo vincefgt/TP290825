@@ -21,7 +21,7 @@ public class SparadrapMainApp {
         
         SwingUtilities.invokeLater(() -> {
             try {
-                //showSplashScreen();
+                //showSplashScreen(); loading frame
                 SparadrapMainInit.main(args); // initialisation data from main init
                 SparadrapMainInterface mainInterface = new SparadrapMainInterface();
                 mainInterface.setVisible(true);
@@ -36,7 +36,7 @@ public class SparadrapMainApp {
         });
     }
     
-    private static void showSplashScreen() {
+    /*private static void showSplashScreen() {
         JWindow splash = new JWindow();
         splash.setSize(450, 300);
         splash.setLocationRelativeTo(null);
@@ -93,5 +93,5 @@ public class SparadrapMainApp {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-    }
+    }*/
 }
