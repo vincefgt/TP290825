@@ -196,7 +196,7 @@ void setup(){
     @DisplayName("Test valid dep null")
     void testValidationDepNull() {
         Mutuelle mutuelle = new Mutuelle("Test Null", 50.0);
-        System.out.println(mutuelle.getDep());
+        //System.out.println(mutuelle.getDep());
         assertThrows(IllegalArgumentException.class, () -> {
             mutuelle.setDep(null);
         });

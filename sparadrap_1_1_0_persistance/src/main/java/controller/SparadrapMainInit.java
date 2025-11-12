@@ -1,102 +1,16 @@
-package view;
+package controller;
 
-import controller.PharmacieController;
 import model.*;
+//import test.PharmacieTests;
+import view.PharmacieView;
 
-import javax.swing.*;
-import java.awt.*;
 import java.time.LocalDate;
 
-/**
- * Classe de lancement pour l'interface Sparadrap
- * Initialise les données de test et lance l'interface principale
- */
-public class SparadrapLauncher {
-    
+class SparadrapMainInit {
     public static void main(String[] args) {
-        // Configuration du Look and Feel
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        SwingUtilities.invokeLater(() -> {
-            try {
-                //showSplashScreen();
-                initializeTestData();
-                SparadrapMainInterface mainInterface = new SparadrapMainInterface();
-                mainInterface.setVisible(true);
-                
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, 
-                    "Erreur lors de l'initialisation: " + e.getMessage(), 
-                    "Erreur de démarrage", 
-                    JOptionPane.ERROR_MESSAGE);
-                System.exit(1);
-            }
-        });
+        initializeTestData();
     }
-    
-    private static void showSplashScreen() {
-        JWindow splash = new JWindow();
-        splash.setSize(450, 300);
-        splash.setLocationRelativeTo(null);
-        
-        JPanel splashPanel = new JPanel(new BorderLayout());
-        splashPanel.setBackground(new Color(52, 73, 94));
-        splashPanel.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
-        
-        // Logo et titre
-        JLabel logoLabel = new JLabel("🏥", JLabel.CENTER);
-        logoLabel.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 48));
-        logoLabel.setForeground(Color.WHITE);
-        
-        JLabel titleLabel = new JLabel("Pharmacie SPARADRAP", JLabel.CENTER);
-        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 28));
-        titleLabel.setForeground(Color.WHITE);
-        
-        JLabel subtitleLabel = new JLabel("Système de Gestion Pharmaceutique", JLabel.CENTER);
-        subtitleLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        subtitleLabel.setForeground(new Color(189, 195, 199));
-        
-        JLabel versionLabel = new JLabel("Version 1.0 - Chargement...", JLabel.CENTER);
-        versionLabel.setFont(new Font("Segoe UI", Font.ITALIC, 12));
-        versionLabel.setForeground(new Color(149, 165, 166));
-        
-        // Barre de progression
-        JProgressBar progressBar = new JProgressBar();
-        progressBar.setIndeterminate(true);
-        progressBar.setBackground(new Color(52, 73, 94));
-        progressBar.setForeground(new Color(46, 204, 113));
-        progressBar.setBorderPainted(false);
-        
-        // Layout du splash
-        JPanel centerPanel = new JPanel(new GridLayout(4, 1, 0, 10));
-        centerPanel.setOpaque(false);
-        centerPanel.add(logoLabel);
-        centerPanel.add(titleLabel);
-        centerPanel.add(subtitleLabel);
-        centerPanel.add(versionLabel);
-        
-        splashPanel.add(centerPanel, BorderLayout.CENTER);
-        splashPanel.add(progressBar, BorderLayout.SOUTH);
-        
-        splash.setContentPane(splashPanel);
-        splash.setVisible(true);
-        
-        // Simuler le temps de chargement
-        Timer timer = new Timer(3000, e -> splash.dispose());
-        timer.setRepeats(false);
-        timer.start();
-        
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-    }
-    
+
     public static PharmacieController initializeTestData() {
         try {
             PharmacieController initController = new PharmacieController();
@@ -109,7 +23,7 @@ public class SparadrapLauncher {
             initController.addMutuelle(mgen);
             initController.addMutuelle(harmonie);
             initController.addMutuelle(secu);
-            
+
             // Create medecin (3)
             Medecin defaultMedecin = new Medecin("default", "Tous Medecins", "Nc",
                     "default@medecin.fr", 0, "Nc", "0000000000",
@@ -123,11 +37,11 @@ public class SparadrapLauncher {
             initController.addMedecin(defaultMedecin);
             initController.addMedecin(drDupont);
             initController.addMedecin(drMartin);
-            
+
             // Create client (4)
             Client defaultClient = new Client("default", "Tous Clients", "Nc",
                     0, "Nc", "0000000000", "default@client.fr", 123456789101112L,
-                     LocalDate.of(1900, 1, 1), null, null); // default do not delete
+                    LocalDate.of(1900, 1, 1), null, null); // default do not delete
             Client client1 = new Client("Durand", "Jean", "123 Rue de la République",
                     75001, "Paris", "0123456789", "jean.durand@email.com",
                     111222333444555L, LocalDate.of(1980, 6, 15), mgen, drDupont);
@@ -143,15 +57,15 @@ public class SparadrapLauncher {
             initController.addClient(client3);
 
             // Create med (5)
-            Medicament doliprane = new Medicament("Doliprane 1000mg", catMed.ANTALGIQUE, 
+            Medicament doliprane = new Medicament("Doliprane 1000mg", catMed.ANTALGIQUE,
                     15.20, "1986-03-21", 50);
-            Medicament aspirine = new Medicament("Aspirine 500mg", catMed.ANALGESIQUE, 
+            Medicament aspirine = new Medicament("Aspirine 500mg", catMed.ANALGESIQUE,
                     3.80, "2023-01-10", 30);
-            Medicament ibuprofene = new Medicament("Ibuprofène 200mg", catMed.ANTIINFLAMMATOIRE, 
+            Medicament ibuprofene = new Medicament("Ibuprofène 200mg", catMed.ANTIINFLAMMATOIRE,
                     4.50, "2024-01-01", 25);
-            Medicament vitamine = new Medicament("Vitamine C", catMed.VITAMINE, 
+            Medicament vitamine = new Medicament("Vitamine C", catMed.VITAMINE,
                     8.90, "2023-02-01", 40);
-            Medicament antibiotique = new Medicament("Amoxicilline", catMed.ANTIBIOTIQUE, 
+            Medicament antibiotique = new Medicament("Amoxicilline", catMed.ANTIBIOTIQUE,
                     12.50, "2025-09-04", 20);
             initController.addMed(doliprane);
             initController.addMed(aspirine);
@@ -192,9 +106,9 @@ public class SparadrapLauncher {
             return initController;
 
         } catch (Exception e) {
-            System.err.println("❌ Erreur lors de l'initialisation des données: " + e.getMessage());
-            e.printStackTrace();
+           System.err.println("❌ Erreur lors de l'initialisation des données: " + e.getMessage());
             return null;
         }
     }
+
 }

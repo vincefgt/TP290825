@@ -8,7 +8,7 @@
  * <h2>Main Interface Classes:</h2>
  * <ul>
  *   <li>{@link view.SparadrapMainInterface} - Main GUI application window</li>
- *   <li>{@link view.SparadrapLauncher} - Application launcher with initialization</li>
+ *   <li>{@link controller.SparadrapMainApp} - Application launcher with initialization</li>
  *   <li>{@link view.PharmacieView} - Console-based view for testing</li>
  * </ul>
  * 

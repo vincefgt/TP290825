@@ -216,10 +216,6 @@ public class PharmacieController {
             mut.setPhone(phone);
             //mut.setDep(dep);
         }
-
-
-
-
     }
 
     // ACHAT WITH ORDONNANCE
@@ -276,7 +272,7 @@ public class PharmacieController {
         // availability med
         for (Medicament med : getListMed()) {
             if (med.getStock() <= 0) {
-                System.out.println("Out of Stock: "+med.getNameMed());
+                //System.out.println("Out of Stock: "+med.getNameMed());
                 return false;
             }
         }

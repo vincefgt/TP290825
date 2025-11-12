@@ -1006,7 +1006,7 @@ public class SparadrapMainInterface extends JFrame {
         // creation sublist to sort and hide first line
         sListMutuelle.sort(Comparator.comparing(m -> m.getLastName().toLowerCase())); // sort By alpha
         for (Mutuelle mut : sListMutuelle) {
-            System.out.println(mut);
+            //System.out.println(mut);
             Object[] row = {
                     mut.getLastName(),
                     mut.getTauxRemb()
