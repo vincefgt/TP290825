@@ -67,10 +67,12 @@ public class Mutuelle extends Person{
     private int depCode;
     private String nomDep;
     private double tauxRemb =0; // Taux de remboursement en pourcentage (0-100)
+    private Integer id_mut;
 
     // Constructeur
-    public Mutuelle(String firstName,String lastName, String address, String email,int nbState,String city,String phone, double tauxRemb) { //,Dep dep) {
+    public Mutuelle(Integer id_mut, String firstName,String lastName, String address, String email,int nbState,String city,String phone, double tauxRemb) { //,Dep dep) {
         super("Mutuelle",lastName,address,email,nbState,city,phone);
+        this.setId(id_mut);
         this.setTauxRemb(tauxRemb);
        // this.setDep(dep);
     }
@@ -79,6 +81,17 @@ public class Mutuelle extends Person{
         this.setFirstName("Mutuelle");
         this.setTauxRemb(tauxRemb);
         //PharmacieController.getListMutuelles().add(this);
+    }
+    public Mutuelle(Integer id_mut, String lastName, double tauxRemb) {
+        super(lastName);
+        this.setId(id_mut);
+        this.setFirstName("Mutuelle");
+        this.setTauxRemb(tauxRemb);
+        //PharmacieController.getListMutuelles().add(this);
+    }
+
+    public void setId(Integer id_mut) {
+        this.id_mut = id_mut;
     }
 
     public Dep getDep() {

@@ -3,6 +3,9 @@ package model;
 import controller.PharmacieController;
 import controller.Regex;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 import static java.lang.String.format;
 
 /**
@@ -67,37 +70,45 @@ public class Medecin extends Person {
 
     private Long nbAgreement;
     private java.util.List<Client> patients; // List of patients
-    private String idMedecin;
+    private int idMedecin;
 
     // Constructor
     public Medecin(String firstName, String lastName, String address,String email, int nbState,String city,
-                   String phone, Long nbAgreement,String idMedecin) {
+                   String phone, Long nbAgreement,int idMedecin) {
         super(firstName,lastName,address,email,nbState,city,phone);
         this.setNbAgreement(nbAgreement);
-        this.idMedecin = generateId(idMedecin);
+        this.idMedecin = idMedecin;
         this.patients = new java.util.ArrayList<>();
     }
-    public Medecin(String firstName, String lastName, String city, long nbAgreement,String idMedecin) {
+    public Medecin(String firstName, String lastName, String city, Long nbAgreement,int idMedecin) {
         super(firstName,lastName,city);
         this.setNbAgreement(nbAgreement);
         this.setIdMedecin(idMedecin);
         this.patients = new java.util.ArrayList<>();
     }
-    public Medecin(String lastName,String firstName, long nbAgreement, String idMedecin) {
+    public Medecin(String lastName,String firstName, Long nbAgreement, int idMedecin) {
         super(firstName,lastName);
         this.setNbAgreement(nbAgreement);
         this.setIdMedecin(idMedecin);
         this.patients = new java.util.ArrayList<>();
     }
+    public Medecin(String firstName, String lastName,String email,String city, String phone, Long nbAgreement,int idMedecin) {
+        super(firstName,lastName,email,city,phone);
+        this.setNbAgreement(nbAgreement);
+        this.idMedecin = idMedecin;
+    }
+    public Medecin(){
+        super();
+    } // by default
 
-    public String getIdMedecin() {
+    public int getIdMedecin() {
         return this.idMedecin;
     }
-    public void setIdMedecin(String idMedecin) {
-        this.idMedecin = generateId(idMedecin);
+    public void setIdMedecin(int idMedecin) {
+        this.idMedecin = idMedecin;
     }
 
-    public long getNbAgreement() {
+    public Long getNbAgreement() {
         return this.nbAgreement;
     }
     public void setNbAgreement(long nbAgreement) {
@@ -124,16 +135,16 @@ public class Medecin extends Person {
     }
 
     // delete medecin
-    public boolean deleteMedecin(Medecin pMedecin) {
+    public boolean deleteMedecin(Medecin pMedecin) throws SQLException, IOException, ClassNotFoundException {
         return PharmacieController.getListMedecins().remove(pMedecin);
     }
     // add patient
-    public void addMedecin(Medecin pMedecin) {
+    public void addMedecin(Medecin pMedecin) throws SQLException, IOException, ClassNotFoundException {
             PharmacieController.getListMedecins().add(pMedecin);
     }
 
     // Méthodes utilitaires
-    private String generateId(String idMedecin) {
+    private String generateId(String idMedecin) throws SQLException, IOException, ClassNotFoundException {
         if (Regex.testNotEmpty(idMedecin)) {
             return "MED" + format("%04d", PharmacieController.getListMedecins().size() + 1); //Date.now().toString() + '_' + Math.random().toString(36).substr(2, 9);
         } else { return idMedecin; }

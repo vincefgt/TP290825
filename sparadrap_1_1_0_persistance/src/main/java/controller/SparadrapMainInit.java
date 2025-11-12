@@ -1,21 +1,17 @@
 package controller;
 
 import model.*;
-//import test.PharmacieTests;
-import view.PharmacieView;
-
 import java.time.LocalDate;
-
-import static controller.PharmacieController.listAchats;
 
 class SparadrapMainInit {
     public static void main(String[] args) {
-      //  initializeTestData(); loading data
+        initializeTestData(); // loading data
     }
 
     public static PharmacieController initializeTestData() {
         try {
             PharmacieController initController = new PharmacieController();
+           /*
             // Create mut (4)
             Mutuelle defaultMut = new Mutuelle("Sélectionner mutuelle",0); //default do not delete
             Mutuelle mgen = new Mutuelle("MGEN", 70.0);
@@ -24,8 +20,8 @@ class SparadrapMainInit {
             initController.addMutuelle(defaultMut); // do not delete
             initController.addMutuelle(mgen);
             initController.addMutuelle(harmonie);
-            initController.addMutuelle(secu);
-
+            initController.addMutuelle(secu);*/
+/*
             // Create medecin (3)
             Medecin defaultMedecin = new Medecin("default", "Tous Medecins", "Nc",
                     "default@medecin.fr", 0, "Nc", "0000000000",
@@ -39,35 +35,35 @@ class SparadrapMainInit {
             initController.addMedecin(defaultMedecin);
             initController.addMedecin(drDupont);
             initController.addMedecin(drMartin);
-
+/*
             // Create client (4)
             Client defaultClient = new Client("default", "Tous Clients", "Nc",
                     0, "Nc", "0000000000", "default@client.fr", 123456789101112L,
                     LocalDate.of(1900, 1, 1), null, null); // default do not delete
             Client client1 = new Client("Durand", "Jean", "123 Rue de la République",
                     75001, "Paris", "0123456789", "jean.durand@email.com",
-                    111222333444555L, LocalDate.of(1980, 6, 15), mgen, drDupont);
+                        111222333444555L, LocalDate.of(1980, 6, 15), null, drDupont);
             Client client2 = new Client("Moreau", "Marie", "456 Boulevard Voltaire",
                     69000, "Lyon", "0987654321", "marie.moreau@email.com",
-                    666777888999000L, LocalDate.of(1975, 3, 22), harmonie, drMartin);
+                    666777888999000L, LocalDate.of(1975, 3, 22), null, drMartin);
             Client client3 = new Client("Bernard", "Pierre", "789 Avenue de la Liberté",
                     13000, "Marseille", "0491234567", "pierre.bernard@email.com",
-                    555666777888999L, LocalDate.of(1985, 11, 8), secu, drDupont);
+                    555666777888999L, LocalDate.of(1985, 11, 8), null, drDupont);
             initController.addClient(defaultClient); // do not delete
             initController.addClient(client1);
             initController.addClient(client2);
             initController.addClient(client3);
-
+            /*
             // Create med (5)
-            Medicament doliprane = new Medicament("Doliprane 1000mg", catMed.ANTALGIQUE,
+            Medicament doliprane = new Medicament("Doliprane 1000mg", catMed.ANTALGIQUE.toString(),
                     15.20, "1986-03-21", 50);
-            Medicament aspirine = new Medicament("Aspirine 500mg", catMed.ANALGESIQUE,
+            Medicament aspirine = new Medicament("Aspirine 500mg", catMed.ANALGESIQUE.toString(),
                     3.80, "2023-01-10", 30);
-            Medicament ibuprofene = new Medicament("Ibuprofène 200mg", catMed.ANTIINFLAMMATOIRE,
+            Medicament ibuprofene = new Medicament("Ibuprofène 200mg", catMed.ANTIINFLAMMATOIRE.toString(),
                     4.50, "2024-01-01", 25);
-            Medicament vitamine = new Medicament("Vitamine C", catMed.VITAMINE,
+            Medicament vitamine = new Medicament("Vitamine C", catMed.VITAMINE.toString(),
                     8.90, "2023-02-01", 40);
-            Medicament antibiotique = new Medicament("Amoxicilline", catMed.ANTIBIOTIQUE,
+            Medicament antibiotique = new Medicament("Amoxicilline", catMed.ANTIBIOTIQUE.toString(),
                     12.50, "2025-09-04", 20);
             initController.addMed(doliprane);
             initController.addMed(aspirine);

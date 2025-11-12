@@ -67,22 +67,30 @@ public class Client extends Person {
     private LocalDate dateBirth;
     private Mutuelle mut;
     private Medecin medecinTraitant;
+    private Integer id_client;
     //private List<Client> listClient;
 
     public static Map<String, Client> MapClient = new HashMap<>();
 
     // Constructeur avec validation (code défensif)
-    public Client(String firstName, String lastName, String address, int nbState,
+    public Client(Integer id_client, String firstName, String lastName, String address, Integer nbState,
                   String city, String phone, String email, long nbSS,
-                  LocalDate dateBirth,Mutuelle mut, Medecin medecinTraitant) {
+                  LocalDate dateBirth, Mutuelle mut, Medecin medecinTraitant) {
         super (firstName, lastName,address,email,nbState,city,phone);
+        this.setId(id_client);
         this.setNbSS(nbSS);
         this.setDateBirth(dateBirth);
         this.setMutuelle(mut);
         this.setMedecinTraitant(medecinTraitant);
         MapClient.put(lastName+" "+firstName, this);
     }
+    public Client(){
+        super();
+    } // by default
 
+    public void setId(Integer id_client) {
+        this.id_client = id_client;
+    }
     public long getNbSS() {
         return nbSS;
     }

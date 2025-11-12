@@ -9,12 +9,12 @@ public class Person {
     private String lastName;
     private String address;
     private String email;
-    private int nbState;
+    private Integer nbState;
     private String city;
     private String phone;
 
     //constructor
-    public Person(String firstName, String lastName, String address, String email, int nbState, String city, String phone) {
+    public Person(String firstName, String lastName, String address, String email, Integer nbState, String city, String phone) {
         this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setAddress(address);
@@ -36,12 +36,22 @@ public class Person {
         this.setCity(city);
     }
 
+    public Person(String firstName, String lastName, String email, String city, String phone) {
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setEmail(email);
+        this.setCity(city);
+        this.setPhone(phone);
+    }
+
+    public Person() {} // by default
+
     public String getFirstName() {
         return this.firstName;
     }
     public void setFirstName(String firstName) {
         if (Regex.testChar(firstName))//||Regex.testNotEmpty(firstName))
-            throw new IllegalArgumentException("firstName required & without number");
+            throw new IllegalArgumentException("Regex: firstName required & without number");
         this.firstName = capitalize(firstName);
     }
 
@@ -49,8 +59,8 @@ public class Person {
         return this.lastName;
     }
     public void setLastName(String lastName) {
-        if (Regex.testNotEmpty(lastName)||Regex.testChar(lastName))
-            throw new IllegalArgumentException("lastName required & without number");
+        /*if (Regex.testChar(lastName)) // ||Regex.testNotEmpty(lastName))
+            throw new IllegalArgumentException("Regex: lastName required & without number");*/
         this.lastName = capitalize(lastName).toUpperCase();
     }
 

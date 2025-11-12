@@ -3,6 +3,8 @@ package view;
 import controller.PharmacieController;
 import model.*;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class PharmacieView {
@@ -108,7 +110,7 @@ public class PharmacieView {
     }
 
     // Méthode pour créer un achat avec ordonnance
-    public void creerAchatAvecOrdonnance() {
+    public void creerAchatAvecOrdonnance() throws SQLException, IOException, ClassNotFoundException {
         System.out.println("\n=== CRÉATION D'UN ACHAT AVEC ORDONNANCE ===");
         
         // Sélection du client
@@ -166,7 +168,7 @@ public class PharmacieView {
     }
     
     // Méthode pour ajouter des médicaments à l'ordonnance
-    private void ajouterMedicamentsOrdonnance() {
+    private void ajouterMedicamentsOrdonnance() throws SQLException, IOException, ClassNotFoundException {
         if (controller.getListMed().isEmpty()) {
             afficherErreur("Aucun médicament disponible.");
             return;

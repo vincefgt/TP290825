@@ -33,9 +33,9 @@ public class Singleton {
             if (getConnection() == null || getConnection().isClosed()) {
                 new Singleton();
                 System.out.println("Connected to database : " + getConnection());
-            } else {
-                System.out.println("Connection already existing");
-            }
+            } /*else {
+                 System.out.println("Connection already existing");
+            }*/
         } finally {
 
         }

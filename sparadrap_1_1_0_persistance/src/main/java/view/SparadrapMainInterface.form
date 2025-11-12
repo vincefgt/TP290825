@@ -33,7 +33,7 @@
             <properties>
               <font size="12" style="0"/>
               <foreground color="-4473925"/>
-              <text value="Version 1.0 - Système de Gestion"/>
+              <text value="Version 2.0.0 - Système de Gestion"/>
             </properties>
           </component>
         </children>
@@ -2087,6 +2087,14 @@
               <minimumSize width="-1" height="-1"/>
               <preferredSize width="200" height="-1"/>
               <text value=""/>
+            </properties>
+          </component>
+          <component id="cf075" class="javax.swing.JLabel" binding="db_connection">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <foreground color="-1"/>
+              <horizontalAlignment value="0"/>
+              <text value="Connected to database:"/>
             </properties>
           </component>
         </children>

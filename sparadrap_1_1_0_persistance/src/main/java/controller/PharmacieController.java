@@ -1,14 +1,19 @@
 package controller;
 
+import BDD.Singleton;
 import model.*;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import static controller.SpraradrapMainPersistance.drugs;
 
 /**
  * Main controller class for the Sparadrap Pharmacy Management System.
@@ -93,13 +98,13 @@ public class PharmacieController {
     }
 
     // CLIENTS
-    public static boolean addClient(Client client) {
+    public static boolean addClient(Client client) throws SQLException, IOException, ClassNotFoundException {
         if (client != null && !getListClients().contains(client)) {
             return getListClients().add(client);
         }
         return false;
     }
-    public static boolean getClient(int row) {
+    public static boolean getClient(int row) throws SQLException, IOException, ClassNotFoundException {
         return getListClients().get(row) != null;
     }
     public static void updateClient(Client client, String firstName, String lastName, String address, int nbState,
@@ -134,12 +139,12 @@ public class PharmacieController {
         }
         return null;
     }
-    public static List<Client> getListClients() {
-        return listClients;
+    public static List<Client> getListClients() throws SQLException, IOException, ClassNotFoundException {
+        return Implementation.selectFromClients(Singleton.getInstanceDB()); //listClients;
     }
 
     //MEDECIN
-    public static boolean addMedecin(Medecin medecin) {
+    public static boolean addMedecin(Medecin medecin) throws SQLException, IOException, ClassNotFoundException {
         if (medecin != null && !getListMedecins().contains(medecin)) {
             return getListMedecins().add(medecin);
         }
@@ -156,8 +161,8 @@ public class PharmacieController {
         }
         return null;
     }
-    public static List<Medecin> getListMedecins() {
-        return listMedecins;
+    public static List<Medecin> getListMedecins() throws SQLException, IOException, ClassNotFoundException {
+        return Implementation.selectFromDoctors(Singleton.getInstanceDB()); //listMedecins;
     }
     public static void updateMedecin(Medecin medecin, String firstName, String lastName, String address, int nbState,
                                     String city, String phone, String email, Long nbAgreement) {
@@ -172,12 +177,13 @@ public class PharmacieController {
     }
 
     // MED add in med list = ALL med
-    public static boolean addMed(Medicament medicament) {
+    public static boolean addMed(Medicament medicament) throws SQLException, IOException, ClassNotFoundException {
         if (medicament != null && !getListMed().contains(medicament)) {
             return getListMed().add(medicament);
         }
         return false;
     }
+
     // Med List
     public Medicament searchLastName(String lastName) {
         if (Regex.testNotEmpty(lastName)||Regex.testChar(lastName)) {
@@ -190,19 +196,19 @@ public class PharmacieController {
         }
         return null;
     }
-    public static List<Medicament> getListMed() {
-        return listMed;
+    public static List<Medicament> getListMed() throws SQLException, IOException, ClassNotFoundException {
+        return Implementation.selectFromDrugs(Singleton.getInstanceDB());  // listMed;
     }
 
     // MUTUELLES
-    public static boolean addMutuelle(Mutuelle mutuelle) {
+    public static boolean addMutuelle(Mutuelle mutuelle) throws SQLException, IOException, ClassNotFoundException {
         if (mutuelle != null && !getListMutuelles().contains(mutuelle)) {
             return getListMutuelles().add(mutuelle);
         }
         return false;
     }
-    public static List<Mutuelle> getListMutuelles() {
-        return listMutuelles;
+    public static List<Mutuelle> getListMutuelles() throws SQLException, IOException, ClassNotFoundException {
+        return Implementation.selectFromMutuelle(Singleton.getInstanceDB()); // listMutuelles;
     }
     public static void updateMutuelle(Mutuelle mut, String lastName, String address, int nbState,
                                      String city, String phone, String email, Double tauxRemb) {
@@ -225,8 +231,7 @@ public class PharmacieController {
             return false;
         }
         try {
-            Ordonnance ordonnance = new Ordonnance(dateOrdo, medecin, client); // Create new ordonnance
-            
+            Ordonnance ordonnance = new Ordonnance(null, dateOrdo, medecin, client); // Create new ordonnance
             // Add ordonnance to list
             if (addOrdonnance(ordonnance)) {
                 Achat achat = new Achat(dateAchat, client, ordonnance); // Create achat with ordonnance
@@ -261,7 +266,7 @@ public class PharmacieController {
     }
 
     //ACHATS
-    public static boolean savingAchat(Achat achat) {
+    public static boolean savingAchat(Achat achat) throws SQLException, IOException, ClassNotFoundException {
         if (achat == null) {
             return false;
         }

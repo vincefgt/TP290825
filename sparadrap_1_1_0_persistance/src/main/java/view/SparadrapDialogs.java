@@ -5,6 +5,8 @@ import model.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 /**
@@ -30,7 +32,7 @@ public class SparadrapDialogs {
         private Client client;
         private boolean confirmed = false;
         
-        public ClientDialog(Frame parent, Client client) {
+        public ClientDialog(Frame parent, Client client) throws SQLException, IOException, ClassNotFoundException {
             super(parent, client == null ? "Nouveau Client" : "Modifier Client", true);
             this.client = client;
             initializeDialog();
@@ -48,7 +50,7 @@ public class SparadrapDialogs {
             setResizable(false);
         }
         
-        private void createComponents() {
+        private void createComponents() throws SQLException, IOException, ClassNotFoundException {
             prenomField = new JTextField();
             nomField = new JTextField();
             adresseField = new JTextField();
@@ -197,7 +199,7 @@ public class SparadrapDialogs {
                 
                 if (client == null) {
                     // Nouveau client
-                    client = new Client(prenom, nom, adresse, 75000, "Paris", telephone, 
+                    client = new Client(null, prenom, nom, adresse, 75000, "Paris", telephone,
                                       email, numeroSS, LocalDate.now(), mutuelle, medecin);
                 } else {
                     // Modifier client existant

@@ -76,22 +76,36 @@ import java.time.LocalDate;
  */
 public class Medicament {
     private String nameMed;
-    private catMed cat;
+    //private catMed cat;
     private double price;
     private LocalDate datOnMarket;
     private int stock;
+    private int id;
+    private String cat;
 
     // Constructeur
-    public Medicament(String nameMed, catMed cat, double price, String datOnMarket, int stock) {
+    public Medicament(int id, String nameMed, String cat, double price, String datOnMarket, int stock) {
+        this.setId(id);
         this.setNameMed(nameMed);
         this.setCat(cat);
         this.setPrice(price);
         this.setDatOnMarket(datOnMarket);
         this.setStock(stock);
-        PharmacieController.getListMed().add(this);
+    }
+
+    public Medicament( String nameMed, String cat, double price, String datOnMarket, int stock) {
+        this.setNameMed(nameMed);
+        this.setCat(cat);
+        this.setPrice(price);
+        this.setDatOnMarket(datOnMarket);
+        this.setStock(stock);
     }
 
     // Getters et Setters
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNameMed() {
         return this.nameMed;
     }
@@ -101,12 +115,23 @@ public class Medicament {
         }
         this.nameMed = nameMed.trim();
     }
-
+    /** OLD   **/
+    /*
     public catMed getCat() {
         return this.cat;
     }
     public void setCat(catMed cat) {
         if (Regex.testNotEmpty(String.valueOf(cat))) {
+            throw new IllegalArgumentException("Category required");
+        }
+        this.cat = cat;
+    }*/
+    public String getCat() {
+        return this.cat;
+    }
+
+    public void setCat(String cat) {
+        if (Regex.testNotEmpty(cat)) {
             throw new IllegalArgumentException("Category required");
         }
         this.cat = cat;

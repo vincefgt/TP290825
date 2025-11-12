@@ -83,18 +83,20 @@ public class Ordonnance extends Medecin{
     private Client patient;
     private Medecin medecin;
     public List<Medicament> listMedOrdo;
-
+    private Integer id_prep;
     // Constructeur
-    public Ordonnance(String firstName,String lastName,String address,String email,int nbState,String city,String phone,Long nbAgreement,String idMedecin, LocalDate dateOrdo, Client patient) {
+    public Ordonnance(Integer id_prep,String firstName,String lastName,String address,String email,int nbState,String city,String phone,Long nbAgreement,int idMedecin, LocalDate dateOrdo, Client patient) {
         super(firstName,lastName,address,email,nbState,city,phone,nbAgreement,idMedecin);
+        this.setId(id_prep);
         this.setDateOrdo(dateOrdo);
         this.setPatient(patient);
-        Medecin mededin = new Medecin(firstName,lastName,address,email,nbState,city,phone,nbAgreement,null); // because do not exist
+        Medecin mededin = new Medecin(firstName,lastName,address,email,nbState,city,phone,nbAgreement,idMedecin); // because do not exist
         this.setMedecin(mededin);
         this.listMedOrdo = new ArrayList<>();
     }
-    public Ordonnance(LocalDate dateOrdo,Medecin medecin,Client patient) {
+    public Ordonnance(Integer id_prep, LocalDate dateOrdo,Medecin medecin,Client patient) {
         super(medecin.getFirstName(), medecin.getLastName(), medecin.getNbAgreement(), medecin.getIdMedecin());
+        this.setId(id_prep);
         this.setMedecin(medecin);
         this.setDateOrdo(dateOrdo);
         this.setPatient(patient);
@@ -102,6 +104,10 @@ public class Ordonnance extends Medecin{
     }
 
     // Getters et Setters
+    public void setId(Integer p_id_prep) {
+        this.id_prep = p_id_prep;
+    }
+
     public String getDateOrdo() {
         return this.dateOrdo.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
