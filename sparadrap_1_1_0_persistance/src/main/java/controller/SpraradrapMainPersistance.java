@@ -25,7 +25,7 @@ public class SpraradrapMainPersistance {
         Implementation.getTableData(Singleton.getInstanceDB(), "mutuelle");
         Implementation.getTableData(Singleton.getInstanceDB(), "person");
         */
-        PharmacieView.printList(Implementation.selectFromPrescription(Singleton.getInstanceDB())); //displaing list
+        //PharmacieView.printList(Implementation.selectFromPrescription(Singleton.getInstanceDB())); //displaing list
         SparadrapMainApp.main(args); // loading App
 
     }

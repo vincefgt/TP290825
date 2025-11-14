@@ -187,8 +187,7 @@ public class Implementation {
         }
         return doctors;
     } //list doctors
-
-    public static  List<Ordonnance> selectFromPrescription(Connection connection) {
+    /*public static  List<Ordonnance> selectFromPrescription(Connection connection) {
 
         //String select = "select p.id_prescription, date_prescription, person.firstname, person.lastname, id_doctor from prescription p\n" +
         String select = "select * from prescription p\n" +
@@ -219,7 +218,7 @@ public class Implementation {
             throw new RuntimeException(e);
         }
         return preps;
-    } //list ordo
+    } //list ordo */
 
     /*public static  List<?> selectFromCategories(Connection connection) {
 
@@ -298,38 +297,30 @@ public class Implementation {
         }
         return doc;
     }
-/*
-    public static String insertIntoAbonne(Connection connection, Abonne abonne) {
 
-        // valeur de l'id par défaut
-        String inserted = "0";
-
+    public static int insertIntoDoctor(Connection connection, Medecin newDoctor) {
+        int inserted = 0; // valeur de l'id par défaut
         // requête
-        StringBuilder insertIntoAbonne = new StringBuilder();
-        insertIntoAbonne.append("insert into Abonne(nom, prenom) values(?,?)");
-
+        StringBuilder insertIntoDoctor = new StringBuilder();
+        insertIntoDoctor.append("insert into person (firstname, lastname) values(?,?)");
         try {
-
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    insertIntoAbonne.toString(),
+                    insertIntoDoctor.toString(),
                     PreparedStatement.RETURN_GENERATED_KEYS);
-
-            preparedStatement.setString(1, abonne.getNom());
-            preparedStatement.setString(2, abonne.getPrenom());
-
+            preparedStatement.setString(1, newDoctor.getFirstName());
+            preparedStatement.setString(2, newDoctor.getLastName());
             preparedStatement.executeUpdate();
-
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                inserted = resultSet.getString(1);
+                inserted = resultSet.getInt(1);
             }
 
         } catch (SQLException e) {
-            System.err.println("Error inserting abonne " + e.getMessage());
+            System.err.println("Error inserting doctor " + e.getMessage());
         }
 
         return inserted;
-    } */
+    }
 
 
 }

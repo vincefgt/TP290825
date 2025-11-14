@@ -14,7 +14,7 @@ public class Person {
     private String phone;
 
     //constructor
-    public Person(String firstName, String lastName, String address, String email, Integer nbState, String city, String phone) {
+    public Person(String lastName, String firstName, String address, String email, Integer nbState, String city, String phone) {
         this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setAddress(address);
@@ -26,24 +26,22 @@ public class Person {
     public Person(String lastName) {
         this.setLastName(lastName);
     }
-    public Person(String lastName, String city) {
-        this.setLastName(lastName);
-        this.setCity(city);
-    }
     public Person(String lastName, String firstName, String city) {
         this.setLastName(lastName);
         this.setFirstName(firstName);
         this.setCity(city);
     }
-
-    public Person(String firstName, String lastName, String email, String city, String phone) {
+    public Person(String lastName, String firstName) {
+        this.setLastName(lastName);
+        this.setFirstName(firstName);
+    }
+    public Person(String lastName, String firstName, String email, String city, String phone) {
         this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setEmail(email);
         this.setCity(city);
         this.setPhone(phone);
     }
-
     public Person() {} // by default
 
     public String getFirstName() {

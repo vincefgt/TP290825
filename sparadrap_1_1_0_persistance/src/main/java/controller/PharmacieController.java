@@ -2,18 +2,13 @@ package controller;
 
 import BDD.Singleton;
 import model.*;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-
-import static controller.SpraradrapMainPersistance.drugs;
 
 /**
  * Main controller class for the Sparadrap Pharmacy Management System.
@@ -144,9 +139,11 @@ public class PharmacieController {
     }
 
     //MEDECIN
-    public static boolean addMedecin(Medecin medecin) throws SQLException, IOException, ClassNotFoundException {
-        if (medecin != null && !getListMedecins().contains(medecin)) {
-            return getListMedecins().add(medecin);
+    public static boolean addMedecin(Medecin newDoctor) throws SQLException, IOException, ClassNotFoundException {
+        if (newDoctor != null && !getListMedecins().contains(newDoctor)) {
+            //return getListMedecins().add(medecin);
+            Implementation.insertIntoDoctor(Singleton.getInstanceDB(), newDoctor);
+            return true;
         }
         return false;
     }

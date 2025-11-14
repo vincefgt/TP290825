@@ -84,9 +84,7 @@ public class Client extends Person {
         this.setMedecinTraitant(medecinTraitant);
         MapClient.put(lastName+" "+firstName, this);
     }
-    public Client(){
-        super();
-    } // by default
+    public Client(){} // by default
 
     public void setId(Integer id_client) {
         this.id_client = id_client;

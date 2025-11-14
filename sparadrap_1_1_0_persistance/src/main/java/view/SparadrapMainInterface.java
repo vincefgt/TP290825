@@ -726,22 +726,25 @@ public class SparadrapMainInterface extends JFrame {
         try {
             String prenom = medecinPrenomField.getText().trim();
             String nom = medecinNomField.getText().trim();
-            String email = medecinEmailField.getText().trim();
+            /*String email = medecinEmailField.getText().trim();
             String phone = medecinPhoneField.getText().trim();
             String address = medecinAddressField.getText().trim();
             int nbState = Integer.parseInt(medecinNbStateField.getText());
             String city = medecinCityField.getText().trim();
             Long nbAgreement = Long.parseLong(medecinNbAgreementField.getText().trim());
-
-            if (prenom.isEmpty() || nom.isEmpty() || email.isEmpty()) {
+*/
+            if (prenom.isEmpty() || nom.isEmpty()){ // || email.isEmpty()) {
                 showErrorMessage("Veuillez remplir au moins le prénom, nom et email!");
                 return;
             }
 
             // Create medecin with default values for required fields
+            //Person newPerson = new Person();
+            Medecin newMedecin = new Medecin(prenom,nom);
+            /*
             Medecin newMedecin = new Medecin(prenom,nom, address.isEmpty() ? "Non renseigné" : address, email, nbState, city, phone.isEmpty() ? "0000000000" : phone
                     ,String.valueOf(nbAgreement).isEmpty() ? 000000000000000L : nbAgreement, 0000 );
-
+            */
             PharmacieController.addMedecin(newMedecin);
             loadMedecinData();
             clearMedecinForm();

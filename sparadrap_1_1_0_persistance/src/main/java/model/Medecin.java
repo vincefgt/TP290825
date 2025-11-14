@@ -73,14 +73,14 @@ public class Medecin extends Person {
     private int idMedecin;
 
     // Constructor
-    public Medecin(String firstName, String lastName, String address,String email, int nbState,String city,
+    public Medecin(String lastName, String firstName, String address,String email, int nbState,String city,
                    String phone, Long nbAgreement,int idMedecin) {
         super(firstName,lastName,address,email,nbState,city,phone);
         this.setNbAgreement(nbAgreement);
         this.idMedecin = idMedecin;
         this.patients = new java.util.ArrayList<>();
     }
-    public Medecin(String firstName, String lastName, String city, Long nbAgreement,int idMedecin) {
+    public Medecin(String lastName, String firstName, String city, Long nbAgreement,int idMedecin) {
         super(firstName,lastName,city);
         this.setNbAgreement(nbAgreement);
         this.setIdMedecin(idMedecin);
@@ -92,14 +92,18 @@ public class Medecin extends Person {
         this.setIdMedecin(idMedecin);
         this.patients = new java.util.ArrayList<>();
     }
-    public Medecin(String firstName, String lastName,String email,String city, String phone, Long nbAgreement,int idMedecin) {
+    public Medecin(String lastName, String firstName,String email,String city, String phone, Long nbAgreement,int idMedecin) {
         super(firstName,lastName,email,city,phone);
         this.setNbAgreement(nbAgreement);
         this.idMedecin = idMedecin;
     }
-    public Medecin(){
-        super();
-    } // by default
+    public Medecin(){} // by default
+    public Medecin(String lastName, String firstName, String email) {
+        super(firstName,lastName,email);
+    }
+    public Medecin(String lastname, String firstname) {
+        super(firstname,lastname);
+    }
 
     public int getIdMedecin() {
         return this.idMedecin;
