@@ -70,8 +70,8 @@ public class Mutuelle extends Person{
     private Integer id_mut;
 
     // Constructeur
-    public Mutuelle(Integer id_mut, String firstName,String lastName, String address, String email,int nbState,String city,String phone, double tauxRemb) { //,Dep dep) {
-        super("Mutuelle",lastName,address,email,nbState,city,phone);
+    public Mutuelle(Integer id_mut, String lastName,String firstName, String address, String email,int nbState,String city,String phone, double tauxRemb) { //,Dep dep) {
+        super(lastName,"Mutuelle",address,email,nbState,city,phone);
         this.setId(id_mut);
         this.setTauxRemb(tauxRemb);
        // this.setDep(dep);

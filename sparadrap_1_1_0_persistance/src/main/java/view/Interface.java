@@ -3,15 +3,19 @@ package view;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.text.StyleContext;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.util.Locale;
 
 /**
  * Interface principale de SparadrapV1
  * Compatible avec le plugin UI Designer d'IntelliJ IDEA
- *
+ * <p>
  * Cette classe utilise des composants Swing standard et suit les bonnes pratiques
  * pour être facilement modifiable via l'UI Designer
  */
@@ -251,23 +255,36 @@ public class Interface extends JFrame {
         configPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
 
         // Configuration de la base de données
-        gbc.gridx = 0; gbc.gridy = 0; gbc.anchor = GridBagConstraints.WEST;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.WEST;
         configPanel.add(new JLabel("Serveur de base de données:"), gbc);
 
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.weightx = 1.0;
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0;
         JTextField dbServerField = new JTextField("localhost:3306");
         configPanel.add(dbServerField, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 1; gbc.fill = GridBagConstraints.NONE; gbc.weightx = 0;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 0;
         configPanel.add(new JLabel("Base de données:"), gbc);
 
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.weightx = 1.0;
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0;
         JTextField dbNameField = new JTextField("sparadrap_db");
         configPanel.add(dbNameField, gbc);
 
         // Boutons de test
-        gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 2; gbc.fill = GridBagConstraints.NONE;
-        gbc.anchor = GridBagConstraints.CENTER; gbc.insets = new Insets(20, 0, 0, 0);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(20, 0, 0, 0);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
         JButton testButton = new JButton("Tester la connexion");
@@ -338,16 +355,19 @@ public class Interface extends JFrame {
         item.addActionListener(listener);
         return item;
     }
+
     private Icon createIcon(String name) {
         // Placeholder pour les icônes - à remplacer par de vraies icônes
         return UIManager.getIcon("FileView.computerIcon");
     }
+
     private void updateStatusLabel(String text) {
         statusLabel.setText(text);
         addToLog(text);
     }
+
     private void addToLog(String message) {
-        logArea.append(java.time.LocalDateTime.now().toString() + " - " + message + "\n");
+        logArea.append(LocalDateTime.now().toString() + " - " + message + "\n");
         logArea.setCaretPosition(logArea.getDocument().getLength());
     }
 
@@ -356,6 +376,7 @@ public class Interface extends JFrame {
         updateStatusLabel("Création d'un nouvel élément...");
         // TODO: Implémenter la logique
     }
+
     private void onOpen(ActionEvent e) {
         JFileChooser fileChooser = new JFileChooser();
         int result = fileChooser.showOpenDialog(this);
@@ -363,6 +384,7 @@ public class Interface extends JFrame {
             updateStatusLabel("Ouverture du fichier: " + fileChooser.getSelectedFile().getName());
         }
     }
+
     private void onSave(ActionEvent e) {
         updateStatusLabel("Sauvegarde en cours...");
         // Simulation d'une tâche longue
@@ -382,20 +404,25 @@ public class Interface extends JFrame {
         };
         worker.execute();
     }
+
     private void onExport(ActionEvent e) {
         updateStatusLabel("Export des données...");
         // TODO: Implémenter la logique d'export
     }
+
     private void onRefresh(ActionEvent e) {
         updateStatusLabel("Actualisation des données...");
         // TODO: Implémenter l'actualisation
     }
+
     private void onCopy(ActionEvent e) {
         updateStatusLabel("Copie effectuée");
     }
+
     private void onPaste(ActionEvent e) {
         updateStatusLabel("Collage effectué");
     }
+
     private void onDelete(ActionEvent e) {
         int selectedRow = dataTable.getSelectedRow();
         if (selectedRow >= 0) {
@@ -408,16 +435,19 @@ public class Interface extends JFrame {
             }
         }
     }
+
     private void onShowLogs(ActionEvent e) {
         tabbedPane.setSelectedIndex(1);
         updateStatusLabel("Affichage des logs");
     }
+
     private void onAbout(ActionEvent e) {
         JOptionPane.showMessageDialog(this,
                 "SparadrapV1\n\nGestionnaire de données avancé\nVersion 1.0\n\nConçu pour être modifiable via UI Designer",
                 "À propos",
                 JOptionPane.INFORMATION_MESSAGE);
     }
+
     private void onExit(ActionEvent e) {
         int result = JOptionPane.showConfirmDialog(this,
                 "Voulez-vous vraiment quitter l'application ?",
@@ -440,4 +470,5 @@ public class Interface extends JFrame {
             new Interface().setVisible(true);
         });
     }
+
 }

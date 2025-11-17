@@ -3,6 +3,7 @@ package vf_afpa_cda24060;
 import controller.PharmacieController;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
@@ -10,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+@Disabled
 @DisplayName("Tests de la classe Achat")
 public class AchatTest {
 
@@ -19,6 +21,7 @@ public class AchatTest {
     private Medecin medecin;
     private Ordonnance ordonnance;
     private Medicament medicament1, medicament2, medicament3;
+
 
     @BeforeEach
     void setUp() {

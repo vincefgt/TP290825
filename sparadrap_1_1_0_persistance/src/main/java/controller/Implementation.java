@@ -2,6 +2,7 @@ package controller;
 
 import jdk.jfr.Category;
 import model.*;
+import view.SparadrapMainInterface;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -110,7 +111,7 @@ public class Implementation {
                 int op_city = resultSet.getInt("op_city");
                 String name_city = resultSet.getString("name_city");
 
-                Mutuelle mut = new Mutuelle(numab, "Mutuelle", nom,street,email,op_city,name_city,phone, tauxRemb);
+                Mutuelle mut = new Mutuelle(numab, nom, "Mutuelle",street,email,op_city,name_city,phone, tauxRemb);
                 muts.add(mut);
             }
         } catch (SQLException e) {
@@ -320,6 +321,49 @@ public class Implementation {
         }
 
         return inserted;
+    }
+    public static boolean updateIntoDoctor(Connection connection, Medecin Doctor, String firstname, String lastname) {
+        int inserted = 0; // valeur de l'id par défaut
+        // requête
+        StringBuilder updateIntoDoctor = new StringBuilder();
+        updateIntoDoctor.append("update person\n" +
+                                "SET firstname = ?, lastname = ?\n" +
+                                "where id_person=(select id_person from doctor where id_doctor = ?)");
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    updateIntoDoctor.toString(),
+                    PreparedStatement.RETURN_GENERATED_KEYS);
+                    preparedStatement.setString(1, firstname);
+                    preparedStatement.setString(2, lastname);
+                    preparedStatement.setInt(3, Doctor.getIdMedecin());
+                    preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                selectFromDoctors(connection);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error inserting doctor " + e.getMessage());
+        }
+        return true;
+    }
+    public static boolean deteleIntoDoctor(Connection connection, Medecin Doctor) {
+        int inserted = 0; // valeur de l'id par défaut
+        // requête
+        StringBuilder deleteIntoDoctor = new StringBuilder();
+        //deleteIntoDoctor.append("delete from doctor where id_doctor = ?");
+        deleteIntoDoctor.append("delete from person where id_person=(select id_person from doctor where id_doctor = ?)");
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    deleteIntoDoctor.toString(),
+                    PreparedStatement.RETURN_GENERATED_KEYS);
+            preparedStatement.setInt(1, Doctor.getIdMedecin());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println("Error inserting doctor " + e.getMessage());
+        }
+        return true;
     }
 
 

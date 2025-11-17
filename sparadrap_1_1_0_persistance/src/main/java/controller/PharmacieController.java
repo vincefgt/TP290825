@@ -8,7 +8,10 @@ import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+
+import static BDD.Singleton.*;
 
 /**
  * Main controller class for the Sparadrap Pharmacy Management System.
@@ -162,7 +165,9 @@ public class PharmacieController {
         return Implementation.selectFromDoctors(Singleton.getInstanceDB()); //listMedecins;
     }
     public static void updateMedecin(Medecin medecin, String firstName, String lastName, String address, int nbState,
-                                    String city, String phone, String email, Long nbAgreement) {
+                                    String city, String phone, String email, Long nbAgreement) throws SQLException, IOException, ClassNotFoundException {
+        /*
+        medecin.getIdMedecin();
         medecin.setFirstName(firstName);
         medecin.setLastName(lastName);
         medecin.setNbState(nbState);
@@ -171,6 +176,8 @@ public class PharmacieController {
         medecin.setAddress(address);
         medecin.setCity(city);
         medecin.setPhone(phone);
+        */
+        Implementation.updateIntoDoctor(Singleton.getInstanceDB(), medecin, firstName, lastName);
     }
 
     // MED add in med list = ALL med

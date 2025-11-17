@@ -73,7 +73,7 @@ public class Client extends Person {
     public static Map<String, Client> MapClient = new HashMap<>();
 
     // Constructeur avec validation (code défensif)
-    public Client(Integer id_client, String firstName, String lastName, String address, Integer nbState,
+    public Client(Integer id_client, String lastName, String firstName, String address, Integer nbState,
                   String city, String phone, String email, long nbSS,
                   LocalDate dateBirth, Mutuelle mut, Medecin medecinTraitant) {
         super (firstName, lastName,address,email,nbState,city,phone);

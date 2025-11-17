@@ -10,7 +10,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.FontUIResource;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -711,8 +713,12 @@ public class SparadrapMainInterface extends JFrame {
         try {
             int selectedMedecin = medecinTable.getSelectedRow();
             if (selectedMedecin >= 0) {
+                /*
                 PharmacieController.getListMedecins().remove(selectedMedecin);
                 medecinTableModel.removeRow(selectedMedecin);
+                */
+                Implementation.deteleIntoDoctor(Singleton.getInstanceDB(),PharmacieController.getListMedecins().get(selectedMedecin));
+                loadMedecinData();
                 showSuccessMessage("Medecin supprimé avec succès!");
                 updateStatusLabel("Medecin supprimé");
             } else {
@@ -757,8 +763,8 @@ public class SparadrapMainInterface extends JFrame {
     }
     private void updateMedecin() {
         try {
-            int selectedMedecin = medecinTable.getSelectedRow()+1;
-            if (selectedMedecin >= 1 || selectedMedecin > medecinTable.getRowCount()) {
+            int selectedMedecin = medecinTable.getSelectedRow(); //+1;
+            if (selectedMedecin >= 0 || selectedMedecin > medecinTable.getRowCount()) {
                 cancelMedecinButton.setVisible(true);
                 validationMedecinButton.setVisible(true);
                 addMedecinButton.setVisible(false);
@@ -776,16 +782,24 @@ public class SparadrapMainInterface extends JFrame {
                     } catch (ClassNotFoundException e) {
                         throw new RuntimeException(e);
                     }
-                    PharmacieController.updateMedecin(medecin,
-                            medecinPrenomField.getText(),
-                            medecinNomField.getText(),
-                            medecinAddressField.getText(),
-                            Integer.parseInt(medecinNbStateField.getText()),
-                            medecinCityField.getText(),
-                            medecinPhoneField.getText(),
-                            medecinEmailField.getText(),
-                            Long.parseLong(medecinNbAgreementField.getText())
-                    );
+                    try {
+                        PharmacieController.updateMedecin(medecin,
+                                medecinPrenomField.getText(),
+                                medecinNomField.getText(),
+                                medecinAddressField.getText(),
+                                Integer.parseInt(medecinNbStateField.getText()),
+                                medecinCityField.getText(),
+                                medecinPhoneField.getText(),
+                                medecinEmailField.getText(),
+                                Long.parseLong(medecinNbAgreementField.getText())
+                        );
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (ClassNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
                     try {
                         loadMedecinData();
                     } catch (SQLException e) {
@@ -1154,7 +1168,7 @@ public class SparadrapMainInterface extends JFrame {
     private void loadMedecinData() throws SQLException, IOException, ClassNotFoundException {
         medecinTableModel.setRowCount(0);
         List<Medecin> sListMedecins = PharmacieController.getListMedecins().subList(0, PharmacieController.getListMedecins().size());
-        sListMedecins.sort(Comparator.comparing(m -> m.getLastName().toLowerCase()+" "+m.getFirstName().toLowerCase()));
+        //sListMedecins.sort(Comparator.comparing(m -> m.getLastName().toLowerCase()+" "+m.getFirstName().toLowerCase())); // sort by A-Z
         for (Medecin medecin : sListMedecins) {
             Object[] row = {
                     "Dr "+medecin.getFirstName()+" "+medecin.getLastName(),
@@ -1310,6 +1324,7 @@ public class SparadrapMainInterface extends JFrame {
 
     /**
      * DialogBox
+     *
      * @param message
      */
     private void showSuccessMessage(String message) {
@@ -1349,7 +1364,7 @@ public class SparadrapMainInterface extends JFrame {
         private void initializeDialog() throws SQLException, IOException, ClassNotFoundException {
             setSize(600, 600);
             setLocationRelativeTo(getParent());
-            
+
             JPanel mainPanel = new JPanel(new BorderLayout());
             mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
 
@@ -1458,7 +1473,7 @@ public class SparadrapMainInterface extends JFrame {
             medicamentsList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                java.util.List<Medicament> selectedMeds = medicamentsList.getSelectedValuesList();
+                List<Medicament> selectedMeds = medicamentsList.getSelectedValuesList();
                 double total = 0.0;
                 double remb = 0.0;
                 for (Medicament med : selectedMeds) {
@@ -1483,7 +1498,7 @@ public class SparadrapMainInterface extends JFrame {
                     // Only if one item is selected
                     if (e.getStateChange() == ItemEvent.SELECTED) {
                         // Recalcul total med selected
-                        java.util.List<Medicament> selectedMeds = medicamentsList.getSelectedValuesList();
+                        List<Medicament> selectedMeds = medicamentsList.getSelectedValuesList();
                         double total = 0.0;
                         for (Medicament med : selectedMeds) {
                             total += med.getPrice();
@@ -1532,7 +1547,7 @@ public class SparadrapMainInterface extends JFrame {
             cartList.addListSelectionListener(new ListSelectionListener() {
                 @Override
                 public void valueChanged(ListSelectionEvent e) {
-                    java.util.List<Medicament> selectedMedsCart = cartList.getSelectedValuesList();
+                    List<Medicament> selectedMedsCart = cartList.getSelectedValuesList();
                     double total = 0.0;
                     double remb = 0.0;
                     for (Medicament med : selectedMedsCart) {
