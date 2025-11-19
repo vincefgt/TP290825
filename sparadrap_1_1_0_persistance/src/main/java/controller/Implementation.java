@@ -335,7 +335,7 @@ public class Implementation {
                     PreparedStatement.RETURN_GENERATED_KEYS);
                     preparedStatement.setString(1, firstname);
                     preparedStatement.setString(2, lastname);
-                    preparedStatement.setInt(3, Doctor.getIdMedecin());
+                    preparedStatement.setInt(3, Doctor.getId());
                     preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -357,7 +357,7 @@ public class Implementation {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     deleteIntoDoctor.toString(),
                     PreparedStatement.RETURN_GENERATED_KEYS);
-            preparedStatement.setInt(1, Doctor.getIdMedecin());
+            preparedStatement.setInt(1, Doctor.getId());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

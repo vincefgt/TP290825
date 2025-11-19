@@ -86,6 +86,10 @@ public class Client extends Person {
     }
     public Client(){} // by default
 
+
+    public Integer getId() {
+            return id_client;
+    }
     public void setId(Integer id_client) {
         this.id_client = id_client;
     }
@@ -100,7 +104,7 @@ public class Client extends Person {
     }
 
     public String getDateBirth() {
-        return dateBirth.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        return dateBirth.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
     public void setDateBirth(LocalDate dateBirth) {
         if (Regex.testDate(dateBirth)||Regex.testNotEmpty(String.valueOf(dateBirth)))

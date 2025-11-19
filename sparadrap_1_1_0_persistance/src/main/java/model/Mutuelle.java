@@ -93,6 +93,9 @@ public class Mutuelle extends Person{
     public void setId(Integer id_mut) {
         this.id_mut = id_mut;
     }
+    public Integer getId_mut() {
+        return id_mut;
+    }
 
     public Dep getDep() {
         return dep;

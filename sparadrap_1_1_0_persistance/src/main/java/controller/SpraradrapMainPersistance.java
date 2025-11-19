@@ -1,8 +1,7 @@
 package controller;
 
-import BDD.Singleton;
+import DAO.Singleton;
 import model.Medicament;
-import view.PharmacieView;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -29,27 +28,5 @@ public class SpraradrapMainPersistance {
         SparadrapMainApp.main(args); // loading App
 
     }
-
-    /**
-        List<Abonne> listAbonnes = null;
-        try {
-            listAbonnes = AbonneImplementation.selectFromAbonne_WtithSingleton();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        for (Abonne abonne : listAbonnes) {
-            System.out.println(abonne);
-        }
-
-        ListAbonnes frame = new ListAbonnes(listAbonnes);
-        frame.setVisible(true);
-
-        System.out.println("---------------------");**/
-
     }
 

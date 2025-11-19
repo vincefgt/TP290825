@@ -1,4 +1,4 @@
-package BDD;
+package DAO;
 
 import java.io.IOException;
 import java.io.InputStream;

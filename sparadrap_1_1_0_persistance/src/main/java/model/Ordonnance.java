@@ -95,7 +95,7 @@ public class Ordonnance extends Medecin{
         this.listMedOrdo = new ArrayList<>();
     }
     public Ordonnance(Integer id_prep, LocalDate dateOrdo,Medecin medecin,Client patient) {
-        super(medecin.getFirstName(), medecin.getLastName(), medecin.getNbAgreement(), medecin.getIdMedecin());
+        super(medecin.getFirstName(), medecin.getLastName(), medecin.getNbAgreement(), medecin.getId());
         this.setId(id_prep);
         this.setMedecin(medecin);
         this.setDateOrdo(dateOrdo);

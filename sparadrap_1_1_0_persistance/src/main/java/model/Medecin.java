@@ -83,13 +83,13 @@ public class Medecin extends Person {
     public Medecin(String lastName, String firstName, String city, Long nbAgreement,int idMedecin) {
         super(firstName,lastName,city);
         this.setNbAgreement(nbAgreement);
-        this.setIdMedecin(idMedecin);
+        this.setId(idMedecin);
         this.patients = new java.util.ArrayList<>();
     }
     public Medecin(String lastName,String firstName, Long nbAgreement, int idMedecin) {
         super(firstName,lastName);
         this.setNbAgreement(nbAgreement);
-        this.setIdMedecin(idMedecin);
+        this.setId(idMedecin);
         this.patients = new java.util.ArrayList<>();
     }
     public Medecin(String lastName, String firstName,String email,String city, String phone, Long nbAgreement,int idMedecin) {
@@ -105,10 +105,10 @@ public class Medecin extends Person {
         super(firstname,lastname);
     }
 
-    public int getIdMedecin() {
+    public int getId() {
         return this.idMedecin;
     }
-    public void setIdMedecin(int idMedecin) {
+    public void setId(int idMedecin) {
         this.idMedecin = idMedecin;
     }
 

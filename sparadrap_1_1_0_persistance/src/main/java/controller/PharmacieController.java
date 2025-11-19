@@ -1,17 +1,18 @@
 package controller;
 
-import BDD.Singleton;
+
+import DAO.Singleton;
+import DAO.clientDAO;
+import DAO.medecinDAO;
 import model.*;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-
-import static BDD.Singleton.*;
 
 /**
  * Main controller class for the Sparadrap Pharmacy Management System.
@@ -77,6 +78,8 @@ import static BDD.Singleton.*;
  * @see model.Ordonnance
  */
 public class PharmacieController {
+
+
     // Lists
     public static java.util.List<Client> listClients;
     public static java.util.List<Medecin> listMedecins;
@@ -86,7 +89,7 @@ public class PharmacieController {
     public static java.util.List<Achat> listAchats;
 
     // Constructeur
-    public PharmacieController() {
+    public PharmacieController() throws SQLException, IOException, ClassNotFoundException {
         listClients = new ArrayList<>(); // historic clients
         listMedecins = new ArrayList<>(); // historic medecins
         listMed = new ArrayList<>(); // historic meds
@@ -98,7 +101,9 @@ public class PharmacieController {
     // CLIENTS
     public static boolean addClient(Client client) throws SQLException, IOException, ClassNotFoundException {
         if (client != null && !getListClients().contains(client)) {
-            return getListClients().add(client);
+            //return getListClients().add(client);
+            clientDAO clientDAO = new clientDAO();
+            clientDAO.insert(client);
         }
         return false;
     }
@@ -107,7 +112,8 @@ public class PharmacieController {
     }
     public static void updateClient(Client client, String firstName, String lastName, String address, int nbState,
                                        String city, String phone, String email, long nbSS,
-                                       LocalDate dateBirth, Mutuelle mut, Medecin medecinTraitant) {
+                                       LocalDate dateBirth, Mutuelle mut, Medecin medecinTraitant) throws SQLException, IOException, ClassNotFoundException {
+
         client.setFirstName(firstName);
         client.setLastName(lastName);
         client.setNbState(nbState);
@@ -119,12 +125,20 @@ public class PharmacieController {
         client.setAddress(address);
         client.setCity(city);
         client.setPhone(phone);
+
+        clientDAO clientDAO =  new clientDAO();
+        clientDAO.update(client); // update BDD
+        getListClients(); // update list
     }
-    public static boolean deleteClient(Client client){
-        if (client != null && !listClients.contains(client)) {
+    public static boolean deleteClient(Client client) throws SQLException, IOException, ClassNotFoundException {
+       // if (client != null && !listClients.contains(client)) {
+            /*
+            PharmacieController.getListClients().remove(selectedClient);
+            clientsTableModel.removeRow(selectedClient);
             return listClients.remove(client);
-        }
-        return false;
+            */
+            clientDAO clientDAO = new clientDAO();
+          return clientDAO.deleteByObj(client);
     }
     public Client SearchSS(long numeroSS) {
         if (Regex.testNotEmpty(String.valueOf(numeroSS))) {
@@ -138,14 +152,18 @@ public class PharmacieController {
         return null;
     }
     public static List<Client> getListClients() throws SQLException, IOException, ClassNotFoundException {
-        return Implementation.selectFromClients(Singleton.getInstanceDB()); //listClients;
+        //return Implementation.selectFromClients(Singleton.getInstanceDB()); //listClients;
+        clientDAO clientDAO = new clientDAO();
+        return clientDAO.findAll();
     }
 
     //MEDECIN
     public static boolean addMedecin(Medecin newDoctor) throws SQLException, IOException, ClassNotFoundException {
         if (newDoctor != null && !getListMedecins().contains(newDoctor)) {
             //return getListMedecins().add(medecin);
-            Implementation.insertIntoDoctor(Singleton.getInstanceDB(), newDoctor);
+            //Implementation.insertIntoDoctor(Singleton.getInstanceDB(), newDoctor);
+            medecinDAO medecinDAO = new medecinDAO();
+            medecinDAO.insert(newDoctor);
             return true;
         }
         return false;
@@ -162,22 +180,14 @@ public class PharmacieController {
         return null;
     }
     public static List<Medecin> getListMedecins() throws SQLException, IOException, ClassNotFoundException {
-        return Implementation.selectFromDoctors(Singleton.getInstanceDB()); //listMedecins;
+            medecinDAO medecinDAO = new medecinDAO();
+            return medecinDAO.findAll(); //listMedecins;
     }
+
     public static void updateMedecin(Medecin medecin, String firstName, String lastName, String address, int nbState,
                                     String city, String phone, String email, Long nbAgreement) throws SQLException, IOException, ClassNotFoundException {
-        /*
-        medecin.getIdMedecin();
-        medecin.setFirstName(firstName);
-        medecin.setLastName(lastName);
-        medecin.setNbState(nbState);
-        medecin.setNbAgreement(nbAgreement);
-        medecin.setEmail(email);
-        medecin.setAddress(address);
-        medecin.setCity(city);
-        medecin.setPhone(phone);
-        */
-        Implementation.updateIntoDoctor(Singleton.getInstanceDB(), medecin, firstName, lastName);
+       medecinDAO medecinDAO = new medecinDAO();
+       medecinDAO.update(medecin);
     }
 
     // MED add in med list = ALL med

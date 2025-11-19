@@ -546,6 +546,7 @@
                         <constraints/>
                         <properties>
                           <alignmentX value="0.5"/>
+                          <autoCreateRowSorter value="true"/>
                           <cellSelectionEnabled value="false"/>
                           <columnSelectionAllowed value="false"/>
                           <focusCycleRoot value="false"/>
@@ -798,8 +799,10 @@
                           <inheritsPopupMenu value="true"/>
                           <intercellSpacing width="1" height="1"/>
                           <rowHeight value="25"/>
+                          <rowSelectionAllowed value="true"/>
                           <showHorizontalLines value="true"/>
                           <showVerticalLines value="false"/>
+                          <updateSelectionOnSort value="true"/>
                         </properties>
                       </component>
                     </children>
@@ -1647,13 +1650,16 @@
                       <component id="6735f" class="javax.swing.JTable" binding="mutuelleTable">
                         <constraints/>
                         <properties>
+                          <autoCreateRowSorter value="true"/>
                           <autoscrolls value="true"/>
                           <background color="-2104859"/>
-                          <cellSelectionEnabled value="true"/>
-                          <columnSelectionAllowed value="true"/>
+                          <cellSelectionEnabled value="false"/>
+                          <columnSelectionAllowed value="false"/>
+                          <focusable value="false"/>
                           <gridColor color="-2104859"/>
                           <inheritsPopupMenu value="false"/>
                           <opaque value="true"/>
+                          <rowSelectionAllowed value="true"/>
                           <showHorizontalLines value="true"/>
                           <showVerticalLines value="false"/>
                           <toolTipText value="double clic pour détails"/>
@@ -2036,6 +2042,7 @@
                       <component id="2ec53" class="javax.swing.JTable" binding="medecinTable">
                         <constraints/>
                         <properties>
+                          <autoCreateRowSorter value="true"/>
                           <cellSelectionEnabled value="false"/>
                           <fillsViewportHeight value="false"/>
                           <focusable value="false"/>
