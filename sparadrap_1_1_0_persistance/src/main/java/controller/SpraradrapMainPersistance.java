@@ -11,12 +11,10 @@ import java.util.List;
 public class SpraradrapMainPersistance {
     public static List<Medicament> drugs;
 
-
     public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException {
         // connect classic
        // connectionBdd connectionBdd = new ConnectionBdd();
        //connectionBdd.connectBdd();
-
         Singleton.testConnectionWithSingleton(); // avec singleton
         /*
         Implementation.getTableData(Singleton.getInstanceDB(), "doctor");
@@ -26,7 +24,6 @@ public class SpraradrapMainPersistance {
         */
         //PharmacieView.printList(Implementation.selectFromPrescription(Singleton.getInstanceDB())); //displaing list
         SparadrapMainApp.main(args); // loading App
-
     }
-    }
+}
 

@@ -222,7 +222,7 @@
                         <properties>
                           <font size="12" style="1"/>
                           <horizontalAlignment value="4"/>
-                          <text value="Prénom:"/>
+                          <text value="Prénom*:"/>
                         </properties>
                       </component>
                       <component id="f9g0h" class="javax.swing.JLabel">
@@ -400,7 +400,7 @@
                           <font size="12" style="1"/>
                           <horizontalAlignment value="4"/>
                           <horizontalTextPosition value="4"/>
-                          <text value="Nom:"/>
+                          <text value="Nom*:"/>
                         </properties>
                       </component>
                       <component id="2e116" class="javax.swing.JLabel">
@@ -528,6 +528,15 @@
                           <preferredSize width="49" height="500"/>
                         </properties>
                       </component>
+                      <component id="5d387" class="javax.swing.JLabel">
+                        <constraints>
+                          <grid row="3" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <requestFocusEnabled value="true"/>
+                          <text value="(*) required"/>
+                        </properties>
+                      </component>
                     </children>
                   </grid>
                   <scrollpane id="g7h8i" binding="clientScrollPane">
@@ -607,14 +616,27 @@
                       <component id="dc399" class="javax.swing.JFormattedTextField" binding="ssTextField">
                         <constraints/>
                         <properties>
+                          <background color="-1"/>
+                          <dragEnabled value="true"/>
                           <editable value="true"/>
-                          <enabled value="false"/>
+                          <enabled value="true"/>
+                          <foreground color="-14273992"/>
+                          <horizontalAlignment value="0"/>
+                          <inheritsPopupMenu value="true"/>
                           <minimumSize width="200" height="25"/>
-                          <opaque value="false"/>
+                          <opaque value="true"/>
                           <preferredSize width="200" height="25"/>
-                          <requestFocusEnabled value="false"/>
+                          <requestFocusEnabled value="true"/>
                           <scrollOffset value="0"/>
+                          <text value=""/>
                           <toolTipText value="Entrer n° Sécurité Sociale"/>
+                          <visible value="true"/>
+                        </properties>
+                      </component>
+                      <component id="fd5af" class="javax.swing.JRadioButton" binding="clientAllButton">
+                        <constraints/>
+                        <properties>
+                          <text value="Tous"/>
                         </properties>
                       </component>
                     </children>
@@ -654,7 +676,7 @@
                         </constraints>
                         <properties>
                           <font size="12" style="1"/>
-                          <text value="Nom:"/>
+                          <text value="Nom*:"/>
                         </properties>
                       </component>
                       <component id="v7w8x" class="javax.swing.JTextField" binding="medicamentNomField">
@@ -676,7 +698,7 @@
                         </constraints>
                         <properties>
                           <font size="12" style="1"/>
-                          <text value="Catégorie:"/>
+                          <text value="Catégorie*:"/>
                         </properties>
                       </component>
                       <grid id="q1r2s" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="-1">
@@ -725,7 +747,7 @@
                         </constraints>
                         <properties>
                           <font size="12" style="1"/>
-                          <text value="Stock:"/>
+                          <text value="Stock*:"/>
                         </properties>
                       </component>
                       <component id="b1c2d" class="javax.swing.JComboBox" binding="medicamentCategorieCombo">
@@ -744,7 +766,7 @@
                         </constraints>
                         <properties>
                           <font size="12" style="1"/>
-                          <text value="Prix (€):"/>
+                          <text value="Prix (€)*:"/>
                         </properties>
                       </component>
                       <component id="h5i6j" class="javax.swing.JTextField" binding="medicamentPrixField">
@@ -999,61 +1021,6 @@
                           </component>
                         </children>
                       </scrollpane>
-                      <grid id="b9439" binding="searchByClient" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
-                        <constraints border-constraint="South"/>
-                        <properties>
-                          <focusable value="false"/>
-                          <maximumSize width="2000" height="1000"/>
-                        </properties>
-                        <border type="empty"/>
-                        <children>
-                          <component id="d454b" class="javax.swing.JLabel">
-                            <constraints/>
-                            <properties>
-                              <enabled value="true"/>
-                              <horizontalAlignment value="2"/>
-                              <text value="Filtre par Client:"/>
-                            </properties>
-                          </component>
-                          <component id="4d873" class="javax.swing.JComboBox" binding="clientComboAchat">
-                            <constraints/>
-                            <properties>
-                              <enabled value="true"/>
-                              <focusCycleRoot value="true"/>
-                              <focusable value="false"/>
-                              <inheritsPopupMenu value="false"/>
-                              <maximumRowCount value="10"/>
-                              <minimumSize width="150" height="25"/>
-                              <opaque value="false"/>
-                              <popupVisible value="false"/>
-                              <preferredSize width="250" height="25"/>
-                              <toolTipText value="Selectionner client"/>
-                            </properties>
-                          </component>
-                          <component id="58d6e" class="javax.swing.JRadioButton" binding="allAchatsRadio">
-                            <constraints/>
-                            <properties>
-                              <text value="Tous"/>
-                            </properties>
-                          </component>
-                          <component id="5167c" class="javax.swing.JLabel">
-                            <constraints/>
-                            <properties>
-                              <enabled value="false"/>
-                              <text value="Recherche Numéro SS"/>
-                            </properties>
-                          </component>
-                          <component id="852ed" class="javax.swing.JFormattedTextField" binding="formattedTextField1" default-binding="true">
-                            <constraints/>
-                            <properties>
-                              <editable value="true"/>
-                              <enabled value="false"/>
-                              <minimumSize width="200" height="25"/>
-                              <preferredSize width="200" height="25"/>
-                            </properties>
-                          </component>
-                        </children>
-                      </grid>
                     </children>
                   </grid>
                 </children>
@@ -1194,7 +1161,7 @@
                   <inheritsPopupMenu value="true"/>
                   <opaque value="true"/>
                 </properties>
-                <border type="none" title="📋 Ordonnances"/>
+                <border type="empty" title="📋 Ordonnances"/>
                 <children>
                   <grid id="d64d7" binding="SortOrdoPane" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
                     <constraints border-constraint="North"/>
@@ -1291,6 +1258,61 @@
                       </component>
                     </children>
                   </grid>
+                  <grid id="b9439" binding="searchByClient" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                    <constraints border-constraint="South"/>
+                    <properties>
+                      <focusable value="false"/>
+                      <maximumSize width="2000" height="1000"/>
+                    </properties>
+                    <border type="empty"/>
+                    <children>
+                      <component id="d454b" class="javax.swing.JLabel">
+                        <constraints/>
+                        <properties>
+                          <enabled value="true"/>
+                          <horizontalAlignment value="2"/>
+                          <text value="Filtre par Client:"/>
+                        </properties>
+                      </component>
+                      <component id="4d873" class="javax.swing.JComboBox" binding="clientComboAchat">
+                        <constraints/>
+                        <properties>
+                          <enabled value="true"/>
+                          <focusCycleRoot value="true"/>
+                          <focusable value="false"/>
+                          <inheritsPopupMenu value="false"/>
+                          <maximumRowCount value="10"/>
+                          <minimumSize width="150" height="25"/>
+                          <opaque value="false"/>
+                          <popupVisible value="false"/>
+                          <preferredSize width="250" height="25"/>
+                          <toolTipText value="Selectionner client"/>
+                        </properties>
+                      </component>
+                      <component id="58d6e" class="javax.swing.JRadioButton" binding="allAchatsRadio">
+                        <constraints/>
+                        <properties>
+                          <text value="Tous"/>
+                        </properties>
+                      </component>
+                      <component id="5167c" class="javax.swing.JLabel">
+                        <constraints/>
+                        <properties>
+                          <enabled value="false"/>
+                          <text value="Recherche Numéro SS"/>
+                        </properties>
+                      </component>
+                      <component id="852ed" class="javax.swing.JFormattedTextField" binding="formattedTextField1" default-binding="true">
+                        <constraints/>
+                        <properties>
+                          <editable value="true"/>
+                          <enabled value="false"/>
+                          <minimumSize width="200" height="25"/>
+                          <preferredSize width="200" height="25"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
                   <scrollpane id="8918d" binding="ordoScrollPane">
                     <constraints border-constraint="Center"/>
                     <properties>
@@ -1311,6 +1333,7 @@
                           <autoscrolls value="true"/>
                           <background color="-1"/>
                           <intercellSpacing width="1" height="1"/>
+                          <showHorizontalLines value="false"/>
                         </properties>
                       </component>
                     </children>
@@ -1319,9 +1342,11 @@
               </grid>
               <grid id="df75d" layout-manager="BorderLayout" hgap="0" vgap="0">
                 <constraints>
-                  <tabbedpane title="🏛️ Mutelles"/>
+                  <tabbedpane title="🏛️ Mutuelles"/>
                 </constraints>
-                <properties/>
+                <properties>
+                  <name value="Mutuelles"/>
+                </properties>
                 <border type="none" title="🏛️Mutelles"/>
                 <children>
                   <grid id="68144" layout-manager="GridLayoutManager" row-count="4" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -1330,6 +1355,7 @@
                     <properties>
                       <background color="-1"/>
                       <focusable value="false"/>
+                      <name value="Mutuelles"/>
                       <preferredSize width="-1" height="200"/>
                     </properties>
                     <border type="line" title="Nouvelle Mutuelle" title-justification="1" title-position="2">
@@ -1348,7 +1374,7 @@
                           <horizontalAlignment value="4"/>
                           <horizontalTextPosition value="4"/>
                           <requestFocusEnabled value="false"/>
-                          <text value="Nom:"/>
+                          <text value="Nom*:"/>
                         </properties>
                       </component>
                       <component id="8e7b9" class="javax.swing.JTextField" binding="mutNomField">
@@ -1602,7 +1628,7 @@
                           <font size="12" style="1"/>
                           <horizontalAlignment value="0"/>
                           <horizontalTextPosition value="0"/>
-                          <text value="Remboursement (%):"/>
+                          <text value="Remboursement (%)*:"/>
                         </properties>
                       </component>
                       <component id="91dda" class="javax.swing.JTextField" binding="mutTauxRembField">
@@ -1698,7 +1724,7 @@
                           <font size="12" style="1"/>
                           <horizontalAlignment value="4"/>
                           <horizontalTextPosition value="4"/>
-                          <text value="Prénom:"/>
+                          <text value="Prénom*:"/>
                         </properties>
                       </component>
                       <component id="63603" class="javax.swing.JLabel">
@@ -2029,7 +2055,7 @@
                           <font size="12" style="1"/>
                           <horizontalAlignment value="4"/>
                           <horizontalTextPosition value="4"/>
-                          <text value="Nom:"/>
+                          <text value="Nom*:"/>
                         </properties>
                       </component>
                     </children>

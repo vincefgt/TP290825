@@ -10,9 +10,13 @@ import model.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -163,6 +167,7 @@ public class SparadrapMainInterface extends JFrame {
     private JPanel searchPane;
     private JRadioButton allAchatsRadio;
     private JFormattedTextField formattedTextField1;
+    private JRadioButton clientAllButton;
     private DefaultTableModel medecinTableModel;
 
 
@@ -204,6 +209,7 @@ public class SparadrapMainInterface extends JFrame {
         buttonGroup.add(allRadioButton);
         allRadioButton.setSelected(true);
         allAchatsRadio.setSelected(true);
+        clientAllButton.setSelected(true);
     }
     private void initializeTableModels() {
         // Clients table
@@ -214,6 +220,14 @@ public class SparadrapMainInterface extends JFrame {
         };
         clientsTable.setModel(clientsTableModel);
 
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(clientsTable.getModel());
+        clientsTable.setRowSorter(sorter);
+        // Tri visuel : colonne 0 (LastName), A → Z
+        List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);
+        SwingUtilities.invokeLater(sorter::sort); // Appliquer le tri après affichage
+
         // Médicaments table
         String[] medicamentColumns = {"Nom", "Catégorie", "Prix (€)", "Stock", "Date Marché"};
         medicamentsTableModel = new DefaultTableModel(medicamentColumns, 0) {
@@ -222,6 +236,14 @@ public class SparadrapMainInterface extends JFrame {
         };
         medicamentsTable.setModel(medicamentsTableModel);
 
+        TableRowSorter<TableModel> sorterMed = new TableRowSorter<>(medicamentsTable.getModel());
+        medicamentsTable.setRowSorter(sorterMed);
+        // Tri visuel : colonne 0 (LastName), A → Z
+        List<RowSorter.SortKey> sortKeysMed = new ArrayList<>();
+        sortKeysMed.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorterMed.setSortKeys(sortKeysMed);
+        SwingUtilities.invokeLater(sorterMed::sort); // Appliquer le tri après affichage
+
         // Achats table
         String[] achatColumns = {"Date", "Client", "Type", "Montant Total", "Remboursement", "Ordonnance"};
         achatsTableModel = new DefaultTableModel(achatColumns, 0) {
@@ -229,6 +251,7 @@ public class SparadrapMainInterface extends JFrame {
             public boolean isCellEditable(int row, int column) { return false; }
         };
         achatsTable.setModel(achatsTableModel);
+
         // Ordonnance table
         String[] ordoColumns = {"Date", "Patient", "Medecin", "numero Agreement", "id medecin"};
         ordoTableModel = new DefaultTableModel(ordoColumns, 0) {
@@ -238,6 +261,7 @@ public class SparadrapMainInterface extends JFrame {
             }
         };
         ordoTable.setModel(ordoTableModel);
+
         // mut table
         String[] mutColumns = {"Nom","Taux Remb (%)"};
         mutTableModel = new DefaultTableModel(mutColumns, 0) {
@@ -248,6 +272,14 @@ public class SparadrapMainInterface extends JFrame {
         };
         mutuelleTable.setModel(mutTableModel);
 
+        TableRowSorter<TableModel> sorterMut = new TableRowSorter<>(mutuelleTable.getModel());
+        mutuelleTable.setRowSorter(sorterMut);
+        // Tri visuel : colonne 0 (LastName), A → Z
+        List<RowSorter.SortKey> sortKeysMut = new ArrayList<>();
+        sortKeysMut.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorterMut.setSortKeys(sortKeysMut);
+        SwingUtilities.invokeLater(sorterMut::sort); // Appliquer le tri après affichage
+
         // medecin table
         String[] medecincColumns = {"Nom", "Ville", "phone","email","numero Agreement"};
         medecinTableModel = new DefaultTableModel(medecincColumns, 0) {
@@ -257,44 +289,56 @@ public class SparadrapMainInterface extends JFrame {
             }
         };
         medecinTable.setModel(medecinTableModel);
-    }
 
+        TableRowSorter<TableModel> sorterDoc = new TableRowSorter<>(medecinTable.getModel());
+        medecinTable.setRowSorter(sorterDoc);
+        // Tri visuel : colonne 0 (LastName), A → Z
+        List<RowSorter.SortKey> sortKeysDoc = new ArrayList<>();
+        sortKeysDoc.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorterDoc.setSortKeys(sortKeysDoc);
+        SwingUtilities.invokeLater(sorterDoc::sort); // Appliquer le tri après affichage
+    }
     private void setupComboBoxes() throws SQLException, IOException, ClassNotFoundException {
         // med cat
         medicamentCategorieCombo.removeAllItems();
         for (catMed category : catMed.values()) {
-            medicamentCategorieCombo.addItem(category);
-        }
+            medicamentCategorieCombo.addItem(category);}
+        medicamentCategorieCombo.setSelectedItem(null); // fill empty at start
+
         // achat > sort achat
         dateFilterCombo.removeAllItems();// = new JComboBox<>();
         for (DateFilter filter : DateFilter.values()) {
             dateFilterCombo.addItem(filter.toString());
         }
-        dateFilterCombo.setSelectedItem(DateFilter.ALL_TIME.toString());
+        dateFilterCombo.setSelectedItem(DateFilter.ALL_TIME.toString());  // Sort all time by default
+
         //  client > search client
         clientCombo.removeAllItems();
         //clientCombo.addItem("Sélectionner client");
         clientCombo.setSelectedItem(-1);
         clientComboAchat.removeAllItems();
         clientComboAchat.setSelectedIndex(-1);
-
        for (Client client : PharmacieController.getListClients()) {
             //String clientStringCombo = client.getLastName()+" "+client.getFirstName();
             clientCombo.addItem(client);
-            clientComboAchat.addItem(client);
-        }
+            clientComboAchat.addItem(client); }
+       clientComboAchat.setSelectedItem(null);
+       clientCombo.setSelectedItem(null);
+
         // medecin > ordo frame
         medecinsCombo.removeAllItems();
         medecinsCombo.setSelectedItem(-1);
         for (Medecin medecin : PharmacieController.getListMedecins()) {
             medecinsCombo.addItem(medecin);
         }
+        medecinsCombo.setSelectedItem(null);
+
         // mut > client Frame
         mutCombo.removeAllItems();
         mutCombo.setSelectedItem(0);
         for (Mutuelle mut : PharmacieController.getListMutuelles()) {
-            mutCombo.addItem(mut);
-        }
+            mutCombo.addItem(mut);}
+        mutCombo.setSelectedItem(null); // empty at start
     }
 
     //UI
@@ -420,15 +464,31 @@ public class SparadrapMainInterface extends JFrame {
         clientCombo.addActionListener(e -> {
             try {
                 filterClients();
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (ClassNotFoundException ex) {
+            } catch (SQLException | IOException | ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
         });
-
+        ssTextField.getDocument().addDocumentListener(new  DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {filter();}
+            @Override
+            public void removeUpdate(DocumentEvent e) {filter();}
+            @Override
+            public void changedUpdate(DocumentEvent e) {filter();}
+            private void filter() {
+                String txt = ssTextField.getText();
+                TableRowSorter<TableModel> sorter = (TableRowSorter<TableModel>) clientsTable.getRowSorter();
+                sorter.setRowFilter(RowFilter.regexFilter("(?i)" + txt));
+            }
+        });
+        clientAllButton.addActionListener(e -> {
+            clientCombo.setSelectedItem(null);
+            try {
+                filterClients();
+            } catch (SQLException | IOException | ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         // Médicament actions
         addMedicamentButton.addActionListener(e -> addNewMedicament());
         clearMedicamentButton.addActionListener(e -> clearMedicamentForm());
@@ -490,7 +550,11 @@ public class SparadrapMainInterface extends JFrame {
 
         //ordo actions
         medecinsCombo.addActionListener(e -> {
-            filterOrdoByMedecins();
+            try {
+                filterOrdoByMedecins();
+            } catch (SQLException | IOException | ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         // Stats
@@ -567,7 +631,11 @@ public class SparadrapMainInterface extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    showOrdoDetails();
+                    try {
+                        showOrdoDetails();
+                    } catch (SQLException | IOException | ClassNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });
@@ -588,7 +656,6 @@ public class SparadrapMainInterface extends JFrame {
             }
         });
     }
-
     private void showTab(int index) {
         mainTabbedPane.setSelectedIndex(index);
         updateStatusLabel("Onglet sélectionné: " + mainTabbedPane.getTitleAt(index));
@@ -601,7 +668,8 @@ public class SparadrapMainInterface extends JFrame {
             if (selectedClient >= 0) {
                 PharmacieController.deleteClient(PharmacieController.getListClients().get(selectedClient)); // to controller
                 PharmacieController.getListClients();
-                filterClients();
+                filterClients(); // update list clients
+                setupComboBoxes(); // update combo boxes
                 showSuccessMessage("Client(e) supprimé(e) avec succès!");
                 updateStatusLabel("Client(e) supprimé(e)");
             } else {
@@ -645,7 +713,8 @@ public class SparadrapMainInterface extends JFrame {
     }
     private void updateClient() {
         try {
-            int selectedClient = clientsTable.getSelectedRow(); //+1;
+            int selectedClientView = clientsTable.getSelectedRow(); //+1;
+            int selectedClient = clientsTable.convertRowIndexToModel(selectedClientView); // Convertir l'index visuel en index du modèle
             if (selectedClient >= 0 || selectedClient > clientsTable.getRowCount()) {
                 cancelButton.setVisible(true);
                 validationButton.setVisible(true);
@@ -669,24 +738,14 @@ public class SparadrapMainInterface extends JFrame {
                                 //LocalDate.parse(clientDateBirthField.getText()),
                                 selectedMut, null
                         );
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    } catch (ClassNotFoundException e) {
+                    } catch (SQLException | IOException | ClassNotFoundException e) {
                         throw new RuntimeException(e);
                     }
-
                     try {
                         filterClients();//loadClientsData();
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    } catch (ClassNotFoundException e) {
+                    } catch (SQLException | IOException | ClassNotFoundException e) {
                         throw new RuntimeException(e);
                     }
-
                     clearClientForm();
                     cancelButton.setVisible(false);
                     validationButton.setVisible(false);
@@ -704,6 +763,7 @@ public class SparadrapMainInterface extends JFrame {
                     clearClientButton.setVisible(true);
                     updateClientButton.setVisible(true);
                 });
+
             } else {
                 showErrorMessage("Selected Client required");
             }
@@ -769,7 +829,9 @@ public class SparadrapMainInterface extends JFrame {
     }
     private void updateMedecin() {
         try {
-            int selectedMedecin = medecinTable.getSelectedRow(); //+1;
+            int selectedMedecinView = medecinTable.getSelectedRow(); //+1;
+            int selectedMedecin = medecinTable.convertRowIndexToModel(selectedMedecinView); // Convertir l'index visuel en index du modèle
+
             if (selectedMedecin >= 0 || selectedMedecin > medecinTable.getRowCount()) {
                 cancelMedecinButton.setVisible(true);
                 validationMedecinButton.setVisible(true);
@@ -832,6 +894,7 @@ public class SparadrapMainInterface extends JFrame {
                     clearMedecinButton.setVisible(true);
                     updateMedecinButton.setVisible(true);
                 });
+
             } else {
                 showErrorMessage("Selected Medecin required");
             }
@@ -885,18 +948,20 @@ public class SparadrapMainInterface extends JFrame {
     }
     private void updateMut() {
         try {
-            int selectedMut = mutuelleTable.getSelectedRow()+1;
-            if (selectedMut >= 1 || selectedMut > mutuelleTable.getRowCount()) {
+            int selectedMutView = mutuelleTable.getSelectedRow();//+1;
+            int selectedMutModel = mutuelleTable.convertRowIndexToModel(selectedMutView); // Convertir l'index visuel en index du modèle
+
+            if (selectedMutView >= 0 || selectedMutView > mutuelleTable.getRowCount()) {
                 cancelMutButton.setVisible(true);
                 validationMutButton.setVisible(true);
                 addMutButton.setVisible(false);
                 clearMutButton.setVisible(false);
                 updateMutButton.setVisible(false);
-                setMutForm(PharmacieController.getListMutuelles().get(selectedMut));
+                setMutForm(PharmacieController.getListMutuelles().get(selectedMutModel));
                 validationMutButton.addActionListener(actionEvent -> {
                     Mutuelle mut = null;
                     try {
-                        mut = PharmacieController.getListMutuelles().get(selectedMut);
+                        mut = PharmacieController.getListMutuelles().get(selectedMutModel);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     } catch (IOException e) {
@@ -925,7 +990,7 @@ public class SparadrapMainInterface extends JFrame {
                         throw new RuntimeException(e);
                     }
                     clearMutForm();
-                    mutuelleTable.setRowSelectionInterval(selectedMut-1, selectedMut-1);
+                    mutuelleTable.setRowSelectionInterval(selectedMutModel-1, selectedMutModel-1);
                     cancelMutButton.setVisible(false);
                     validationMutButton.setVisible(false);
                     addMutButton.setVisible(true);
@@ -942,6 +1007,7 @@ public class SparadrapMainInterface extends JFrame {
                     clearMutButton.setVisible(true);
                     updateMutButton.setVisible(true);
                 });
+
             } else {
                 showErrorMessage("Selected Mutuelle required");
             }
@@ -1097,7 +1163,7 @@ public class SparadrapMainInterface extends JFrame {
             }
         }
     }
-    private void showOrdoDetails() {
+    private void showOrdoDetails() throws SQLException, IOException, ClassNotFoundException {
         int selectedRow = ordoTable.getSelectedRow();
         if (selectedRow != -1) {
            // LocalDate dateAchat = LocalDate.parse((String)achatsTableModel.getValueAt(selectedRow, 0),DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -1121,15 +1187,14 @@ public class SparadrapMainInterface extends JFrame {
         loadMedicamentsData();
         filterAchats(); //TODO sort by date in JTable
         loadOrdoData(); //TODO sort by date in JTable
-        loadMedecinData(); //TODO sort by Name(a-z) / by cat
-        loadMutData(); //TODO sort by Name(a-z)
+        loadMedecinData();
+        loadMutData();
         updateStatistics();
     }
     private void loadMedicamentsData() throws SQLException, IOException, ClassNotFoundException {
         medicamentsTableModel.setRowCount(0);
         List<Medicament> sListMed = PharmacieController.getListMed().subList(0, PharmacieController.getListMed().size());
-        sListMed.sort(Comparator.comparing(m -> m.getNameMed().toLowerCase()));
-
+        //sListMed.sort(Comparator.comparing(m -> m.getNameMed().toLowerCase()));
         for (Medicament med : sListMed) {
             Object[] row = {
                 med.getNameMed(),
@@ -1141,7 +1206,7 @@ public class SparadrapMainInterface extends JFrame {
             medicamentsTableModel.addRow(row);
         }
     }
-    private void loadOrdoData() {
+    private void loadOrdoData() throws SQLException, IOException, ClassNotFoundException {
        /* ordoTableModel.setRowCount(0);
         for (Ordonnance ordonnance : PharmacieController.getListOrdo()) {
             Object[] row = {
@@ -1158,9 +1223,8 @@ public class SparadrapMainInterface extends JFrame {
     private void loadMutData() throws SQLException, IOException, ClassNotFoundException {
         mutTableModel.setRowCount(0);
         System.out.println(PharmacieController.getListMutuelles().size());
-        List<Mutuelle> sListMutuelle = PharmacieController.getListMutuelles().subList(0, PharmacieController.getListMutuelles().size());
-        // creation sublist to sort and hide first line
-        sListMutuelle.sort(Comparator.comparing(m -> m.getLastName().toLowerCase())); // sort By alpha
+        List<Mutuelle> sListMutuelle = PharmacieController.getListMutuelles().subList(0, PharmacieController.getListMutuelles().size()); // creation sublist to sort and hide first line
+        //sListMutuelle.sort(Comparator.comparing(m -> m.getLastName().toLowerCase())); // sort By alpha
         for (Mutuelle mut : sListMutuelle) {
             //System.out.println(mut);
             Object[] row = {
@@ -1169,7 +1233,14 @@ public class SparadrapMainInterface extends JFrame {
             };
             mutTableModel.addRow(row);
         }
-
+        /*
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(mutuelleTable.getModel());
+        mutuelleTable.setRowSorter(sorter);
+        List<RowSorter.SortKey> sortKeys = new ArrayList<>();   // Tri visuel : colonne 0 (LastName), A → Z
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);
+        SwingUtilities.invokeLater(sorter::sort); // Appliquer le tri après affichage
+         */
     }
     private void loadMedecinData() throws SQLException, IOException, ClassNotFoundException {
         medecinTableModel.setRowCount(0);
@@ -1258,7 +1329,8 @@ public class SparadrapMainInterface extends JFrame {
         clientCityField.setText("");
         clientDateBirthField.setText("");
         clientNbSSField.setText("");
-        mutCombo.setSelectedIndex(0);
+        mutCombo.setSelectedItem(null); // fill empty
+        //mutCombo.setSelectedIndex(0);
     }
     private void clearMedicamentForm() {
         medicamentNomField.setText("");
@@ -1339,10 +1411,6 @@ public class SparadrapMainInterface extends JFrame {
     public void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Erreur", JOptionPane.ERROR_MESSAGE);
     }
-    private void showInfoMessage(String message) {
-        JOptionPane.showMessageDialog(this, message, "Information", JOptionPane.INFORMATION_MESSAGE);
-    }
-
     private void createUIComponents() {
         // TODO: place custom component creation code here
     }
@@ -1649,7 +1717,6 @@ public class SparadrapMainInterface extends JFrame {
             return confirmed;
         }
     }
-
     private static class ClientDetailsDialog extends JDialog {
         public ClientDetailsDialog(Frame parent, Client client) {
             super(parent, "Détails du Client", true);
@@ -2134,39 +2201,40 @@ public class SparadrapMainInterface extends JFrame {
         List<Client> sListClient = PharmacieController.getListClients().subList(0, PharmacieController.getListClients().size());
         //sListClient.sort(Comparator.comparing(m -> m.getLastName().toLowerCase()+" "+m.getFirstName().toLowerCase()));
         for (Client client : sListClient) {
-           boolean clientSelected = selectedClientFilter.equals(client); //client.getLastName()+" "+client.getFirstName());
-           if  (clientCombo.getSelectedIndex() == 0) {
-               clientSelected = true;
-           }
-            if (clientSelected|| clientCombo==null) {
+            boolean clientSelected = false;
+            if  (clientCombo.getSelectedItem() == null ) {
+               clientSelected = true; }
+            else {
+                clientAllButton.setSelected(false);
+                clientSelected = Objects.equals(selectedClientFilter.getNbSS(), client.getNbSS()); //client.getLastName()+" "+client.getFirstName());
+            }
+
+           if ( clientSelected ) {
             Object[] row = {
                     client.getFirstName(),
                     client.getLastName(),
                     client.getEmail(),
                     client.getPhone(),
                     client.getNbSS(),
-                    client.getMutuelle() != null ? client.getMutuelle().getLastName() : "Aucun"
+                    client.getMutuelle() // != null ? client.getMutuelle().getLastName() : "Aucun"
             };
             clientsTableModel.addRow(row);
             }
         }
-
         // Update the border title with filtered count
         setupBorderScroll(clientScrollPane, "("+clientsTableModel.getRowCount()+" / "+
                 PharmacieController.getListClients().size()+")");
         // Create status message showing both active filters
         String statusMessage = "Clients filtrés: "+selectedClientFilter;
         updateStatusLabel(statusMessage);
-
-
     }
-    private void filterOrdoByMedecins() {
+    private void filterOrdoByMedecins() throws SQLException, IOException, ClassNotFoundException {
         Medecin selectedMedecinFilter = (Medecin) medecinsCombo.getSelectedItem();
         assert selectedMedecinFilter != null; // not be null
         ordoTableModel.setRowCount(0);
         boolean medecinSelected = false;
         for (Ordonnance ordoFilted : PharmacieController.getListOrdo()) {
-            if (medecinsCombo.getSelectedIndex() != 0) {
+            if (medecinsCombo.getSelectedItem() != null) {
                 medecinSelected = selectedMedecinFilter.equals(ordoFilted.getMedecin()); //"Dr "+medecin.getLastName()+" "+medecin.getFirstName());
             } else {
                 medecinSelected = true;

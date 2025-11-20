@@ -43,6 +43,12 @@ public class Person {
         this.setPhone(phone);
     }
     public Person() {} // by default
+    public Person(String firstName, String lastName, String email, String phone) {
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setEmail(email);
+        this.setPhone(phone);
+    }
 
     public String getFirstName() {
         return this.firstName;
@@ -50,7 +56,7 @@ public class Person {
     public void setFirstName(String firstName) {
         if (Regex.testChar(firstName))//||Regex.testNotEmpty(firstName))
             throw new IllegalArgumentException("Regex: firstName required & without number");
-        this.firstName = capitalize(firstName);
+        this.firstName = firstName; //capitalize(firstName);
     }
 
     public String getLastName() {
@@ -59,7 +65,7 @@ public class Person {
     public void setLastName(String lastName) {
         /*if (Regex.testChar(lastName)) // ||Regex.testNotEmpty(lastName))
             throw new IllegalArgumentException("Regex: lastName required & without number");*/
-        this.lastName = capitalize(lastName).toUpperCase();
+        this.lastName =  capitalize(lastName).toUpperCase();
     }
 
     public String getAddress() {
@@ -112,23 +118,20 @@ public class Person {
     //LowerCase except firstOne
     public static String capitalize(String input) {
         if (input == null || input.isEmpty()) {
-            return input;
-        }
-
-        String[] words = input.trim().toLowerCase().split("\\s+");
-        StringBuilder result = new StringBuilder();
-
-        for (String word : words) {
-            if (!word.isEmpty()) {
-                result.append(Character.toUpperCase(word.charAt(0)))
-                        .append(word.substring(1))
-                        .append(" ");
+            return input="";
+        } else {
+            String[] words = input.trim().toLowerCase().split("\\s+");
+            StringBuilder result = new StringBuilder();
+            for (String word : words) {
+                if (!word.isEmpty()) {
+                    result.append(Character.toUpperCase(word.charAt(0)))
+                            .append(word.substring(1))
+                            .append(" ");
+                }
             }
+            return result.toString().trim();
         }
-
-        return result.toString().trim();
     }
-
 
     @Override
     public String toString() {

@@ -1,9 +1,7 @@
 package controller;
 
 
-import DAO.Singleton;
-import DAO.clientDAO;
-import DAO.medecinDAO;
+import DAO.*;
 import model.*;
 
 import java.io.IOException;
@@ -128,7 +126,6 @@ public class PharmacieController {
 
         clientDAO clientDAO =  new clientDAO();
         clientDAO.update(client); // update BDD
-        getListClients(); // update list
     }
     public static boolean deleteClient(Client client) throws SQLException, IOException, ClassNotFoundException {
        // if (client != null && !listClients.contains(client)) {
@@ -222,7 +219,8 @@ public class PharmacieController {
         return false;
     }
     public static List<Mutuelle> getListMutuelles() throws SQLException, IOException, ClassNotFoundException {
-        return Implementation.selectFromMutuelle(Singleton.getInstanceDB()); // listMutuelles;
+        mutDAO mutDAO = new mutDAO();
+        return mutDAO.findAll(); // listMutuelles;
     }
     public static void updateMutuelle(Mutuelle mut, String lastName, String address, int nbState,
                                      String city, String phone, String email, Double tauxRemb) {
@@ -268,15 +266,17 @@ public class PharmacieController {
     }
 
     // ORDO
-    public static boolean addOrdonnance(Ordonnance ordonnance) {
+    public static boolean addOrdonnance(Ordonnance ordonnance) throws SQLException, IOException, ClassNotFoundException {
         if (ordonnance != null && !listOrdonnances.contains(ordonnance)) {
             return getListOrdo().add(ordonnance);
         }
         //TODO: popup message already exist
         return false;
     }
-    public static List<Ordonnance> getListOrdo() {
-        return listOrdonnances;
+    public static List<Ordonnance> getListOrdo() throws SQLException, IOException, ClassNotFoundException {
+        //return listOrdonnances;
+        ordoDAO ordoDAO = new ordoDAO();
+        return ordoDAO.findAll();
     }
 
     //ACHATS

@@ -19,11 +19,7 @@ public abstract class DAO<T> {
     static {
         try {
             connection = Singleton.getInstanceDB();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

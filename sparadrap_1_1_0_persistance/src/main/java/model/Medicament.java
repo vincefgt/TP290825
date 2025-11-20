@@ -92,7 +92,6 @@ public class Medicament {
         this.setDatOnMarket(datOnMarket);
         this.setStock(stock);
     }
-
     public Medicament( String nameMed, String cat, double price, String datOnMarket, int stock) {
         this.setNameMed(nameMed);
         this.setCat(cat);

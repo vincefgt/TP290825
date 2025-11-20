@@ -85,6 +85,16 @@ public class Client extends Person {
         MapClient.put(lastName+" "+firstName, this);
     }
     public Client(){} // by default
+    public Client(Integer id_client, String lastName, String firstName, String phone, String email, long nbSS,
+                  LocalDate dateBirth, Mutuelle mut, Medecin medecinTraitant) {
+        super (firstName,lastName,email,phone);
+        this.setId(id_client);
+        this.setNbSS(nbSS);
+        this.setDateBirth(dateBirth);
+        this.setMutuelle(mut);
+        this.setMedecinTraitant(medecinTraitant);
+   //     MapClient.put(lastName+" "+firstName, this);
+    }
 
 
     public Integer getId() {

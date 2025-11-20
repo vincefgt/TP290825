@@ -1,12 +1,15 @@
 package DAO;
 
+import model.Client;
 import model.Medecin;
+import model.Mutuelle;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +67,7 @@ public class medecinDAO extends DAO<Medecin> {
 
     @Override
     public boolean deleteById(Integer pId) throws SQLException {
-        return false;
+       return false;
     }
 
     @Override
@@ -87,8 +90,37 @@ public class medecinDAO extends DAO<Medecin> {
     }
 
     @Override
-    public Medecin findById(Integer pId) throws SQLException {
-        return null;
+    public static Medecin findById(Integer pId) throws SQLException {
+        StringBuilder findByIdClient = new StringBuilder();
+        findByIdClient.append("select  doctor.id_doctor, person.id_person, firstname, lastname, nb_agreement, phone, email, street, op_city, name_city from doctor\n" +
+                             "INNER JOIN doctor ON person.id_person = doctor.id_person\n" +
+                             "INNER JOIN address ON address.id_address=person.id_address\n" +
+                             "INNER JOIN city on city.id_city=address.id_city;\n" +
+                             "WHERE id_doctor =?;"
+        );
+
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                findByIdClient.toString()); // etablissement d'un statement
+        preparedStatement.setInt(1, pId);
+        //preparedStatement.executeUpdate();
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(!resultSet.next()) {
+            return null;
+        }
+
+        // utilisation du resultSet pour récuperer les valeurs de chaques colonnes ciblées par le nom
+        int numId = resultSet.getInt("id_person");
+        String prenom = resultSet.getString("firstname");
+        String nom = resultSet.getString("lastname");
+        Long nSS = resultSet.getLong("nSS");
+        String phone = resultSet.getString("phone");
+        String email = resultSet.getString("email");
+        String street = resultSet.getString("street");
+        Integer op_city = resultSet.getInt("op_city");
+        String name_city = resultSet.getString("name_city");
+        Long nb_agreement = resultSet.getLong("nb_agreement");
+
+        return new Medecin(numId, prenom, nom, street, op_city, name_city, phone, email, nb_agreement);
     }
 
     @Override
