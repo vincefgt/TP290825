@@ -90,13 +90,13 @@ public class medecinDAO extends DAO<Medecin> {
     }
 
     @Override
-    public static Medecin findById(Integer pId) throws SQLException {
+    public Medecin findById(Integer pId) throws SQLException {
         StringBuilder findByIdClient = new StringBuilder();
         findByIdClient.append("select  doctor.id_doctor, person.id_person, firstname, lastname, nb_agreement, phone, email, street, op_city, name_city from doctor\n" +
-                             "INNER JOIN doctor ON person.id_person = doctor.id_person\n" +
+                             "INNER JOIN person ON person.id_person = doctor.id_person\n" +
                              "INNER JOIN address ON address.id_address=person.id_address\n" +
-                             "INNER JOIN city on city.id_city=address.id_city;\n" +
-                             "WHERE id_doctor =?;"
+                             "INNER JOIN city on city.id_city=address.id_city\n" +
+                             "WHERE doctor.id_doctor =?;"
         );
 
         PreparedStatement preparedStatement = connection.prepareStatement(
@@ -109,18 +109,16 @@ public class medecinDAO extends DAO<Medecin> {
         }
 
         // utilisation du resultSet pour récuperer les valeurs de chaques colonnes ciblées par le nom
-        int numId = resultSet.getInt("id_person");
         String prenom = resultSet.getString("firstname");
         String nom = resultSet.getString("lastname");
-        Long nSS = resultSet.getLong("nSS");
         String phone = resultSet.getString("phone");
         String email = resultSet.getString("email");
         String street = resultSet.getString("street");
-        Integer op_city = resultSet.getInt("op_city");
+        int op_city = resultSet.getInt("op_city");
         String name_city = resultSet.getString("name_city");
         Long nb_agreement = resultSet.getLong("nb_agreement");
 
-        return new Medecin(numId, prenom, nom, street, op_city, name_city, phone, email, nb_agreement);
+        return new Medecin(prenom, nom, street, email, op_city, name_city, phone,nb_agreement,pId);
     }
 
     @Override

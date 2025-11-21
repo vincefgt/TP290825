@@ -48,7 +48,7 @@ public class ordoDAO extends DAO<Ordonnance> {
     public List<Ordonnance> findAll() throws SQLException {
 
         StringBuilder findIntoOrdo = new StringBuilder();
-        findIntoOrdo.append("select * from prescription p;");
+        findIntoOrdo.append("select * from prescription;");
 
         List<Ordonnance> ordos = new ArrayList<>();
 
@@ -59,22 +59,18 @@ public class ordoDAO extends DAO<Ordonnance> {
 
                 // utilisation du resultSet pour récuperer les valeurs de chaques colonnes ciblées par le nom
                 int numId = resultSet.getInt("id_person");
-                //Integer id_mutuelle = resultSet.getInt("id_mutuelle");
-                //String mut_lastname = resultSet.getString("nameMut");
-                //Double tauxRemb = resultSet.getDouble("tauxRemb");
                 Integer id_doctor = resultSet.getInt("id_doctor");
                 Integer id_prescription = resultSet.getInt("id_prescription");
                 LocalDate datePrescription = resultSet.getDate("date_prescription").toLocalDate();
 
                 clientDAO clientDAO = new clientDAO();
-                //clientDAO.findById(numId);
-                //Client clt = new Client(numId, prenom, nom, phone, email, nSS, dob_client,null,null);
-                //Medecin doc = new Medecin(prenom, nom, phone, nb_agreement, id_doctor);
+                medecinDAO medecinDAO = new medecinDAO();
                 Ordonnance ordo = new Ordonnance(id_prescription,datePrescription,medecinDAO.findById(id_doctor),clientDAO.findById(numId));
                 ordos.add(ordo);
             }
         } catch (SQLException | IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+           // System.err.println("Erreur import All Ordo: " + e.getMessage());
+             throw new RuntimeException(e);
         }
         return ordos;
     }

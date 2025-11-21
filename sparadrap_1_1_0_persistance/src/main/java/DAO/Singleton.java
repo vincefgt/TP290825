@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import static com.mysql.cj.conf.PropertyKey.profileSQL;
+
 public class Singleton {
     private static final Properties props = new Properties();
     private static Connection connection;
@@ -23,6 +25,7 @@ public class Singleton {
             String  password = props.getProperty("jdbc.password");
 
             connection = DriverManager.getConnection(url, login, password); // création de la connexion
+           // ?logger=com.mysql.cj.log.StandardLogger&profileSQL=true;
            // System.out.println("Connected to database : " + connection);
         }
     }
