@@ -180,7 +180,6 @@ public class PharmacieController {
             medecinDAO medecinDAO = new medecinDAO();
             return medecinDAO.findAll(); //listMedecins;
     }
-
     public static void updateMedecin(Medecin medecin, String firstName, String lastName, String address, int nbState,
                                     String city, String phone, String email, Long nbAgreement) throws SQLException, IOException, ClassNotFoundException {
        medecinDAO medecinDAO = new medecinDAO();
@@ -246,7 +245,7 @@ public class PharmacieController {
             Ordonnance ordonnance = new Ordonnance(null, dateOrdo, medecin, client); // Create new ordonnance
             // Add ordonnance to list
             if (addOrdonnance(ordonnance)) {
-                Achat achat = new Achat(dateAchat, client, ordonnance); // Create achat with ordonnance
+                Achat achat = new Achat(dateAchat, client, ordonnance, 0.00f,0.00f); // Create achat with ordonnance
                 return savingAchat(achat); // Save achat
             }
         } catch (Exception e) {
@@ -264,7 +263,6 @@ public class PharmacieController {
         }
         return false;
     }
-
     // ORDO
     public static boolean addOrdonnance(Ordonnance ordonnance) throws SQLException, IOException, ClassNotFoundException {
         if (ordonnance != null && !listOrdonnances.contains(ordonnance)) {
@@ -285,25 +283,29 @@ public class PharmacieController {
             return false;
         }
         // availability med
-        for (Medicament med : getListMed()) {
+        for (Medicament med : achat.getListMedAchat()) {
             if (med.getStock() <= 0) {
                 //System.out.println("Out of Stock: "+med.getNameMed());
                 return false;
             }
         }
         // down stock
-        for (Medicament med : getListMed()) {
+        for (Medicament med : achat.getListMedAchat()) {
             med.reduireQuantite(1); // Réduction d'1 unité par défaut
         }
         // Recal montants
         achat.calMontants();
         // Add to list ALL Achats
-        return listAchats.add(achat);
+        purchaseDAO purchaseDAO = new purchaseDAO();
+        purchaseDAO.insert(achat);
+        //return listAchats.add(achat);
+        return true;
     }
 
     // Historic Achats
-    public static List<Achat> getListAchats() {
-        return listAchats;
+    public static List<Achat> getListAchats() throws SQLException, IOException, ClassNotFoundException {
+        purchaseDAO purchaseDAO = new purchaseDAO();
+        return purchaseDAO.findAll();
     }
 
     // List of Client's Achat

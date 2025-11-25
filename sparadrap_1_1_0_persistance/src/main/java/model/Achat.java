@@ -1,5 +1,6 @@
 package model;
 
+import DAO.clientDAO;
 import controller.PharmacieController;
 import controller.Regex;
 import Exception.InputException;
@@ -90,7 +91,8 @@ public class Achat {
     private double Total = 0;
     private double Remb = 0;
 
-    //TODO add quantity by achat
+    //TODO add quantity by achat detail
+    //TODO total panier
 
     // Constructeur achat direct
     public Achat(LocalDate dateAchat, Client client) {
@@ -98,14 +100,22 @@ public class Achat {
         this.setClient(client);
         this.listMedAchat = new ArrayList<>();
         this.setOrdonnance(null); // Achat direct
-        this.setTotal(Total);
-        this.setRemb(Remb);
+        //this.setTotal(Total);
+        //this.setRemb(Remb);
+    }
+    public Achat(LocalDate dateAchat,  Float Total, Float Remb) {
+        this.dateAchat = dateAchat;
+        this.Total = Total;
+        this.Remb = Remb;
+        this.listMedAchat = new ArrayList<>();
     }
     // Constructeur achat ordonnance
-    public Achat(LocalDate dateAchat, Client client, Ordonnance ordonnance) {
+    public Achat(LocalDate dateAchat, Client client, Ordonnance ordonnance, Float Total, Float Remb) {
         this(dateAchat, client);
         this.setOrdonnance(ordonnance);
-        this.listMedAchat = new ArrayList<>();
+        this.setTotal(Total);
+        this.setRemb(Remb);
+        //this.listMedAchat = new ArrayList<>();
         this.setListMedAchat(ordonnance); // recup listMedOrdo to listMedAchat
     }
 
@@ -121,6 +131,7 @@ public class Achat {
     public Client getClient() {
         return this.client;
     }
+
     public void setClient(Client client) {
         if (Regex.testNotEmpty(client))
             throw new InputException("client required");
@@ -128,6 +139,7 @@ public class Achat {
     }
 
     public List<Medicament> getListMedAchat() {
+        //TODO link BDD
         return this.listMedAchat;
     }
 
@@ -160,11 +172,11 @@ public class Achat {
     public boolean addMedAchat(Medicament medicament) {
         if (medicament != null) {
             this.listMedAchat.add(medicament);
-            calMontants();
+            //calMontants();
         } else if (ordonnance != null) {
             this.listMedAchat.addAll(ordonnance.getListMedOrdo());
         }
-        return false;
+        return true;
     }
 
     // cal montants

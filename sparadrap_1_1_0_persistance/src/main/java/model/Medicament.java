@@ -104,6 +104,9 @@ public class Medicament {
     public void setId(int id) {
         this.id = id;
     }
+    public int getId() {
+        return id;
+    }
 
     public String getNameMed() {
         return this.nameMed;

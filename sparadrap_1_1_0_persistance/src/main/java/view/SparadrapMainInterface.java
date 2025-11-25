@@ -517,25 +517,57 @@ public class SparadrapMainInterface extends JFrame {
             }
         });
        // calculerRemboursementButton.addActionListener(e -> calculateRemboursement());
-        dateFilterCombo.addActionListener(e -> filterAchats());
-        ActionListener groupListener = e -> filterAchats(); //check group
+        dateFilterCombo.addActionListener(e -> {
+            try {
+                filterAchats();
+            } catch (SQLException | IOException | ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        ActionListener groupListener = e -> {
+            try {
+                filterAchats();
+            } catch (SQLException | IOException | ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+        }; //check group
         ordoRadioButton.addActionListener(groupListener);
         directRadioButton.addActionListener(groupListener);
         allRadioButton.addActionListener(groupListener);
         endDayTextField.addActionListener(e -> {
             if(!startDayTextField.getText().isEmpty()){
                 dateFilterCombo.setSelectedItem("Date spe");
-                filterAchats();}
+                try {
+                    filterAchats();
+                } catch (SQLException | IOException | ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
         });
         startDayTextField.addActionListener(e -> {
             if(endDayTextField.getText().isEmpty()){
                 dateFilterCombo.setSelectedItem("Ce jour");
-                filterAchats();}
+                try {
+                    filterAchats();
+                } catch (SQLException | IOException | ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
         });
-        clientComboAchat.addActionListener(e -> filterAchats());
+        clientComboAchat.addActionListener(e -> {
+            try {
+                filterAchats();
+            } catch (SQLException | IOException | ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         allAchatsRadio.addActionListener(e -> {
             clientComboAchat.setSelectedIndex(0);
-            filterAchats();
+            try {
+                filterAchats();
+            } catch (SQLException | ClassNotFoundException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         //Medecin actions
@@ -1681,31 +1713,30 @@ public class SparadrapMainInterface extends JFrame {
         private void confirmAchat() {
             //selection client
             Client selectedClient = (Client) clientCombo.getSelectedItem();
-            int[] selectedIndices = medicamentsList.getSelectedIndices();
-            if (selectedClient == null || selectedClient.getNbSS()==123456789101112L|| selectedIndices.length == 0 ) {
+            if (cartListModel.getSize() > 0) {
+                cartList.setSelectionInterval(0, cartListModel.getSize() - 1);}
+            int[] selectedIndices = cartList.getSelectedIndices();
+            if (selectedClient == null) {
                 JOptionPane.showMessageDialog(this, "Veuillez sélectionner un client et au moins un médicament!");
                 return;}
-
             try {
                 Achat newAchat = new Achat(LocalDate.now(), selectedClient);
-                for (int index : selectedIndices) {
-                    Medicament med = medicamentsListModel.getElementAt(index);
+                for (int index : selectedIndices) {     // create listMedAchat
+                    Medicament med = cartListModel.getElementAt(index);
                     newAchat.addMedAchat(med);
                 }
                 if (typeAchat) {
-                    //selection medecin
-                    Medecin selectedMedecin = (Medecin) medecinsCombo.getSelectedItem();
-                   //seize date ordo
-                    LocalDate seizeDateOrdo = LocalDate.parse(dateOrdoField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                    if (selectedMedecin == null || seizeDateOrdo.isAfter(LocalDate.now())){
-                        JOptionPane.showMessageDialog(this, "Veuillez sélectionner un medecin et date réelle d'ordonnance!");
-                        return;
-                    }
-                Ordonnance newOrdo = new Ordonnance(null,seizeDateOrdo, selectedMedecin, selectedClient);
-                newOrdo.getListMedOrdo().addAll(newAchat.getListMedAchat()); // get list empty and create copy of list achat
-                newAchat.setOrdonnance(newOrdo); // add new ordo at purchase
-                PharmacieController.addOrdonnance(newOrdo);
-            }
+                    Medecin selectedMedecin = (Medecin) medecinsCombo.getSelectedItem(); //selection medecin
+                    LocalDate seizeDateOrdo = LocalDate.parse(dateOrdoField.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")); //seize date ordo
+                        if (selectedMedecin == null || seizeDateOrdo.isAfter(LocalDate.now())){
+                            JOptionPane.showMessageDialog(this, "Veuillez sélectionner un medecin et date réelle d'ordonnance!");
+                            return;
+                        } //error date ordo and unselecte doctor
+                    Ordonnance newOrdo = new Ordonnance(null,seizeDateOrdo, selectedMedecin, selectedClient);
+                    newOrdo.getListMedOrdo().addAll(newAchat.getListMedAchat()); // get list empty and create copy of list achat
+                    newAchat.setOrdonnance(newOrdo); // add new ordo at purchase
+                    PharmacieController.addOrdonnance(newOrdo);
+                }  // purchase type prescription
                 PharmacieController.savingAchat(newAchat);
                 confirmed = true;
                 dispose();
@@ -2090,19 +2121,20 @@ public class SparadrapMainInterface extends JFrame {
     /**
      * Sorting Achats / clients
      */
-    private void filterAchats() {
+    private void filterAchats() throws SQLException, IOException, ClassNotFoundException {
         String selectedDateFilter = (String) dateFilterCombo.getSelectedItem();
         assert selectedDateFilter != null; // not be null
+
         Client selectedClientFilter = (Client) clientComboAchat.getSelectedItem();
-        assert selectedClientFilter != null; // not be null
         boolean clientSelected = true;
+
         DateFilter dateFilter = DateFilter.getDateFilterFromString(selectedDateFilter);
         ButtonModel selectedRadioButton = buttonGroup.getSelection();
         String typeFilter = selectedRadioButton.getActionCommand();
         achatsTableModel.setRowCount(0);
 
         for (Achat achat : PharmacieController.getListAchats()) {
-            if (clientComboAchat.getSelectedIndex()!=0) {
+            if (clientComboAchat.getSelectedItem()!= null) {
                 allAchatsRadio.setSelected(false);
                 clientSelected = selectedClientFilter.equals(achat.getClient()); //client.getLastName()+" "+client.getFirstName());
             }
@@ -2111,7 +2143,7 @@ public class SparadrapMainInterface extends JFrame {
             if (includeByDate && includeByType && clientSelected || dateFilter==null&&startDayTextField.getText().isEmpty()&&endDayTextField.getText().isEmpty()) {
                 Object[] row = {
                     achat.getDateAchat(),
-                    achat.getClient().getFirstName() + " " + achat.getClient().getLastName(),
+                    achat.getClient() == null ? "-" : achat.getClient().getFirstName()+" "+achat.getClient().getLastName(),
                     achat.IsAchatDirect(achat.getOrdonnance()) ? "Direct" : "Ordonnance",
                     String.format("%.2f €", achat.getTotal()),
                     String.format("%.2f €", achat.getRemb()),
@@ -2120,7 +2152,6 @@ public class SparadrapMainInterface extends JFrame {
                 achatsTableModel.addRow(row);
             }
         }
-
         // Update the border count
         setupBorderScroll(achatsScrollPane, "("+achatsTableModel.getRowCount()+" / "+
                 PharmacieController.getListAchats().size()+")");

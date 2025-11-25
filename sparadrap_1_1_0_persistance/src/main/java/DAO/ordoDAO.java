@@ -7,6 +7,7 @@ import model.Mutuelle;
 import model.Ordonnance;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -40,8 +41,31 @@ public class ordoDAO extends DAO<Ordonnance> {
     }
 
     @Override
-    public Ordonnance findById(Integer pId) throws SQLException {
-        return null;
+    public Ordonnance findById(Integer pId) throws SQLException, IOException, ClassNotFoundException {
+        StringBuilder findByIdClient = new StringBuilder();
+        findByIdClient.append("select * from prescription p\n" +
+                              "WHERE p.id_prescription=?;");
+
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                findByIdClient.toString()); // etablissement d'un statement
+        preparedStatement.setInt(1, pId);
+        //preparedStatement.executeUpdate();
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(!resultSet.next()) {
+            return null;
+        }
+
+        // utilisation du resultSet pour récuperer les valeurs de chaques colonnes ciblées par le nom
+        int id_prescription = resultSet.getInt("id_prescription");
+        int numId = resultSet.getInt("id_person");
+        int id_doctor = resultSet.getInt("id_doctor");
+        LocalDate date_prescription = resultSet.getDate("date_prescription").toLocalDate(); //, DateTimeFormatter.ofPattern("dd-MM/yyyy"));
+
+        clientDAO clientDAO =new clientDAO();
+        medecinDAO medecinDAO =new medecinDAO();
+        //Client client =new Client();
+        //Medecin medecin =new Medecin();
+        return new Ordonnance(id_prescription, date_prescription, medecinDAO.findById(id_doctor), clientDAO.findById(numId));
     }
 
     @Override

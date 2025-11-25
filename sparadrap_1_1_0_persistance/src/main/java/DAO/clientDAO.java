@@ -37,7 +37,6 @@ public class clientDAO extends DAO<Client> {
         } catch (SQLException e) {
             System.err.println("Error inserting doctor " + e.getMessage());
         }
-
         return entity;
     }
 

@@ -16,12 +16,12 @@ public class SpraradrapMainPersistance {
        // connectionBdd connectionBdd = new ConnectionBdd();
        //connectionBdd.connectBdd();
         Singleton.testConnectionWithSingleton(); // avec singleton
-        /*
+        /**
         Implementation.getTableData(Singleton.getInstanceDB(), "doctor");
         Implementation.getTableData(Singleton.getInstanceDB(), "categories");
         Implementation.getTableData(Singleton.getInstanceDB(), "mutuelle");
         Implementation.getTableData(Singleton.getInstanceDB(), "person");
-        */
+        **/
         //PharmacieView.printList(Implementation.selectFromPrescription(Singleton.getInstanceDB())); //displaing list
         SparadrapMainApp.main(args); // loading App
     }

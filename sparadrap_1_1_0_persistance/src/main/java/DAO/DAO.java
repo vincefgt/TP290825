@@ -55,7 +55,7 @@ public abstract class DAO<T> {
      * @param pId
      * @return l'objet T ciblé
      */
-    public abstract T findById(Integer pId) throws SQLException;
+    public abstract T findById(Integer pId) throws SQLException, IOException, ClassNotFoundException;
 
     /**
      * recherche global
