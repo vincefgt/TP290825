@@ -1,27 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration xmlns="https://logging.apache.org/xml/ns"
-               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:schemaLocation="
-                   https://logging.apache.org/xml/ns
-                   https://logging.apache.org/xml/ns/log4j-config-2.xsd">
+<Configuration status="WARN">
+        <!-- xmlns="https://logging.apache.org/xml/ns"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+            https://logging.apache.org/xml/ns
+            https://logging.apache.org/xml/ns/log4j-config-2.xsd"> -->
+    <Properties>
+        <Property name="logs">logs</Property>
+        <!-- Pattern avec utilisateur du ThreadContext -->
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level [User:%X{user}] [Session:%X{sessionId}] [IP:%X{ip}] %logger{36} - %msg%n</Property>
+    </Properties>
     <Appenders>
         <Console name="CONSOLE" target="SYSTEM_OUT">
-            <PatternLayout pattern="%p - %m%n"/>
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%level] (%c) - %msg%n"/>
         </Console>
-        <File name="MAIN" fileName="logs/main.log">
-            <JsonTemplateLayout/>
-        </File>
-        <File name="DEBUG_LOG" fileName="logs/debug.log">
-            <PatternLayout pattern="%d [%t] %p %c - %m%n"/>
-        </File>
+
+        <!--
+        <RollingFile name="RollingFile"
+                     fileName="logs/app.log"
+                     filePattern="logs/main-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%level] (%c) - %msg%n"/>
+            <Policies>
+                <!- Rotation dès que le fichier atteint 5 Mo
+                <SizeBasedTriggeringPolicy size="5MB"/>
+            </Policies>
+            <!- max="5" = garder 5 fichiers de backup
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+        -->
+
+        <RollingFile name="RollingFile"
+                     fileName="logs/application.log"
+                     filePattern="logs/application-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!-- Rollover at midnight every day -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <!-- Also rollover if file size exceeds 10MB -->
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <!-- Keep log files for 30 days -->
+            <DefaultRolloverStrategy max="30">
+                <Delete basePath="logs" maxDepth="1">
+                    <IfFileName glob="application-*.log.gz"/>
+                    <IfLastModified age="30d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+        <!-- Separate Rolling File for Errors -->
+        <RollingFile name="ErrorRollingFile"
+                     fileName="logs/error.log"
+                     filePattern="logs/error-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <!-- Only log ERROR and FATAL level messages -->
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30">
+                <Delete basePath="logs" maxDepth="1">
+                    <IfFileName glob="error-*.log.gz"/>
+                    <IfLastModified age="30d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
     </Appenders>
     <Loggers>
         <Root level="INFO">
-            <AppenderRef ref="CONSOLE" level="WARN"/>
-            <AppenderRef ref="MAIN"/>
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="RollingFile"/>
         </Root>
-        <Logger name="org.example" level="DEBUG">
-            <AppenderRef ref="DEBUG_LOG"/>
-        </Logger>
     </Loggers>
 </Configuration>

@@ -1,5 +1,7 @@
 package BDD;
 
+import logger.MySlf4j;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -17,7 +19,7 @@ public class ConnectionBdd {
             try (InputStream is = ConnectionBdd.class.getClassLoader().getResourceAsStream(pathConfig)) {
                 props.load(is);
             } catch (IOException e1) {
-                System.err.printf("Error loading properties file: %s\n", e1.getMessage());
+                MySlf4j.getLogger().error("Error loading properties file: %s\n{}", e1.getMessage());
             }
 
             try {
@@ -28,14 +30,13 @@ public class ConnectionBdd {
                 String password = props.getProperty("jdbc.password");
                 connection = DriverManager.getConnection(url, login, password);
 
-                System.out.println("Connected to database : " + connection);
-
             } catch (ClassNotFoundException e) {
+                MySlf4j.getLogger().error(e.getMessage());
                 System.err.printf("Error loading JDBC Driver: %s\n", e.getMessage()); // si driver introuvale
             } catch (SQLException e) {
                 System.err.printf("Error Connexion JDBC Driver: %s\n", e.getMessage()); // si connesion impossible
+                MySlf4j.getLogger().error(e.getMessage());
             }
-
             return connection;
         }
 
@@ -43,13 +44,11 @@ public class ConnectionBdd {
             if (connection != null) {
                 try {
                     connection.close();
-                    System.out.println("Connection closed");
+                    MySlf4j.getLogger().info("Deconnected to dababase {}", String.valueOf(connection));
                 } catch (SQLException e) {
-                    System.err.println("Error closing connection" + e.getMessage());
+                    MySlf4j.getLogger().error("Error closing connection {}", e.getMessage());
                 }
 
             }
         }
-
-
     }

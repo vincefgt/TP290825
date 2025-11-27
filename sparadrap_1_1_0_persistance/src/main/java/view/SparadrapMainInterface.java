@@ -6,7 +6,7 @@ import DAO.medecinDAO;
 import controller.DateFilter;
 import controller.Implementation;
 import controller.PharmacieController;
-import logger.Mylogj2;
+import logger.MySlf4j;
 import model.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -1718,7 +1718,7 @@ public class SparadrapMainInterface extends JFrame {
                 cartList.setSelectionInterval(0, cartListModel.getSize() - 1);}
             int[] selectedIndices = cartList.getSelectedIndices();
             if (selectedClient == null) {
-                Mylogj2.getLogger().info("Med null");
+                MySlf4j.getLogger().info("Med null");
                 JOptionPane.showMessageDialog(this, "Veuillez sélectionner un client et au moins un médicament!");
                 return;}
             try {

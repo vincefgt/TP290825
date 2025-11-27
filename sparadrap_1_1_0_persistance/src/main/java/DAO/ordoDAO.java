@@ -1,10 +1,12 @@
 package DAO;
 
 import controller.SparadrapMainApp;
+import logger.MySlf4j;
 import model.Client;
 import model.Medecin;
 import model.Mutuelle;
 import model.Ordonnance;
+import org.apache.logging.log4j.Level;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -94,7 +96,8 @@ public class ordoDAO extends DAO<Ordonnance> {
             }
         } catch (SQLException | IOException | ClassNotFoundException e) {
            // System.err.println("Erreur import All Ordo: " + e.getMessage());
-             throw new RuntimeException(e);
+            // throw new RuntimeException(e);
+            MySlf4j.getLogger().info(e.getMessage());
         }
         return ordos;
     }

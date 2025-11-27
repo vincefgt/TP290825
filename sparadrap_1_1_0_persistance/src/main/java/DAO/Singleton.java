@@ -1,5 +1,7 @@
 package DAO;
 
+import logger.MySlf4j;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -31,16 +33,11 @@ public class Singleton {
     }
 
     public static Connection getInstanceDB() throws SQLException, IOException, ClassNotFoundException {
-
         try {
             if (getConnection() == null || getConnection().isClosed()) {
                 new Singleton();
-                System.out.println("Connected to database : " + getConnection());
-            } /*else {
-                 System.out.println("Connection already existing");
-            }*/
+            }
         } finally {
-
         }
         return connection;
     }
@@ -49,9 +46,9 @@ public class Singleton {
         try {
             if (getConnection() != null && !getConnection().isClosed()) {
                 getConnection().close();
+                MySlf4j.getLogger().info("Connection closed."+getConnection());
             }
         } finally {
-
         }
     }
 
@@ -63,15 +60,10 @@ public class Singleton {
         Connection connection = null;
         try {
             connection = Singleton.getInstanceDB();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            MySlf4j.getLogger().info("Connected to database: " + connection);
+        } catch (SQLException | IOException | ClassNotFoundException e) {
+            MySlf4j.getLogger().error("Connection failed "+e.getMessage());
         }
-        //System.out.println(connection);
-        System.out.println("---------------------");
 
     }
 

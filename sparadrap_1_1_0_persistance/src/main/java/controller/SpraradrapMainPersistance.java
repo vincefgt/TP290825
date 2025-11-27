@@ -2,11 +2,9 @@ package controller;
 
 import DAO.Singleton;
 import model.Medicament;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
 
 public class SpraradrapMainPersistance {
     public static List<Medicament> drugs;

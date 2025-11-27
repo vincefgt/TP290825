@@ -1,7 +1,9 @@
 package DAO;
 
+import logger.MySlf4j;
 import model.Client;
 import model.Mutuelle;
+import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
@@ -65,6 +67,7 @@ public class clientDAO extends DAO<Client> {
         } catch (SQLException e) {
             System.err.println("Error BDD " + e.getMessage());
             connection.rollback();
+            MySlf4j.getLogger().error(e.getMessage());
         }
         return true;
     }
@@ -170,7 +173,8 @@ public class clientDAO extends DAO<Client> {
                 clients.add(clt);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
+            MySlf4j.getLogger().error(e.getMessage());
         }
         return clients;
         // list Clients
