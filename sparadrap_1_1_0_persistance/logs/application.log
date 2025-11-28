@@ -1,0 +1,10 @@
+[2025-11-27 08:37:02] [INFO] (logger.MySlf4j) - Connected to database : com.mysql.cj.jdbc.ConnectionImpl@5fe94a96
+[2025-11-27 08:40:26] [INFO] (logger.MySlf4j) - Connected to database : com.mysql.cj.jdbc.ConnectionImpl@5fe94a96
+2025-11-27 08:45:37.143 [main] INFO  [User:] [Session:] [IP:] logger.MySlf4j - Connected to database : com.mysql.cj.jdbc.ConnectionImpl@5fe94a96
+2025-11-27 08:53:02.468 [main] INFO  [User:] [Session:] [IP:] logger.MySlf4j - Connected to database : com.mysql.cj.jdbc.ConnectionImpl@5fe94a96
+2025-11-27 08:55:14.119 [main] INFO  [User:] [Session:] [IP:] logger.MySlf4j - Connected to database : com.mysql.cj.jdbc.ConnectionImpl@5fe94a96
+2025-11-27 08:56:25.975 [main] INFO  [User:] [Session:] [IP:] logger.MySlf4j - Connected to database : com.mysql.cj.jdbc.ConnectionImpl@5fe94a96
+2025-11-27 08:58:33.968 [main] INFO  [User:] [Session:] [IP:] logger.MySlf4j - Connected to database : com.mysql.cj.jdbc.ConnectionImpl@5fe94a96
+2025-11-27 08:59:47.983 [main] INFO  [User:] [Session:] [IP:] logger.MySlf4j - Connected to database: com.mysql.cj.jdbc.ConnectionImpl@5fe94a96
+2025-11-27 09:02:16.464 [main] INFO  [User:] [Session:] [IP:] logger.MySlf4j - Connected to database: com.mysql.cj.jdbc.ConnectionImpl@76012793
+2025-11-27 15:45:58.403 [main] INFO  [User:] [Session:] [IP:] logger.MySlf4j - Connected to database: com.mysql.cj.jdbc.ConnectionImpl@635572a7
